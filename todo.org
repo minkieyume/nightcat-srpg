@@ -1,0 +1,39 @@
+#+TITLE: 夜之城传说 - 程序TODO
+#+FILETAGS: :GDYMZ:程序待办:
+
+* 机制实装 :机制实装:
+:PROPERTIES:
+:CATEGORY: 机制实装
+:END:
+
+* 机制测试 :机制测试:
+:PROPERTIES:
+:CATEGORY: 机制测试
+:END:
+
+* 原型搭建 :原型搭建:
+:PROPERTIES:
+:CATEGORY: 原型搭建
+:END:
+
+** 灰盒6 :灰盒6:
+
+* BUG修复 :BUG修复:
+:PROPERTIES:
+:CATEGORY: BUG修复
+:END:
+
+* 性能优化 :性能优化:
+:PROPERTIES:
+:CATEGORY: 性能优化
+:END:
+
+* 代码重构 :代码重构:
+:PROPERTIES:
+:CATEGORY: 代码重构
+:END:
+
+* 文档补充 :文档补充:
+:PROPERTIES:
+:CATEGORY: 文档补充
+:END:
