@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctpwokqd5uh20"]
-
-[ext_resource type="PackedScene" uid="uid://5m30opp7uf8m" path="res://time_click_bar.tscn" id="1_i26rj"]
-
-[node name="MainMenu" type="Node2D"]
-
-[node name="TimeClickBar" parent="." instance=ExtResource("1_i26rj")]
-position = Vector2(213, 271)
-scale = Vector2(4, 4)
