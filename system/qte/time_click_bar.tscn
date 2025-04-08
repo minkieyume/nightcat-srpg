@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5m30opp7uf8m"]
 
-[ext_resource type="Script" uid="uid://t2v3hutwj2cu" path="res://time_click_bar.gd" id="1_tl608"]
+[ext_resource type="Script" uid="uid://t2v3hutwj2cu" path="res://system/time_click_bar.gd" id="1_tl608"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tl608"]
 size = Vector2(2, 20)
