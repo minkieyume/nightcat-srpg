@@ -45,6 +45,8 @@ func _init_astar() -> void:
 	astar.update()
 
 func change_direction(dir:Vector2i) -> bool:
+	if direction == dir:
+		return true
 	match dir:
 		Vector2.DOWN:
 			direction = dir
