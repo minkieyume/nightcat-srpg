@@ -93,5 +93,6 @@ tile_set = SubResource("TileSet_uhuot")
 tile_set = SubResource("TileSet_jnhi6")
 rendering_quadrant_size = 48
 
-[node name="Character" parent="SpaceTilemap" instance=ExtResource("2_167pv")]
-position = Vector2(24, 24)
+[node name="Character" parent="SpaceTilemap" node_paths=PackedStringArray("space_tilemap") instance=ExtResource("2_167pv")]
+space_tilemap = NodePath("..")
+metadata/_edit_group_ = true

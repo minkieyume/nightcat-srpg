@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://11lfpaemgm03"]
+[gd_scene load_steps=19 format=3 uid="uid://11lfpaemgm03"]
 
 [ext_resource type="Script" uid="uid://wbnikvil5wun" path="res://system/character/character.gd" id="1_1i7cy"]
 [ext_resource type="Texture2D" uid="uid://cwcnpq7876prd" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_5/character_5_frame32x32.png" id="1_kfso4"]
 [ext_resource type="PackedScene" uid="uid://ciljufcsear1m" path="res://system/action_system/ActionManager.tscn" id="3_wlaod"]
+[ext_resource type="Script" uid="uid://cwks6baw6juj6" path="res://system/character/states/idle_state.gd" id="4_2gdvs"]
+[ext_resource type="Script" uid="uid://clf6ve54nuriy" path="res://system/character/states/move_state.gd" id="5_y8eg4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kfso4"]
 size = Vector2(48, 48)
@@ -171,7 +173,7 @@ _data = {
 script = ExtResource("1_1i7cy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 9)
+position = Vector2(24, 33)
 scale = Vector2(3, 3)
 texture = ExtResource("1_kfso4")
 hframes = 3
@@ -179,6 +181,7 @@ vframes = 4
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 24)
 shape = SubResource("RectangleShape2D_kfso4")
 
 [node name="ActionManager" parent="." instance=ExtResource("3_wlaod")]
@@ -189,3 +192,14 @@ libraries = {
 &"idle": SubResource("AnimationLibrary_bl7gt"),
 &"move": SubResource("AnimationLibrary_u646v")
 }
+
+[node name="LimboHSM" type="LimboHSM" parent="."]
+
+[node name="IdleState" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_2gdvs")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="MoveState" type="LimboState" parent="LimboHSM"]
+script = ExtResource("5_y8eg4")
+
+[connection signal="started_move" from="." to="." method="_on_started_move"]
