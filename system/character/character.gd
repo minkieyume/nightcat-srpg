@@ -28,7 +28,7 @@ func _ready() -> void:
 	_init_state_machine()
 	_init_astar()
 	act(&"action",Vector2i(2,2))
-	emit_signal("started_move",Vector2i(10,10))
+	emit_signal("started_move",Vector2i(5,5))
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")
@@ -48,16 +48,16 @@ func change_direction(dir:Vector2i) -> bool:
 	if direction == dir:
 		return true
 	match dir:
-		Vector2.DOWN:
+		Vector2i.DOWN:
 			direction = dir
 			return true
-		Vector2.LEFT:
+		Vector2i.LEFT:
 			direction = dir
 			return true
-		Vector2.RIGHT:
+		Vector2i.RIGHT:
 			direction = dir
 			return true
-		Vector2.UP:
+		Vector2i.UP:
 			direction = dir
 			return true
 		_:

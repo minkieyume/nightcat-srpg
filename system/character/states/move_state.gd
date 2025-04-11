@@ -26,7 +26,6 @@ func walk_path():
 	var path = agent.move_path
 	var map = agent.space_tilemap
 	var start:Vector2i
-	print(path)
 	var starts = []
 	for point in path:
 		start = map.local_to_map(agent.position)
