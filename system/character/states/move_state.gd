@@ -25,11 +25,8 @@ func _on_direction_changed(direction):
 func walk_path():
 	var path = agent.move_path
 	var map = agent.space_tilemap
-	var start:Vector2i
-	var starts = []
 	for point in path:
-		start = map.local_to_map(agent.position)
-		starts.append(start)
+		var start = map.local_to_map(agent.position)
 		await step(point - start)
 	get_root().dispatch("move_stop")
 	

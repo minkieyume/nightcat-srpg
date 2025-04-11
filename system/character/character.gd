@@ -27,8 +27,8 @@ signal direction_changed(direct:Vector2i)
 func _ready() -> void:
 	_init_state_machine()
 	_init_astar()
-	act(&"action",Vector2i(2,2))
-	emit_signal("started_move",Vector2i(5,5))
+	print(act(&"action",Vector2i(2,2)))
+	print(act(&"move_action",Vector2i(5,8)))
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")
@@ -66,6 +66,14 @@ func change_direction(dir:Vector2i) -> bool:
 func act(id:StringName,target:Vector2i) -> bool:
 	#玩家执行行动，成功返回true。
 	return action_manager.execute_action(id,target)
+
+func move_to(target:Vector2i) -> bool:
+	var start = space_tilemap.local_to_map(position)
+	if astar.is_point_solid(target):
+		return false
+	move_path = astar.get_id_path(start,target)
+	hsm.dispatch("move_start")
+	return true
 
 func _on_started_move(target:Vector2i) -> void:
 	var start = space_tilemap.local_to_map(position)

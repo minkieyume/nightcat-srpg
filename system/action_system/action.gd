@@ -12,9 +12,6 @@ extends Resource
 	"Object":true  # 物件
 }
 
-func _init() -> void:
-	id = &"action"
-
 func execute(character:Character,target:Vector2i) -> bool:
 	#执行action的行动，成功返回true
 	print(character.name,target)
