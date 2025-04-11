@@ -12,7 +12,7 @@ func _ready() -> void:
 func execute_action(id:StringName,target:Vector2i) -> bool:
 	#执行一个行动，成功返回true，失败返回false
 	if action_list.has(id):
-		return action_list[id].execute(get_node(character),target)
+		return action_list[id]._execute(get_node(character),target)
 	else:
 		push_error("角色没有该行动")
 		return false

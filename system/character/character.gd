@@ -28,7 +28,7 @@ func _ready() -> void:
 	_init_state_machine()
 	_init_astar()
 	print(act(&"action",Vector2i(2,2)))
-	print(act(&"move_action",Vector2i(5,8)))
+	print(act(&"move_action",Vector2i(3,3)))
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")

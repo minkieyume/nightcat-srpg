@@ -12,6 +12,17 @@ extends Resource
 	"Object":true  # 物件
 }
 
+func _execute(character:Character,target:Vector2i) -> bool:
+	if is_instance_valid(action_range):
+		var map = character.space_tilemap
+		var origin = map.local_to_map(character.position)
+		action_range.clac_result(origin)
+		if !action_range.is_target_valid(target):
+			return false
+	if !execute(character,target):
+		return false
+	return true
+
 func execute(character:Character,target:Vector2i) -> bool:
 	#执行action的行动，成功返回true
 	print(character.name,target)
