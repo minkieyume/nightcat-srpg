@@ -21,7 +21,6 @@ var direction:Vector2i = Vector2i.DOWN:
 		emit_signal("direction_changed",direction)
 var move_path = []
 
-signal started_move(target:Vector2i)
 signal direction_changed(direct:Vector2i)
 
 func _ready() -> void:
@@ -74,8 +73,3 @@ func move_to(target:Vector2i) -> bool:
 	move_path = astar.get_id_path(start,target)
 	hsm.dispatch("move_start")
 	return true
-
-func _on_started_move(target:Vector2i) -> void:
-	var start = space_tilemap.local_to_map(position)
-	move_path = astar.get_id_path(start,target)
-	hsm.dispatch("move_start")

@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_06t4h"]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node"]
 
 [node name="Test001" parent="." instance=ExtResource("1_06t4h")]

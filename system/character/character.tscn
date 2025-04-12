@@ -246,5 +246,3 @@ script = ExtResource("4_2gdvs")
 
 [node name="MoveState" type="LimboState" parent="LimboHSM"]
 script = ExtResource("5_y8eg4")
-
-[connection signal="started_move" from="." to="." method="_on_started_move"]
