@@ -45,10 +45,15 @@ extends Node2D
 
 var tile_size:Vector2i
 
-var limit_array:Array[Vector2i]
-var highlight:Vector2i
+var limit_array:Array[Vector2i]:
+	set(l):
+		limit_array = l
+		queue_redraw()
+var highlight:Vector2i:
+	set(h):
+		highlight = h
+		queue_redraw()
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tile_size = fill_map.tile_set.tile_size
 	
@@ -64,7 +69,7 @@ func _draw() -> void:
 	if show_grid:
 		_draw_grid_cells()
 
-func _draw_grid_cells() -> void:
+func _draw_grid_cells() -> void: # 在所有已使用的网格绘制网格线
 	var used_cells = fill_map.get_used_cells()
 	if show_highlight:
 		used_cells.erase(highlight)

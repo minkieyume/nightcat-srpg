@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bra1lfpkko5i1"]
+
+[ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/ui/grid_target_choser.gd" id="1_7epwx"]
+
+[node name="GridTargetChoser" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+script = ExtResource("1_7epwx")
+
+[connection signal="target_canceled" from="." to="." method="_on_target_canceled"]
+[connection signal="target_chosed" from="." to="." method="_on_target_chosed"]

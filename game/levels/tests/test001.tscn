@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ccnwnypq8ftbo" path="res://assets/external_packs/overworld-pack-full_version/autotiles/autotile_1.png" id="1_jnhi6"]
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="2_167pv"]
-[ext_resource type="PackedScene" uid="uid://w3krvb8juvar" path="res://system/ui/grid_map_control.tscn" id="3_eihuk"]
+[ext_resource type="PackedScene" uid="uid://bra1lfpkko5i1" path="res://system/ui/grid_target_choser.tscn" id="5_5a2x4"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="5_dbhlh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnhi6"]
@@ -118,6 +118,7 @@ rendering_quadrant_size = 48
 
 [node name="GridDrawer" parent="." node_paths=PackedStringArray("fill_map") instance=ExtResource("5_dbhlh")]
 fill_map = NodePath("../GridMap")
+show_highlight = true
 
 [node name="Character" parent="." node_paths=PackedStringArray("space_tilemap") instance=ExtResource("2_167pv")]
 space_tilemap = NodePath("../GridMap")
@@ -125,5 +126,5 @@ metadata/_edit_group_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GridMapControl" parent="CanvasLayer" node_paths=PackedStringArray("grid_drawer") instance=ExtResource("3_eihuk")]
+[node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("grid_drawer") instance=ExtResource("5_5a2x4")]
 grid_drawer = NodePath("../../GridDrawer")
