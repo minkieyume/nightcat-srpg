@@ -1,7 +1,7 @@
 class_name Character
+# 处理角色状态与行为
 extends Area2D
 
-@export var space_tilemap:TileMapLayer
 @export var move_speed = 96
 
 @onready var action_manager:ActionManager = $ActionManager
@@ -12,36 +12,26 @@ extends Area2D
 @onready var idle_state: LimboState = $LimboHSM/IdleState
 @onready var move_state: LimboState = $LimboHSM/MoveState
 
-var astar:AStarGrid2D
-
 var direction:Vector2i = Vector2i.DOWN:
-	# 玩家朝向
+	# 角色朝向
 	set(d):
 		direction = d
 		emit_signal("direction_changed",direction)
-var move_path = []
 
 signal direction_changed(direct:Vector2i)
+signal move_requested(moveable,target:Vector2i)
 
 func _ready() -> void:
 	_init_state_machine()
-	_init_astar()
-	print(act(&"action",Vector2i(2,2)))
-	print(act(&"move_action",Vector2i(3,3)))
+	request_move_to(Vector2i(3,3))
+#	print(act(&"action",Vector2i(2,2)))
+#	print(act(&"move_action",Vector2i(3,3)))
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")
 	hsm.add_transition(move_state, idle_state,"move_stop")
 	hsm.initialize(self)
 	hsm.set_active(true)
-
-func _init_astar() -> void:
-	astar = AStarGrid2D.new()
-	astar.region = Rect2i(Vector2i(0,0),space_tilemap.tile_set.tile_size)
-	astar.set_default_compute_heuristic(astar.Heuristic.HEURISTIC_MANHATTAN)
-	astar.set_default_estimate_heuristic(astar.Heuristic.HEURISTIC_MANHATTAN)
-	astar.set_diagonal_mode(astar.DiagonalMode.DIAGONAL_MODE_NEVER)
-	astar.update()
 
 func change_direction(dir:Vector2i) -> bool:
 	if direction == dir:
@@ -66,10 +56,18 @@ func act(id:StringName,target:Vector2i) -> bool:
 	#玩家执行行动，成功返回true。
 	return action_manager.execute_action(id,target)
 
-func move_to(target:Vector2i) -> bool:
-	var start = space_tilemap.local_to_map(position)
-	if astar.is_point_solid(target):
-		return false
-	move_path = astar.get_id_path(start,target)
+func step(dir:Vector2,vdis:Vector2) -> void:
+	# 朝特定方向移动一段距离
+	# dir:朝向的向量
+	# vdis:距离的向量，x和y分别代表x方向和y方向的移动量。
 	hsm.dispatch("move_start")
-	return true
+	change_direction(dir)
+	var end = position+vdis*dir
+	var dis = position.distance_to(end) # 计算绝对距离数值。
+	var tween = get_tree().create_tween()
+	tween.tween_property(self,"position",end,dis/move_speed)
+	await tween.finished
+	hsm.dispatch("move_stop")
+
+func request_move_to(target:Vector2i):
+	emit_signal("move_requested",self,target)

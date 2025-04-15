@@ -11,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
 script = ExtResource("1_7epwx")
+metadata/_edit_group_ = true
 
 [connection signal="target_canceled" from="." to="." method="_on_target_canceled"]
 [connection signal="target_chosed" from="." to="." method="_on_target_chosed"]
