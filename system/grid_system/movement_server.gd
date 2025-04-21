@@ -19,16 +19,17 @@ func _init_astar() -> void:
 	astar.set_diagonal_mode(astar.DiagonalMode.DIAGONAL_MODE_NEVER)
 	astar.update()
 
-# BUG：角色实际移动的位置总是比输入的位置多一格
 func _move_character(character:Character,target:Vector2i):
 	var path = []
 	var start = grid_map.local_to_map(character.position)
 	if astar.is_point_solid(target):
 		return
 	path = astar.get_id_path(start,target)
+	print(path)
 	for point in path:
 		await character.step(point - start,tile_size)
 		start = grid_map.local_to_map(character.position)
 
+# Note:坐标从0开始算，而非从1开始算。
 func _on_charactermove_requested(character:Character,target:Vector2i):
 	_move_character(character,target)

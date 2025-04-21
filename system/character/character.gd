@@ -69,5 +69,9 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	await tween.finished
 	hsm.dispatch("move_stop")
 
+# Note:坐标从0开始算，而非从1开始算。
 func request_move_to(target:Vector2i):
+	# 对负责处理地图移动的MovementServer模块发送移动请求信号，
+	# MovementServer模块接受到信号后自动处理玩家的移动。
+	# target是请求移动的目标。
 	emit_signal("move_requested",self,target)
