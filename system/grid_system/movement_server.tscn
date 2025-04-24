@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtl6pwehxavyo"]
-
-[ext_resource type="Script" uid="uid://oxrarhfu5cu3" path="res://system/grid_system/movement_server.gd" id="1_64ljb"]
-
-[node name="MovementServer" type="Node2D"]
-script = ExtResource("1_64ljb")

@@ -1,5 +1,6 @@
 class_name Character
 # 处理角色状态与行为
+# 与各个Server中介通信
 extends Area2D
 
 @export var move_speed = 96
@@ -19,11 +20,14 @@ var direction:Vector2i = Vector2i.DOWN:
 		emit_signal("direction_changed",direction)
 
 signal direction_changed(direct:Vector2i)
+signal action_requested(action_manager:ActionManager,id:StringName,\
+	target:Vector2i)
 signal move_requested(moveable,target:Vector2i)
 
 func _ready() -> void:
 	_init_state_machine()
 	request_move_to(Vector2i(3,3))
+	request_action("action",Vector2i(2,2))
 #	print(act(&"action",Vector2i(2,2)))
 #	print(act(&"move_action",Vector2i(3,3)))
 
@@ -52,10 +56,6 @@ func change_direction(dir:Vector2i) -> bool:
 		_:
 			return false
 	
-func act(id:StringName,target:Vector2i) -> bool:
-	#玩家执行行动，成功返回true。
-	return action_manager.execute_action(id,target)
-
 func step(dir:Vector2,vdis:Vector2) -> void:
 	# 朝特定方向移动一段距离
 	# dir:朝向的向量
@@ -75,3 +75,6 @@ func request_move_to(target:Vector2i):
 	# MovementServer模块接受到信号后自动处理玩家的移动。
 	# target是请求移动的目标。
 	emit_signal("move_requested",self,target)
+
+func request_action(id:StringName,target:Vector2i):
+	emit_signal("action_requested",action_manager,id,target)

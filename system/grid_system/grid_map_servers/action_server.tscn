@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxrbu0r200l8m"]
+
+[ext_resource type="Script" uid="uid://cskj07j14eiqg" path="res://system/grid_system/grid_map_servers/action_server.gd" id="1_1mkfo"]
+
+[node name="ActionServer" type="Node"]
+script = ExtResource("1_1mkfo")
+metadata/_custom_type_script = "uid://bamkaecutgfkg"

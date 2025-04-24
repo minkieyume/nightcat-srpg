@@ -1,14 +1,10 @@
-extends Node2D
+extends GridMapServer
 # 处理角色在网格图块中的移动逻辑
-
-@export var grid_map:TileMapLayer
 
 var astar:AStarGrid2D
 
-var tile_size:Vector2i
-
 func _ready() -> void:
-	tile_size = grid_map.tile_set.tile_size
+	super()
 	_init_astar()
 
 func _init_astar() -> void:

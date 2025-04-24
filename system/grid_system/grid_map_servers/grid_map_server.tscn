@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ysrwqhx3vecp"]
+
+[ext_resource type="Script" uid="uid://bamkaecutgfkg" path="res://system/grid_system/grid_map_servers/grid_map_server.gd" id="1_8g4at"]
+
+[node name="GridMapServer" type="Node"]
+script = ExtResource("1_8g4at")
