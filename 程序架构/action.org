@@ -1,0 +1,35 @@
+#+TITLE: 程序架构 - Action
+
+* 介绍
+用来处理行动通用逻辑的类，也提供行动属性、限制等访问逻辑。
+
+* 关系图
+#+begin_src plantuml :file action_struct.png
+class Character{
++ act()
+}
+class Action{
++ execute()
+}
+class ActionManager{
++ actions:Array[ActionResource]
++ create_action(resource:ActionResource) -> Action
++ execute_action(id:StringName)
+}
+class ActionResource{
++ id:StringName
++ action_logic:Script
+}
+interface ActionLogic{
++ execute()
+}
+
+Action ..|> ActionLogic : 实现
+ActionManager --|> Action : 创建
+ActionManager --o ActionResource : 聚合
+ActionResource --* ActionLogic : 包含
+#+end_src
+
+#+ATTR_ORG: :width 340
+#+RESULTS:
+[[file:action_struct.png]]
