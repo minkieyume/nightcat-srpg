@@ -13,9 +13,11 @@ class LimboState{
 }
 class MenuManager{
 + transition:Dictionary
++ _return()
 }
 class MenuState{
 + transition:Dictionary
++ _return()
 }
 LimboHSM -up-|> LimboState : 继承
 MenuManager -right-|> LimboHSM : 继承
