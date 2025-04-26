@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbblsed5rbrf7"]
+
+[ext_resource type="Script" uid="uid://dmqb80wbqxon3" path="res://system/ui/menu_state.gd" id="1_co6tu"]
+
+[node name="MenuState" type="LimboState"]
+script = ExtResource("1_co6tu")

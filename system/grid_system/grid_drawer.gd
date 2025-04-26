@@ -1,5 +1,6 @@
 class_name GridDrawer
 extends Node2D
+# 图层绘制器，用于在填充图层上绘制网格。
 
 @export var fill_map:TileMapLayer # 用于填充和绘制网格的图块层
 

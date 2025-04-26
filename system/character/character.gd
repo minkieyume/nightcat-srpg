@@ -27,8 +27,6 @@ signal move_requested(moveable,target:Vector2i)
 func _ready() -> void:
 	_init_state_machine()
 	request_action("move",Vector2i(2,2))
-#	print(act(&"action",Vector2i(2,2)))
-#	print(act(&"move_action",Vector2i(3,3)))
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")

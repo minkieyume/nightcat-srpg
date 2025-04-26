@@ -1,4 +1,4 @@
-extends Control
+extends MenuState
 
 @export var grid_drawer:GridDrawer
 
@@ -6,9 +6,6 @@ var chosing:bool = true # 正在选择
 
 signal target_chosed
 signal target_canceled
-
-func _ready() -> void:
-	grab_focus()
 
 func _gui_input(event) -> void:
 	if event.is_action_pressed("ui_accept") and chosing:
