@@ -25,7 +25,7 @@ MenuState -right-|> LimboState : 继承
 MenuState o-- MenuManager : 管理
 #+end_src
 
-#+ATTR_ORG: :width 340
+#+ATTR_ORG: :width 640
 #+RESULTS:
 [[file:menu_manager_struct.png]]
 

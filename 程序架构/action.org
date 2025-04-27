@@ -39,6 +39,6 @@ ActionServer --> ActionManager : 激活
 ActionServer -left-> GridMap : 引用
 #+end_src
 
-#+ATTR_ORG: :width 340
+#+ATTR_ORG: :width 640
 #+RESULTS:
 [[file:action_struct.png]]

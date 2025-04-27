@@ -30,7 +30,7 @@ IdleState -left-> MoveState : move_start
 MoveState -right-> IdleState : move_stop
 #+end_src
 
-#+ATTR_ORG: :width 540
+#+ATTR_ORG: :width 840
 #+RESULTS:
 [[file:character_struct.png]]
 
@@ -50,6 +50,6 @@ Character .right.> MovementServer : move_requested()
 MovementServer -right-> GridMap : 转换坐标
 #+end_src
 
-#+ATTR_ORG: :width 540
+#+ATTR_ORG: :width 840
 #+RESULTS:
 [[file:character_relation.png]]
