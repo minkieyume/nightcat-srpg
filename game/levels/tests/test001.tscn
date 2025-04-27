@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=14 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Texture2D" uid="uid://ccnwnypq8ftbo" path="res://assets/external_packs/overworld-pack-full_version/autotiles/autotile_1.png" id="1_jnhi6"]
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="5_s0flc"]
 [ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/ui/menu_manager.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="7_s0flc"]
+[ext_resource type="PackedScene" uid="uid://bhtycubwmulo" path="res://system/ui/action_choser.tscn" id="9_s27i0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnhi6"]
 texture = ExtResource("1_jnhi6")
@@ -136,8 +137,16 @@ metadata/_edit_group_ = true
 
 [node name="MenuManager" parent="CanvasLayer" instance=ExtResource("7_80j1t")]
 
-[node name="GridTargetChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("grid_drawer") instance=ExtResource("5_5a2x4")]
+[node name="GridTargetChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("grid_drawer", "transition") instance=ExtResource("5_5a2x4")]
 grid_drawer = NodePath("../../../GridDrawer")
+transition = {
+&"character_chose": NodePath("../ActionChoser")
+}
+
+[node name="ActionChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition") instance=ExtResource("9_s27i0")]
+transition = {
+&"chose_target": NodePath("../GridTargetChoser")
+}
 
 [connection signal="action_requested" from="Character" to="ActionServer" method="_on_action_requested"]
 [connection signal="move_requested" from="Character" to="MovementServer" method="_on_charactermove_requested"]

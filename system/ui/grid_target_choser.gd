@@ -2,19 +2,37 @@ extends MenuState
 
 @export var grid_drawer:GridDrawer
 
-var chosing:bool = true # 正在选择
+"""Transition：
+"character_chose" -> action_choser
+"""
+
+"""上下文：
+target:Vector2i 选中的目标，通常是一个坐标。
+target_chose_event:StringName TargetChoser选中后触发的事件，决定接下来转换到哪个节点
+"""
 
 signal target_chosed
 signal target_canceled
 
+func _ready() -> void:
+	super()
+	add_event_handler("chose",_chose)
+	context["target_chose_event"] = &"character_chose"
+
+func _enter() -> void:
+	super()
+	grid_drawer.show_highlight = true
+
+func _exit() -> void:
+	super()
+	grid_drawer.show_highlight = false
+
 func _gui_input(event) -> void:
-	if event.is_action_pressed("ui_accept") and chosing:
-		chosing = false
+	if event.is_action_pressed("ui_accept"):
 		emit_signal("target_chosed")
-	if event.is_action_pressed("ui_cancel") and !chosing:
-		chosing = true
+	elif event.is_action_pressed("ui_cancel"):
 		emit_signal("target_canceled")
-	if chosing:
+	else:
 		grid_drawer.highlight+= _get_input_direction()
 
 func _get_input_direction() -> Vector2i:
@@ -29,10 +47,18 @@ func _get_input_direction() -> Vector2i:
 func get_chosed_target() -> Vector2i:
 	return grid_drawer.highlight
 
-func _on_target_chosed():
+func _return(cargo:Dictionary) -> bool:
+	return true
+
+func _chose() -> bool:
 	print("行动了")
-	grid_drawer.show_highlight = false
+	context["target"] = get_chosed_target()
+	dispatch(context["target_chose_event"])
+	return true
+
+func _on_target_chosed():
+	dispatch("chose")
 
 func _on_target_canceled():
-	print("取消了")
-	grid_drawer.show_highlight = true
+	dispatch("_return")
+	
