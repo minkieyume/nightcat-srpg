@@ -75,3 +75,6 @@ func request_move_to(target:Vector2i):
 
 func request_action(id:StringName,target:Vector2i):
 	emit_signal("action_requested",action_manager,id,target)
+
+func get_action_list() -> Dictionary:
+	return action_manager.action_list

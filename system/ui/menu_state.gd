@@ -3,9 +3,13 @@ extends LimboState
 
 @export var menu:Control
 @export var transition:Dictionary[StringName,LimboState]
-var context:Dictionary
+var context:Dictionary:
+	set(c):
+		context = c
+		emit_signal("context_changed")
 
 signal cargo_send(cargo:Dictionary)
+signal context_changed
 
 func _ready() -> void:
 	add_event_handler("return",_return)

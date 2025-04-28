@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=15 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Texture2D" uid="uid://ccnwnypq8ftbo" path="res://assets/external_packs/overworld-pack-full_version/autotiles/autotile_1.png" id="1_jnhi6"]
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/ui/menu_manager.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="7_s0flc"]
 [ext_resource type="PackedScene" uid="uid://bhtycubwmulo" path="res://system/ui/action_choser.tscn" id="9_s27i0"]
+[ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://grid_quest_server.tscn" id="10_360cf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnhi6"]
 texture = ExtResource("1_jnhi6")
@@ -130,6 +131,9 @@ grid_map = NodePath("../GridMap")
 [node name="ActionServer" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("7_s0flc")]
 grid_map = NodePath("../GridMap")
 
+[node name="GridQuestServer" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("10_360cf")]
+grid_map = NodePath("../GridMap")
+
 [node name="Character" parent="." instance=ExtResource("2_167pv")]
 metadata/_edit_group_ = true
 
@@ -150,3 +154,4 @@ transition = {
 
 [connection signal="action_requested" from="Character" to="ActionServer" method="_on_action_requested"]
 [connection signal="move_requested" from="Character" to="MovementServer" method="_on_charactermove_requested"]
+[connection signal="quest_character" from="CanvasLayer/MenuManager/ActionChoser" to="GridQuestServer" method="_quest_character"]

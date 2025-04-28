@@ -24,6 +24,7 @@ metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 [sub_resource type="Resource" id="Resource_bl7gt"]
 script = ExtResource("4_bl7gt")
 id = &"action"
+group = &""
 action_name = "行动"
 action_range = SubResource("Resource_xru7q")
 action_logic = ExtResource("5_bl7gt")
@@ -48,6 +49,7 @@ resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
 id = &"move"
+group = &""
 action_name = "移动"
 action_range = SubResource("Resource_lmbwv")
 action_logic = ExtResource("7_q48ol")
@@ -219,7 +221,7 @@ _data = {
 &"move_up": SubResource("Animation_fvjva")
 }
 
-[node name="Character" type="Area2D"]
+[node name="Character" type="Area2D" groups=["character"]]
 script = ExtResource("1_1i7cy")
 metadata/_edit_lock_ = true
 
