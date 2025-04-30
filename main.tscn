@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctpwokqd5uh20"]
+
+[ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/phase_system/phase_controller.tscn" id="3_272bh"]
+[ext_resource type="PackedScene" uid="uid://bra1lfpkko5i1" path="res://system/phase_system/menu_phase/grid_target_choser_controller.tscn" id="4_5vw27"]
+[ext_resource type="PackedScene" uid="uid://bhtycubwmulo" path="res://system/phase_system/menu_phase/action_choser_controller.tscn" id="5_kek77"]
+[ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
+[ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
+[ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
+
+[node name="Main" type="Node"]
+
+[node name="Test001" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="LevelHandler" parent="." node_paths=PackedStringArray("level") instance=ExtResource("2_0xm2m")]
+level = NodePath("../Test001")
+
+[node name="GridQuester" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("8_5vw27")]
+level_handler = NodePath("../LevelHandler")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MenuManager" parent="CanvasLayer" node_paths=PackedStringArray("level_handler") instance=ExtResource("3_272bh")]
+level_handler = NodePath("../../LevelHandler")
+
+[node name="GridTargetChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition") instance=ExtResource("4_5vw27")]
+transition = {
+&"character_chose": NodePath("../ActionChoser")
+}
+
+[node name="ActionChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("grid_quester", "transition") instance=ExtResource("5_kek77")]
+grid_quester = NodePath("../../../GridQuester")
+transition = {
+&"chose_target": NodePath("../GridTargetChoser")
+}
+
+[node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("6_4c57u")]
+phase = NodePath("../MenuManager/GridTargetChoser")
+
+[node name="ActionChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("7_efxa6")]
+visible = false
+offset_left = 277.0
+offset_top = 100.0
+offset_right = -683.0
+offset_bottom = -440.0
+phase = NodePath("../MenuManager/ActionChoser")
+metadata/_edit_group_ = true

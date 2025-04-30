@@ -1,6 +1,6 @@
 extends MenuPhase
 
-@export var grid_drawer:GridDrawer
+var grid_drawer:GridDrawer
 
 """Transition：
 "character_chose" -> action_choser
@@ -15,6 +15,10 @@ func _ready() -> void:
 	super()
 	add_event_handler("chose",_chose)
 	context["target_chose_event"] = &"character_chose"
+
+func _setup() -> void:
+	print(level_handler)
+	grid_drawer = level_handler.get_grid_drawer()
 
 func _enter() -> void:
 	super()

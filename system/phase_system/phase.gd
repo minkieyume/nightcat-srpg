@@ -1,6 +1,7 @@
 class_name Phase
 extends LimboState
 
+var level_handler:LevelHandler
 @export var transition:Dictionary[StringName,LimboState]
 var context:Dictionary:
 	set(c):

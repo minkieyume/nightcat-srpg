@@ -1,18 +1,12 @@
-[gd_scene load_steps=18 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=12 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Texture2D" uid="uid://ccnwnypq8ftbo" path="res://assets/external_packs/overworld-pack-full_version/autotiles/autotile_1.png" id="1_jnhi6"]
 [ext_resource type="Script" uid="uid://dk2c36u70rkwa" path="res://system/level_system/level.gd" id="1_pj3v8"]
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="2_167pv"]
-[ext_resource type="PackedScene" uid="uid://bra1lfpkko5i1" path="res://system/phase_system/menu_phase/grid_target_choser_controller.tscn" id="5_5a2x4"]
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="5_s0flc"]
-[ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/phase_system/phase_controller.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="7_s0flc"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="7_w2seq"]
-[ext_resource type="PackedScene" uid="uid://bhtycubwmulo" path="res://system/phase_system/menu_phase/action_choser_controller.tscn" id="9_s27i0"]
-[ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="10_360cf"]
-[ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="11_pj3v8"]
-[ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="13_2fenr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnhi6"]
 texture = ExtResource("1_jnhi6")
@@ -131,9 +125,6 @@ grid_map = NodePath("../GridMap")
 [node name="ActionServer" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("7_s0flc")]
 grid_map = NodePath("../GridMap")
 
-[node name="GridQuester" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("10_360cf")]
-grid_map = NodePath("../GridMap")
-
 [node name="GridDrawer" parent="." node_paths=PackedStringArray("fill_map") instance=ExtResource("7_w2seq")]
 fill_map = NodePath("../GridMap")
 
@@ -142,34 +133,6 @@ fill_map = NodePath("../GridMap")
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Character" parent="Characters" instance=ExtResource("2_167pv")]
-metadata/_edit_group_ = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MenuManager" parent="CanvasLayer" instance=ExtResource("7_80j1t")]
-
-[node name="GridTargetChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("grid_drawer", "transition") instance=ExtResource("5_5a2x4")]
-grid_drawer = NodePath("../../../GridDrawer")
-transition = {
-&"character_chose": NodePath("../ActionChoser")
-}
-
-[node name="ActionChoser" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("grid_quester", "transition") instance=ExtResource("9_s27i0")]
-grid_quester = NodePath("../../../GridQuester")
-transition = {
-&"chose_target": NodePath("../GridTargetChoser")
-}
-
-[node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("11_pj3v8")]
-phase = NodePath("../MenuManager/GridTargetChoser")
-
-[node name="ActionChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("13_2fenr")]
-visible = false
-offset_left = 277.0
-offset_top = 100.0
-offset_right = -683.0
-offset_bottom = -440.0
-phase = NodePath("../MenuManager/ActionChoser")
 metadata/_edit_group_ = true
 
 [connection signal="action_requested" from="Characters/Character" to="ActionServer" method="_on_action_requested"]

@@ -21,8 +21,8 @@ func _enter() -> void:
 	_update_action_list()
 
 func _update_action_list():
-	var character = grid_quester.quest_character(context["target"])
-	update_context("action_list",character.get_action_list())
+	var action_target = grid_quester.quest_character(context["target"])
+	update_context("action_list",level_handler.get_character_actions(action_target))
 
 func _on_action_chosed() -> bool:
 	print(context["chosed_action"])

@@ -1,8 +1,12 @@
 class_name PhaseController
 extends LimboHSM
 
+@export var level_handler:LevelHandler
 @export var transition:Dictionary[StringName,LimboState]
-var context:Dictionary
+var context:Dictionary:
+	set(c):
+		context = c
+		emit_signal("context_changed")
 
 signal cargo_send(cargo:Dictionary)
 
@@ -15,6 +19,11 @@ func _ready() -> void:
 				add_transition(phase,target,event)
 	initialize(self)
 	set_active(true)
+
+func _setup():
+	for phase in get_children():
+		if phase is Phase or phase is PhaseController:
+			phase.level_handler = level_handler
 
 func _enter() -> void:
 	pass
