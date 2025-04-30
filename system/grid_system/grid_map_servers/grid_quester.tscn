@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://frwonbuxsi7w"]
+
+[ext_resource type="PackedScene" uid="uid://ysrwqhx3vecp" path="res://system/grid_system/grid_map_servers/grid_map_server.tscn" id="1_lmm8n"]
+[ext_resource type="Script" uid="uid://cac7vldvifvtr" path="res://system/grid_system/grid_map_servers/grid_quester.gd" id="2_wkjde"]
+
+[node name="GridQuester" instance=ExtResource("1_lmm8n")]
+script = ExtResource("2_wkjde")

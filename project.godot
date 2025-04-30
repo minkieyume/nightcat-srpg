@@ -24,10 +24,6 @@ window/size/viewport_height=540
 
 naming/script_name_casing=2
 
-[global_group]
-
-grid_quester="实现get_grid_result()方法，用于从获取从grid_queste_server查询的结果"
-
 [input]
 
 ui_accept={

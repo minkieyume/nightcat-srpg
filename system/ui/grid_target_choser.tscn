@@ -1,22 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bra1lfpkko5i1"]
+[gd_scene load_steps=3 format=3 uid="uid://ca46e64edqsde"]
 
-[ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/ui/grid_target_choser.gd" id="1_7epwx"]
+[ext_resource type="PackedScene" uid="uid://dfbhsmbbpxs5d" path="res://system/ui/phase_menu.tscn" id="1_7epwx"]
+[ext_resource type="Script" uid="uid://dy06veqjlkes" path="res://system/ui/grid_target_choser.gd" id="2_nsn0q"]
 
-[node name="GridTargetChoser" type="LimboState" node_paths=PackedStringArray("menu")]
-script = ExtResource("1_7epwx")
-menu = NodePath("Control")
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-metadata/_edit_group_ = true
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="GridTargetChoserController" instance=ExtResource("1_7epwx")]
 focus_mode = 1
-
-[connection signal="target_canceled" from="." to="." method="_on_target_canceled"]
-[connection signal="target_chosed" from="." to="." method="_on_target_chosed"]
-[connection signal="gui_input" from="Control" to="." method="_gui_input"]
+script = ExtResource("2_nsn0q")

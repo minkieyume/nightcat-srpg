@@ -1,7 +1,6 @@
-class_name MenuState
+class_name Phase
 extends LimboState
 
-@export var menu:Control
 @export var transition:Dictionary[StringName,LimboState]
 var context:Dictionary:
 	set(c):
@@ -9,25 +8,24 @@ var context:Dictionary:
 		emit_signal("context_changed")
 
 signal cargo_send(cargo:Dictionary)
-signal context_changed
+signal context_changed()
+signal context_updated(id,content)
 
 func _ready() -> void:
-	add_event_handler("return",_return)
+	pass
 
 func _enter() -> void:
-	if is_instance_valid(menu):
-		menu.visible = true
-		menu.grab_focus()
+	pass
 
 func _exit() -> void:
 	emit_signal("cargo_send",context)
-	if is_instance_valid(menu):
-		menu.visible = false
-		menu.release_focus()
-
-func _return(cargo:Dictionary) -> bool: # 返回到上级节点
-	return false
 
 func _on_cargo_recieve(cargo:Dictionary):
-	print(cargo)
 	context = cargo
+
+func search_context(id):
+	return context.get(id)
+
+func update_context(id,content):
+	context[id] = content
+	emit_signal("context_updated",id,content)

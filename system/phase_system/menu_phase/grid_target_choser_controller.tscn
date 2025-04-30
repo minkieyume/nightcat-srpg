@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bra1lfpkko5i1"]
+
+[ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/phase_system/menu_phase/grid_target_choser_controller.gd" id="1_kltid"]
+
+[node name="GridTargetChoserController" type="LimboState"]
+script = ExtResource("1_kltid")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+metadata/_edit_group_ = true

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8c80fm02csb8"]
-
-[ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/ui/menu_manager.gd" id="1_xbi2e"]
-
-[node name="MenuManager" type="LimboHSM"]
-script = ExtResource("1_xbi2e")
