@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://mnyff37hjcq"]
+
+[ext_resource type="PackedScene" uid="uid://bbblsed5rbrf7" path="res://system/phase_system/phase.tscn" id="1_3gvf1"]
+[ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/action_achiever.gd" id="2_gsnlp"]
+
+[node name="ActionAchiever" node_paths=PackedStringArray("transition") instance=ExtResource("1_3gvf1")]
+script = ExtResource("2_gsnlp")
+transition = {
+&"action_end": null
+}

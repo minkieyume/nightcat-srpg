@@ -19,10 +19,13 @@ func _enter() -> void:
 	pass
 
 func _exit() -> void:
-	emit_signal("cargo_send",context)
+	send_cargo(context)
 
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo
+
+func send_cargo(ctx:Dictionary):
+	emit_signal("cargo_send",ctx)
 
 func search_context(id):
 	return context.get(id)

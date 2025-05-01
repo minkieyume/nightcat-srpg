@@ -23,6 +23,7 @@ signal direction_changed(direct:Vector2i)
 signal action_requested(action_manager:ActionManager,id:StringName,\
 	target:Vector2i)
 signal move_requested(moveable,target:Vector2i)
+signal action_finished
 
 func _ready() -> void:
 	_init_state_machine()

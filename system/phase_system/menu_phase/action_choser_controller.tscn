@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dq1x3v8wi5fis" path="res://system/phase_system/menu_phase/action_choser_controller.gd" id="1_0avoj"]
 
-[node name="ActionChoserController" type="LimboState"]
+[node name="ActionChoserController" type="LimboState" node_paths=PackedStringArray("transition")]
 script = ExtResource("1_0avoj")
+transition = {
+&"chose_action_target": null
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
