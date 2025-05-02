@@ -1,0 +1,31 @@
+#+TITLE: 程序架构 - 进程管理
+
+* 介绍
+进程管理器架构，负责管理游戏进程以及传递数据的基类，继承LimboHSM。
+
+* 关系图
+#+begin_src plantuml :file phase_controller_struct.png
+class LimboHSM{
++ add_transition(from:LimboState,to:LimboState,event:StringName)
+}
+class LimboState{
++ dispatch(event:StringName)
+}
+class PhaseController{
++ transition:Dictionary
++ _return()
+}
+class Phase{
++ transition:Dictionary
++ _return()
+}
+LimboHSM -up-|> LimboState : 继承
+PhaseController -right-|> LimboHSM : 继承
+Phase -right-|> LimboState : 继承
+Phase o-- PhaseController : 管理
+#+end_src
+
+#+ATTR_ORG: :width 640
+#+RESULTS:
+[[file:phase_controller_struct.png]]
+

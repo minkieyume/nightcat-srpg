@@ -1,4 +1,4 @@
-#+TITLE: 程序架构 - Character
+#+TITLE: 程序架构 - 角色类
 
 * 结构图
 #+begin_src plantuml :file character_struct.png
