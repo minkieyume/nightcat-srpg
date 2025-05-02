@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=12 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/phase_system/phase_controller.tscn" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://bra1lfpkko5i1" path="res://system/phase_system/menu_phase/grid_target_choser_controller.tscn" id="4_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="4_efxa6"]
+[ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bhtycubwmulo" path="res://system/phase_system/menu_phase/action_choser_controller.tscn" id="5_kek77"]
 [ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
@@ -18,6 +20,12 @@
 level = NodePath("../Test001")
 
 [node name="GridQuester" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("8_5vw27")]
+level_handler = NodePath("../LevelHandler")
+
+[node name="MovementServer" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("4_efxa6")]
+level_handler = NodePath("../LevelHandler")
+
+[node name="ActionFactory" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("5_dg77c")]
 level_handler = NodePath("../LevelHandler")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -37,7 +45,8 @@ transition = {
 &"chose_action_target": NodePath("../GridTargetChoser")
 }
 
-[node name="ActionAchiever" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition") instance=ExtResource("7_kek77")]
+[node name="ActionAchiever" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("action_factory", "transition") instance=ExtResource("7_kek77")]
+action_factory = NodePath("../../../ActionFactory")
 transition = {
 &"action_end": NodePath("../GridTargetChoser")
 }

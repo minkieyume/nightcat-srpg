@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=10 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Texture2D" uid="uid://ccnwnypq8ftbo" path="res://assets/external_packs/overworld-pack-full_version/autotiles/autotile_1.png" id="1_jnhi6"]
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="2_167pv"]
-[ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="5_s0flc"]
-[ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="7_s0flc"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="7_w2seq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnhi6"]
@@ -119,12 +117,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAMAAAABAAAAAAABAAMAAAACAAEAAAABAAM
 tile_set = SubResource("TileSet_5a2x4")
 rendering_quadrant_size = 48
 
-[node name="MovementServer" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("5_s0flc")]
-grid_map = NodePath("../GridMap")
-
-[node name="ActionServer" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("7_s0flc")]
-grid_map = NodePath("../GridMap")
-
 [node name="GridDrawer" parent="." node_paths=PackedStringArray("fill_map") instance=ExtResource("7_w2seq")]
 fill_map = NodePath("../GridMap")
 
@@ -134,6 +126,3 @@ fill_map = NodePath("../GridMap")
 
 [node name="Character" parent="Characters" instance=ExtResource("2_167pv")]
 metadata/_edit_group_ = true
-
-[connection signal="action_requested" from="Characters/Character" to="ActionServer" method="_on_action_requested"]
-[connection signal="move_requested" from="Characters/Character" to="MovementServer" method="_on_charactermove_requested"]

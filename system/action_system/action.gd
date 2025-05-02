@@ -1,21 +1,30 @@
 class_name Action
 extends Object
 
-var grid_map:TileMapLayer
-var character:Character
+var level_handler:LevelHandler
+var requester:int
+var target:Vector2i
+
 var resource:ActionResource
 var action_range:ActionRange
 var logic:ActionLogic
-var target:Vector2i
+
+
+signal failed
+signal finished
 
 func execute()  -> bool:
 	if is_instance_valid(action_range):
-		var origin = grid_map.local_to_map(character.position)
+		var origin = level_handler.get_character_position(requester)
 		var result = clac_action_range(origin)
 		if !is_target_valid(result):
+			emit_signal("failed")
 			return false
-	if !logic.execute(character,grid_map,target):
+	var action_result = await logic.execute(requester,target,level_handler)
+	if !action_result:
+		emit_signal("failed")
 		return false
+	emit_signal("finished")
 	return true
 
 func clac_action_range(origin:Vector2i) -> Array[Vector2i]:
@@ -71,3 +80,6 @@ func is_target_valid(result:Array[Vector2i]) -> bool:
 		return true
 	else:
 		return false
+
+func change_target(t:Vector2i) -> void:
+	target = t

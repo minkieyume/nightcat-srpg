@@ -1,5 +1,5 @@
 extends GridMapServer
-# 处理角色在网格图块中的移动逻辑
+# 处理角色在图块中的移动请求
 
 var astar:AStarGrid2D
 
@@ -15,17 +15,16 @@ func _init_astar() -> void:
 	astar.set_diagonal_mode(astar.DiagonalMode.DIAGONAL_MODE_NEVER)
 	astar.update()
 
-func _move_character(character:Character,target:Vector2i):
+func _move_character(cid:int,target:Vector2i):
 	var path = []
+	var character = level_handler.get_character(cid)
 	var start = grid_map.local_to_map(character.position)
 	if astar.is_point_solid(target):
 		return
 	path = astar.get_id_path(start,target)
-	print(path)
-	for point in path:
-		await character.step(point - start,tile_size)
-		start = grid_map.local_to_map(character.position)
+	character.step_path(path,tile_size,grid_map)
 
 # Note:坐标从0开始算，而非从1开始算。
-func _on_charactermove_requested(character:Character,target:Vector2i):
-	_move_character(character,target)
+func _on_command_recieved(command:StringName,args:Array):
+	if command == "move_character":
+		_move_character(args[0],args[1])

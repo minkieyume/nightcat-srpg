@@ -3,8 +3,8 @@ extends MenuPhase
 var grid_drawer:GridDrawer
 
 """Transition：
-"character_chose" -> action_choser
-"action_target_chose" -> action_achiever
+&"character_chose" -> action_choser
+&"action_target_chose" -> action_achiever
 """
 
 """上下文：

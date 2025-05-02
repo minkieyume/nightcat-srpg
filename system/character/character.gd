@@ -5,7 +5,7 @@ extends Area2D
 
 @export var move_speed = 96
 
-@onready var action_manager:ActionManager = $ActionManager
+@onready var action_manager = $ActionManager
 @onready var animation_player = $AnimationPlayer
 
 #LimboHSM状态机插件
@@ -20,14 +20,10 @@ var direction:Vector2i = Vector2i.DOWN:
 		emit_signal("direction_changed",direction)
 
 signal direction_changed(direct:Vector2i)
-signal action_requested(action_manager:ActionManager,id:StringName,\
-	target:Vector2i)
-signal move_requested(moveable,target:Vector2i)
-signal action_finished
+signal path_end
 
 func _ready() -> void:
 	_init_state_machine()
-	request_action("move",Vector2i(2,2))
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")
@@ -53,7 +49,15 @@ func change_direction(dir:Vector2i) -> bool:
 			return true
 		_:
 			return false
-	
+
+func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
+	# 沿着path批量移动
+	var start = map.local_to_map(position)
+	for point in path:
+		await step(point - start,vdis)
+		start = map.local_to_map(position)
+	emit_signal("path_end")
+
 func step(dir:Vector2,vdis:Vector2) -> void:
 	# 朝特定方向移动一段距离
 	# dir:朝向的向量
@@ -67,15 +71,8 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	await tween.finished
 	hsm.dispatch("move_stop")
 
-# Note:坐标从0开始算，而非从1开始算。
-func request_move_to(target:Vector2i):
-	# 对负责处理地图移动的MovementServer模块发送移动请求信号，
-	# MovementServer模块接受到信号后自动处理玩家的移动。
-	# target是请求移动的目标。
-	emit_signal("move_requested",self,target)
-
-func request_action(id:StringName,target:Vector2i):
-	emit_signal("action_requested",action_manager,id,target)
-
 func get_action_list() -> Dictionary:
 	return action_manager.action_list
+
+func get_action_resource(id:StringName):
+	return action_manager.get_action_resouce(id)
