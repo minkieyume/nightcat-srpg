@@ -3,12 +3,7 @@
 * 结构图
 #+begin_src plantuml :file character_struct.png
 class Character{
-+ act() -> bool
 + step() -> void
-}
-
-class ActionManager{
-+ execute_action() -> bool
 }
 
 class LimboHsm{
@@ -22,7 +17,6 @@ entity MoveState{
 - _update_animation(direction) -> void
 }
 
-Character o-right- ActionManager : 处理行动
 Character o-left- LimboHsm : 处理状态
 IdleState -up-* LimboHsm
 MoveState -up-* LimboHsm
@@ -37,17 +31,21 @@ MoveState -right-> IdleState : move_stop
 * 关系图
 #+begin_src plantuml :file character_relation.png
 class Character{
-+ request_move_to() -> void
++ step_path()
 }
 class MovementServer{
-- _on_charactermove_requested() -> void
++ request_move()
 }
 class GridMap{
 + local_to_map() -> Vector2i
 + map_to_local() -> Vector2i
 }
-Character .right.> MovementServer : move_requested()
-MovementServer -right-> GridMap : 转换坐标
+class Action{
++ execute()
+}
+Character <-right- MovementServer : 提供path，通知character移动
+MovementServer <-down- GridMap : 转换坐标
+Action -left-> MovementServer : 请求移动
 #+end_src
 
 #+ATTR_ORG: :width 840
