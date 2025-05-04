@@ -87,4 +87,3 @@ func _draw_grid(grid:Vector2i,color:Color,o_color:Color) -> void:
 	var rect = Rect2(pos-Vector2(tile_size)/2,tile_size)
 	draw_rect(rect,color) # 绘制网格
 	draw_rect(rect,o_color,false) # 绘制网格边框
-

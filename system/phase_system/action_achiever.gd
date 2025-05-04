@@ -15,11 +15,10 @@ var achieve_action:Action
 
 func _enter():
 	super()
-	achieve_action = \
-		action_factory.create_action(context["actor"],context["chosed_action"],context["target"])
+	achieve_action = action_factory.create_action(context["actor"], context["chosed_action"], context["target"])
+	achieve_action.finished.connect(_action_finish)
+	achieve_action.failed.connect(_action_failed)
 	achieve_action.execute()
-	await achieve_action.finished
-	_action_finish()
 
 func _exit():
 	super()
@@ -29,5 +28,10 @@ func clean_action():
 	achieve_action.free()
 
 func _action_finish():
+	context["target_chose_event"] = &"character_chose"
+	dispatch("action_end")
+
+func _action_failed():
+	print("[DEBUG] 目标不可达，请重新选择")
 	context["target_chose_event"] = &"character_chose"
 	dispatch("action_end")
