@@ -1,5 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctpwokqd5uh20"]
-
+[gd_scene load_steps=15 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
