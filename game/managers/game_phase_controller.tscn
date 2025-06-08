@@ -1,0 +1,180 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcp4wjouh8kwm"]
+
+[ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/phase_system/phase_controller.tscn" id="1_c7g17"]
+[ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://game/managers/game_phase_controller.gd" id="2_emkk0"]
+[ext_resource type="Script" uid="uid://d1at7yexse563" path="res://game/phases/prepare_turn.gd" id="3_64vh6"]
+[ext_resource type="Script" uid="uid://dmqb80wbqxon3" path="res://system/phase_system/phase.gd" id="3_emkk0"]
+[ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="4_d1ik7"]
+[ext_resource type="Script" uid="uid://bxxextwo4at4k" path="res://game/phases/turn_start_prompt.gd" id="5_emkk0"]
+[ext_resource type="Script" uid="uid://75x78h8qhuj5" path="res://game/phases/restore_ap.gd" id="6_emkk0"]
+
+[node name="GamePhaseController" instance=ExtResource("1_c7g17")]
+script = ExtResource("2_emkk0")
+
+[node name="PrepareTurn" type="LimboState" parent="." index="0"]
+script = ExtResource("3_64vh6")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PhaseController" type="LimboHSM" parent="PrepareTurn" index="0"]
+script = ExtResource("4_d1ik7")
+metadata/_custom_type_script = "uid://fe3prh577nyf"
+
+[node name="TurnStartPrompt" type="LimboState" parent="PrepareTurn/PhaseController" index="0"]
+script = ExtResource("5_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="RestoreAP" type="LimboState" parent="PrepareTurn/PhaseController" index="1"]
+script = ExtResource("6_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="CooldownTick" type="LimboState" parent="PrepareTurn/PhaseController" index="2"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="AdvanceAlertCountdown" type="LimboState" parent="PrepareTurn/PhaseController" index="3"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="CleanupExpiredStatus" type="LimboState" parent="PrepareTurn/PhaseController" index="4"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PrepareTurnEndCheck" type="LimboState" parent="PrepareTurn/PhaseController" index="5"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerTurn" type="LimboState" parent="." index="1"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PhaseController" type="LimboHSM" parent="PlayerTurn" index="0"]
+script = ExtResource("4_d1ik7")
+metadata/_custom_type_script = "uid://fe3prh577nyf"
+
+[node name="PlayerTurnStartPrompt" type="LimboState" parent="PlayerTurn/PhaseController" index="0"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerSelectUnit" type="LimboState" parent="PlayerTurn/PhaseController" index="1"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerOpenActionMenu" type="LimboState" parent="PlayerTurn/PhaseController" index="2"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerSelectAction" type="LimboState" parent="PlayerTurn/PhaseController" index="3"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerSelectMoveTarget" type="LimboState" parent="PlayerTurn/PhaseController" index="4"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerUnitMoving" type="LimboState" parent="PlayerTurn/PhaseController" index="5"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerSelectSkillTarget" type="LimboState" parent="PlayerTurn/PhaseController" index="6"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerUnitSkillExecuting" type="LimboState" parent="PlayerTurn/PhaseController" index="7"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerSelectInteractTarget" type="LimboState" parent="PlayerTurn/PhaseController" index="8"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerUnitInteracting" type="LimboState" parent="PlayerTurn/PhaseController" index="9"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerSelectCoopTarget" type="LimboState" parent="PlayerTurn/PhaseController" index="10"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerCoopSkillExecuting" type="LimboState" parent="PlayerTurn/PhaseController" index="11"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerCoopAftermath" type="LimboState" parent="PlayerTurn/PhaseController" index="12"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerCheckUnitAP" type="LimboState" parent="PlayerTurn/PhaseController" index="13"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerCheckAllUnitsAP" type="LimboState" parent="PlayerTurn/PhaseController" index="14"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerTurnEndPrompt" type="LimboState" parent="PlayerTurn/PhaseController" index="15"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyTurn" type="LimboState" parent="." index="2"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PhaseController" type="LimboHSM" parent="EnemyTurn" index="0"]
+script = ExtResource("4_d1ik7")
+metadata/_custom_type_script = "uid://fe3prh577nyf"
+
+[node name="EnemyTurnStartPrompt" type="LimboState" parent="EnemyTurn/PhaseController" index="0"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemySelectUnit" type="LimboState" parent="EnemyTurn/PhaseController" index="1"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyUnitTurnStart" type="LimboState" parent="EnemyTurn/PhaseController" index="2"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyAIPhase" type="LimboState" parent="EnemyTurn/PhaseController" index="3"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyUnitTurnEnd" type="LimboState" parent="EnemyTurn/PhaseController" index="4"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyCheckNextUnit" type="LimboState" parent="EnemyTurn/PhaseController" index="5"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyTurnEndPrompt" type="LimboState" parent="EnemyTurn/PhaseController" index="6"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EndTurn" type="LimboState" parent="." index="3"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PhaseController" type="LimboHSM" parent="EndTurn" index="0"]
+script = ExtResource("4_d1ik7")
+metadata/_custom_type_script = "uid://fe3prh577nyf"
+
+[node name="EndTurnStartPrompt" type="LimboState" parent="EndTurn/PhaseController" index="0"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="VictoryConditionCheck" type="LimboState" parent="EndTurn/PhaseController" index="1"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="DefeatConditionCheck" type="LimboState" parent="EndTurn/PhaseController" index="2"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="TurnCleanup" type="LimboState" parent="EndTurn/PhaseController" index="3"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EndTurnEndCheck" type="LimboState" parent="EndTurn/PhaseController" index="4"]
+script = ExtResource("3_emkk0")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"

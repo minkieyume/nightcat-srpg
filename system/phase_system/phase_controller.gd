@@ -11,14 +11,17 @@ var context:Dictionary:
 signal cargo_send(cargo:Dictionary)
 
 func _ready() -> void:
+	_init_state_machine()
+	
+func _init_state_machine():
 	for phase in get_children():
 		if phase is Phase or phase is PhaseController:
 			for event in phase.transition.keys():
 				var target = phase.transition[event]
 				phase.cargo_send.connect(target._on_cargo_recieve)
 				add_transition(phase,target,event)
+	# LimboHSM 会自动将第一个子节点设为初始状态
 	initialize(self)
-	set_active(true)
 
 func _setup():
 	for phase in get_children():
@@ -34,14 +37,10 @@ func _exit() -> void:
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo
 
-# 回合推进：重置所有角色AP，推进所有技能冷却
-func advance_turn():
-	# 重置所有角色AP
-	for character in level_handler.get_character_list():
-		if character.has_method("reset_ap"):
-			character.reset_ap()
-		# 推进技能冷却
-		if character.has_node("ActionManager"):
-			var am = character.get_node("ActionManager")
-			if am.has_method("tick_cooldown"):
-				am.tick_cooldown()
+# 启动状态机
+func start():
+	set_active(true)
+	# 确保初始状态被激活
+	var first_child = get_children()[0] if get_children().size() > 0 else null
+	if first_child and not first_child.is_active():
+		first_child._enter()
