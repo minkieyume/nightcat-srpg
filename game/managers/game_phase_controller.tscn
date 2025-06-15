@@ -11,16 +11,23 @@
 [node name="GamePhaseController" instance=ExtResource("1_c7g17")]
 script = ExtResource("2_emkk0")
 
-[node name="PrepareTurn" type="LimboState" parent="." index="0"]
+[node name="PrepareTurn" type="LimboState" parent="." index="0" node_paths=PackedStringArray("transition")]
 script = ExtResource("3_64vh6")
+transition = {
+&"init": NodePath(""),
+&"next": NodePath("../PlayerTurn")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="PhaseController" type="LimboHSM" parent="PrepareTurn" index="0"]
 script = ExtResource("4_d1ik7")
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
-[node name="TurnStartPrompt" type="LimboState" parent="PrepareTurn/PhaseController" index="0"]
+[node name="TurnStartPrompt" type="LimboState" parent="PrepareTurn/PhaseController" index="0" node_paths=PackedStringArray("transition")]
 script = ExtResource("5_emkk0")
+transition = {
+&"next": NodePath("")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="RestoreAP" type="LimboState" parent="PrepareTurn/PhaseController" index="1"]

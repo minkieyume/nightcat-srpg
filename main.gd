@@ -4,6 +4,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("[Main] 启用 GamePhaseController")
 	game_phase_controller.start()
 
 
