@@ -34,7 +34,8 @@ level_handler = NodePath("../LevelHandler")
 [node name="ActionFactory" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("5_dg77c")]
 level_handler = NodePath("../LevelHandler")
 
-[node name="GamePhaseController" parent="." instance=ExtResource("6_ycdy4")]
+[node name="GamePhaseController" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("6_ycdy4")]
+level_handler = NodePath("../LevelHandler")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
