@@ -6,37 +6,39 @@
 * 关系图
 #+begin_src plantuml :file action_struct.png
 class Character{
-+ request_action(action_manager:ActionManager)
++ get_action_list()
 }
 class Action{
 + execute()
 }
 class ActionManager{
 + actions:Array[ActionResource]
-+ create_action(resource:ActionResource) -> Action
-+ execute_action(id:StringName,gridmap:TileMaplayer)
 }
 class ActionResource{
 + id:StringName
 + action_logic:Script
 }
 class ActionServer{
-- _on_action_requested(action_manager:ActionManager)
++ create_action(action_resource)
 }
-class GridMap{
-+ tile_size
+class LevelHandler{
++ get_tilemap()
+}
+class ActionAchiever{
++ context:Dictionary
 }
 interface ActionLogic{
 + execute()
 }
 
+ActionAchiever ..> ActionServer : 请求
+Character -right-> ActionAchiever : 提供
 Action ..|> ActionLogic : 实现
-ActionManager --|> Action : 创建
-ActionManager --o ActionResource : 聚合
+ActionServer --|> Action : 创建
 ActionResource --* ActionLogic : 包含
-Character ..> ActionServer : 请求
-ActionServer --> ActionManager : 激活
-ActionServer -left-> GridMap : 引用
+ActionServer -left-> LevelHandler : 调取
+ActionManager --o ActionResource : 聚合
+Character --* ActionManager : 包含
 #+end_src
 
 #+ATTR_ORG: :width 640
