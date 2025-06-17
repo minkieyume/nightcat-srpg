@@ -221,7 +221,7 @@ _data = {
 &"move_up": SubResource("Animation_fvjva")
 }
 
-[node name="Character" type="Area2D" groups=["character"]]
+[node name="Character" type="Area2D" groups=["character", "id"]]
 script = ExtResource("1_1i7cy")
 metadata/_edit_lock_ = true
 

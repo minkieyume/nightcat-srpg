@@ -2,7 +2,7 @@ class_name Action
 extends Object
 
 var level_handler:LevelHandler
-var requester:int
+var requester:String
 var target:Vector2i
 
 var resource:ActionResource
@@ -15,6 +15,7 @@ signal finished
 
 func execute()  -> bool:
 	if is_instance_valid(action_range):
+#		print("[Action]",requester)
 		var origin = level_handler.get_character_position(requester)
 		var result = clac_action_range(origin)
 		if !is_target_valid(result):

@@ -3,6 +3,8 @@ class_name Character
 # 与各个Server中介通信
 extends Area2D
 
+@export var id = "kiko"
+
 @export var move_speed = 96
 
 @onready var action_manager = $ActionManager

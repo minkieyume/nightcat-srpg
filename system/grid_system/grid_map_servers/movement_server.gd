@@ -15,7 +15,7 @@ func _init_astar() -> void:
 	astar.set_diagonal_mode(astar.DiagonalMode.DIAGONAL_MODE_NEVER)
 	astar.update()
 
-func _move_character(cid:int,target:Vector2i):
+func _move_character(cid:String,target:Vector2i):
 	var path = []
 	var character = level_handler.get_character(cid)
 	var start = grid_map.local_to_map(character.position)

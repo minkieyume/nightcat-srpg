@@ -15,6 +15,7 @@ var achieve_action:Action
 
 func _enter():
 	super()
+#	print("[ActionAchever]",context["actor"])
 	achieve_action = action_factory.create_action(context["actor"], context["chosed_action"], context["target"])
 	achieve_action.finished.connect(_action_finish)
 	achieve_action.failed.connect(_action_failed)

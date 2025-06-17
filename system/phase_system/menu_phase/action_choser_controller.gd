@@ -7,7 +7,7 @@ extends MenuPhase
 """上下文：
 target:Vector2i TargetChoser选中的目标，通常是一个坐标。
 target_chose_event:StringName TargetChoser选中后触发的事件，决定转换到哪个节点。
-actor: int 行动的发起者与执行者，用id表示。
+actor: String 行动的发起者与执行者，用id表示。
 action_list: Dictionary 角色的行动列表
 chosed_action: StringName ActionChoser选中的行动。
 """
