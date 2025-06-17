@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://pnqa3pqiiklj"]
+
+[ext_resource type="PackedScene" uid="uid://bbblsed5rbrf7" path="res://system/phase_system/phase.tscn" id="1_g8k01"]
+[ext_resource type="Script" uid="uid://l6clbaryheso" path="res://cargo_set_phase.gd" id="2_scf5c"]
+
+[node name="CargoSetPhase" instance=ExtResource("1_g8k01")]
+script = ExtResource("2_scf5c")

@@ -128,5 +128,8 @@ fill_map = NodePath("../GridMap")
 [node name="Character" parent="Characters" instance=ExtResource("2_167pv")]
 metadata/_edit_group_ = true
 
-[node name="CharacterController" parent="." node_paths=PackedStringArray("level") instance=ExtResource("6_5a2x4")]
-level = NodePath("..")
+[node name="CharacterControllers" type="Node" parent="."]
+
+[node name="CharacterController" parent="CharacterControllers" node_paths=PackedStringArray("level") instance=ExtResource("6_5a2x4")]
+level = NodePath("../..")
+handled_characters = Array[String](["kiko"])

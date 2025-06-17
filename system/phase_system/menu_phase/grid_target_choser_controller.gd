@@ -16,7 +16,6 @@ chosed_action: ActionChoser选中的行动。
 func _ready() -> void:
 	super()
 	add_event_handler("chose",_chose)
-	context["target_chose_event"] = &"character_chose"
 
 func _setup() -> void:
 	grid_drawer = level_handler.get_grid_drawer()
