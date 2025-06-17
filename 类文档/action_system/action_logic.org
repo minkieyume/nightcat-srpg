@@ -1,0 +1,14 @@
+#+Title:ActionLogic
+
+* 描述
+行动的抽象接口
+
+* 方法
+** bool execute()
+*** 参数类型
+character:String,
+target:Vector2i,
+handler:LevelHandler
+
+*** 描述
+需要实现抽象方法，实现该方法即可自定义一个ActionLogic。

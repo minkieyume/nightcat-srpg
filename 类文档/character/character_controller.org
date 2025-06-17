@@ -1,0 +1,12 @@
+#+Title:CharacterController
+* 描述
+负责代理角色操作的控件，该控件的职责是用于区分不同的角色所有者，并部分或完全接管该所有者所持角色的操作逻辑。
+
+* 方法
+** bool is_character_handled()
+*** 参数
+- id:String
+  角色id
+
+*** 描述
+用于判定角色是否被方法所接管。
