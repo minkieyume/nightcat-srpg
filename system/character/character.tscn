@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://11lfpaemgm03"]
+[gd_scene load_steps=28 format=3 uid="uid://11lfpaemgm03"]
 
 [ext_resource type="Script" uid="uid://wbnikvil5wun" path="res://system/character/character.gd" id="1_1i7cy"]
 [ext_resource type="Texture2D" uid="uid://cwcnpq7876prd" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_5/character_5_frame32x32.png" id="1_kfso4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="5_q48ol"]
 [ext_resource type="Script" uid="uid://clf6ve54nuriy" path="res://system/character/states/move_state.gd" id="5_y8eg4"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="7_q48ol"]
+[ext_resource type="Resource" uid="uid://s8x3th7h6nkw" path="res://game/actions/action_resources/interact_action.tres" id="8_deljr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kfso4"]
 size = Vector2(48, 48)
@@ -44,7 +45,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_q48ol"]
+[sub_resource type="Resource" id="Resource_fvjva"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -238,7 +239,7 @@ position = Vector2(24, 24)
 shape = SubResource("RectangleShape2D_kfso4")
 
 [node name="ActionManager" parent="." instance=ExtResource("3_wlaod")]
-actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_q48ol")])
+actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_fvjva"), ExtResource("8_deljr")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -39,5 +39,11 @@ func get_character_owner(id:String):
 func get_grid_map() -> TileMapLayer:
 	return level.get_grid_map()
 
+func get_interactable(id:String) -> Interactable:
+	return level.get_interactable(id)
+
+func get_interactable_list() -> Dictionary[String,Interactable]:
+	return level.get_interactable_dict()
+
 func send_command(command:StringName,args:Array):
 	emit_signal("command_send",command,args)

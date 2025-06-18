@@ -3,5 +3,5 @@ extends Node2D
 
 @export var id = "interactable1"
 
-func interact():
-	pass
+func interact(character:String,handler:LevelHandler):
+	print(character)

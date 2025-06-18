@@ -36,3 +36,9 @@ func get_character_array() -> Array[Character]:
 
 func get_character(id:String):
 	return Character.new()
+
+func get_interactable_dict() -> Dictionary[String,Interactable]:
+	return {"test":Interactable.new()}
+
+func get_interactable(id:String) -> Interactable:
+	return Interactable.new()

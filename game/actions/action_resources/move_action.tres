@@ -17,6 +17,7 @@ resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("1_ea0sw")
 id = &"move"
+group = ""
 action_name = "移动"
 action_range = SubResource("Resource_lmbwv")
 action_logic = ExtResource("1_nm8lr")

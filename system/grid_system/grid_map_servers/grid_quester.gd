@@ -13,3 +13,12 @@ func quest_character(target:Vector2i) -> String:
 		if grid_map.local_to_map(character.position) == target:
 			return character_key
 	return ""
+
+func quest_interactable(target:Vector2i) -> String:
+	var interactable_list = level_handler.get_interactable_list()
+	var grid_map = level_handler.get_grid_map()
+	for ikey in interactable_list.keys():
+		var character = interactable_list[ikey]
+		if grid_map.local_to_map(character.position) == target:
+			return ikey
+	return ""

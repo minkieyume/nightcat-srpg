@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=14 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bhtycubwmulo" path="res://system/phase_system/menu_phase/action_choser_controller.tscn" id="5_kek77"]
 [ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
+[ext_resource type="PackedScene" uid="uid://sj35t43mot4c" path="res://system/grid_system/grid_map_servers/interactable_server.tscn" id="6_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://pnqa3pqiiklj" path="res://system/phase_system/cargo_set_phase.tscn" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="PackedScene" uid="uid://mnyff37hjcq" path="res://system/phase_system/action_achiever.tscn" id="7_kek77"]
@@ -27,6 +28,10 @@ level_handler = NodePath("../LevelHandler")
 level_handler = NodePath("../LevelHandler")
 
 [node name="ActionFactory" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("5_dg77c")]
+level_handler = NodePath("../LevelHandler")
+
+[node name="InteractableServer" parent="." node_paths=PackedStringArray("grid_quester", "level_handler") instance=ExtResource("6_ycdy4")]
+grid_quester = NodePath("../GridQuester")
 level_handler = NodePath("../LevelHandler")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
