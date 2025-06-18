@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=12 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Texture2D" uid="uid://ccnwnypq8ftbo" path="res://assets/external_packs/overworld-pack-full_version/autotiles/autotile_1.png" id="1_jnhi6"]
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="2_167pv"]
+[ext_resource type="PackedScene" uid="uid://ctrc3t2peuvw0" path="res://system/interactable_system/interactable.tscn" id="5_s0flc"]
 [ext_resource type="PackedScene" uid="uid://ctiaxhyv6kofx" path="res://system/character/character_controller.tscn" id="6_5a2x4"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="7_w2seq"]
 
@@ -121,15 +122,18 @@ rendering_quadrant_size = 48
 [node name="GridDrawer" parent="." node_paths=PackedStringArray("fill_map") instance=ExtResource("7_w2seq")]
 fill_map = NodePath("../GridMap")
 
-[node name="Objects" type="Node2D" parent="."]
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="Interactable" parent="Interactables" instance=ExtResource("5_s0flc")]
+position = Vector2(48, 0)
 
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Character" parent="Characters" instance=ExtResource("2_167pv")]
 metadata/_edit_group_ = true
 
-[node name="CharacterControllers" type="Node" parent="."]
+[node name="CharacterOwners" type="Node" parent="."]
 
-[node name="CharacterController" parent="CharacterControllers" node_paths=PackedStringArray("level") instance=ExtResource("6_5a2x4")]
+[node name="CharacterOwner" parent="CharacterOwners" node_paths=PackedStringArray("level") instance=ExtResource("6_5a2x4")]
 level = NodePath("../..")
 handled_characters = Array[String](["kiko"])

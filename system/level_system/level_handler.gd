@@ -5,9 +5,6 @@ extends Node
 
 signal command_send(command:StringName,args:Array)
 
-func _ready() -> void:
-	level.handler = self
-
 func get_grid_drawer() -> GridDrawer:
 	return level.get_grid_drawer()
 
@@ -35,8 +32,8 @@ func get_character_array() -> Array[Character]:
 func get_character(id:String):
 	return level.get_character(id)
 
-func get_character_controller(id:String):
-	var cdict = level.get_character_controllers()
+func get_character_owner(id:String):
+	var cdict = level.get_character_owners()
 	return cdict.get(id)
 
 func get_grid_map() -> TileMapLayer:

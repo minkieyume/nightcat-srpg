@@ -1,17 +1,17 @@
 extends Level
 
 var character_dict:Dictionary[String,Character]
-var character_controller_dict:Dictionary[String,CharacterController]
+var character_owner_dict:Dictionary[String,CharacterOwner]
 
 @onready var characters = $Characters
 @onready var grid_map:TileMapLayer =  $GridMap
 @onready var grid_drawer:GridDrawer = $GridDrawer
-@onready var character_controllers = $CharacterControllers
+@onready var character_owners = $CharacterOwners
 
 func _ready() -> void:
 	super()
 	character_dict = pack_nodes_to_dict(characters,character_dict)
-	character_controller_dict = pack_nodes_to_dict(character_controllers,character_controller_dict)
+	character_owner_dict = pack_nodes_to_dict(character_owners,character_owner_dict)
 
 func get_grid_drawer() -> GridDrawer:
 	return grid_drawer
@@ -19,8 +19,8 @@ func get_grid_drawer() -> GridDrawer:
 func get_grid_map() -> TileMapLayer:
 	return grid_map
 
-func get_character_controllers() -> Dictionary[String,CharacterController]:
-	return character_controller_dict
+func get_character_owners() -> Dictionary[String,CharacterOwner]:
+	return character_owner_dict
 
 func get_character_dict() -> Dictionary[String,Character]:
 	return character_dict

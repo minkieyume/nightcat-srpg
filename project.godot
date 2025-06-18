@@ -27,6 +27,8 @@ naming/script_name_casing=2
 [global_group]
 
 id=""
+interactable="可互动物体"
+character=""
 
 [input]
 
