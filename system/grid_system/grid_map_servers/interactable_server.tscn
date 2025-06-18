@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sj35t43mot4c"]
+
+[ext_resource type="Script" uid="uid://0yd2fnei0p6e" path="res://system/grid_system/grid_map_servers/interactable_server.gd" id="1_d0r5p"]
+
+[node name="InteractableServer" type="Node"]
+script = ExtResource("1_d0r5p")
