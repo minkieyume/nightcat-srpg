@@ -1,6 +1,7 @@
 extends PhaseMenu
 
 var action_button_groups:Dictionary
+var current_button_groups:Dictionary
 var current_action_buttons:Dictionary
 
 @onready var action_button = $ActionButton
@@ -43,6 +44,7 @@ func pull_subaction_group(group:String) -> Dictionary:
 func update_action_buttons(group:String):
 	# 更新并展示特定组的按钮
 	var subgroup = pull_subaction_group(group)
+	current_button_groups = subgroup
 	current_action_buttons.clear()
 	for button in grid_container.get_children():
 		if button is Button:
@@ -65,5 +67,9 @@ func _on_action_button_pressed():
 	var button = get_viewport().gui_get_focus_owner()
 	if button is Button:
 		var id = current_action_buttons[button]
-		phase.update_context("chosed_action",id)
-		phase.dispatch("action_chosed")
+		var button_group = current_button_groups[id]
+		if button_group is Dictionary:
+			update_action_buttons(id)
+		else:
+			phase.update_context("chosed_action",id)
+			phase.dispatch("action_chosed")
