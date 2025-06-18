@@ -3,6 +3,8 @@ extends Node
 # 代理对关卡内容的访问与操作
 @export var level:Level
 
+var grid_quester:GridQuester
+
 signal command_send(command:StringName,args:Array)
 
 func get_grid_drawer() -> GridDrawer:
@@ -44,6 +46,9 @@ func get_interactable(id:String) -> Interactable:
 
 func get_interactable_list() -> Dictionary[String,Interactable]:
 	return level.get_interactable_dict()
+
+func get_grid_quester() -> GridQuester:
+	return grid_quester
 
 func send_command(command:StringName,args:Array):
 	emit_signal("command_send",command,args)

@@ -4,6 +4,9 @@ extends Node
 
 @export var level_handler:LevelHandler
 
+func _ready() -> void:
+	level_handler.grid_quester = self
+
 func quest_character(target:Vector2i) -> String:
 	# 搜寻与特定网格位置匹配的角色并返回id
 	var character_list = level_handler.get_character_dict()
