@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://u4m2fbdw6oco"]
+
+[ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/character/state_ai.gd" id="1_0ei4x"]
+
+[node name="StateAI" type="LimboHSM"]
+script = ExtResource("1_0ei4x")

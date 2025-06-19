@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://01oidtdphw7y"]
+
+[ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="1_7lwml"]
+[ext_resource type="Script" uid="uid://cmf6e44ujult2" path="res://system/character/state_ai_character.gd" id="2_ctogx"]
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="3_ond6r"]
+[ext_resource type="Script" uid="uid://cnv2akdwnh864" path="res://system/action_system/action_logic.gd" id="4_f2w5s"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="5_w7s04"]
+[ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="6_d38is"]
+[ext_resource type="Script" uid="uid://1hic4fic3pr4" path="res://game/actions/action_logics/interact_action.gd" id="7_ptded"]
+
+[sub_resource type="Resource" id="Resource_xru7q"]
+script = ExtResource("5_w7s04")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 10)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_bl7gt"]
+script = ExtResource("3_ond6r")
+id = &"action"
+group = ""
+action_name = "行动"
+action_range = SubResource("Resource_xru7q")
+action_logic = ExtResource("4_f2w5s")
+allowed_target = {
+"Enemy": true,
+"Object": true,
+"Player": true,
+"Tile": true
+}
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
+[sub_resource type="Resource" id="Resource_lmbwv"]
+script = ExtResource("5_w7s04")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_7lwml"]
+resource_local_to_scene = true
+resource_name = "Move"
+script = ExtResource("3_ond6r")
+id = &"move"
+group = ""
+action_name = "移动"
+action_range = SubResource("Resource_lmbwv")
+action_logic = ExtResource("6_d38is")
+allowed_target = {
+"Enemy": true,
+"Object": true,
+"Player": true,
+"Tile": true
+}
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
+[sub_resource type="Resource" id="Resource_xkqmr"]
+script = ExtResource("5_w7s04")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_ctogx"]
+resource_local_to_scene = true
+resource_name = "Interact"
+script = ExtResource("3_ond6r")
+id = &"interact"
+group = ""
+action_name = "互动"
+action_range = SubResource("Resource_xkqmr")
+action_logic = ExtResource("7_ptded")
+allowed_target = {
+"Enemy": true,
+"Object": true,
+"Player": true,
+"Tile": true
+}
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
+[sub_resource type="Resource" id="Resource_irlr2"]
+script = ExtResource("5_w7s04")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_ond6r"]
+resource_local_to_scene = true
+resource_name = "Move"
+script = ExtResource("3_ond6r")
+id = &"move_skill"
+group = "技能"
+action_name = "移动"
+action_range = SubResource("Resource_irlr2")
+action_logic = ExtResource("6_d38is")
+allowed_target = {
+"Enemy": true,
+"Object": true,
+"Player": true,
+"Tile": true
+}
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
+[node name="StateAICharacter" groups=["ai_character"] instance=ExtResource("1_7lwml")]
+script = ExtResource("2_ctogx")
+
+[node name="ActionManager" parent="." index="2"]
+actions = Array[ExtResource("3_ond6r")]([SubResource("Resource_bl7gt"), SubResource("Resource_7lwml"), SubResource("Resource_ctogx"), SubResource("Resource_ond6r")])
