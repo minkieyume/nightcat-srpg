@@ -4,10 +4,15 @@ extends Phase
 "action_end" -> action_choser
 """
 
-"""上下文：
+"""接收的上下文：
+master:String 角色拥有者的ID
+actor:String 角色的ID
 target:Vector2i 选中的目标，通常是一个坐标。
-target_chose_event:StringName TargetChoser选中后触发的事件，决定接下来转换到哪个节点
 chosed_action: ActionChoser选中的行动。
+"""
+
+"""传递的上下文：
+target_chose_event:StringName TargetChoser选中后触发的事件，决定接下来转换到哪个节点
 """
 @export var action_factory:ActionFactory
 

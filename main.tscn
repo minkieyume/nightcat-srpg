@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=14 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="PackedScene" uid="uid://mnyff37hjcq" path="res://system/phase_system/action_achiever.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://vpbg4qftulog" path="res://system/phase_system/character_ai_runner.tscn" id="8_ycdy4"]
 
 [node name="Main" type="Node"]
 
@@ -36,9 +37,14 @@ level_handler = NodePath("../../LevelHandler")
 
 [node name="CargoSetPhase" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition") instance=ExtResource("7_dg77c")]
 cargos = {
-"master": "player",
+"master": "enemy",
 "target_chose_event": &"character_chose"
 }
+transition = {
+&"next": NodePath("../CharacterAIRunner")
+}
+
+[node name="CharacterAIRunner" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition") instance=ExtResource("8_ycdy4")]
 transition = {
 &"next": NodePath("../GridTargetChoser")
 }

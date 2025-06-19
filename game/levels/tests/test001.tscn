@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://je3vtoci4xmo" path="res://system/grid_system/grid_map.tscn" id="2_63egv"]
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="2_167pv"]
 [ext_resource type="PackedScene" uid="uid://ctrc3t2peuvw0" path="res://system/interactable_system/interactable.tscn" id="5_s0flc"]
-[ext_resource type="PackedScene" uid="uid://ctiaxhyv6kofx" path="res://system/character/character_controller.tscn" id="6_5a2x4"]
+[ext_resource type="PackedScene" uid="uid://ctiaxhyv6kofx" path="res://system/character/character_owner.tscn" id="6_5a2x4"]
 [ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/characters/enemy_001.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="7_w2seq"]
 

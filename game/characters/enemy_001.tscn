@@ -128,7 +128,7 @@ script = ExtResource("8_ri16f")
 [node name="Patrol" type="LimboState" parent="StateAI" index="0"]
 script = ExtResource("10_22db3")
 
-[node name="Guard" type="LimboState" parent="StateAI" index="1"]
+[node name="Stop" type="LimboState" parent="StateAI" index="1"]
 script = ExtResource("11_x6aw5")
 
 [node name="Chase" type="LimboState" parent="StateAI" index="2"]
