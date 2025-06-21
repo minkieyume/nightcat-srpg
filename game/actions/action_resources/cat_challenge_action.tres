@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://cjowru8chcbk0"]
+
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1"]
+[ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="2"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="3"]
+
+[sub_resource type="Resource" id="Range"]
+script = ExtResource("3")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 3)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+
+[resource]
+resource_local_to_scene = true
+resource_name = "夜猫挑战"
+script = ExtResource("1")
+id = &"cat_challenge"
+group = ""
+action_name = "夜猫挑战"
+action_range = SubResource("Range")
+action_logic = ExtResource("2")
+allowed_target = {
+"Tile": true
+}
+ap_cost = 2
+cooldown = 2

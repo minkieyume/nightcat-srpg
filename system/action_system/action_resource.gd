@@ -13,3 +13,7 @@ extends Resource
 	"Player":true, # 玩家
 	"Object":true  # 物件
 }
+@export var ap_cost: int = 1 # 行动消耗AP
+@export var cooldown: int = 0 # 行动冷却回合数
+@export var icon: Texture2D # 行动图标（可选）
+@export var effect_fx: PackedScene # 行动特效（可选）

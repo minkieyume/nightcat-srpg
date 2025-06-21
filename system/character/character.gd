@@ -21,8 +21,22 @@ var direction:Vector2i = Vector2i.DOWN:
 		direction = d
 		emit_signal("direction_changed",direction)
 
+# 角色属性字典，便于扩展
+var attributes = {
+	"ap": 4,
+	"max_ap": 4,
+	"hp": 10,
+	"max_hp": 10
+}
+
+# 角色状态管理
+var state: String = "normal" # 角色当前状态，如 normal, stunned, confused 等
+var state_turns: int = 0 # 状态剩余持续回合数
+
 signal direction_changed(direct:Vector2i)
 signal path_end
+signal ap_changed(new_ap)
+signal state_changed(new_state)
 
 func _ready() -> void:
 	_init_state_machine()
@@ -73,8 +87,64 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	await tween.finished
 	hsm.dispatch("move_stop")
 
+# 角色行动
 func get_action_list() -> Dictionary:
 	return action_manager.action_list
 
 func get_action_resource(id:StringName):
 	return action_manager.get_action_resouce(id)
+
+# 角色属性
+func get_attribute(attr_name: String):
+	return attributes.get(attr_name, null)
+
+func set_attribute(attr_name: String, value):
+	attributes[attr_name] = value
+
+func add_attribute(attr_name: String, delta):
+	attributes[attr_name] = get_attribute(attr_name) + delta
+
+# AP相关
+func get_ap() -> int:
+	return attributes["ap"]
+
+func set_ap(value: int) -> void:
+	attributes["ap"] = clamp(value, 0, attributes["max_ap"])
+	emit_signal("ap_changed", attributes["ap"])
+
+func add_ap(delta: int) -> void:
+	set_ap(get_ap() + delta)
+
+func reset_ap() -> void:
+	set_ap(attributes["max_ap"])
+
+func can_consume_ap(cost: int) -> bool:
+	return get_ap() >= cost
+
+func consume_ap(cost: int) -> bool:
+	if can_consume_ap(cost):
+		add_ap(-cost)
+		return true
+	return false
+
+# 状态相关
+func set_state(new_state: String, turns: int = 0) -> void:
+	state = new_state
+	state_turns = turns
+	emit_signal("state_changed", state)
+
+func get_state() -> String:
+	return state
+
+func is_state(state_name: String) -> bool:
+	return state == state_name
+
+func tick_state() -> void:
+	if state != "normal":
+		if state_turns > 0:
+			state_turns -= 1
+			if state_turns == 0:
+				set_state("normal")
+
+func get_state_turns() -> int:
+	return state_turns

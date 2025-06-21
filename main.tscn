@@ -1,5 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://ctpwokqd5uh20"]
 
+
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b8c80fm02csb8" path="res://system/phase_system/phase_controller.tscn" id="3_272bh"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://mnyff37hjcq" path="res://system/phase_system/action_achiever.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://vpbg4qftulog" path="res://system/phase_system/character_ai_runner.tscn" id="8_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://obu782ptmn7w" path="res://system/ui/character_info.tscn" id="12_dg77c"]
 
 [node name="Main" type="Node"]
 
@@ -78,3 +80,5 @@ offset_right = -683.0
 offset_bottom = -440.0
 phase = NodePath("../MenuManager/ActionChoser")
 metadata/_edit_group_ = true
+
+[node name="CharacterInfo" parent="CanvasLayer" instance=ExtResource("12_dg77c")]

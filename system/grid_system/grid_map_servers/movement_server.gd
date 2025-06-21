@@ -1,3 +1,4 @@
+class_name MovementServer
 extends GridMapServer
 # 处理角色在图块中的移动请求
 
@@ -14,6 +15,13 @@ func _init_astar() -> void:
 	astar.set_default_estimate_heuristic(astar.Heuristic.HEURISTIC_MANHATTAN)
 	astar.set_diagonal_mode(astar.DiagonalMode.DIAGONAL_MODE_NEVER)
 	astar.update()
+
+func get_path_length(start: Vector2i, target: Vector2i) -> int:
+	if astar.is_point_solid(target):
+		return 0
+	var path = astar.get_id_path(start, target)
+	# 修正：ap消耗应为实际格数（path.size()-1），最小为0
+	return max(path.size() - 1, 0)
 
 func _move_character(cid:String,target:Vector2i):
 	var path = []

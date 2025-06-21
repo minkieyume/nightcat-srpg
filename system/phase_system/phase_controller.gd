@@ -33,3 +33,15 @@ func _exit() -> void:
 
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo
+
+# 回合推进：重置所有角色AP，推进所有技能冷却
+func advance_turn():
+	# 重置所有角色AP
+	for character in level_handler.get_character_list():
+		if character.has_method("reset_ap"):
+			character.reset_ap()
+		# 推进技能冷却
+		if character.has_node("ActionManager"):
+			var am = character.get_node("ActionManager")
+			if am.has_method("tick_cooldown"):
+				am.tick_cooldown()

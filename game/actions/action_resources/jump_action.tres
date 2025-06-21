@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://dx1hvecftvb3d"]
+
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1"]
+[ext_resource type="Script" uid="uid://b57riagenvlv0" path="res://game/actions/action_logics/jump_action.gd" id="2"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="3"]
+
+[sub_resource type="Resource" id="Range"]
+script = ExtResource("3")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 1)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+
+[resource]
+resource_local_to_scene = true
+resource_name = "Jump"
+script = ExtResource("1")
+id = &"jump"
+group = ""
+action_name = "正义跳跃"
+action_range = SubResource("Range")
+action_logic = ExtResource("2")
+allowed_target = {
+"Tile": true
+}
+ap_cost = 1
+cooldown = 0

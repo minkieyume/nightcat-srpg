@@ -11,6 +11,7 @@ focus_mode = 1
 script = ExtResource("2_u4t3p")
 
 [node name="Panel" type="Panel" parent="." index="0"]
+layout_mode = 0
 offset_right = 46.0
 offset_bottom = 106.0
 focus_mode = 1
@@ -25,6 +26,7 @@ grow_horizontal = 2
 
 [node name="ActionButton" type="Button" parent="." index="1"]
 visible = false
+layout_mode = 0
 offset_top = -39.0
 offset_right = 40.0
 offset_bottom = -8.0

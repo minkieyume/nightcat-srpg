@@ -2,6 +2,7 @@ class_name LevelHandler
 extends Node
 # 代理对关卡内容的访问与操作
 @export var level:Level
+@export var movement_server: Node
 
 var grid_quester:GridQuester
 
@@ -52,3 +53,10 @@ func get_grid_quester() -> GridQuester:
 
 func send_command(command:StringName,args:Array):
 	emit_signal("command_send",command,args)
+
+func get_path_length(start: Vector2i, target: Vector2i) -> int:
+	if movement_server:
+		var length = movement_server.get_path_length(start, target)
+		# 修正：路径长度实际为格数（即 path.size()-1），但ap消耗应为最大允许AP与实际路径长度的较小值
+		return max(length, 0)
+	return 1
