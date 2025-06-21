@@ -25,4 +25,3 @@ func execute(character:String, target:Vector2i, handler:LevelHandler) -> bool:
 #	target:Vector2i) -> bool:
 #	character.request_move_to(target)
 #	return true
-)
