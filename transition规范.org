@@ -1,0 +1,5 @@
+#+TITLE: Transition规范
+
+* 前言
+本规范用于控制PhaseController的Transition，决定各个Transition键的作用，方便将进行dispatch，该规范仅在流程控制层有效。
+
