@@ -1,7 +1,8 @@
 extends Phase
 
 """Transition：
-"action_end" -> action_choser
+"action_finish" -> turn_end
+"action_failed" -> action_choser
 """
 
 """接收的上下文：
@@ -36,9 +37,9 @@ func clean_action():
 
 func _action_finish():
 	context["target_chose_event"] = &"character_chose"
-	dispatch("action_end")
+	dispatch("action_finish")
 
 func _action_failed():
 	print("[DEBUG] 目标不可达，请重新选择")
 	context["target_chose_event"] = &"character_chose"
-	dispatch("action_end")
+	dispatch("action_fail")

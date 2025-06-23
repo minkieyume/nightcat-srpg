@@ -24,7 +24,7 @@ func _enter() -> void:
 func _update_action_list():
 	_update_actor()
 	var actor_id = context["actor"]
-	if typeof(actor_id) == TYPE_INT:
+	if typeof(actor_id) == TYPE_STRING:
 		var action_list = level_handler.get_character_actions(actor_id)
 		if action_list == null:
 			push_error("[action_choser_controller.gd] 获取角色行动列表失败，actor_id: %s" % [str(actor_id)])

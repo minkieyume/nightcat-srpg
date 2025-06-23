@@ -26,7 +26,7 @@ func _enter() -> void:
 	# 限制移动范围：只允许AP步数内的格子
 	var actor_id = context.get("actor", null)
 	var action_id = context.get("chosed_action", null)
-	if typeof(actor_id) == TYPE_INT and action_id == &"move":
+	if typeof(actor_id) == TYPE_STRING and action_id == &"move":
 		var actor = level_handler.get_character(actor_id)
 		if actor:
 			var ap = actor.get_ap()

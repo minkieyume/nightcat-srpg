@@ -6,5 +6,6 @@
 [node name="ActionAchiever" node_paths=PackedStringArray("transition") instance=ExtResource("1_3gvf1")]
 script = ExtResource("2_gsnlp")
 transition = {
-&"action_end": null
+&"action_failed": null,
+&"action_finish": null
 }

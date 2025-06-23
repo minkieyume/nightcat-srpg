@@ -15,6 +15,7 @@ func _enter() -> void:
 	await get_tree().create_timer(0.5).timeout
 	
 	# 转换到CooldownTick阶段
+	dispatch("turn_end")
 	var cooldown_tick = get_parent().get_node("CooldownTick")
 	if cooldown_tick:
 		transition["next"] = cooldown_tick

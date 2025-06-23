@@ -68,7 +68,7 @@ func create_action_button(id:StringName,action_name:StringName,sample_button:But
 	# 判断可用性
 	var actor_id = phase.context.get("actor", null)
 	var actor = null
-	if typeof(actor_id) == TYPE_INT:
+	if typeof(actor_id) == TYPE_STRING:
 		actor = phase.level_handler.get_character(actor_id)
 	if actor == null or actor.action_manager == null:
 		push_error("[action_choser.gd] context['actor'] 不是合法角色对象，缺少 action_manager。当前值：%s" % [str(actor_id)])
