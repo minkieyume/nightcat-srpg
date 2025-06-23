@@ -3,3 +3,8 @@
 * 前言
 本规范用于控制PhaseController的Transition，决定各个Transition键的作用，方便将进行dispatch，该规范仅在流程控制层有效。
 
+* 规范
+** turn_end
+dispatch该字符串用于结束当前的阶段控制器，以便跳转到下一个阶段控制器。
+因为LimboState的dispatch机制是，dispatch的信号如果没有被接收，就会往上层冒泡，所以在子状态中使用turn_end信号，如果子状态没有监听turn_end，那么该信号便会传递到上级状态。
+因此，状态机任何状态中都能使用turn_end来结束当前的大状态，跳转到下个大状态。
