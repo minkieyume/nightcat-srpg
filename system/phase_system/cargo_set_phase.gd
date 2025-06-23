@@ -4,4 +4,3 @@ extends Phase
 func _enter() -> void:
 	context.merge(cargos,true)
 	dispatch("next")
-

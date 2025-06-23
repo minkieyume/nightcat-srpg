@@ -23,19 +23,10 @@ func _enter() -> void:
 
 func _update_action_list():
 	_update_actor()
-	var actor_id = context["actor"]
-	if typeof(actor_id) == TYPE_STRING:
-		var action_list = level_handler.get_character_actions(actor_id)
-		if action_list == null:
-			push_error("[action_choser_controller.gd] 获取角色行动列表失败，actor_id: %s" % [str(actor_id)])
-		else:
-			update_context("action_list", action_list)
-	else:
-		push_error("[action_choser_controller.gd] context['actor'] 不是 int，当前值：%s" % [str(actor_id)])
+	update_context("action_list",level_handler.get_character_actions(context["actor"]))
 
 func _update_actor():
-	var id = grid_quester.quest_character(context["target"])
-	context["actor"] = id
+	context["actor"] = grid_quester.quest_character(context["target"])
 
 func _on_action_chosed() -> bool:
 	context.erase("target")
