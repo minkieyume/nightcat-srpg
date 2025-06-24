@@ -53,11 +53,8 @@ transition = {
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="ActionChoseMenu" type="LimboHSM" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
+[node name="ActionChoseMenu" type="LimboHSM" parent="CanvasLayer/MenuManager"]
 script = ExtResource("10_yaehf")
-transition = {
-&"turn_end": NodePath("../Default")
-}
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
 [node name="CargoSetPhase" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition") instance=ExtResource("7_dg77c")]

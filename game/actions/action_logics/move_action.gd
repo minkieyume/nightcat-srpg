@@ -17,7 +17,7 @@ func execute(character:String, target:Vector2i, handler:LevelHandler) -> bool:
 		if action_res:
 			action_res.ap_cost = ap_cost
 	# 发送移动命令
-	handler.send_command("move_character", [character, target])
+	handler.send_command("move_character", [character, target])	
 	await agent.path_end
 	return true
 

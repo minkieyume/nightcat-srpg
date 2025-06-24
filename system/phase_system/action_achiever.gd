@@ -35,7 +35,7 @@ func _exit():
 func clean_action():
 	achieve_action.free()
 
-func _action_finish():
+func _action_finish():	
 	context["target_chose_event"] = &"character_chose"
 	dispatch("action_finish")
 

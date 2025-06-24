@@ -1,7 +1,7 @@
 extends ActionLogic
 
 # 蜡笔爆冲：冲刺2格，击飞晕眩1敌
-func execute(character:int, target:Vector2i, handler:LevelHandler) -> bool:
+func execute(character:String, target:Vector2i, handler:LevelHandler) -> bool:
 	var grid_map = handler.get_grid_map()
 	var actor = handler.get_character(character)
 	var from = handler.get_character_position(character)
