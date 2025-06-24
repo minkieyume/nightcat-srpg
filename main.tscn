@@ -46,14 +46,18 @@ script = ExtResource("8_074og")
 level_handler = NodePath("../../LevelHandler")
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
-[node name="Default" type="LimboState" parent="CanvasLayer/MenuManager"]
+[node name="Hide" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("9_2cqfq")
+transition = {
+&"action": NodePath("../ActionChoseMenu")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="ActionChoseMenu" type="LimboHSM" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("10_yaehf")
 transition = {
-&"turn_end": NodePath("../Default")
+&"hide": NodePath("../Hide"),
+&"turn_end": NodePath("../Hide")
 }
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
