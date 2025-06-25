@@ -1,5 +1,5 @@
 extends Phase
 
 func _enter() -> void:
-	print("[PlayerTurn] 玩家回合")
+	print("[EnemyTurn] 敌人回合")
 	dispatch("next")

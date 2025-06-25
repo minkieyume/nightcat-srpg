@@ -14,10 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://mnyff37hjcq" path="res://system/phase_system/action_achiever.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
-[ext_resource type="Script" uid="uid://dmqb80wbqxon3" path="res://system/phase_system/phase.gd" id="9_2cqfq"]
+[ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/hide.gd" id="9_074og"]
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="10_yaehf"]
 [ext_resource type="PackedScene" uid="uid://obu782ptmn7w" path="res://system/ui/character_info.tscn" id="12_dg77c"]
-[ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_end.gd" id="15_074og"]
+[ext_resource type="PackedScene" uid="uid://dws00ylwpcwr" path="res://system/phase_system/turn_end.tscn" id="15_074og"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_w48qg")
@@ -47,7 +47,7 @@ level_handler = NodePath("../../LevelHandler")
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
 [node name="Hide" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
-script = ExtResource("9_2cqfq")
+script = ExtResource("9_074og")
 transition = {
 &"action": NodePath("../ActionChoseMenu")
 }
@@ -89,9 +89,7 @@ transition = {
 &"action_finish": NodePath("../TurnEnd")
 }
 
-[node name="TurnEnd" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu"]
-script = ExtResource("15_074og")
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+[node name="TurnEnd" parent="CanvasLayer/MenuManager/ActionChoseMenu" instance=ExtResource("15_074og")]
 
 [node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("6_4c57u")]
 phase = NodePath("../MenuManager/ActionChoseMenu/GridTargetChoser")
@@ -107,4 +105,6 @@ metadata/_edit_group_ = true
 
 [node name="CharacterInfo" parent="CanvasLayer" instance=ExtResource("12_dg77c")]
 
+[connection signal="command_send" from="LevelHandler" to="GamePhaseController" method="_on_level_handler_command_send"]
 [connection signal="command_send" from="LevelHandler" to="CanvasLayer/MenuManager" method="_on_level_handler_command_send"]
+[connection signal="command_send" from="LevelHandler" to="CanvasLayer/MenuManager/ActionChoseMenu/CargoSetPhase" method="_on_level_handler_command_send"]

@@ -1,5 +1,4 @@
 extends Phase
 
 func _enter() -> void:
-	
-	dispatch("next")
+	call_deferred("dispatch", "next")

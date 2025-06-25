@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxblkg4285lk8"]
+
+[ext_resource type="Script" uid="uid://b65kjtdr7qnm3" path="res://system/phase_system/count_back_turn.gd" id="1_4t2fl"]
+
+[node name="CountBackTurn" type="LimboState" node_paths=PackedStringArray("transition")]
+script = ExtResource("1_4t2fl")
+transition = {
+&"back": NodePath(""),
+&"next": NodePath("")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
