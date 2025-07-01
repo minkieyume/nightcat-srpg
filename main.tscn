@@ -24,8 +24,11 @@ script = ExtResource("1_w48qg")
 
 [node name="Test001" parent="." instance=ExtResource("1_ig7tw")]
 
-[node name="LevelHandler" parent="." node_paths=PackedStringArray("level") instance=ExtResource("2_0xm2m")]
+[node name="LevelHandler" parent="." node_paths=PackedStringArray("level", "movement_server", "grid_quester", "action_factory") instance=ExtResource("2_0xm2m")]
 level = NodePath("../Test001")
+movement_server = NodePath("../MovementServer")
+grid_quester = NodePath("../GridQuester")
+action_factory = NodePath("../ActionFactory")
 
 [node name="GridQuester" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("8_5vw27")]
 level_handler = NodePath("../LevelHandler")

@@ -1,14 +1,15 @@
 class_name GridQuester
+## 从地图中查询信息并返回
 extends Node
-# 用于从地图中查询信息并返回
 
+## 关卡管理器
 @export var level_handler:LevelHandler
 
 func _ready() -> void:
 	level_handler.grid_quester = self
 
+## 在给定位置搜寻匹配的角色，返回角色id，如果没有则返回空字符串
 func quest_character(target:Vector2i) -> String:
-	# 搜寻与特定网格位置匹配的角色并返回id
 	var character_list = level_handler.get_character_dict()
 	var grid_map = level_handler.get_grid_map()
 	for character_key in character_list.keys():
@@ -17,6 +18,7 @@ func quest_character(target:Vector2i) -> String:
 			return character_key
 	return ""
 
+## 在给定位置搜寻可互动物体，返回物体id，如果没有则返回空字符串
 func quest_interactable(target:Vector2i) -> String:
 	var interactable_list = level_handler.get_interactable_list()
 	var grid_map = level_handler.get_grid_map()

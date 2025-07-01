@@ -3,8 +3,8 @@ extends Node
 # 代理对关卡内容的访问与操作
 @export var level:Level
 @export var movement_server: Node
-
-var grid_quester:GridQuester
+@export var grid_quester:GridQuester
+@export var action_factory:ActionFactory
 
 signal command_send(command:StringName,args:Array)
 
@@ -19,12 +19,13 @@ func get_character_action(id:String,action_id:StringName):
 	var character = get_character(id)
 	return character.get_action_resource(action_id)
 
+## 获取角色坐标，未找到则返回 (-9223372036854775808,-9223372036854775808)
 func get_character_position(id:String) -> Vector2i:
 	var character = get_character(id)
 	var grid_map = level.get_grid_map()
 	if is_instance_valid(character) and is_instance_valid(grid_map):
 		return grid_map.local_to_map(character.position)
-	return Vector2i.ZERO
+	return Vector2i(-9223372036854775808,-9223372036854775808)
 
 func get_character_dict() -> Dictionary[String,Character]:
 	return level.get_character_dict()
@@ -50,6 +51,9 @@ func get_interactable_list() -> Dictionary[String,Interactable]:
 
 func get_grid_quester() -> GridQuester:
 	return grid_quester
+
+func get_action_factory() -> ActionFactory:
+	return action_factory
 
 func send_command(command:StringName,args:Array):
 	emit_signal("command_send",command,args)

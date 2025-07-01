@@ -104,6 +104,9 @@ func set_attribute(attr_name: String, value):
 func add_attribute(attr_name: String, delta):
 	attributes[attr_name] = get_attribute(attr_name) + delta
 
+func get_action_manager():
+	return action_manager
+
 # AP相关
 func get_ap() -> int:
 	return attributes["ap"]

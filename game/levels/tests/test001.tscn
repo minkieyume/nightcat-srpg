@@ -133,7 +133,7 @@ position = Vector2(48, 0)
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="Player" parent="Characters" instance=ExtResource("5_dbhlh")]
+[node name="Player" parent="Characters" groups=["player"] instance=ExtResource("5_dbhlh")]
 metadata/_edit_group_ = true
 
 [node name="Enemy001" parent="Characters" instance=ExtResource("7_80j1t")]

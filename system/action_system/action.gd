@@ -28,8 +28,9 @@ func execute()  -> bool:
 	emit_signal("finished")
 	return true
 
+## 根据输入参数将允许互动的绝对坐标计算出来。
 func clac_action_range(origin:Vector2i) -> Array[Vector2i]:
-# 根据输入参数将允许互动的绝对坐标计算出来。
+
 	var result:Array[Vector2i] = []
 	match action_range.type:
 		0:
