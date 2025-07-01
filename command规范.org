@@ -1,0 +1,5 @@
+#+TITLE: Command规范
+
+* 前言
+本规范用于LevelHandler的Command，通过LevelHandler的Command机制，可以很方便地对各个模块发送命令与参数，以便调用和访问，接收命令方只需要链接level_handler的command_send信号即可收到命令和参数。
+
