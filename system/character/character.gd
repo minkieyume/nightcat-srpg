@@ -98,6 +98,8 @@ func update_sight_character(handler:LevelHandler):
 		var pos = handler.get_character_position(player.id)		
 		if sight_radius.is_tile_in_radius(pos,handler.get_grid_quester()):
 			in_sight_characters.append(player)
+		else:
+			in_sight_characters.erase(player)
 
 # 角色行动
 func get_action_list() -> Dictionary:
