@@ -27,3 +27,15 @@ func quest_interactable(target:Vector2i) -> String:
 		if grid_map.local_to_map(character.position) == target:
 			return ikey
 	return ""
+
+## 获取图块坐标。
+func quest_tile_position(target:Vector2i) -> Vector2:
+	var grid_map = level_handler.get_grid_map()
+	return grid_map.map_to_local(target)
+	
+## 获取图块中点坐标。
+func quest_tile_center(target:Vector2i) -> Vector2:
+	var grid_map = level_handler.get_grid_map()
+	var tile_pos = grid_map.map_to_local(target)
+	var tile_size = grid_map.tile_set.tile_size
+	return tile_pos+Vector2(tile_size/2)

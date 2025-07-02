@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://11lfpaemgm03"]
+[gd_scene load_steps=33 format=3 uid="uid://11lfpaemgm03"]
 
 [ext_resource type="Script" uid="uid://wbnikvil5wun" path="res://system/character/character.gd" id="1_1i7cy"]
 [ext_resource type="Texture2D" uid="uid://cwcnpq7876prd" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_5/character_5_frame32x32.png" id="1_kfso4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://clf6ve54nuriy" path="res://system/character/states/move_state.gd" id="5_y8eg4"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="7_q48ol"]
 [ext_resource type="Script" uid="uid://1hic4fic3pr4" path="res://game/actions/action_logics/interact_action.gd" id="8_fvjva"]
+[ext_resource type="Script" uid="uid://bkddet74xapio" path="res://system/character/sight_radius.gd" id="10_h7f75"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kfso4"]
 size = Vector2(48, 48)
@@ -47,7 +48,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_deljr"]
+[sub_resource type="Resource" id="Resource_fvjva"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -74,7 +75,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_fvjva"]
+[sub_resource type="Resource" id="Resource_h7f75"]
 resource_local_to_scene = true
 resource_name = "Interact"
 script = ExtResource("4_bl7gt")
@@ -101,7 +102,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_h7f75"]
+[sub_resource type="Resource" id="Resource_i8eqi"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -295,8 +296,16 @@ frame = 1
 position = Vector2(24, 24)
 shape = SubResource("RectangleShape2D_kfso4")
 
+[node name="SightRadius" type="Node2D" parent="." node_paths=PackedStringArray("base")]
+script = ExtResource("10_h7f75")
+radius = 192.0
+degress = 45.0
+rotation_deg = 90.0
+base = NodePath("..")
+metadata/_custom_type_script = "uid://bkddet74xapio"
+
 [node name="ActionManager" parent="." instance=ExtResource("3_wlaod")]
-actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_deljr"), SubResource("Resource_fvjva"), SubResource("Resource_h7f75")])
+actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_fvjva"), SubResource("Resource_h7f75"), SubResource("Resource_i8eqi")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

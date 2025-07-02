@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rp8otv7y8koo"]
+
+[ext_resource type="Script" uid="uid://my620shvwpsn" path="res://system/character/tiled_sight_radius.gd" id="1_5aa1t"]
+
+[node name="TiledSightRadius" type="Node2D"]
+script = ExtResource("1_5aa1t")

@@ -9,6 +9,7 @@ extends Area2D
 
 @onready var action_manager = $ActionManager
 @onready var animation_player = $AnimationPlayer
+@onready var sight_radius = $SightRadius
 
 #LimboHSM状态机插件
 @onready var hsm: LimboHSM = $LimboHSM
@@ -48,6 +49,8 @@ func _init_state_machine() -> void:
 	hsm.set_active(true)
 
 func change_direction(dir:Vector2i) -> bool:
+	var dir_angle = Vector2(dir).angle()
+	sight_radius.rotation_deg = rad_to_deg(dir_angle)
 	if direction == dir:
 		return true
 	match dir:

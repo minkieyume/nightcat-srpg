@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bb4jaww77an76"]
+[gd_scene load_steps=22 format=3 uid="uid://bb4jaww77an76"]
 
 [ext_resource type="PackedScene" uid="uid://01oidtdphw7y" path="res://system/character/state_ai_character.tscn" id="1_wkmnl"]
 [ext_resource type="Texture2D" uid="uid://joantxapre28" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_12/character_12_frame16x20.png" id="2_nydrm"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p36qo"]
+[ext_resource type="Script" uid="uid://h4xu0prbqlx3" path="res://system/action_system/action_manager.gd" id="3_hhohr"]
 [ext_resource type="Script" uid="uid://cnv2akdwnh864" path="res://system/action_system/action_logic.gd" id="3_ri16f"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_nydrm"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_22db3"]
@@ -46,7 +47,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_rgqvb"]
+[sub_resource type="Resource" id="Resource_hhohr"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("2_p36qo")
@@ -73,7 +74,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_hhohr"]
+[sub_resource type="Resource" id="Resource_dpa4x"]
 resource_local_to_scene = true
 resource_name = "Interact"
 script = ExtResource("2_p36qo")
@@ -100,7 +101,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_dpa4x"]
+[sub_resource type="Resource" id="Resource_ioue7"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("2_p36qo")
@@ -127,10 +128,15 @@ id = "enemy1"
 position = Vector2(24, 18)
 texture = ExtResource("2_nydrm")
 
-[node name="ActionManager" parent="." index="2"]
-actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_bl7gt"), SubResource("Resource_rgqvb"), SubResource("Resource_hhohr"), SubResource("Resource_dpa4x")])
+[node name="SightRadius" parent="." index="2"]
+position = Vector2(24, 24)
+rotation_deg = -90.0
 
-[node name="StateAI" parent="." index="5" instance=ExtResource("7_p36qo")]
+[node name="ActionManager" parent="." index="3"]
+script = ExtResource("3_hhohr")
+actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_bl7gt"), SubResource("Resource_hhohr"), SubResource("Resource_dpa4x"), SubResource("Resource_ioue7")])
+
+[node name="StateAI" parent="." index="6" instance=ExtResource("7_p36qo")]
 script = ExtResource("8_ri16f")
 
 [node name="Patrol" type="LimboState" parent="StateAI" index="0"]
