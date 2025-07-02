@@ -16,6 +16,8 @@ extends Area2D
 @onready var idle_state: LimboState = $LimboHSM/IdleState
 @onready var move_state: LimboState = $LimboHSM/MoveState
 
+var in_sight_characters = []
+
 var direction:Vector2i = Vector2i.DOWN:
 	# 角色朝向
 	set(d):
@@ -89,6 +91,13 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	tween.tween_property(self,"position",end,dis/move_speed)
 	await tween.finished
 	hsm.dispatch("move_stop")
+
+func update_sight_character(handler:LevelHandler):
+	var players = get_tree().get_nodes_in_group("player")
+	for player in players:
+		var pos = handler.get_character_position(player.id)		
+		if sight_radius.is_tile_in_radius(pos,handler.get_grid_quester()):
+			in_sight_characters.append(player)
 
 # 角色行动
 func get_action_list() -> Dictionary:

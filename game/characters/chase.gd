@@ -34,3 +34,10 @@ func _state_logic(handler:LevelHandler):
 				action.change_target(min_pos)
 				# 之后要添加障碍检测
 		action.execute()
+
+func _transition_precheck(handler:LevelHandler):
+	agent.update_sight_character(handler) # 此方法后面移到阶段中最好。
+	var sc:Array = agent.in_sight_characters
+	if sc.is_empty():
+		dispatch("lost_enemy")
+		
