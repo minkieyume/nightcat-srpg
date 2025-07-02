@@ -298,7 +298,7 @@ shape = SubResource("RectangleShape2D_kfso4")
 
 [node name="SightRadius" type="Node2D" parent="." node_paths=PackedStringArray("base")]
 script = ExtResource("10_h7f75")
-radius = 192.0
+radius = 288.0
 degress = 45.0
 rotation_deg = 90.0
 base = NodePath("..")

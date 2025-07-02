@@ -93,7 +93,7 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	hsm.dispatch("move_stop")
 
 func update_sight_character(handler:LevelHandler):
-	var players = get_tree().get_nodes_in_group("player")
+	var players = handler.get_player_list()
 	for player in players:
 		var pos = handler.get_character_position(player.id)		
 		if sight_radius.is_tile_in_radius(pos,handler.get_grid_quester()):

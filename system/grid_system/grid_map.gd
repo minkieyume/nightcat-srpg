@@ -52,7 +52,7 @@ func is_in_radius(origin: Vector2i, target: Vector2i, radius: int) -> bool:
 	return origin.distance_to(target) <= radius
 
 # 获取圆形范围内所有格子
-func get_cells_in_radius(origin: Vector2i, radius: int) -> Array[Vector2i]:
+func get_cells_in_radius(origin: Vector2i, radius: int) -> Array:
 	var result = []
 	for x in range(-radius, radius+1):
 		for y in range(-radius, radius+1):

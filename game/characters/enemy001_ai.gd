@@ -1,6 +1,5 @@
 extends StateAI
 
-
 @onready var patrol = $Patrol
 @onready var stop = $Stop
 @onready var chase = $Chase

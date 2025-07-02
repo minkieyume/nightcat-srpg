@@ -7,20 +7,23 @@
 [sub_resource type="Resource" id="Range"]
 script = ExtResource("3")
 deter_array = Array[Vector2i]([])
-deter_vector2 = Vector2i(1, 3)
+deter_vector2 = Vector2i(1, 6)
 deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 
 [resource]
 resource_local_to_scene = true
-resource_name = "夜猫挑战"
+resource_name = "夜猫嘲讽"
 script = ExtResource("1")
 id = &"cat_challenge"
-group = ""
-action_name = "夜猫挑战"
+group = "技能"
+action_name = "夜猫嘲讽"
 action_range = SubResource("Range")
 action_logic = ExtResource("2")
 allowed_target = {
+"Enemy": true,
+"Object": true,
+"Player": true,
 "Tile": true
 }
 ap_cost = 2

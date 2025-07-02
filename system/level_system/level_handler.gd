@@ -55,6 +55,24 @@ func get_grid_quester() -> GridQuester:
 func get_action_factory() -> ActionFactory:
 	return action_factory
 
+func get_player_list() -> Array[Character]:
+	return get_character_array().filter(_player_fliter)
+
+func get_enemy_list() -> Array[Character]:
+	return get_character_array().filter(_enemy_fliter)
+
+func _player_fliter(enemy:Character) -> bool:
+	if enemy.is_in_group("player"):
+		return true
+	else:
+		return false
+
+func _enemy_fliter(enemy:Character) -> bool:
+	if enemy.is_in_group("enemy"):
+		return true
+	else:
+		return false
+
 func send_command(command:StringName,args:Array):
 	emit_signal("command_send",command,args)
 

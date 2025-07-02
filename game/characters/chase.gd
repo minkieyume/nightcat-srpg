@@ -1,7 +1,7 @@
 extends StateAIState
 
 func _state_logic(handler:LevelHandler):
-	var players = get_tree().get_nodes_in_group("player")
+	var players = handler.get_player_list()
 	var factory = handler.get_action_factory()
 	var self_pos = handler.get_character_position(agent.id)
 
@@ -17,7 +17,21 @@ func _state_logic(handler:LevelHandler):
 			if distance < last_distance:
 				min_pos = pos
 
-	var action:Action = factory.create_action(agent.id,&"move",min_pos-Vector2i(1,1))
+	# 获取要移动到的目标坐标
+	var prechose_target = []	
+	prechose_target.append(min_pos+Vector2i.LEFT)
+	prechose_target.append(min_pos+Vector2i.DOWN)
+	prechose_target.append(min_pos+Vector2i.RIGHT)
+	prechose_target.append(min_pos+Vector2i.UP)
+
+	min_pos = prechose_target.min()
+
+	for target in prechose_target:
+		if self_pos.distance_to(target) < self_pos.distance_to(min_pos):
+			min_pos = target
+		
+
+	var action:Action = factory.create_action(agent.id,&"move",min_pos)
 	var rrange = action.clac_action_range(self_pos)
 	if action.is_target_valid(rrange):
 		action.execute()
@@ -30,14 +44,14 @@ func _state_logic(handler:LevelHandler):
 			var distance = r.distance_to(player_pos)
 			var last_distance = r.distance_to(player_pos)
 			if distance < last_distance:
-				min_pos = r				
+				min_pos = r
 				action.change_target(min_pos)
 				# 之后要添加障碍检测
 		action.execute()
 
 func _transition_precheck(handler:LevelHandler):
 	agent.update_sight_character(handler) # 此方法后面移到阶段中最好。
-	var sc:Array = agent.in_sight_characters
-	if sc.is_empty():
-		dispatch("lost_enemy")
+#	var sc:Array = agent.in_sight_characters
+#	if sc.is_empty():
+#		dispatch("lost_enemy")
 		

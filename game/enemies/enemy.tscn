@@ -60,5 +60,5 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [node name="Enemy" instance=ExtResource("1_uda04")]
 
-[node name="ActionManager" parent="." index="2"]
+[node name="ActionManager" parent="." index="3"]
 actions = Array[ExtResource("2_k0yxv")]([SubResource("Resource_bl7gt"), SubResource("Resource_jncvr")])
