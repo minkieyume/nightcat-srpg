@@ -14,7 +14,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_46k48"]
+[sub_resource type="Resource" id="Resource_md0a2"]
 resource_local_to_scene = true
 resource_name = "移动"
 script = ExtResource("2_46k48")
@@ -40,7 +40,7 @@ deter_vector2 = Vector2i(0, 0)
 deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 
-[sub_resource type="Resource" id="Resource_si000"]
+[sub_resource type="Resource" id="Resource_46k48"]
 resource_local_to_scene = true
 resource_name = "夜猫嘲讽"
 script = ExtResource("2_46k48")
@@ -61,4 +61,4 @@ cooldown = 2
 [node name="Player" instance=ExtResource("1_md0a2")]
 
 [node name="ActionManager" parent="." index="3"]
-actions = Array[ExtResource("2_46k48")]([SubResource("Resource_46k48"), SubResource("Resource_si000")])
+actions = Array[ExtResource("2_46k48")]([SubResource("Resource_md0a2"), SubResource("Resource_46k48")])

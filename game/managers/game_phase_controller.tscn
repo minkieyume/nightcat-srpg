@@ -81,6 +81,7 @@ transition = {
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="CountBackTurn" parent="PlayerTurn" index="2" node_paths=PackedStringArray("transition") instance=ExtResource("10_75ivs")]
+back_twice = 1
 transition = {
 &"back": NodePath("../PlayerAction"),
 &"next": NodePath("../TurnEnd")
