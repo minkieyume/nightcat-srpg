@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://crf1v72tkw48u"]
+
+[ext_resource type="PackedScene" uid="uid://ctrc3t2peuvw0" path="res://system/interactable_system/interactable.tscn" id="1_eo2us"]
+[ext_resource type="Script" uid="uid://dydywr7jpy7an" path="res://system/interactable_system/machine.gd" id="2_wvmyt"]
+
+[node name="Machine" groups=["machine"] instance=ExtResource("1_eo2us")]
+script = ExtResource("2_wvmyt")
+id = "machine1"
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 9

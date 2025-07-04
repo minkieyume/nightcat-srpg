@@ -30,6 +30,7 @@ id=""
 interactable="可互动物体"
 character=""
 ai_character=""
+machine=""
 
 [input]
 
