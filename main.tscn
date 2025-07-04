@@ -13,11 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="PackedScene" uid="uid://mnyff37hjcq" path="res://system/phase_system/action_achiever.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
-[ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
-[ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/hide.gd" id="9_074og"]
+[ext_resource type="Script" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
+[ext_resource type="Script" path="res://system/phase_system/hide.gd" id="9_074og"]
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="10_yaehf"]
 [ext_resource type="PackedScene" uid="uid://obu782ptmn7w" path="res://system/ui/character_info.tscn" id="12_dg77c"]
-[ext_resource type="PackedScene" uid="uid://dws00ylwpcwr" path="res://system/phase_system/turn_end.tscn" id="15_074og"]
+[ext_resource type="PackedScene" path="res://system/phase_system/turn_end.tscn" id="15_074og"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_w48qg")
