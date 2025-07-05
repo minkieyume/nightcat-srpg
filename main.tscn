@@ -96,7 +96,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="ActionAchiever" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
 script = ExtResource("14_getpj")
 transition = {
-&"action_failed": NodePath("../ActionChoser"),
+&"action_failed": NodePath("../GridTargetChoser"),
 &"action_finish": NodePath("../TurnEnd")
 }
 

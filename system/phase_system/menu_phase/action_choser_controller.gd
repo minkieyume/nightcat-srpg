@@ -61,6 +61,7 @@ func _on_action_chosed() -> bool:
 	return true
 
 func _return() -> bool:
+	context.erase("actor")
 	context.erase("target")
 	context.erase("action_list")
 	context.erase("action")

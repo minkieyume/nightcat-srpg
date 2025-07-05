@@ -46,4 +46,4 @@ func _action_finish():
 func _action_failed():
 	print("[DEBUG] 行动执行失败")
 	context["target_chose_event"] = &"character_chose"
-	dispatch("action_fail")
+	dispatch("action_failed")
