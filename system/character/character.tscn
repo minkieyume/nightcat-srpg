@@ -321,3 +321,13 @@ script = ExtResource("4_2gdvs")
 
 [node name="MoveState" type="LimboState" parent="LimboHSM"]
 script = ExtResource("5_y8eg4")
+
+[node name="Character_info" type="Label" parent="."]
+offset_left = 4.0
+offset_top = -56.0
+offset_right = 44.0
+offset_bottom = -7.0
+text = "AP:1
+HP:1"
+horizontal_alignment = 1
+vertical_alignment = 1

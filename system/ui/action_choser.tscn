@@ -7,7 +7,7 @@
 [node name="ActionChoser" instance=ExtResource("1_0avoj")]
 offset_right = -960.0
 offset_bottom = -540.0
-focus_mode = 1
+focus_mode = 2
 script = ExtResource("2_u4t3p")
 
 [node name="Panel" type="Panel" parent="." index="0"]

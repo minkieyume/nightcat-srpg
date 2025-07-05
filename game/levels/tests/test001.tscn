@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="PackedScene" uid="uid://ctrc3t2peuvw0" path="res://system/interactable_system/interactable.tscn" id="5_s0flc"]
 [ext_resource type="PackedScene" uid="uid://ctiaxhyv6kofx" path="res://system/character/character_owner.tscn" id="6_5a2x4"]
-[ext_resource type="PackedScene" path="res://system/interactable_system/machine.tscn" id="6_360cf"]
+[ext_resource type="PackedScene" uid="uid://crf1v72tkw48u" path="res://system/interactable_system/machine.tscn" id="6_360cf"]
 [ext_resource type="PackedScene" uid="uid://dupnywu6oavso" path="res://game/player/kiko.tscn" id="6_s27i0"]
 [ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/enemy_001.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="7_s27i0"]

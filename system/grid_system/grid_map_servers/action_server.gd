@@ -11,7 +11,7 @@ func _on_action_requested(action_manager:ActionManager,\
 	if !result:
 		push_warning("行动失败")
 
-func create_action(requester:String,id:StringName,target:Vector2i) -> Action:
+func create_action(requester:String,id:StringName) -> Action:
 #	print("[ActionFactory]",requester)
 	var action_resource = level_handler.get_character_action(requester,id)
 	var action = Action.new()
@@ -21,5 +21,4 @@ func create_action(requester:String,id:StringName,target:Vector2i) -> Action:
 	action.resource = action_resource
 	action.action_range = action_resource.action_range
 	action.logic = action_logic.new()
-	action.target = target
 	return action

@@ -16,8 +16,7 @@ signal finished
 func execute()  -> bool:
 	if is_instance_valid(action_range):
 #		print("[Action]",requester)
-		var origin = level_handler.get_character_position(requester)
-		var result = clac_action_range(origin)
+		var result = clac_action_range()
 		if !is_target_valid(result):
 			emit_signal("failed")
 			return false
@@ -28,8 +27,12 @@ func execute()  -> bool:
 	emit_signal("finished")
 	return true
 
-## 根据输入参数将允许互动的绝对坐标计算出来。
-func clac_action_range(origin:Vector2i) -> Array[Vector2i]:
+func set_target(t:Vector2i):
+	target = t
+
+## 计算允许互动的绝对坐标。
+func clac_action_range() -> Array[Vector2i]:
+	var origin = level_handler.get_character_position(requester)	
 
 	var result:Array[Vector2i] = []
 	match action_range.type:

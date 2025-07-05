@@ -6,8 +6,9 @@ signal target_canceled
 func _ready() -> void:
 	super()
 	grab_focus()
-	target_chosed.connect(phase._on_target_chosed)
-	target_canceled.connect(phase._on_target_chosed)
+	if phase is GridTargetChoserController:
+		target_chosed.connect(phase._on_target_chosed)
+		target_canceled.connect(phase._on_target_canceled)
 
 func _gui_input(event) -> void:
 	if event.is_action_pressed("ui_accept"):

@@ -31,8 +31,9 @@ func _state_logic(handler:LevelHandler):
 			min_pos = target
 		
 
-	var action:Action = factory.create_action(agent.id,&"move",min_pos)
-	var rrange = action.clac_action_range(self_pos)
+	var action:Action = factory.create_action(agent.id,&"move")
+	action.set_target(min_pos)
+	var rrange = action.clac_action_range()
 	if action.is_target_valid(rrange):
 		action.execute()
 		#临时方案，后面得改成选择最近的没有障碍物的点。

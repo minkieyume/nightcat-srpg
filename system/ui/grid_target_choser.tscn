@@ -4,5 +4,5 @@
 [ext_resource type="Script" uid="uid://dy06veqjlkes" path="res://system/ui/grid_target_choser.gd" id="2_nsn0q"]
 
 [node name="GridTargetChoserController" instance=ExtResource("1_7epwx")]
-focus_mode = 1
+focus_mode = 2
 script = ExtResource("2_nsn0q")

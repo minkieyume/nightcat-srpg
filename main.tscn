@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=18 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
-[ext_resource type="Script" path="res://main.gd" id="1_w48qg"]
+[ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
 [ext_resource type="PackedScene" uid="uid://cdlasbamfh716" path="res://system/level_system/level_handler.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="4_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="5_dg77c"]
@@ -9,12 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bcp4wjouh8kwm" path="res://system/phase_system/turn_phase/game_phase_controller.tscn" id="6_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
-[ext_resource type="Script" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
+[ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
 [ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/menu_phase/hide.gd" id="9_074og"]
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="10_yaehf"]
 [ext_resource type="Script" uid="uid://l6clbaryheso" path="res://system/phase_system/tool_phase/cargo_set_phase.gd" id="11_074og"]
 [ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/phase_system/menu_phase/grid_target_choser_controller.gd" id="12_cegan"]
-[ext_resource type="PackedScene" path="res://system/ui/character_info.tscn" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://dq1x3v8wi5fis" path="res://system/phase_system/menu_phase/action_choser_controller.gd" id="13_82xsv"]
 [ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="14_getpj"]
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="15_074og"]
@@ -83,17 +82,18 @@ transition = {
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 metadata/_edit_group_ = true
 
-[node name="ActionChoser" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("grid_quester", "transition")]
+[node name="ActionChoser" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("action_factory", "grid_quester", "transition")]
 script = ExtResource("13_82xsv")
+action_factory = NodePath("../../../../ActionFactory")
 grid_quester = NodePath("../../../../GridQuester")
 transition = {
+&"back": NodePath("../GridTargetChoser"),
 &"chose_action_target": NodePath("../GridTargetChoser")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="ActionAchiever" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("action_factory", "transition")]
+[node name="ActionAchiever" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
 script = ExtResource("14_getpj")
-action_factory = NodePath("../../../../ActionFactory")
 transition = {
 &"action_failed": NodePath("../ActionChoser"),
 &"action_finish": NodePath("../TurnEnd")
@@ -105,6 +105,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("6_4c57u")]
 phase = NodePath("../MenuManager/ActionChoseMenu/GridTargetChoser")
+metadata/_edit_lock_ = true
 
 [node name="ActionChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("7_efxa6")]
 visible = false
@@ -114,8 +115,7 @@ offset_right = -683.0
 offset_bottom = -440.0
 phase = NodePath("../MenuManager/ActionChoseMenu/ActionChoser")
 metadata/_edit_group_ = true
-
-[node name="CharacterInfo" parent="CanvasLayer" instance=ExtResource("12_dg77c")]
+metadata/_edit_lock_ = true
 
 [connection signal="command_send" from="LevelHandler" to="GamePhaseController" method="_on_level_handler_command_send"]
 [connection signal="command_send" from="LevelHandler" to="CanvasLayer/MenuManager" method="_on_level_handler_command_send"]
