@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_nydrm"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_22db3"]
 [ext_resource type="PackedScene" uid="uid://u4m2fbdw6oco" path="res://system/character/state_ai.tscn" id="7_p36qo"]
-[ext_resource type="Script" uid="uid://d1li423y1f0vj" path="res://game/characters/enemy001_ai.gd" id="8_ri16f"]
-[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/characters/patrol.gd" id="10_22db3"]
-[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/characters/guard.gd" id="11_x6aw5"]
-[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/characters/chase.gd" id="12_rgqvb"]
+[ext_resource type="Script" uid="uid://d1li423y1f0vj" path="res://game/enemy/enemy001_ai.gd" id="8_ri16f"]
+[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/enemy/patrol.gd" id="10_22db3"]
+[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/enemy/guard.gd" id="11_x6aw5"]
+[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/enemy/chase.gd" id="12_rgqvb"]
 
 [sub_resource type="Resource" id="Resource_lmbwv"]
 script = ExtResource("4_nydrm")

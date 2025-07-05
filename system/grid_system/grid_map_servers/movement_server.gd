@@ -16,6 +16,7 @@ func _init_astar() -> void:
 	astar.set_diagonal_mode(astar.DiagonalMode.DIAGONAL_MODE_NEVER)
 	astar.update()
 
+# 获取路径长度的格数
 func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	if astar.is_point_solid(target):
 		return 0
@@ -23,6 +24,7 @@ func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	# 修正：ap消耗应为实际格数（path.size()-1），最小为0
 	return max(path.size() - 1, 0)
 
+# 移动角色
 func _move_character(cid:String,target:Vector2i):
 	var path = []
 	var character = level_handler.get_character(cid)
@@ -32,6 +34,7 @@ func _move_character(cid:String,target:Vector2i):
 	path = astar.get_id_path(start,target)
 	character.step_path(path,tile_size,grid_map)
 
+# 接收移动角色指令。
 # Note:坐标从0开始算，而非从1开始算。
 func _on_command_recieved(command:StringName,args:Array):
 	if command == "move_character":

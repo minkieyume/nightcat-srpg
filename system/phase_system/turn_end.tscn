@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dws00ylwpcwr"]
-
-[ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_end.gd" id="1_xfcs6"]
-
-[node name="TurnEnd" type="LimboState"]
-script = ExtResource("1_xfcs6")
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"

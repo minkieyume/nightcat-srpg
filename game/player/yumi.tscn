@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cg3dp8fyss4f2"]
 
-[ext_resource type="PackedScene" uid="uid://lmoiu70kd743" path="res://game/players/player.tscn" id="1_ia4wj"]
+[ext_resource type="PackedScene" uid="uid://lmoiu70kd743" path="res://game/player/player.tscn" id="1_ia4wj"]
 [ext_resource type="Texture2D" uid="uid://6bai4y0n3etq" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_2/character_2_frame16x20.png" id="2_ia4wj"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p1g74"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="3_ditxy"]

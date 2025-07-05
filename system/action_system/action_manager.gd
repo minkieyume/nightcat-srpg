@@ -6,6 +6,7 @@ extends Node
 var action_list = {}
 
 # 行动冷却管理
+# TODO，待重构和解耦AP机制。
 var cooldown_map := {} # key: StringName, value: int
 
 func _ready() -> void:
