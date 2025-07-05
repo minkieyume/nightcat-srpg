@@ -77,7 +77,7 @@ func update_action_buttons(group:String):
 func _gui_input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		# 根据情况决定是返回上页ui还是返回上个菜单
-		print("action_canceled")
+		#print("action_canceled")
 		if current_button_path != "":
 			var button_groups = Array(current_button_path.split("/"))
 			button_groups.pop_back()

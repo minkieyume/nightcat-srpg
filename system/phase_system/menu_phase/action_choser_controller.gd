@@ -25,25 +25,32 @@ func _enter() -> void:
 
 func _update_action_list():
 	_update_actor()
-	update_context("action_list",level_handler.get_character_actions(context["actor"]))
+	if context.has("actor"):
+		if is_master_own_character():
+			update_context("action_list",level_handler.get_character_actions(context["actor"]))
+	else:
+		print("[ActionChoser] 未找到角色，请重新选择")
+		call_deferred("dispatch","return")
 
 func _update_actor():
 	var actor = grid_quester.quest_character(context["target"])
 	if actor != "":
-		context["actor"] = actor
-	else:
-		dispatch("return")
+		context["actor"] = actor		
 
-func _create_action():
+func is_master_own_character():
 	var character_owner = level_handler.get_character_owner(context["master"])
 	if character_owner and character_owner.is_character_handled(context["actor"]):
-		var action:Action = action_factory.create_action(context["actor"], context["chosed_action"])
-		context["action"] = action
-		var action_range = action.clac_action_range()
-		context["action_limit"] = action_range
+		return true
 	else:
 		print("[ActionChoser] 请选择有控制权的角色")
-		dispatch("return")
+		call_deferred("dispatch","return")
+		return false
+
+func _create_action():
+	var action:Action = action_factory.create_action(context["actor"], context["chosed_action"])
+	context["action"] = action
+	var action_range = action.clac_action_range()
+	context["action_limit"] = action_range
 
 func _on_action_chosed() -> bool:
 	context.erase("target")
@@ -61,5 +68,4 @@ func _return() -> bool:
 	return true
 
 func _on_ui_canceled():
-	print("action-return")
 	dispatch("return")

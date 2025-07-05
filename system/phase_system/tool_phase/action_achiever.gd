@@ -30,7 +30,9 @@ func _enter():
 		achieve_action.execute()
 
 func _exit():
-	super()	
+	super()
+	context.erase("actor")
+	context.erase("target")
 	call_deferred("clean_action")
 	
 func clean_action():

@@ -22,6 +22,7 @@
 script = ExtResource("1_w48qg")
 
 [node name="Test001" parent="." instance=ExtResource("1_ig7tw")]
+metadata/_edit_lock_ = true
 
 [node name="LevelHandler" parent="." node_paths=PackedStringArray("level", "movement_server", "grid_quester", "action_factory") instance=ExtResource("2_0xm2m")]
 level = NodePath("../Test001")
