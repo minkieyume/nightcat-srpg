@@ -37,6 +37,9 @@ func get_character_dict() -> Dictionary[String,Character]:
 func get_character_array() -> Array[Character]:
 	return [Character.new()]
 
+func get_character_list() -> Array[String]:
+	return [""]
+
 func get_character(id:String):
 	return Character.new()
 

@@ -41,6 +41,9 @@ func get_character_dict() -> Dictionary[String,Character]:
 func get_character_array() -> Array[Character]:
 	return level.get_character_array()
 
+func get_character_list() -> Array[String]:
+	return level.get_character_list()
+
 func get_character(id:String):
 	return level.get_character(id)
 
