@@ -20,6 +20,9 @@ func execute()  -> bool:
 		if !is_target_valid(result):
 			emit_signal("failed")
 			return false
+	if !can_consume(requester):
+		emit_signal("failed")
+		return false
 	var action_result = await logic.execute(requester,target,level_handler)
 	if !action_result:
 		emit_signal("failed")
@@ -31,10 +34,15 @@ func execute()  -> bool:
 func set_target(t:Vector2i):
 	target = t
 
+func can_consume(requester:String) -> bool:
+	var character = level_handler.get_character(requester)
+	var consume = resource.ap_cost
+	return character.can_consume_ap(consume)
+
 func coast_ap(requester:String):
 	var character = level_handler.get_character(requester)
-	var cosume = resource.ap_cost
-	character.consume_ap(cosume)
+	var consume = resource.ap_cost
+	character.consume_ap(consume)
 
 ## 计算允许互动的绝对坐标。
 func clac_action_range() -> Array[Vector2i]:

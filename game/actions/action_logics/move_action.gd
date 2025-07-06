@@ -13,18 +13,17 @@ func execute(character:String, target:Vector2i, handler:LevelHandler) -> bool:
 	var server = handler.get_movement_server()
 	server.move_failed.connect(_on_move_failed)
 	agent.path_end.connect(_on_path_end)
+
 	# OOP式调用LevelHandler的get_path_length
 	var ap_cost = handler.get_path_length(start, target)
-	# 强制ap_cost最大不能超过当前AP
-	var cur_ap = agent.get_ap()
-	if ap_cost > cur_ap:
-		ap_cost = cur_ap
-	# 动态设置本次ActionResource的ap_cost
-	var am = agent.action_manager
-	if am:
-		var action_res = am.get_action_resouce(&"move")
-		if action_res:
-			action_res.ap_cost = ap_cost
+
+	# 设置行动的AP消费
+	if agent.can_consume_ap(ap_cost):
+		agent.consume_ap(ap_cost)
+	else:
+		# 若行动开销超过AP，则行动执行失败。
+		return false
+	
 	# 发送移动命令
 	handler.send_command("move_character", [character, target])
 	await recieved_end
