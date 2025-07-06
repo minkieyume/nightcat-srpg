@@ -36,6 +36,15 @@ func update_character_blocks() -> void:
 		astar.set_point_solid(tile,true)
 	astar.update()
 
+## 更新物件自带的障碍效果
+func update_interactable_blocks() -> void:
+	var characters = level_handler.get_character_array()
+	var interactables = level_handler.get_interactable_list()
+	for interactable in interactables.keys():
+		var tile = level_handler.get_interactable_position(interactable)
+		astar.set_point_solid(tile,true)
+	astar.update()
+
 ## 获取路径长度的格数
 func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	if astar.is_point_solid(target):

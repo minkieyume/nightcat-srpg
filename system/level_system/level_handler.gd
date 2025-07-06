@@ -27,6 +27,14 @@ func get_character_position(id:String) -> Vector2i:
 		return grid_map.local_to_map(character.position)
 	return Vector2i(-9223372036854775808,-9223372036854775808)
 
+## 获取可互动体坐标，未找到则返回 (-9223372036854775808,-9223372036854775808)
+func get_interactable_position(id:String) -> Vector2i:
+	var interactable = get_interactable(id)
+	var grid_map = level.get_grid_map()
+	if is_instance_valid(interactable) and is_instance_valid(grid_map):
+		return grid_map.local_to_map(interactable.position)
+	return Vector2i(-9223372036854775808,-9223372036854775808)
+
 func get_character_dict() -> Dictionary[String,Character]:
 	return level.get_character_dict()
 
