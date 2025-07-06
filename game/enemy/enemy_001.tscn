@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bb4jaww77an76"]
 
 [ext_resource type="PackedScene" uid="uid://01oidtdphw7y" path="res://system/character/state_ai_character.tscn" id="1_wkmnl"]
-[ext_resource type="Texture2D" uid="uid://joantxapre28" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_12/character_12_frame16x20.png" id="2_nydrm"]
+[ext_resource type="Texture2D" uid="uid://dpu55ya1scc61" path="res://assets/external_packs/character-pack-free_version/free_character_3.png" id="2_ciyex"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p36qo"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_nydrm"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_22db3"]
@@ -44,7 +44,7 @@ id = "enemy1"
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(24, 18)
-texture = ExtResource("2_nydrm")
+texture = ExtResource("2_ciyex")
 
 [node name="SightRadius" parent="." index="2"]
 position = Vector2(24, 24)

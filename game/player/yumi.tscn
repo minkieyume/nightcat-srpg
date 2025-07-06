@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cg3dp8fyss4f2"]
 
 [ext_resource type="PackedScene" uid="uid://lmoiu70kd743" path="res://game/player/player.tscn" id="1_ia4wj"]
-[ext_resource type="Texture2D" uid="uid://6bai4y0n3etq" path="res://assets/external_packs/character-pack-full_version/sprite_split/character_2/character_2_frame16x20.png" id="2_ia4wj"]
+[ext_resource type="Texture2D" uid="uid://m8lgoix5bjae" path="res://assets/external_packs/character-pack-free_version/free_character_2.png" id="2_4vs7r"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p1g74"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="3_ditxy"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_qjnne"]
@@ -66,7 +66,7 @@ id = "yumi"
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(25, 18)
-texture = ExtResource("2_ia4wj")
+texture = ExtResource("2_4vs7r")
 
 [node name="ActionManager" parent="." index="3"]
 actions = Array[ExtResource("2_p1g74")]([SubResource("Resource_ditxy"), SubResource("Resource_qjnne")])

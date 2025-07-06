@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://lmoiu70kd743"]
+[gd_scene load_steps=11 format=3 uid="uid://lmoiu70kd743"]
 
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="1_md0a2"]
+[ext_resource type="Texture2D" uid="uid://cpbjwpjsb4jhb" path="res://assets/external_packs/character-pack-free_version/free_character_nude.png" id="2_4ste8"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_46k48"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_2hm0h"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_bhy47"]
@@ -59,6 +60,10 @@ ap_cost = 2
 cooldown = 2
 
 [node name="Player" instance=ExtResource("1_md0a2")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(24, 18)
+texture = ExtResource("2_4ste8")
 
 [node name="ActionManager" parent="." index="3"]
 actions = Array[ExtResource("2_46k48")]([SubResource("Resource_md0a2"), SubResource("Resource_46k48")])
