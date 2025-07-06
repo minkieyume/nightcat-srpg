@@ -1,0 +1,3 @@
+#+TITLE: 插件备注
+* 备注
+由于平台问题，我这边暂时只安装了linux-amd架构的godot_gameplay_attribute插件，别的平台的架构可能需要其其它人帮忙编译。
