@@ -57,6 +57,7 @@ var highlight:Vector2i:
 
 func _ready() -> void:
 	tile_size = fill_map.tile_set.tile_size
+	fill_map.modulate = Color(1,1,1,1)
 	
 	if show_grid or show_limit or show_highlight:
 		queue_redraw()

@@ -1,51 +1,30 @@
 extends TileMapLayer
 
-# 地形类型枚举，方便编辑器输入
+## 地形类型枚举，方便查阅
 enum Terrain {
 	NORMAL = 0,
 	BLOCK = 1,
-	SLIP = 2,
-	TRAP = 3,
-	COVER_LOW = 4,
-	COVER_HIGH = 5,
-	MECHANISM = 6
 }
 
-# 存储自定义格子属性（如障碍、滑地、机关等）
-var cell_type_map := {} # key: Vector2i, value: Terrain
+const TERRRAIN_TYPES = [Terrain.NORMAL,Terrain.BLOCK]
 
-# 设置格子类型
-func set_cell_type(pos: Vector2i, cell_type: int) -> void:
-	cell_type_map[pos] = cell_type
-
-# 获取格子类型，未设置则返回Terrain.NORMAL
+## 获取格子类型，未设置则返回Terrain.NORMAL
 func get_cell_type(pos: Vector2i) -> int:
-	return cell_type_map.get(pos, Terrain.NORMAL)
+	if tile_set.has_custom_data_layer_by_name("terrain_type"):		
+		var tile_data = get_cell_tile_data(pos)
+		var type = tile_data.get_custom_data("terrain_type")
+		if type in TERRRAIN_TYPES:
+			return type
+	return Terrain.NORMAL
 
-# 是否可通行
+## 是否可通行
 func is_cell_passable(pos: Vector2i) -> bool:
 	var t = get_cell_type(pos)
-	return t in [Terrain.NORMAL, Terrain.SLIP, Terrain.COVER_LOW, Terrain.MECHANISM]
+	return t in [Terrain.NORMAL]
 
-# 是否为障碍
+## 是否为障碍
 func is_cell_block(pos: Vector2i) -> bool:
 	return get_cell_type(pos) == Terrain.BLOCK
-
-# 是否为滑地
-func is_cell_slip(pos: Vector2i) -> bool:
-	return get_cell_type(pos) == Terrain.SLIP
-
-# 是否为高遮蔽物（阻挡视线）
-func is_cell_cover_high(pos: Vector2i) -> bool:
-	return get_cell_type(pos) == Terrain.COVER_HIGH
-
-# 是否为低遮蔽物（可翻越，不阻挡视线）
-func is_cell_cover_low(pos: Vector2i) -> bool:
-	return get_cell_type(pos) == Terrain.COVER_LOW
-
-# 是否为机关
-func is_cell_mechanism(pos: Vector2i) -> bool:
-	return get_cell_type(pos) == Terrain.MECHANISM
 
 # 判断目标是否在圆形范围内
 func is_in_radius(origin: Vector2i, target: Vector2i, radius: int) -> bool:
