@@ -55,9 +55,9 @@ id = "machine1"
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="Kiko" parent="Characters" instance=ExtResource("6_s27i0")]
+[node name="Kiko" parent="Characters" groups=["player"] instance=ExtResource("6_s27i0")]
 
-[node name="Yumi" parent="Characters" instance=ExtResource("7_s27i0")]
+[node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]

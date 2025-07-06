@@ -31,6 +31,8 @@ interactable="可互动物体"
 character=""
 ai_character=""
 machine=""
+player=""
+enemy=""
 
 [input]
 
