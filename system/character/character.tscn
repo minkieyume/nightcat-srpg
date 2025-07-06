@@ -48,7 +48,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_h7f75"]
+[sub_resource type="Resource" id="Resource_fvjva"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -75,7 +75,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_i8eqi"]
+[sub_resource type="Resource" id="Resource_h7f75"]
 resource_local_to_scene = true
 resource_name = "Interact"
 script = ExtResource("4_bl7gt")
@@ -102,7 +102,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_cr7lv"]
+[sub_resource type="Resource" id="Resource_i8eqi"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -305,7 +305,7 @@ base = NodePath("..")
 metadata/_custom_type_script = "uid://bkddet74xapio"
 
 [node name="ActionManager" parent="." instance=ExtResource("3_wlaod")]
-actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_h7f75"), SubResource("Resource_i8eqi"), SubResource("Resource_cr7lv")])
+actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_fvjva"), SubResource("Resource_h7f75"), SubResource("Resource_i8eqi")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
