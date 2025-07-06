@@ -1,15 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcp4wjouh8kwm"]
+[gd_scene load_steps=11 format=3 uid="uid://bcp4wjouh8kwm"]
 
 [ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://system/phase_system/turn_phase/game_phase_controller.gd" id="2_emkk0"]
-[ext_resource type="Script" uid="uid://b4mr702dv54vg" path="res://system/phase_system/turn_phase/turn_start_prompt.gd" id="3_5hgr7"]
+[ext_resource type="Script" uid="uid://b4mr702dv54vg" path="res://system/phase_system/turn_phase/turn_prompt.gd" id="3_5hgr7"]
 [ext_resource type="Script" uid="uid://dmqb80wbqxon3" path="res://system/phase_system/phase.gd" id="3_emkk0"]
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="4_d1ik7"]
 [ext_resource type="Script" uid="uid://75x78h8qhuj5" path="res://system/phase_system/turn_phase/restore_ap.gd" id="6_emkk0"]
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="7_dm2g6"]
 [ext_resource type="Script" uid="uid://dhnujo24mhtvc" path="res://system/phase_system/turn_phase/player_select.gd" id="8_hvc3f"]
-[ext_resource type="Script" uid="uid://b7kbwtn2sina4" path="res://game/managers/player_turn_end_prompt.gd" id="10_es0sn"]
 [ext_resource type="Script" uid="uid://b65kjtdr7qnm3" path="res://system/phase_system/turn_phase/count_back_turn.gd" id="10_l1ke0"]
-[ext_resource type="Script" uid="uid://c76fh6flwdnut" path="res://game/managers/enemy_turn_end_prompt.gd" id="12_vudhv"]
 [ext_resource type="Script" uid="uid://qlg2af8eqjwg" path="res://system/phase_system/turn_phase/enemy_next_unit.gd" id="13_prach"]
 [ext_resource type="Script" uid="uid://ced7r81gdbav8" path="res://system/phase_system/tool_phase/character_ai_runner.gd" id="14_dm2g6"]
 
@@ -25,6 +23,7 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 
 [node name="TurnStartPrompt" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("3_5hgr7")
+prompt = "准备阶段"
 transition = {
 &"next": NodePath("../RestoreAP")
 }
@@ -97,7 +96,8 @@ script = ExtResource("3_emkk0")
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="PlayerTurnEndPrompt" type="LimboState" parent="PlayerTurn" node_paths=PackedStringArray("transition")]
-script = ExtResource("10_es0sn")
+script = ExtResource("3_5hgr7")
+prompt = "玩家回合结束"
 transition = {
 &"next": NodePath("../TurnEnd")
 }
@@ -139,12 +139,13 @@ transition = {
 script = ExtResource("10_l1ke0")
 transition = {
 &"back": NodePath("../EnemyNextOwner"),
-&"next": NodePath("../EnemyTurnEndPrompt")
+&"next": NodePath("../TurnEnd")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="EnemyTurnEndPrompt" type="LimboState" parent="EnemyTurn" node_paths=PackedStringArray("transition")]
-script = ExtResource("12_vudhv")
+script = ExtResource("3_5hgr7")
+prompt = "敌人回合结束"
 transition = {
 &"next": NodePath("../TurnEnd")
 }
