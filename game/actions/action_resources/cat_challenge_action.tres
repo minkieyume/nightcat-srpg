@@ -27,4 +27,3 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
-cooldown = 2

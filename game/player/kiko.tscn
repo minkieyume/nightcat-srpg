@@ -60,10 +60,10 @@ ap_cost = 2
 cooldown = 2
 
 [node name="Kiko" instance=ExtResource("1_ouxu8")]
-move_speed = 96
+id = "kiko"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_w02p2")
 
-[node name="ActionManager" parent="." index="3"]
+[node name="ActionManager" parent="." index="4"]
 actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_w02p2"), SubResource("Resource_bjwp7")])

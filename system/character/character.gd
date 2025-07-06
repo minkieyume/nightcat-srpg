@@ -3,14 +3,18 @@ class_name Character
 # 与各个Server中介通信
 extends Area2D
 
+## 角色的id，同场景内角色id不能重复
 @export var id = "character"
-
+## 角色的移动速度。
 @export var move_speed = 192
+## 用于初始化修饰角色属性的值。
+@export var initalize_attribute_buffs:Array[AttributeBuffBase]
 
 @onready var action_manager = $ActionManager
 @onready var animation_player = $AnimationPlayer
 @onready var sight_radius = $SightRadius
 @onready var attributes = $AttributeContainer
+@onready var character_info = $Character_info
 
 #LimboHSM状态机插件
 @onready var hsm: LimboHSM = $LimboHSM
@@ -26,16 +30,24 @@ var direction:Vector2i = Vector2i.DOWN:
 		emit_signal("direction_changed",direction)
 
 # 角色状态管理
-var state: String = "normal" # 角色当前状态，如 normal, stunned, confused 等
-var state_turns: int = 0 # 状态剩余持续回合数
+#var state: String = "normal" # 角色当前状态，如 normal, stunned, confused 等
+#var state_turns: int = 0 # 状态剩余持续回合数
 
 signal direction_changed(direct:Vector2i)
 signal path_end
 signal ap_changed(new_ap)
-signal state_changed(new_state)
+#signal state_changed(new_state)
 
 func _ready() -> void:
 	_init_state_machine()
+	_init_attribute()
+	operate_attribute("ap",5,5)
+	
+
+func _init_attribute() -> void:
+	for buff in initalize_attribute_buffs:
+		attributes.apply_buff(buff)
+	
 
 func _init_state_machine() -> void:
 	hsm.add_transition(idle_state, move_state,"move_start")
@@ -101,12 +113,36 @@ func get_action_list() -> Dictionary:
 func get_action_resource(id:StringName):
 	return action_manager.get_action_resouce(id)
 
-# 角色属性
-# func get_attribute(attr_name: String):
-# 	return attributes.get(attr_name, null)
 
-# func set_attribute(attr_name: String, value):
-# 	attributes[attr_name] = value
+# 角色属性
+func get_attribute(attr_name: String) -> float:
+	return attributes.find_buffed_value(func(attr:RuntimeAttribute): \
+		return attr.attribute.attribute_name == attr_name)
+
+## 对Attribute快捷进行操作
+## Operation值如下所示：
+## 0 - ADD
+## 1 - DIVIDE
+## 2 - MULTIPLY
+## 3 - PERCENTAGE
+## 4 - SUBTRACT
+## 5 - SET
+func operate_attribute(attr_name: String, value:float,o:int=5):
+	var buff = AttributeBuff.new()
+	var operation = AttributeOperation.new()
+	buff.attribute_name = attr_name
+	operation.operand = o
+	operation.value = value
+	buff.operation = operation
+	attributes.apply_buff(buff)
+
+func apply_buff(buff:AttributeBuff):	
+	attributes.apply_buff(buff)
+
+func update_character_info():
+	var ap = int(get_attribute("ap"))
+	var hp = int(get_attribute("hp"))
+	character_info.text = "AP：%d\nHP：%d"%[ap,hp]
 
 # func add_attribute(attr_name: String, delta):
 # 	attributes[attr_name] = get_attribute(attr_name) + delta
@@ -116,45 +152,49 @@ func get_action_resource(id:StringName):
 
 # AP相关
 func get_ap() -> int:
-	return attributes["ap"]
+	return int(get_attribute("ap"))
 
 func set_ap(value: int) -> void:
-	attributes["ap"] = clamp(value, 0, attributes["max_ap"])
-	emit_signal("ap_changed", attributes["ap"])
+	operate_attribute("ap",value,5)
+	emit_signal("ap_changed", get_ap())
 
 func add_ap(delta: int) -> void:
-	set_ap(get_ap() + delta)
+	operate_attribute("ap",delta,0)
 
 func reset_ap() -> void:
-	set_ap(attributes["max_ap"])
+	set_ap(get_attribute("max_ap"))
 
 func can_consume_ap(cost: int) -> bool:
 	return get_ap() >= cost
 
 func consume_ap(cost: int) -> bool:
 	if can_consume_ap(cost):
-		add_ap(-cost)
+		operate_attribute("ap",cost,4)
 		return true
 	return false
 
 # 状态相关
-func set_state(new_state: String, turns: int = 0) -> void:
-	state = new_state
-	state_turns = turns
-	emit_signal("state_changed", state)
+#func set_state(new_state: String, turns: int = 0) -> void:
+#	state = new_state
+#	state_turns = turns
+#	emit_signal("state_changed", state)
+#
+#func get_state() -> String:
+#	return state
+#
+#func is_state(state_name: String) -> bool:
+#	return state == state_name
+#
+#func tick_state() -> void:
+#	if state != "normal":
+#		if state_turns > 0:
+#			state_turns -= 1
+#			if state_turns == 0:
+#				set_state("normal")
 
-func get_state() -> String:
-	return state
+#func get_state_turns() -> int:
+#	return state_turns
 
-func is_state(state_name: String) -> bool:
-	return state == state_name
 
-func tick_state() -> void:
-	if state != "normal":
-		if state_turns > 0:
-			state_turns -= 1
-			if state_turns == 0:
-				set_state("normal")
-
-func get_state_turns() -> int:
-	return state_turns
+func _on_attribute_container_attribute_changed(_attribute:RuntimeAttribute, _previous_value:float, _new_value:float) -> void:
+	update_character_info()

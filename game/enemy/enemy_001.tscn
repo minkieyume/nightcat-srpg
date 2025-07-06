@@ -19,7 +19,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_22db3"]
+[sub_resource type="Resource" id="Resource_ciyex"]
 resource_local_to_scene = true
 resource_name = "移动"
 script = ExtResource("2_p36qo")
@@ -42,16 +42,16 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 ai = NodePath("StateAI")
 id = "enemy1"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(24, 18)
 texture = ExtResource("2_ciyex")
 
-[node name="SightRadius" parent="." index="2"]
+[node name="SightRadius" parent="." index="3"]
 position = Vector2(24, 24)
 rotation_deg = -90.0
 
-[node name="ActionManager" parent="." index="3"]
-actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_22db3")])
+[node name="ActionManager" parent="." index="4"]
+actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_ciyex")])
 
 [node name="StateAI" parent="." index="6" instance=ExtResource("7_p36qo")]
 script = ExtResource("8_ri16f")

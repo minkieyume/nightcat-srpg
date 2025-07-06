@@ -14,6 +14,7 @@
 
 [node name="Test001" type="Node2D"]
 script = ExtResource("1_s0flc")
+metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, 3)
@@ -49,6 +50,7 @@ position = Vector2(48, 0)
 
 [node name="Machine" parent="Interactables" instance=ExtResource("6_360cf")]
 position = Vector2(144, 144)
+id = "machine1"
 
 [node name="Characters" type="Node2D" parent="."]
 
@@ -56,11 +58,9 @@ position = Vector2(144, 144)
 
 [node name="Yumi" parent="Characters" instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
-move_speed = 96
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(240, 240)
-move_speed = 96
 
 [node name="CharacterOwners" type="Node" parent="."]
 

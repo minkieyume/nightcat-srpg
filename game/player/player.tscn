@@ -1,11 +1,31 @@
-[gd_scene load_steps=11 format=3 uid="uid://lmoiu70kd743"]
+[gd_scene load_steps=17 format=3 uid="uid://lmoiu70kd743"]
 
 [ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="1_md0a2"]
 [ext_resource type="Texture2D" uid="uid://xo8fj52ekt2y" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_nude.png" id="2_4ste8"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_46k48"]
+[ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="2_epvkq"]
+[ext_resource type="Script" uid="uid://daouxidx122kl" path="res://system/attribute/ap_initailize.gd" id="3_5ghna"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_2hm0h"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_bhy47"]
 [ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="5_md0a2"]
+
+[sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
+
+[sub_resource type="AttributeBuff" id="AttributeBuff_i8eqi"]
+operation = SubResource("AttributeOperation_u646v")
+script = ExtResource("2_epvkq")
+max_health = 5.0
+health = 5.0
+metadata/_custom_type_script = "uid://w8k7keh2oex5"
+
+[sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
+
+[sub_resource type="AttributeBuff" id="AttributeBuff_1ct06"]
+operation = SubResource("AttributeOperation_cr7lv")
+script = ExtResource("3_5ghna")
+max_ap = 10.0
+ap = 10.0
+metadata/_custom_type_script = "uid://daouxidx122kl"
 
 [sub_resource type="Resource" id="Resource_lmbwv"]
 script = ExtResource("4_2hm0h")
@@ -15,7 +35,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_md0a2"]
+[sub_resource type="Resource" id="Resource_epvkq"]
 resource_local_to_scene = true
 resource_name = "移动"
 script = ExtResource("2_46k48")
@@ -41,7 +61,7 @@ deter_vector2 = Vector2i(0, 0)
 deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 
-[sub_resource type="Resource" id="Resource_46k48"]
+[sub_resource type="Resource" id="Resource_5ghna"]
 resource_local_to_scene = true
 resource_name = "夜猫嘲讽"
 script = ExtResource("2_46k48")
@@ -60,10 +80,11 @@ ap_cost = 2
 cooldown = 2
 
 [node name="Player" instance=ExtResource("1_md0a2")]
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(24, 18)
 texture = ExtResource("2_4ste8")
 
-[node name="ActionManager" parent="." index="3"]
-actions = Array[ExtResource("2_46k48")]([SubResource("Resource_md0a2"), SubResource("Resource_46k48")])
+[node name="ActionManager" parent="." index="4"]
+actions = Array[ExtResource("2_46k48")]([SubResource("Resource_epvkq"), SubResource("Resource_5ghna")])

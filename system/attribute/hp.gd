@@ -1,7 +1,7 @@
 class_name HP
 extends Attribute
 
-const ATTRIBUTE_NAME = "HP"
+const ATTRIBUTE_NAME = "hp"
 
 
 func _init(_attribute_name := ATTRIBUTE_NAME):
@@ -21,6 +21,6 @@ func _derived_from(attribute_set: AttributeSet) -> Array[AttributeBase]:
 func _compute_value(argument: AttributeComputationArgument) -> float:
     var parent_attributes := argument.get_parent_attributes()
     var max_health_attribute := parent_attributes[0]
-    
-    # Clamp the value between 0 (min health, fixed value) and MaxHealthAttribute's value
-    return clamp(argument.operated_value, 0, max_health_attribute.get_buffed_value())
+
+	# 将值控制在0~max值之间，并舍入。 
+    return float(round(clamp(argument.operated_value, 0, max_health_attribute.get_buffed_value())))

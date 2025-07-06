@@ -24,11 +24,17 @@ func execute()  -> bool:
 	if !action_result:
 		emit_signal("failed")
 		return false
+	coast_ap(requester)
 	emit_signal("finished")
 	return true
 
 func set_target(t:Vector2i):
 	target = t
+
+func coast_ap(requester:String):
+	var character = level_handler.get_character(requester)
+	var cosume = resource.ap_cost
+	character.consume_ap(cosume)
 
 ## 计算允许互动的绝对坐标。
 func clac_action_range() -> Array[Vector2i]:
