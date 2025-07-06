@@ -11,6 +11,7 @@ func _ready() -> void:
 	_init_astar()
 	_set_tile_blocks()
 	update_character_blocks()
+	update_interactable_blocks()
 
 func _init_astar() -> void:
 	astar = AStarGrid2D.new()
