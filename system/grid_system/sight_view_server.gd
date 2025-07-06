@@ -7,4 +7,5 @@ func _ready() -> void:
 
 func _on_sight_updated(id:String):
 	var character = level_handler.get_character(id)
-	character.update_sight_view(level_handler)
+	if !character.is_in_group("player"):
+		character.update_sight_view(level_handler)
