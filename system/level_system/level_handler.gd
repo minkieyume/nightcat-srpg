@@ -61,6 +61,9 @@ func get_player_list() -> Array[Character]:
 func get_enemy_list() -> Array[Character]:
 	return get_character_array().filter(_enemy_fliter)
 
+func get_movement_server() -> MovementServer:
+	return movement_server
+
 func _player_fliter(enemy:Character) -> bool:
 	if enemy.is_in_group("player"):
 		return true

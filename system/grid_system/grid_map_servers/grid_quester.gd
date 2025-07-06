@@ -39,3 +39,17 @@ func quest_tile_center(target:Vector2i) -> Vector2:
 	var tile_pos = grid_map.map_to_local(target)
 	var tile_size = grid_map.tile_set.tile_size
 	return tile_pos+Vector2(tile_size/2)
+
+func quest_block_tiles() -> Array:
+	var grid_map:GridMapLayer = level_handler.get_grid_map()
+	var tiles = grid_map.get_used_cells()
+	return tiles.filter(grid_map.is_cell_block)
+
+func quest_passable_tiles() -> Array:
+	var grid_map:GridMapLayer = level_handler.get_grid_map()
+	var tiles = grid_map.get_used_cells()
+	return tiles.filter(grid_map.is_cell_passable)
+
+func is_tile_passable(pos:Vector2i) -> bool:
+	var grid_map:GridMapLayer = level_handler.get_grid_map()
+	return grid_map.is_cell_passable(pos)

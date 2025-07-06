@@ -22,6 +22,9 @@ func pack_nodes_to_dict(nodes:Node,dict:Dictionary) -> Dictionary:
 func get_grid_map() -> TileMapLayer:
 	return TileMapLayer.new()
 
+func get_grid_map_array() -> Array[GridMapLayer]:
+	return [GridMapLayer.new()]
+
 func get_grid_drawer() -> GridDrawer:
 	return GridDrawer.new()
 

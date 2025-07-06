@@ -1,4 +1,6 @@
+class_name GridMapLayer
 extends TileMapLayer
+## 访问图块数据和地形的类
 
 ## 地形类型枚举，方便查阅
 enum Terrain {
@@ -6,14 +8,14 @@ enum Terrain {
 	BLOCK = 1,
 }
 
-const TERRRAIN_TYPES = [Terrain.NORMAL,Terrain.BLOCK]
+const TERRAIN_TYPES = [Terrain.NORMAL,Terrain.BLOCK]
 
 ## 获取格子类型，未设置则返回Terrain.NORMAL
 func get_cell_type(pos: Vector2i) -> int:
 	if tile_set.has_custom_data_layer_by_name("terrain_type"):		
 		var tile_data = get_cell_tile_data(pos)
 		var type = tile_data.get_custom_data("terrain_type")
-		if type in TERRRAIN_TYPES:
+		if type in TERRAIN_TYPES:
 			return type
 	return Terrain.NORMAL
 
@@ -25,6 +27,8 @@ func is_cell_passable(pos: Vector2i) -> bool:
 ## 是否为障碍
 func is_cell_block(pos: Vector2i) -> bool:
 	return get_cell_type(pos) == Terrain.BLOCK
+
+## 下面是待重构的方法，建议移到grid_map_quester：
 
 # 判断目标是否在圆形范围内
 func is_in_radius(origin: Vector2i, target: Vector2i, radius: int) -> bool:

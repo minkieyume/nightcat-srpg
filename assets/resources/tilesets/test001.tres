@@ -1,0 +1,67 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://d103yqt17qft6"]
+
+[ext_resource type="Texture2D" uid="uid://cs503db1g72qy" path="res://assets/external_packs/overworld-pack-free_version/autotiles/free_autotile_0.png" id="1_4d3e5"]
+[ext_resource type="Texture2D" uid="uid://f70dk22fkp45" path="res://assets/external_packs/overworld-pack-free_version/autotiles/free_autotile_26.png" id="2_0jy8b"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pj3v8"]
+texture = ExtResource("1_4d3e5")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3bn13"]
+texture = ExtResource("2_0jy8b")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:0/0/custom_data_0 = 1
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+2:0/0 = 0
+2:0/0/custom_data_0 = 1
+0:1/0 = 0
+0:1/0/custom_data_0 = 1
+1:1/0 = 0
+1:1/0/custom_data_0 = 1
+2:1/0 = 0
+2:1/0/custom_data_0 = 1
+0:2/0 = 0
+0:2/0/custom_data_0 = 1
+1:2/0 = 0
+1:2/0/custom_data_0 = 1
+2:2/0 = 0
+2:2/0/custom_data_0 = 1
+0:3/0 = 0
+0:3/0/custom_data_0 = 1
+1:3/0 = 0
+1:3/0/custom_data_0 = 1
+2:3/0 = 0
+2:3/0/custom_data_0 = 1
+0:4/0 = 0
+0:4/0/custom_data_0 = 1
+1:4/0 = 0
+1:4/0/custom_data_0 = 1
+2:4/0 = 0
+2:4/0/custom_data_0 = 1
+
+[resource]
+tile_size = Vector2i(48, 48)
+terrain_set_0/mode = 1
+terrain_set_0/terrain_0/name = "Grass"
+terrain_set_0/terrain_0/color = Color(0.346451, 0.799715, 0.0706743, 1)
+custom_data_layer_0/name = "terrain_type"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_pj3v8")
+sources/3 = SubResource("TileSetAtlasSource_3bn13")

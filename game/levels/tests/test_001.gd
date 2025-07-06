@@ -5,7 +5,7 @@ var character_owner_dict:Dictionary[String,CharacterOwner]
 var interactable_dict:Dictionary[String,Interactable]
 
 @onready var characters = $Characters
-@onready var grid_map:TileMapLayer =  $GridMap
+@onready var grid_map:TileMapLayer =  $TileMapLayer
 @onready var grid_drawer:GridDrawer = $GridDrawer
 @onready var character_owners = $CharacterOwners
 @onready var interactables = $Interactables
