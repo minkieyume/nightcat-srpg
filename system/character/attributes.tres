@@ -1,0 +1,15 @@
+[gd_resource type="AttributeSet" load_steps=5 format=3 uid="uid://bl63cuqdi5v84"]
+
+[ext_resource type="Script" uid="uid://dopx5ow36x1vy" path="res://system/attribute/hp.gd" id="1_dm1f7"]
+[ext_resource type="Script" uid="uid://syjoqkdsrebv" path="res://system/attribute/max_hp.gd" id="2_4q0un"]
+
+[sub_resource type="Attribute" id="Attribute_rpxmw"]
+script = ExtResource("1_dm1f7")
+metadata/_custom_type_script = "uid://dopx5ow36x1vy"
+
+[sub_resource type="Attribute" id="Attribute_j54pj"]
+script = ExtResource("2_4q0un")
+metadata/_custom_type_script = "uid://syjoqkdsrebv"
+
+[resource]
+attributes = Array[AttributeBase]([SubResource("Attribute_rpxmw"), SubResource("Attribute_j54pj")])

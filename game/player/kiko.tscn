@@ -60,6 +60,7 @@ ap_cost = 2
 cooldown = 2
 
 [node name="Kiko" instance=ExtResource("1_ouxu8")]
+move_speed = 96
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_w02p2")

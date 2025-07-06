@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://11lfpaemgm03"]
+[gd_scene load_steps=34 format=3 uid="uid://11lfpaemgm03"]
 
 [ext_resource type="Script" uid="uid://wbnikvil5wun" path="res://system/character/character.gd" id="1_1i7cy"]
 [ext_resource type="Texture2D" uid="uid://dl1087ffalj4y" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_1.png" id="2_fvjva"]
+[ext_resource type="AttributeSet" uid="uid://bl63cuqdi5v84" path="res://system/character/attributes.tres" id="2_h7f75"]
 [ext_resource type="PackedScene" uid="uid://ciljufcsear1m" path="res://system/action_system/ActionManager.tscn" id="3_wlaod"]
 [ext_resource type="Script" uid="uid://cwks6baw6juj6" path="res://system/character/states/idle_state.gd" id="4_2gdvs"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="4_bl7gt"]
@@ -48,7 +49,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_fvjva"]
+[sub_resource type="Resource" id="Resource_h7f75"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -75,7 +76,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_h7f75"]
+[sub_resource type="Resource" id="Resource_i8eqi"]
 resource_local_to_scene = true
 resource_name = "Interact"
 script = ExtResource("4_bl7gt")
@@ -102,7 +103,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_i8eqi"]
+[sub_resource type="Resource" id="Resource_cr7lv"]
 resource_local_to_scene = true
 resource_name = "Move"
 script = ExtResource("4_bl7gt")
@@ -283,6 +284,10 @@ _data = {
 
 [node name="Character" type="Area2D" groups=["character", "id"]]
 script = ExtResource("1_1i7cy")
+metadata/_edit_lock_ = true
+
+[node name="AttributeContainer" type="AttributeContainer" parent="."]
+attribute_set = ExtResource("2_h7f75")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(24, 19)
@@ -305,7 +310,7 @@ base = NodePath("..")
 metadata/_custom_type_script = "uid://bkddet74xapio"
 
 [node name="ActionManager" parent="." instance=ExtResource("3_wlaod")]
-actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_fvjva"), SubResource("Resource_h7f75"), SubResource("Resource_i8eqi")])
+actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_h7f75"), SubResource("Resource_i8eqi"), SubResource("Resource_cr7lv")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

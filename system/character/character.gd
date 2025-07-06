@@ -3,13 +3,14 @@ class_name Character
 # 与各个Server中介通信
 extends Area2D
 
-@export var id = "kiko"
+@export var id = "character"
 
-@export var move_speed = 96
+@export var move_speed = 192
 
 @onready var action_manager = $ActionManager
 @onready var animation_player = $AnimationPlayer
 @onready var sight_radius = $SightRadius
+@onready var attributes = $AttributeContainer
 
 #LimboHSM状态机插件
 @onready var hsm: LimboHSM = $LimboHSM
@@ -23,14 +24,6 @@ var direction:Vector2i = Vector2i.DOWN:
 	set(d):
 		direction = d
 		emit_signal("direction_changed",direction)
-
-# 角色属性字典，便于扩展
-var attributes = {
-	"ap": 4,
-	"max_ap": 4,
-	"hp": 10,
-	"max_hp": 10
-}
 
 # 角色状态管理
 var state: String = "normal" # 角色当前状态，如 normal, stunned, confused 等
@@ -109,17 +102,17 @@ func get_action_resource(id:StringName):
 	return action_manager.get_action_resouce(id)
 
 # 角色属性
-func get_attribute(attr_name: String):
-	return attributes.get(attr_name, null)
+# func get_attribute(attr_name: String):
+# 	return attributes.get(attr_name, null)
 
-func set_attribute(attr_name: String, value):
-	attributes[attr_name] = value
+# func set_attribute(attr_name: String, value):
+# 	attributes[attr_name] = value
 
-func add_attribute(attr_name: String, delta):
-	attributes[attr_name] = get_attribute(attr_name) + delta
+# func add_attribute(attr_name: String, delta):
+# 	attributes[attr_name] = get_attribute(attr_name) + delta
 
-func get_action_manager():
-	return action_manager
+# func get_action_manager():
+# 	return action_manager
 
 # AP相关
 func get_ap() -> int:

@@ -56,9 +56,11 @@ position = Vector2(144, 144)
 
 [node name="Yumi" parent="Characters" instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
+move_speed = 96
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(240, 240)
+move_speed = 96
 
 [node name="CharacterOwners" type="Node" parent="."]
 
