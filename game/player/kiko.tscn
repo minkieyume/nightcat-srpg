@@ -31,7 +31,6 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
-cooldown = 0
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [sub_resource type="Resource" id="Range"]
@@ -57,7 +56,6 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
-cooldown = 2
 
 [node name="Kiko" instance=ExtResource("1_ouxu8")]
 id = "kiko"

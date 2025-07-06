@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=19 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="4_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dxrbu0r200l8m" path="res://system/grid_system/grid_map_servers/action_server.tscn" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
+[ext_resource type="Script" uid="uid://bwjna2wtjnrxx" path="res://system/grid_system/sight_view_server.gd" id="6_074og"]
 [ext_resource type="PackedScene" uid="uid://bcp4wjouh8kwm" path="res://system/phase_system/turn_phase/game_phase_controller.tscn" id="6_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="8_5vw27"]
@@ -34,6 +35,11 @@ level_handler = NodePath("../LevelHandler")
 
 [node name="MovementServer" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("4_efxa6")]
 level_handler = NodePath("../LevelHandler")
+
+[node name="SightViewServer" type="Node" parent="." node_paths=PackedStringArray("level_handler")]
+script = ExtResource("6_074og")
+level_handler = NodePath("../LevelHandler")
+metadata/_custom_type_script = "uid://bamkaecutgfkg"
 
 [node name="ActionFactory" parent="." node_paths=PackedStringArray("level_handler") instance=ExtResource("5_dg77c")]
 level_handler = NodePath("../LevelHandler")

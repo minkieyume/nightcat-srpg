@@ -40,6 +40,11 @@ func quest_tile_center(target:Vector2i) -> Vector2:
 	var tile_size = grid_map.tile_set.tile_size
 	return tile_pos+Vector2(tile_size/2)
 
+## 获取坐标对应的图块
+func quest_tile(target:Vector2) -> Vector2i:
+	var grid_map = level_handler.get_grid_map()
+	return grid_map.local_to_map(target)
+
 func quest_block_tiles() -> Array:
 	var grid_map:GridMapLayer = level_handler.get_grid_map()
 	var tiles = grid_map.get_used_cells()

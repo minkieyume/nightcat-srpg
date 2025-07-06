@@ -35,7 +35,6 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
-cooldown = 0
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [node name="Enemy001" node_paths=PackedStringArray("ai") instance=ExtResource("1_wkmnl")]
@@ -45,10 +44,6 @@ id = "enemy1"
 [node name="Sprite2D" parent="." index="1"]
 position = Vector2(24, 18)
 texture = ExtResource("2_ciyex")
-
-[node name="SightRadius" parent="." index="3"]
-position = Vector2(24, 24)
-rotation_deg = -90.0
 
 [node name="ActionManager" parent="." index="4"]
 actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_ciyex")])

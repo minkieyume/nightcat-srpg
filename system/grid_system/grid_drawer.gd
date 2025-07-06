@@ -17,6 +17,10 @@ extends Node2D
 	set(s):
 		show_limit = s
 		queue_redraw()
+@export var show_sights:bool = false:
+	set(s):
+		show_sights = s
+		queue_redraw()
 
 @export_category("网格颜色")
 @export var grid_color:Color = Color(1, 1, 1, 0):
@@ -43,6 +47,14 @@ extends Node2D
 	set(c):
 		highlight_outline_color = c
 		queue_redraw()
+@export var sight_color: Color = Color(0, 1, 1, 0.3):
+	set(c):
+		sight_color = c
+		queue_redraw()
+@export var sight_outline_color: Color = Color(0, 1, 1, 0.4):
+	set(c):
+		sight_outline_color = c
+		queue_redraw()
 
 var tile_size:Vector2i
 
@@ -54,13 +66,23 @@ var highlight:Vector2i:
 	set(h):
 		highlight = h
 		queue_redraw()
-
+var sight_dict:Dictionary[String,Array]:
+	set(s):
+		sight_dict = s
+		queue_redraw()
+		
 func _ready() -> void:
 	tile_size = fill_map.tile_set.tile_size
 	fill_map.modulate = Color(1,1,1,1)
 	
-	if show_grid or show_limit or show_highlight:
+	if show_grid or show_limit or show_highlight or show_sights:
 		queue_redraw()
+
+func update_sight_dict(id:String,val:Array):
+	sight_dict[id] = val
+
+func clean_sight_dict(id:String):
+	sight_dict.erase(id)
 
 func _draw() -> void:
 	if show_limit:
@@ -68,6 +90,10 @@ func _draw() -> void:
 			_draw_grid(limit,limit_color,limit_outline_color)
 	if show_highlight:
 		_draw_grid(highlight,highlight_color,highlight_outline_color)
+	if show_sights:
+		for value in sight_dict.values():
+			for sight in value:
+				_draw_grid(sight,sight_color,sight_outline_color)
 	if show_grid:
 		_draw_grid_cells()
 
@@ -80,7 +106,6 @@ func _draw_grid_cells() -> void: # 在所有已使用的网格绘制网格线
 			used_cells.erase(limit)
 	for cell in used_cells:
 		_draw_grid(cell,grid_color,grid_outline_color)
-
 
 func _draw_grid(grid:Vector2i,color:Color,o_color:Color) -> void:
 	# 绘制网格与边框

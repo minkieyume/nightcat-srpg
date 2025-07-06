@@ -42,6 +42,7 @@ rendering_quadrant_size = 48
 
 [node name="GridDrawer" parent="." node_paths=PackedStringArray("fill_map") instance=ExtResource("7_w2seq")]
 fill_map = NodePath("../HighLightLayer")
+show_sights = true
 
 [node name="Interactables" type="Node2D" parent="."]
 

@@ -34,6 +34,7 @@ var direction:Vector2i = Vector2i.DOWN:
 #var state_turns: int = 0 # 状态剩余持续回合数
 
 signal direction_changed(direct:Vector2i)
+signal sight_updated(id:String)
 signal path_end
 signal ap_changed(new_ap)
 #signal state_changed(new_state)
@@ -55,9 +56,24 @@ func _init_state_machine() -> void:
 	hsm.initialize(self)
 	hsm.set_active(true)
 
+func change_face(face:String) -> bool:
+	match face:
+		"down":
+			change_direction(Vector2i.DOWN)
+		"left":
+			change_direction(Vector2i.LEFT)
+		"right":
+			change_direction(Vector2i.RIGHT)
+		"up":
+			change_direction(Vector2i.UP)
+		_:
+			return false
+	emit_signal("sight_updated",id)
+	return true
+
 func change_direction(dir:Vector2i) -> bool:
 	var dir_angle = Vector2(dir).angle()
-	sight_radius.rotation_deg = rad_to_deg(dir_angle)
+	sight_radius.rotation_deg = rad_to_deg(dir_angle)	
 	if direction == dir:
 		return true
 	match dir:
@@ -74,7 +90,7 @@ func change_direction(dir:Vector2i) -> bool:
 			direction = dir
 			return true
 		_:
-			return false
+			return false	
 
 func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
 	# 沿着path批量移动
@@ -82,6 +98,7 @@ func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
 	for point in path:
 		await step(point - start,vdis)
 		start = map.local_to_map(position)
+	emit_signal("sight_updated",id)
 	emit_signal("path_end")
 
 func step(dir:Vector2,vdis:Vector2) -> void:
@@ -105,6 +122,13 @@ func update_sight_character(handler:LevelHandler):
 			in_sight_characters.append(player)
 		else:
 			in_sight_characters.erase(player)
+
+## 更新视野范围高亮数组
+func update_sight_view(handler:LevelHandler):
+	var grid_drawer = handler.get_grid_drawer()
+	var quester = handler.get_grid_quester()
+	var sights_array = sight_radius.get_tiles_in_sector(quester)
+	grid_drawer.update_sight_dict(id,sights_array)
 
 # 角色行动
 func get_action_list() -> Dictionary:
