@@ -1,12 +1,26 @@
-[gd_resource type="Resource" script_class="ActionResource" load_steps=2 format=3 uid="uid://c2c8kbawe86ax"]
+[gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://c2c8kbawe86ax"]
 
+[ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="1_n3plx"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1_s3vay"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="2_1l7oo"]
+
+[sub_resource type="Resource" id="Resource_7m1oh"]
+script = ExtResource("2_1l7oo")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(0, 0)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
 [resource]
+resource_local_to_scene = true
+resource_name = "结束回合"
 script = ExtResource("1_s3vay")
-id = &"action"
+id = &"end_turn"
 group = ""
-action_name = "行动"
+action_name = "结束回合"
+action_range = SubResource("Resource_7m1oh")
+action_logic = ExtResource("1_n3plx")
 allowed_target = {
 "Enemy": true,
 "Object": true,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dupnywu6oavso"]
+[gd_scene load_steps=12 format=3 uid="uid://dupnywu6oavso"]
 
 [ext_resource type="PackedScene" uid="uid://lmoiu70kd743" path="res://game/player/player.tscn" id="1_ouxu8"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_1nccq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="3_wb5sy"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_j5q56"]
 [ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="5_e2xvg"]
+[ext_resource type="Resource" uid="uid://c2c8kbawe86ax" path="res://game/actions/action_resources/end_turn.tres" id="7_bjwp7"]
 
 [sub_resource type="Resource" id="Resource_lmbwv"]
 script = ExtResource("4_j5q56")
@@ -64,4 +65,4 @@ id = "kiko"
 texture = ExtResource("2_w02p2")
 
 [node name="ActionManager" parent="." index="4"]
-actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_w02p2"), SubResource("Resource_bjwp7")])
+actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_w02p2"), SubResource("Resource_bjwp7"), ExtResource("7_bjwp7")])
