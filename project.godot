@@ -15,6 +15,11 @@ run/main_scene="uid://ctpwokqd5uh20"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LevelHandler="*res://global/autoload/level_handler.gd"
+CommandBus="*res://global/autoload/command_bus.gd"
+
 [display]
 
 window/size/viewport_width=960
@@ -26,13 +31,10 @@ naming/script_name_casing=2
 
 [global_group]
 
-id=""
-interactable="可互动物体"
-character=""
 ai_character=""
-machine=""
-player=""
+id=""
 enemy=""
+player=""
 
 [input]
 

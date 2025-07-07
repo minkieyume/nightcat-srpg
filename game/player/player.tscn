@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://lmoiu70kd743"]
 
-[ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/character.tscn" id="1_md0a2"]
+[ext_resource type="PackedScene" uid="uid://11lfpaemgm03" path="res://system/character/charactesr.tscn" id="1_md0a2"]
 [ext_resource type="Texture2D" uid="uid://xo8fj52ekt2y" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_nude.png" id="2_4ste8"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_46k48"]
 [ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="2_epvkq"]

@@ -6,9 +6,8 @@ signal recieved_end
 ## 移动结果
 var move_result = false
 
-func before_target_chose(action:Action) -> int:
-	var handler = action.level_handler
-	var quester = handler.get_grid_quester()		
+func before_target_chose(action:Action) -> int:	
+	var quester = LevelHandler.get_grid_quester()		
 
 	# 更新行动范围配置
 	var blocked_tiles = quester.quest_block_tiles()
@@ -19,26 +18,26 @@ func before_target_chose(action:Action) -> int:
 	return 1
 
 func action_prerun(action:Action) -> int:
-	var handler = action.level_handler
-	var agent = handler.get_character(action.requester)
-	var grid_map = handler.get_grid_map()
+	var LevelHandler = action.level_LevelHandler
+	var agent = LevelHandler.get_character(action.requester)
+	var grid_map = LevelHandler.get_grid_map()
 	var start = grid_map.local_to_map(agent.position)
 	var resource = action.resource
-	# OOP式调用LevelHandler的get_path_length
-	var ap_cost = handler.get_path_length(start, action.target)
+	# OOP式调用LevelLevelHandler的get_path_length
+	var ap_cost = LevelHandler.get_path_length(start, action.target)
 
 	# 设置行动的AP消费
 	resource.ap_cost = ap_cost
 	return 1
 
-func execute(character:String, target:Vector2i, handler:LevelHandler) -> bool:
-	var agent = handler.get_character(character)	
-	var server = handler.get_movement_server()
+func execute(action:Action) -> bool:
+	var agent = LevelLevelHandler.get_character(character)	
+	var server = LevelLevelHandler.get_movement_server()
 	server.move_failed.connect(_on_move_failed)
 	agent.path_end.connect(_on_path_end)
 	
 	# 发送移动命令
-	handler.send_command("move_character", [character, target])
+	CommandBus.send_command("move_character", [character, target])
 	await recieved_end
 	server.move_failed.disconnect(_on_move_failed)
 	agent.path_end.disconnect(_on_path_end)

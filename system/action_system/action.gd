@@ -1,7 +1,6 @@
 class_name Action
 extends Object
 
-var level_handler:LevelHandler
 var requester:String
 var target:Vector2i
 
@@ -28,6 +27,14 @@ func prerun() -> int:
 		return 0
 	return result
 
+func _init(r:String,id:StringName):
+	var action_resource:ActionResource = LevelHandler.get_character_action(requester,id)	
+	var action_logic:GDScript = action_resource.action_logic
+	requester = r	
+	resource = action_resource.duplicate(true)
+	action_range = action_resource.action_range.duplicate(true)
+	logic = action_logic.new()
+
 func execute()  -> bool:
 	if is_instance_valid(action_range):
 #		print("[Action]",requester)
@@ -38,7 +45,7 @@ func execute()  -> bool:
 	if !can_consume():
 		emit_signal("failed")
 		return false
-	var action_result = await logic.execute(requester,target,level_handler)
+	var action_result = await logic.execute(requester,target)
 	if !action_result:
 		emit_signal("failed")
 		return false

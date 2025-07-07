@@ -8,5 +8,5 @@ func before_target_chose(action:Action) -> int:
 func action_prerun(action:Action) -> int:
 	return 1
 
-func execute(character:String,target:Vector2i,handler:LevelHandler) -> bool:
+func execute(action:Action) -> bool:
 	return true

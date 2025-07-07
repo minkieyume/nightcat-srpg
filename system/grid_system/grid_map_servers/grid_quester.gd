@@ -1,62 +1,45 @@
 class_name GridQuester
 ## 从地图中查询信息并返回
-extends Node
-
-## 关卡管理器
-@export var level_handler:LevelHandler
-
-func _ready() -> void:
-	level_handler.grid_quester = self
+extends GridMapServer
 
 ## 在给定位置搜寻匹配的角色，返回角色id，如果没有则返回空字符串
 func quest_character(target:Vector2i) -> String:
-	var character_list = level_handler.get_character_dict()
-	var grid_map = level_handler.get_grid_map()
-	for character_key in character_list.keys():
-		var character = character_list[character_key]
+	var character_list = LevelHandler.get_characters()	
+	for character in character_list:		
 		if grid_map.local_to_map(character.position) == target:
-			return character_key
+			return character.id
 	return ""
 
-## 在给定位置搜寻可互动物体，返回物体id，如果没有则返回空字符串
-func quest_interactable(target:Vector2i) -> String:
-	var interactable_list = level_handler.get_interactable_list()
-	var grid_map = level_handler.get_grid_map()
-	for ikey in interactable_list.keys():
-		var character = interactable_list[ikey]
-		if grid_map.local_to_map(character.position) == target:
-			return ikey
+## 在给定位置搜寻单位，返回单位id，如果没有则返回空字符串
+func quest_unit(target:Vector2i) -> String:
+	var units = LevelHandler.get_units()
+	for unit in units:
+		if grid_map.local_to_map(unit.position) == target:
+			return unit.id
 	return ""
 
 ## 获取图块坐标。
-func quest_tile_position(target:Vector2i) -> Vector2:
-	var grid_map = level_handler.get_grid_map()
+func quest_tile_position(target:Vector2i) -> Vector2:	
 	return grid_map.map_to_local(target)
 	
 ## 获取图块中点坐标。
 func quest_tile_center(target:Vector2i) -> Vector2:
-	var grid_map = level_handler.get_grid_map()
-	var tile_pos = grid_map.map_to_local(target)
-	var tile_size = grid_map.tile_set.tile_size
+	var tile_pos = grid_map.map_to_local(target)	
 	return tile_pos+Vector2(tile_size/2)
 
 ## 获取坐标对应的图块
 func quest_tile(target:Vector2) -> Vector2i:
-	var grid_map = level_handler.get_grid_map()
 	return grid_map.local_to_map(target)
 
 func quest_block_tiles() -> Array:
-	var grid_map:GridMapLayer = level_handler.get_grid_map()
 	var tiles = grid_map.get_used_cells()
 	return tiles.filter(grid_map.is_cell_block)
 
 func quest_passable_tiles() -> Array:
-	var grid_map:GridMapLayer = level_handler.get_grid_map()
 	var tiles = grid_map.get_used_cells()
 	return tiles.filter(grid_map.is_cell_passable)
 
-func is_tile_passable(pos:Vector2i) -> bool:
-	var grid_map:GridMapLayer = level_handler.get_grid_map()
+func is_tile_passable(pos:Vector2i) -> bool:	
 	return grid_map.is_cell_passable(pos)
 
 
@@ -100,8 +83,7 @@ func quest_tiles_in_sector(origin: Vector2i, direction: Vector2i, angle: float, 
 
 # 判断两点间是否有视线遮挡
 func has_line_of_sight(origin: Vector2i, target: Vector2i) -> bool:
-	# TODO: 结合TileMap障碍属性实现Bresenham算法
-	var grid_map:GridMapLayer = level_handler.get_grid_map()
+	# TODO: 结合TileMap障碍属性实现Bresenham算法	
 	for tile in Geometry2D.bresenham_line(origin,target):
 		if grid_map.is_cell_block(tile):
 			return true
@@ -110,8 +92,8 @@ func has_line_of_sight(origin: Vector2i, target: Vector2i) -> bool:
 # 获取区域内所有角色
 func quest_character_in_area(area: Array) -> Array:
 	var result = []
-	for character in level_handler.get_character_array():
-		var c_pos = level_handler.get_character_position(character.id)
+	for character in LevelHandler.get_characters():
+		var c_pos = LevelHandler.get_character_position(character.id)
 		if c_pos in area:
 			result.append(character)
 	return result
@@ -119,8 +101,9 @@ func quest_character_in_area(area: Array) -> Array:
 # 获取区域内所有物件/机关
 func get_interactable_in_area(area: Array) -> Array:
 	var result = []
-	for interactable in level_handler.get_interactable_list():
-		var c_pos = level_handler.get_interactable_position(interactable)
+	var units = LevelHandler.get_units()
+	for interactable in units.filter(func(u:Unit):return u.is_in_group("interactable")):
+		var c_pos = LevelHandler.get_interactable_position(interactable)
 		if c_pos in area:
 			result.append(interactable)
 	return result

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ir6eky6wn7ic" path="res://system/interactable_system/interactable.gd" id="1_p5mss"]
 [ext_resource type="Texture2D" uid="uid://ttrgy3qt3sgy" path="res://assets/external_packs/character-pack-free_version/sprite/free_chests.png" id="2_p5mss"]
 
-[node name="Interactable" type="Node2D" groups=["id", "interactable"]]
+[node name="Interactable" type="Node2D" groups=["interactable"]]
 script = ExtResource("1_p5mss")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

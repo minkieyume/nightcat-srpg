@@ -1,20 +1,18 @@
 extends Level
 
-var character_dict:Dictionary[String,Character]
-var character_owner_dict:Dictionary[String,CharacterOwner]
-var interactable_dict:Dictionary[String,Interactable]
-
 @onready var characters = $Characters
 @onready var grid_map:TileMapLayer =  $TileMapLayer
 @onready var grid_drawer:GridDrawer = $GridDrawer
-@onready var character_owners = $CharacterOwners
-@onready var interactables = $Interactables
+@onready var grid_quester:GridQuester = $GridQuester
+@onready var movement_server:MovementServer = $MovementServer
+@onready var objects = $Objects
 
 func _ready() -> void:
 	super()
-	character_dict = pack_nodes_to_dict(characters,character_dict)
-	character_owner_dict = pack_nodes_to_dict(character_owners,character_owner_dict)
-	interactable_dict = pack_nodes_to_dict(interactables,interactable_dict)
+	var character_dict = pack_nodes_to_dict(characters)
+	var object_dict = pack_nodes_to_dict(objects)
+	unit_dict.merge(character_dict)
+	unit_dict.merge(object_dict)
 
 func get_grid_drawer() -> GridDrawer:
 	return grid_drawer
@@ -22,24 +20,11 @@ func get_grid_drawer() -> GridDrawer:
 func get_grid_map() -> TileMapLayer:
 	return grid_map
 
-func get_character_owners() -> Dictionary[String,CharacterOwner]:
-	return character_owner_dict
+func get_grid_map_layers() -> Array[GridMapLayer]:
+	return [grid_map]
 
-func get_character_dict() -> Dictionary[String,Character]:
-	return character_dict
+func get_grid_quester() -> GridQuester:
+	return grid_quester
 
-func get_character_array() -> Array[Character]:
-	return character_dict.values()
-
-func get_character_list() -> Array[String]:
-	return character_dict.keys()
-
-func get_character(id:String) -> Character:
-#	print("[Level] CharacterID:",id)
-	return character_dict.get(id)
-
-func get_interactable_dict() -> Dictionary[String,Interactable]:
-	return interactable_dict
-
-func get_interactable(id:String) -> Interactable:
-	return interactable_dict.get(id)
+func get_movement_server() -> MovementServer:
+	return movement_server
