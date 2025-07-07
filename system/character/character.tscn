@@ -327,6 +327,9 @@ rotation_deg = 90.0
 base = NodePath("..")
 metadata/_custom_type_script = "uid://bkddet74xapio"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
 [node name="ActionManager" parent="." instance=ExtResource("3_wlaod")]
 actions = Array[ExtResource("4_bl7gt")]([SubResource("Resource_bl7gt"), SubResource("Resource_i8eqi"), SubResource("Resource_cr7lv"), SubResource("Resource_1ct06")])
 
