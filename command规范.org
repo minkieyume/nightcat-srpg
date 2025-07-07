@@ -3,3 +3,13 @@
 * 前言
 本规范用于LevelHandler的Command，通过LevelHandler的Command机制，可以很方便地对各个模块发送命令与参数，以便调用和访问，接收命令方只需要链接level_handler的command_send信号即可收到命令和参数。
 
+* 命令
+** menu
+用于针对menumanager的操作，可以切换menumanager的状态，参数通常为转换表的键，但也有下列特殊参数：
+*** setcargo
+设置菜单的上下文，第二个参数为键，第三个参数为值。
+
+** gamephase
+针对gamephase的操作，可以切换menumanager的状态，参数通常为转换表的键，但也有下列特殊参数：
+*** setcargo
+设置当前阶段的上下文，第二个参数为键，第三个参数为值。

@@ -2,3 +2,19 @@
 
 * 前言
 本规范用于规范流程控制阶段的上下文，决定每个上下文键的作用以及接受的值。
+
+* 上下文
+** target:Vector2i
+被选中的目标，通常是一个坐标。
+** actor:String
+当前选中的角色，用id表示。
+** part:String
+当前执行行动的派系。
+** action:Action
+行动的对象
+** mode:String
+当前的菜单和行动状态，用于重复进入一个节点时判定行动执行到哪个阶段了。
+** interactable:String
+被执行interact操作的对象。
+** to:String
+下一个转换到的目标。

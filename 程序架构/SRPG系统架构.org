@@ -8,12 +8,56 @@
 | 逻辑层     | 处理游戏内各个具体对象的逻辑，并变更场景层的各个节点 | ActionManager   |
 | 数据层     | 访问和封装数据的层                                   | Level，Resource |
 
+* 全局单例
+CommandBus：命令总线，用于在全局对所有节点广播指令和参数。
+LevelHandler：关卡管理器，处理关卡的切换和加载、单位的加载与删除、模块的注册等。
+
+
 * UI层
 
 * 流程控制层
+** 游戏阶段
+** 菜单控件
+菜单状态机：
+- Hide
+- UnitOperationChose
+  - GridTargetChose
+  - ActionChose
+  - TurnEnd
+*** 重构思路
+- 将ActionAchiever和Interactor的逻辑放到GamePhase中
+- 实现对menu的setcargo和对gamephase的setcargo操作，允许两个菜单互传上下文。
+- 将判定菜单使用哪个方式的依据统一改为名为mode的上下文。
 
 * 逻辑层
+** 图块系统
+GridDrawer：图块高亮绘制器，负责绘制图块中的高亮显示。
+GridQuester：图块查询器，负责在图块中查询坐标信息。
+MovementServer：移动服务器，处理单位在图块中的移动。
+
+** 角色系统
+Unit：所有网格中可操作对象的的统一类。
+- speed
+- part 阵营
+- move()
+......
+*** 分组
+interactable：可以互动的接口实现。
+player：该组单位是玩家角色。
+enemy：该组单位是敌人角色。
+*** 重构思路
+- 为所有unit实现从环境接收上下文的功能。
+- 为所有可互动的Unit实现互动前处理和互动时处理的方法。
+
+** 行动系统
+ActionFactory：行动构建器，创建返回行动对象。
+Action：行动类，用于封装行动的执行。
+ActionLogic：execute以Action对象为参数，封装行动的逻辑。
+ActionResource：封装行动的资源
+ActionRange：封装行动范围的数据
+*** 重构思路
+- 为Action类实现接收环境上下文的功能，将ActionLogic的参数改为Action自身。
+- 为Action类实现
 
 
 * 数据层
-
