@@ -34,6 +34,14 @@ func update_character_blocks() -> void:
 	var characters = level_handler.get_character_array()
 	for character in characters:
 		var tile = level_handler.get_character_position(character.id)
+		set_tile_passable(tile)
+	astar.update()
+
+## 移除角色自带的障碍效果
+func remove_character_blocks() -> void:
+	var characters = level_handler.get_character_array()
+	for character in characters:
+		var tile = level_handler.get_character_position(character.id)
 		set_tile_block(tile)
 	astar.update()
 
@@ -71,6 +79,7 @@ func _move_character(cid:String,target:Vector2i):
 		set_tile_passable(start)
 		await character.step_path(path,tile_size,grid_map)
 		update_character_blocks()
+		update_interactable_blocks()
 	else:
 		#print("failed")
 		emit_signal("move_failed")
@@ -84,6 +93,7 @@ func _move_interactable(iid:String,target:Vector2i):
 	if is_point_interactable_reachable(iid,target):
 		set_tile_passable(start)
 		await interactable.move_path(path,tile_size,grid_map)
+		update_character_blocks()
 		update_interactable_blocks()
 	else:		
 		emit_signal("move_failed")

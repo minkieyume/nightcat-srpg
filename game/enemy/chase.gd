@@ -29,7 +29,6 @@ func _state_logic(handler:LevelHandler):
 	for target in prechose_target:
 		if self_pos.distance_to(target) < self_pos.distance_to(min_pos):
 			min_pos = target
-		
 
 	var action:Action = factory.create_action(agent.id,&"move")
 	action.set_target(min_pos)

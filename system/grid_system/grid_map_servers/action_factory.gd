@@ -20,6 +20,6 @@ func create_action(requester:String,id:StringName) -> Action:
 	action.requester = requester
 	action.level_handler = level_handler
 	action.resource = action_resource.duplicate(true)
-	action.action_range = action_resource.action_range
+	action.action_range = action_resource.action_range.duplicate(true)
 	action.logic = action_logic.new()
 	return action
