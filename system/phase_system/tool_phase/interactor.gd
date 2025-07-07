@@ -23,13 +23,14 @@ func _exit():
 		quit()
 
 func quit():
+	context.erase("actor")
 	context.erase("interactable")
 	context.erase("target")
 	interactable.finished.disconnect(_on_interactable_finished)
 	interactable = null
 
 func _on_interactable_finished():
-	pass
+	context["mode"] = "end_action"
 
 func _on_level_handler_command_send(command:StringName, args:Array) -> void:
 	if command == "setcargo":

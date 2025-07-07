@@ -24,6 +24,9 @@ var achieve_action:Action
 
 func _enter():
 	super()
+	if context.has("mode"):
+		if context["mode"] == "end_action":
+			return
 	if context.has("action"):
 		var action = context["action"]
 		if action is Action:			
@@ -47,7 +50,8 @@ func _exit():
 	elif !context.has("action_ctx"):
 		call_deferred("clean_action")
 	
-func clean_action():	
+func clean_action():
+	context["mode"] = "default"
 	context.erase("actor")
 	context.erase("target")
 	context.erase("action")

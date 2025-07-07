@@ -12,9 +12,10 @@ func interact(character:String,handler:LevelHandler,ctx:Dictionary):
 	await path_end
 	var quester = handler.get_grid_quester()
 	var pos = quester.quest_tile(position)
-	var damage_range = quester.quest_tiles_in_radius(pos,2)
-	var enemies = quester.quest_character_in_area(damage_range)
-	enemies = enemies.filter(func(e:Character):return e.is_in_group("enemy"))
-	for enemy in enemies:
-		enemy.apply_damage(1)
+	var damage_range = quester.quest_tiles_in_radius(pos,1)
+	if !damage_range.is_empty():
+		var enemies = quester.quest_character_in_area(damage_range)
+		enemies = enemies.filter(func(e:Character):return e.is_in_group("enemy"))
+		for enemy in enemies:
+			enemy.apply_damage(1)
 	emit_signal("finished")
