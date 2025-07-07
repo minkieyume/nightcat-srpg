@@ -9,9 +9,24 @@ var resource:ActionResource
 var action_range:ActionRange
 var logic:ActionLogic
 
-
 signal failed
 signal finished
+
+func before_target_chose() -> int:
+	if !is_instance_valid(logic):
+		return 0	
+	var result = await logic.before_target_chose(self)
+	if !result:
+		return 0	
+	return result
+
+func prerun() -> int:
+	if !is_instance_valid(logic):
+		return 0
+	var result = await logic.action_prerun(self)
+	if !result:		
+		return 0
+	return result
 
 func execute()  -> bool:
 	if is_instance_valid(action_range):
@@ -20,33 +35,33 @@ func execute()  -> bool:
 		if !is_target_valid(result):
 			emit_signal("failed")
 			return false
-	if !can_consume(requester):
+	if !can_consume():
 		emit_signal("failed")
 		return false
 	var action_result = await logic.execute(requester,target,level_handler)
 	if !action_result:
 		emit_signal("failed")
 		return false
-	coast_ap(requester)
+	coast_ap()
 	emit_signal("finished")
 	return true
 
 func set_target(t:Vector2i):
 	target = t
 
-func can_consume(requester:String) -> bool:
+func can_consume() -> bool:
 	var character = level_handler.get_character(requester)
 	var consume = resource.ap_cost
 	return character.can_consume_ap(consume)
 
-func coast_ap(requester:String):
+func coast_ap():
 	var character = level_handler.get_character(requester)
 	var consume = resource.ap_cost
 	character.consume_ap(consume)
 
 ## 计算允许互动的绝对坐标。
 func clac_action_range() -> Array[Vector2i]:
-	var origin = level_handler.get_character_position(requester)	
+	var origin = level_handler.get_character_position(requester)
 
 	var result:Array[Vector2i] = []
 	match action_range.type:

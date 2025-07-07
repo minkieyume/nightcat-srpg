@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://cuufinm12057a"]
 
-[ext_resource type="Script" uid="uid://1hic4fic3pr4" path="res://game/actions/action_logics/interact_action.gd" id="1_77jaw"]
+[ext_resource type="Script" uid="uid://5cp6n7kqsogh" path="res://game/actions/action_logics/machine_interact_action.gd" id="1_77jaw"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="2_jkeym"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="3_bdk42"]
 

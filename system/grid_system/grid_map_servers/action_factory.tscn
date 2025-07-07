@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dxrbu0r200l8m"]
 
-[ext_resource type="Script" uid="uid://cskj07j14eiqg" path="res://system/grid_system/grid_map_servers/action_server.gd" id="1_1mkfo"]
+[ext_resource type="Script" uid="uid://cskj07j14eiqg" path="res://system/grid_system/grid_map_servers/action_factory.gd" id="1_1mkfo"]
 
 [node name="ActionFactory" type="Node"]
 script = ExtResource("1_1mkfo")

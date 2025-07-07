@@ -51,7 +51,6 @@ position = Vector2(48, 0)
 
 [node name="Machine" parent="Interactables" instance=ExtResource("6_360cf")]
 position = Vector2(144, 144)
-id = "machine1"
 
 [node name="Characters" type="Node2D" parent="."]
 

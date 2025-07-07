@@ -6,6 +6,10 @@ func execute(character:String,target:Vector2i,handler:LevelHandler) -> bool:
 	if ikey != "":
 		var interactable = handler.get_interactable(ikey)
 		if interactable.is_in_group("machine"):
-			await interactable.interact(character,handler)
+			handler.send_command("setcargo",["interactable",interactable.id])
+			handler.send_command("setcargo",["mode","before_interact"])
+			handler.send_command("menu",["interact"])
+			await interactable.finished
+			handler.send_command("menu",["finished"])
 			return true
 	return false

@@ -94,5 +94,5 @@ func send_command(command:StringName,args:Array):
 func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	if movement_server:
 		var length = movement_server.get_path_length(start, target)
-		return max(length, 0)		
+		return max(length, 0)
 	return 1

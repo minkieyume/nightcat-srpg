@@ -4,6 +4,7 @@ extends MenuPhase
 ## 转换表：
 ## &"character_chose" -> action_choser
 ## &"action_target_chose" -> action_achiever
+## &"interactable_target_chose" -> interactor
 ## 
 ## 上下文：
 ## target:Vector2i 选中的目标，通常是一个坐标。
@@ -25,10 +26,11 @@ func _setup() -> void:
 func _enter() -> void:
 	super()
 	grid_drawer.show_highlight = true
+	#print(context)
 	if context["target_chose_event"] == "action_target_chose":
 		if context.has("action_limit"):
 			grid_drawer.limit_array = context["action_limit"]
-			grid_drawer.show_limit = true		
+			grid_drawer.show_limit = true
 			limit_mode = true
 	
 
@@ -40,9 +42,10 @@ func _exit() -> void:
 		grid_drawer.show_limit = false
 
 func _chose() -> bool:
+	#print(context)
 	context["target"] = get_chosed_target()
 	context.erase("action_limit")
-	dispatch(context["target_chose_event"])	
+	dispatch(context["target_chose_event"])
 	return true
 
 func update_target_position(new_pos:Vector2i):

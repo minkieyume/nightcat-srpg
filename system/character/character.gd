@@ -197,6 +197,10 @@ func consume_ap(cost: int) -> bool:
 		return true
 	return false
 
+# HP相关
+func apply_damage(damage:int):
+	operate_attribute("hp",damage,4)
+
 # 状态相关
 #func set_state(new_state: String, turns: int = 0) -> void:
 #	state = new_state

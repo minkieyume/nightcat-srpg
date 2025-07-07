@@ -49,13 +49,14 @@ func is_master_own_character():
 func _create_action():
 	var action:Action = action_factory.create_action(context["actor"], context["chosed_action"])
 	context["action"] = action
+	await action.before_target_chose()	
 	var action_range = action.clac_action_range()
 	context["action_limit"] = action_range
 
 func _on_action_chosed() -> bool:
 	context.erase("target")
 	context.erase("action_list")
-	_create_action()
+	await _create_action()
 	context["target_chose_event"] = &"action_target_chose"	
 	dispatch("chose_action_target")
 	return true
