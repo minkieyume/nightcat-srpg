@@ -6,12 +6,14 @@ func before_action():
 	# if sc.is_empty():
 	# 	dispatch("lost_enemy")
 
-func get_next_action():
-	print("debug")
+func get_next_action():	
+	var ap = agent.get_ap()
+	if ap <= 0:
+		return null
 	var move_action = await get_move_near_character_action()
 	return move_action
 
-	#var ap = agent.get_ap()
+	
 	#var ap_cost = move_action.get_ap_coast()
 	#ap = ap - ap_cost
 	#if ap <= 0:
@@ -32,8 +34,6 @@ func get_next_action():
 	# 			await action.before_target_chose()
 	#			
 	#return action_array
-	
-	
 
 ## 获取移动到角色附近的动作
 func get_move_near_character_action() -> Action:
