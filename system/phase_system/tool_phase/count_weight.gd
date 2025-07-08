@@ -5,7 +5,6 @@ func _setup() -> void:
 
 func _enter() -> void:
 	super()
-	print("计算权重")
 	var characters:Array = LevelHandler.get_characters().filter(func(c):return c.part == context["part"])
 	characters.sort_custom(sort_character)
 	context["units"] = characters

@@ -2,7 +2,6 @@ extends Phase
 
 func _enter() -> void:
 	super()
-	print("下个行动")
 	var unit:Unit = context["actor"]
 	if unit.is_in_group("ai"):
 		var action = await unit.ai.get_next_action()

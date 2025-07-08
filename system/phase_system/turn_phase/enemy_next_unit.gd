@@ -9,7 +9,6 @@ func _setup() -> void:
 	parts = enemy_parts.duplicate()
 
 func _enter() -> void:
-	print("下个派系")
 	super()
 	if !parts.is_empty():
 		context["part"] = parts.pop_front()

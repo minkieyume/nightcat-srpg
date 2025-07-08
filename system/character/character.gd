@@ -106,12 +106,17 @@ func update_sight_units():
 		else:
 			in_sight_units.erase(unit)
 
-## 更新视野范围高亮数组
-func update_sight_view():
+## 显示视野范围高亮范围
+func show_sight_view():
 	var grid_drawer = LevelHandler.get_grid_drawer()
 	var quester = LevelHandler.get_grid_quester()
 	var sights_array = sight_radius.get_tiles_in_sector(quester)
 	grid_drawer.update_sight_dict(id,sights_array)
+
+## 隐藏视野高亮范围
+func hide_sight_view():
+	var grid_drawer = LevelHandler.get_grid_drawer()
+	grid_drawer.clean_sight_dict(id)
 
 # 角色行动
 func get_action_list() -> Dictionary:

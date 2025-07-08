@@ -1,15 +1,14 @@
 extends StateAIState
 
 func before_action():
-	agent.update_sight_character()
-	#	var sc:Array = agent.in_sight_characters
-	#	if sc.is_empty():
-	#		dispatch("lost_enemy")
+	agent.update_sight_units()
+	# var sc:Array = agent.in_sight_characters
+	# if sc.is_empty():
+	# 	dispatch("lost_enemy")
 
 func get_next_action():
-	var action_array = []
+	print("debug")
 	var move_action = await get_move_near_character_action()
-	action_array.append(move_action)
 	return move_action
 
 	#var ap = agent.get_ap()
