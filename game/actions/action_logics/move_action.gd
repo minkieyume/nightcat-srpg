@@ -1,11 +1,5 @@
 extends ActionLogic
 
-## 接收到移动结束的信号
-signal recieved_end
-
-## 移动结果
-var move_result = false
-
 func before_target_chose(action:Action) -> bool:	
 	var quester = LevelHandler.get_grid_quester()		
 
@@ -31,26 +25,11 @@ func before_run(action:Action) -> bool:
 
 func execute(action:Action) -> bool:
 	var character = action.requester
-	var target = action.target
-	var agent = LevelHandler.get_character(character)
+	var target = action.target	
 	var server = LevelHandler.get_movement_server()
-	server.move_failed.connect(_on_move_failed)
-	agent.path_end.connect(_on_path_end)
-	
-	# 发送移动命令
-	CommandBus.send_command("move_unit", [character, target])
-	await recieved_end
-	server.move_failed.disconnect(_on_move_failed)
-	agent.path_end.disconnect(_on_path_end)
-	return move_result
 
-func _on_path_end():
-	move_result = true
-	call_deferred("emit_signal","recieved_end")
-
-func _on_move_failed():	
-	move_result = false
-	call_deferred("emit_signal","recieved_end")
+	var result = await server.move_unit(character,target)
+	return result
 
 #func execute(character:Character,grid_map:TileMapLayer,\
 #	target:Vector2i) -> bool:

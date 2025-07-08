@@ -32,7 +32,9 @@ signal direction_changed(direct:Vector2i)
 signal path_end
 
 func _ready() -> void:
+	await LevelHandler.level_ready
 	_init_animation_machine()
+	var movement = LevelHandler.get_movement_server()
 
 func _init_animation_machine() -> void:
 	animation_machine.add_transition(idle_state, move_state,"move_start")
@@ -71,7 +73,7 @@ func change_direction(dir:Vector2i) -> bool:
 			direction = dir
 			return true
 		_:
-			return false	
+			return false
 
 func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
 	# 沿着path批量移动

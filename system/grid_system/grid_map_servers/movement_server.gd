@@ -5,8 +5,6 @@ extends GridMapServer
 var piercing_astar:AStarGrid2D
 var astar:AStarGrid2D
 
-signal move_failed
-
 func _ready() -> void:
 	super()
 	await LevelHandler.level_ready
@@ -72,17 +70,18 @@ func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	return max(path.size() - 1, 0)
 
 ## 移动单位
-func _move_unit(cid:String,target:Vector2i):	
+func move_unit(cid:String,target:Vector2i) -> bool:
 	var unit = LevelHandler.get_unit(cid)
-	var start = grid_map.local_to_map(unit.position)
-	var path = get_move_path(start,target)
+	var start = grid_map.local_to_map(unit.position)	
 	if is_point_reachable(cid,target):
+		var path = get_move_path(start,target)
 		set_tile_passable(start)
-		await unit.step_path(path,tile_size,grid_map)		
+		await unit.step_path(path,tile_size,grid_map)
 	else:		
-		emit_signal("move_failed")
+		return false
 	remove_unit_blocks()
 	add_unit_blocks()
+	return true
 
 ## 获取移动的路径
 func get_move_path(start:Vector2i,end:Vector2i) -> Array:
@@ -93,8 +92,8 @@ func is_point_reachable(cid:String,target:Vector2i) -> bool:
 	var start = LevelHandler.get_unit_position(cid)
 	var path = get_move_path(start,target)
 	if astar.is_point_solid(target):
-		return false	
-	if path.size() < 0:
+		return false
+	if path.size() <= 0:
 		return false
 	return true
 
@@ -103,4 +102,4 @@ func is_point_reachable(cid:String,target:Vector2i) -> bool:
 ## 接收移动角色指令。
 func _on_command_recieved(command:StringName,args:Array):
 	if command == "move_unit":
-		_move_unit(args[0],args[1])
+		move_unit(args[0],args[1])

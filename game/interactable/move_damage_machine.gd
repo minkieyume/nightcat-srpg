@@ -9,8 +9,12 @@ func before_interact(_character:String,_ctx:Dictionary):
 func interact(_character:String,ctx:Dictionary):
 	CommandBus.send_command("gamephase",["wait"])
 	var target:Vector2i = ctx["target"]	
-	CommandBus.send_command("move_unit",[id,target])
-	await path_end
+	var movement = LevelHandler.get_movement_server()
+	var move_result = await movement.move_unit(id,target)	
+	if !move_result:
+		CommandBus.send_command("gamephase",["interact_failed"])
+		call_deferred("end")
+		return
 	var quester = LevelHandler.get_grid_quester()
 	var pos = quester.quest_tile(position)
 	var damage_range = quester.quest_tiles_in_radius(pos,1)
@@ -22,4 +26,3 @@ func interact(_character:String,ctx:Dictionary):
 	CommandBus.send_command("gamephase",["setcargo","mode","end_interact"])
 	CommandBus.send_command("gamephase",["interact_sucess"])
 	call_deferred("end")
-	

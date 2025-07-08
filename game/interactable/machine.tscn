@@ -6,3 +6,6 @@
 [node name="Machine" groups=["machine"] instance=ExtResource("1_eo2us")]
 script = ExtResource("2_o8w1y")
 id = "machine1"
+
+[connection signal="move_failed" from="." to="." method="_on_move_failed"]
+[connection signal="path_end" from="." to="." method="_on_path_end"]

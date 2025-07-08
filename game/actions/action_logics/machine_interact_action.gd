@@ -10,7 +10,7 @@ func execute(action:Action) -> bool:
 		CommandBus.send_command("gamephase",["setcargo","interactable",unit.id])
 		CommandBus.send_command("gamephase",["setcargo","mode","before_interact"])
 		CommandBus.send_command("gamephase",["interact"])
-		await unit.interact_end		
+		await unit.interact_end
 		return true
 	else:
 		return false

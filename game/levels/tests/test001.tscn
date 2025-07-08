@@ -90,3 +90,7 @@ metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(192, 144)
+
+[connection signal="path_end" from="Characters/Kiko" to="Characters/Kiko" method="_on_path_end"]
+[connection signal="path_end" from="Characters/Yumi" to="Characters/Yumi" method="_on_path_end"]
+[connection signal="path_end" from="Characters/Enemy001" to="Characters/Enemy001" method="_on_path_end"]
