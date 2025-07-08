@@ -41,27 +41,31 @@ func before_run() -> bool:
 		CommandBus.send_command("gamephase",["action_failed"])
 		return false
 
+func end_action(sucess:bool=false) -> void:
+	CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
+	if sucess:
+		CommandBus.send_command("gamephase",["action_sucess"])
+	else:
+		print("[Action] 行动执行失败")
+		CommandBus.send_command("gamephase",["action_failed"])
+
 func execute()  -> bool:
 	CommandBus.send_command("gamephase",["wait"])
 	if is_instance_valid(action_range):
-#		print("[Action]",requester)
-		CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
+#		print("[Action]",requester)		
 		var result = clac_action_range()
 		if !is_target_valid(result):
-			print("[Action] 行动执行失败")
-			CommandBus.send_command("gamephase",["action_failed"])
+			end_action()
 			return false
 	if !can_consume():
-		print("[Action] 行动执行失败")
-		CommandBus.send_command("gamephase",["action_failed"])
+		end_action()
 		return false
 	var action_result = await logic.execute(self)
 	if !action_result:
-		print("[Action] 行动执行失败")
-		CommandBus.send_command("gamephase",["action_failed"])
+		end_action()
 		return false
 	coast_ap()
-	CommandBus.send_command("gamephase",["action_sucess"])
+	end_action(true)
 	return true
 
 func set_target(t:Vector2i):

@@ -27,5 +27,5 @@ allowed_target = {
 "Player": true,
 "Tile": true
 }
-ap_cost = 1
+ap_cost = 0
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"

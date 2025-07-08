@@ -93,17 +93,18 @@ func has_line_of_sight(origin: Vector2i, target: Vector2i) -> bool:
 func quest_character_in_area(area: Array) -> Array:
 	var result = []
 	for character in LevelHandler.get_characters():
-		var c_pos = LevelHandler.get_character_position(character.id)
+		var c_pos = LevelHandler.get_unit_position(character.id)
 		if c_pos in area:
 			result.append(character)
 	return result
 
-# 获取区域内所有物件/机关
-func get_interactable_in_area(area: Array) -> Array:
+# 获取区域内所有单位，按指定filter过滤
+func get_unit_in_area(area: Array,filter:Callable=func(u:Unit):return u.is_in_group("interactable")) \
+	-> Array:
 	var result = []
 	var units = LevelHandler.get_units()
-	for interactable in units.filter(func(u:Unit):return u.is_in_group("interactable")):
-		var c_pos = LevelHandler.get_interactable_position(interactable)
+	for unit in units.filter(filter):
+		var c_pos = LevelHandler.get_interactable_position(unit)
 		if c_pos in area:
-			result.append(interactable)
+			result.append(unit)
 	return result

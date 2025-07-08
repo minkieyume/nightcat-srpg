@@ -45,7 +45,8 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 script = ExtResource("12_cegan")
 transition = {
 &"action_target_chose": NodePath("../TurnEnd"),
-&"character_chose": NodePath("../ActionChoser")
+&"character_chose": NodePath("../ActionChoser"),
+&"interactable_target_chose": NodePath("../TurnEnd")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 metadata/_edit_group_ = true

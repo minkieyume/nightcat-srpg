@@ -11,13 +11,12 @@ func end():
 
 ## 互动前的操作 
 func before_interact(_character:String,_ctx:Dictionary):
-	print(_character)
+	CommandBus.send_command("gamephase",["wait"])
 	CommandBus.send_command("gamephase",["setcargo","mode","interact"])
-	CommandBus.send_command("gamephase",["interact_sucess"])	
+	CommandBus.send_command("gamephase",["interact_sucess"])
 
 ## 与物体互动
 func interact(_character:String,_ctx:Dictionary):
-	print(_character)
 	CommandBus.send_command("gamephase",["setcargo","mode","end_interact"])
 	CommandBus.send_command("gamephase",["interact_sucess"])
 	call_deferred("end")

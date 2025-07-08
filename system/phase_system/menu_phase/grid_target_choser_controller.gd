@@ -37,18 +37,33 @@ func _exit() -> void:
 	if limit_mode:
 		limit_mode = false
 		grid_drawer.show_limit = false
+	
 
 func _chose() -> bool:
-	#print(context)
-	context["target"] = get_chosed_target()
+	var target = get_chosed_target()
+	context["target"] = target
 	match context["mode"]:
 		"chose_character":
+			if !is_chosed_actor_vaild(target):
+				print("[GridChoser] 选中目标不是角色，请重新选择")
+				return true
 			dispatch("character_chose")
 		"chose_action_target":
 			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])
 			CommandBus.send_command("gamephase",["setcargo","target",context["target"]])
+			context.erase("target")
+			CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
 			dispatch("action_target_chose")
+		"chose_interactable_target":
+			CommandBus.send_command("gamephase",["setcargo","target",context["target"]])
+			CommandBus.send_command("gamephase",["interact_sucess"])
+			context.erase("target")
+			dispatch("interactable_target_chose")
 	return true
+
+func is_chosed_actor_vaild(target:Vector2i) -> bool:
+	var quester = LevelHandler.get_grid_quester()
+	return quester.quest_character(target) != ""
 
 func update_target_position(new_pos:Vector2i):
 	grid_drawer.highlight = new_pos
@@ -58,11 +73,14 @@ func get_chosed_target() -> Vector2i:
 
 func _return() -> bool:
 	match context["mode"]:
+		"chose_interactable_target":
+			context["mode"] = "chose_character"
+			CommandBus.send_command("gamephase",["interact_failed"])
 		"chose_action_target":
 			context["mode"] = "chose_character"
 			context.erase("actor")
 			context.erase("action_limit")
-			context.erase("action")		
+			context.erase("action")
 	limit_mode = false
 	grid_drawer.show_limit = false
 	return true

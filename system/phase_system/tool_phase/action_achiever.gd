@@ -21,7 +21,7 @@ target_chose_event:StringName TargetChoser选中后触发的事件，决定接�
 # 	add_event_handler("precheck_continue",_handle_precheck_continue)
 
 func _enter():
-	super()
+	super()	
 	match context["mode"]:
 		"before_action":
 			var action = context["action"]

@@ -16,8 +16,9 @@
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_i8eqi"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_2fenr"]
 operation = SubResource("AttributeOperation_u646v")
+resource_local_to_scene = true
 script = ExtResource("11_uenbh")
 max_health = 5.0
 health = 5.0
@@ -25,8 +26,9 @@ metadata/_custom_type_script = "uid://w8k7keh2oex5"
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_1ct06"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_3bn13"]
 operation = SubResource("AttributeOperation_cr7lv")
+resource_local_to_scene = true
 script = ExtResource("12_ptgd0")
 max_ap = 10.0
 ap = 10.0
@@ -76,13 +78,13 @@ position = Vector2(144, 144)
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Kiko" parent="Characters" groups=["character", "player"] instance=ExtResource("6_s27i0")]
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_2fenr"), SubResource("AttributeBuff_3bn13")])
 part = "player"
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Yumi" parent="Characters" groups=["character", "player"] instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_2fenr"), SubResource("AttributeBuff_3bn13")])
 part = "player"
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 

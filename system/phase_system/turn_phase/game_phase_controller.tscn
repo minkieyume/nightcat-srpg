@@ -74,6 +74,7 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 [node name="PlayerChoseAction" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("8_hvc3f")
 transition = {
+&"menu_hide": NodePath("../PlayerAchieveAction"),
 &"next": NodePath("../PlayerAchieveAction")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"

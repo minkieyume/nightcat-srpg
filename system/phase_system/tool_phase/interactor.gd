@@ -1,7 +1,7 @@
 extends Phase
 
 func _enter():
-	super()	
+	super()
 	var iid = context["interactable"]
 	var interactable = LevelHandler.get_unit(iid)
 	if !interactable.is_in_group("interactable"):
@@ -11,11 +11,10 @@ func _enter():
 	match context["mode"]:
 		"before_interact":
 			interactable.before_interact(context["actor"],context.duplicate())
-			call_deferred("dispatch","wait")
 		"interact":
 			interactable.interact(context["actor"],context.duplicate())
-			call_deferred("dispatch","wait")
 		"end_interact":
+			CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
 			call_deferred("dispatch","next")
 
 func _exit():
@@ -27,9 +26,6 @@ func quit():
 	context.erase("actor")
 	context.erase("interactable")
 	context.erase("target")
-
-func _on_interactable_finished():
-	context["mode"] = "end_action"
 
 # func _on_handler_command_send(command:StringName, args:Array) -> void:
 # 	if command == "setcargo":
