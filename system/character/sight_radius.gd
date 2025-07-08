@@ -27,11 +27,11 @@ func is_in_radius(target:Vector2) -> bool:
 	var start_angle = -half_angle  # 扇形起始角度
 	var end_angle = half_angle    # 扇形结束角度
 
-    # 如果目标点角度在扇形的角度范围内，返回 true
+	# 如果目标点角度在扇形的角度范围内，返回 true
 	if rotated_angle_deg >= start_angle and rotated_angle_deg <= end_angle:
 		return true
-    
-    # 否则，返回 false
+	
+	# 否则，返回 false
 	return false
 
 ## 基于图块中心点判断图块是否在扇形内
@@ -48,4 +48,3 @@ func get_tiles_in_sector(quester:GridQuester) -> Array:
 		if is_tile_in_radius(tile,quester):
 			results.append(tile)
 	return results
-

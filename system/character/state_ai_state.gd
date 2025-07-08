@@ -1,8 +1,8 @@
 class_name StateAIState
 extends LimboState
 
-func _state_logic():
-	pass
+func get_next_action():
+	return null
 
-func _transition_precheck():
+func before_action():
 	pass

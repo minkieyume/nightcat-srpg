@@ -49,8 +49,8 @@ func _chose() -> bool:
 				return true
 			dispatch("character_chose")
 		"chose_action_target":
-			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])
-			CommandBus.send_command("gamephase",["setcargo","target",context["target"]])
+			context["action"].set_target(context["target"])
+			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])			
 			context.erase("target")
 			CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
 			dispatch("action_target_chose")

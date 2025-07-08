@@ -14,6 +14,16 @@ extends Resource
 	"Object":true  # 物件
 }
 @export var ap_cost: int = 1 # 行动消耗AP
+@export var tags:Array[String]
 #@export var cooldown: int = 0 # 行动冷却回合数
 #@export var icon: Texture2D # 行动图标（可选）
 #@export var effect_fx: PackedScene # 行动特效（可选）
+
+func has_tag(tag:String) -> bool:
+	return tag in tags
+
+func any_tags(atags:Array) -> bool:
+	return atags.any(func(t:String):return has_tag(t))
+
+func all_tags(atags:Array) -> bool:
+	return atags.all(func(t:String):return has_tag(t))

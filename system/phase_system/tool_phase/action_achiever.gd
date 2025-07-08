@@ -24,8 +24,7 @@ func _enter():
 	super()	
 	match context["mode"]:
 		"before_action":
-			var action = context["action"]
-			action.set_target(context["target"])
+			var action = context["action"]			
 			action.set_ctx(context)
 			action.before_run()
 		"start_action":

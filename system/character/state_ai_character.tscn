@@ -31,6 +31,7 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [sub_resource type="Resource" id="Range"]
@@ -56,8 +57,9 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
+tags = Array[String]([])
 
-[node name="StateAiCharacter" instance=ExtResource("1_2q30y")]
+[node name="StateAiCharacter" groups=["ai"] instance=ExtResource("1_2q30y")]
 script = ExtResource("2_ctogx")
 
 [node name="ActionManager" parent="." index="6"]

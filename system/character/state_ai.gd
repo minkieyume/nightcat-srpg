@@ -5,9 +5,14 @@ extends LimboHSM
 func _init_ai():
 	pass
 
-func run_current_state(): # 运行当前状态的逻辑
+func before_action():
+	pass
+
+func get_next_action():
 	var state = get_active_state()
-	if state is StateAIState:
-		state._transition_precheck()
-		state = get_active_state()
-		state._state_logic()
+	if state is StateAIState or state is StateAI:
+		await state.before_action()
+		var action = await state.get_next_action()
+		return action
+	else:
+		return null

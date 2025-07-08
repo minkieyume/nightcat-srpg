@@ -71,6 +71,9 @@ func execute()  -> bool:
 func set_target(t:Vector2i):
 	target = t
 
+func get_ap_coast() -> int:
+	return resource.ap_cost
+
 func can_consume() -> bool:
 	var character = LevelHandler.get_character(requester)
 	var consume = resource.ap_cost

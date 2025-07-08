@@ -31,10 +31,10 @@ naming/script_name_casing=2
 
 [global_group]
 
-ai_character=""
 id=""
 enemy=""
 player=""
+ai=""
 
 [input]
 

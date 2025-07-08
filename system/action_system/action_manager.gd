@@ -16,6 +16,15 @@ func _ready() -> void:
 func get_action_resouce(id:StringName):
 	return action_list[id]
 
+func get_action_id_list(action_filter:Callable=func(_a):return true) -> Array:
+	var result = []
+	for id in action_list.keys():
+		var action = action_list[id]
+		if action_filter.call(action):
+			result.append(id)
+	return result
+
+
 # # 检查行动是否可用（AP和冷却）
 # func can_execute_action(id: StringName, actor) -> bool:
 # 	var action: ActionResource = get_action_resouce(id)

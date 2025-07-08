@@ -1,10 +1,9 @@
 extends ActionLogic
 
 # 夜猫嘲讽：引发半径3格敌人连锁反应，视目击等级变化
-func execute(action:Action) -> bool:
-	var grid_map = LevelHandler.get_grid_map()
+func execute(action:Action) -> bool:	
 	var enemies = LevelHandler.get_characters().filter(func(e:Unit):e.is_in_group("enemy"))
-	var center = LevelHandler.get_character_position(action.requester)
+	var center = LevelHandler.get_unit_position(action.requester)
 	for enemy in enemies:
 		# 临时方案，以后要为行动类资源添加范围性行动和目标选择性行动的区分。
 		var radius = 6

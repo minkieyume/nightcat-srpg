@@ -3,6 +3,8 @@ class_name Character
 # 与各个Server中介通信
 extends Unit
 
+@export var weight:int = 0
+
 ## 用于初始化修饰角色属性的值。
 @export var initalize_attribute_buffs:Array[AttributeBuffBase]
 
@@ -11,7 +13,7 @@ extends Unit
 @onready var attributes = $AttributeContainer
 @onready var character_info = $Character_info
 
-var in_sight_characters = []
+var in_sight_units = []
 
 # 角色状态管理
 #var state: String = "normal" # 角色当前状态，如 normal, stunned, confused 等
@@ -95,14 +97,14 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	await tween.finished
 	animation_machine.dispatch("move_stop")
 
-func update_sight_character():
-	var players = LevelHandler.get_characters().filter(func(c:Unit):return c.is_in_group("player"))
-	for player in players:
-		var pos = LevelHandler.get_character_position(player.id)		
+func update_sight_units():
+	var units = LevelHandler.get_units()
+	for unit in units:
+		var pos = LevelHandler.get_unit_position(unit.id)		
 		if sight_radius.is_tile_in_radius(pos,LevelHandler.get_grid_quester()):
-			in_sight_characters.append(player)
+			in_sight_units.append(unit)
 		else:
-			in_sight_characters.erase(player)
+			in_sight_units.erase(unit)
 
 ## 更新视野范围高亮数组
 func update_sight_view():
@@ -158,6 +160,9 @@ func update_character_info():
 # AP相关
 func get_ap() -> int:
 	return int(get_attribute("ap"))
+
+func get_max_ap() -> int:
+	return int(get_attribute("max_ap"))
 
 func set_ap(value: int) -> void:
 	operate_attribute("ap",value,5)

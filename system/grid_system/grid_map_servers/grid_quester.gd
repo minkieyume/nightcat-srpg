@@ -99,7 +99,7 @@ func quest_character_in_area(area: Array) -> Array:
 	return result
 
 # 获取区域内所有单位，按指定filter过滤
-func get_unit_in_area(area: Array,filter:Callable=func(u:Unit):return u.is_in_group("interactable")) \
+func get_unit_in_area(area: Array,filter:Callable=func(_u:Unit):return true) \
 	-> Array:
 	var result = []
 	var units = LevelHandler.get_units()
@@ -108,3 +108,16 @@ func get_unit_in_area(area: Array,filter:Callable=func(u:Unit):return u.is_in_gr
 		if c_pos in area:
 			result.append(unit)
 	return result
+
+func quest_unit_nearst_nearby_tile(origin:Vector2i,uid:String) -> Vector2i:	
+	var target_pos = LevelHandler.get_unit_position(uid)
+	var min_pos = target_pos
+	var min_dist = INF
+	for dir in [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT, Vector2i.UP]:
+		var pos = min_pos + dir
+		var dist = origin.distance_to(pos)
+		if dist < min_dist:
+			min_dist = dist
+			target_pos = pos
+	return target_pos
+

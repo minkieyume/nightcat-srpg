@@ -1,3 +1,4 @@
+class_name StateAICharacter
 extends Character
 
 @export var ai:StateAI

@@ -214,6 +214,7 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [sub_resource type="Resource" id="Range"]
@@ -239,9 +240,11 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
+tags = Array[String]([])
 
 [node name="Character" instance=ExtResource("1_kfso4")]
 script = ExtResource("2_1i7cy")
+weight = 0
 initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
 
 [node name="AnimationPlayer" parent="." index="2"]
@@ -251,12 +254,13 @@ libraries = {
 &"move": SubResource("AnimationLibrary_u646v")
 }
 
-[node name="SightRadius" type="Node2D" parent="." index="4"]
+[node name="SightRadius" type="Node2D" parent="." index="4" node_paths=PackedStringArray("base")]
 position = Vector2(24, 24)
 script = ExtResource("4_fvjva")
 radius = 288.0
 degress = 45.0
 rotation_deg = 90.0
+base = NodePath("..")
 metadata/_custom_type_script = "uid://bkddet74xapio"
 
 [node name="AttributeContainer" type="AttributeContainer" parent="." index="5"]

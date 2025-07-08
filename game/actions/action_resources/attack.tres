@@ -13,6 +13,8 @@ type = 1
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
 [resource]
+resource_local_to_scene = true
+resource_name = "攻击"
 script = ExtResource("1_6n0h0")
 id = &"attack"
 group = ""

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=20 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_pj3v8"]
@@ -27,6 +27,22 @@ metadata/_custom_type_script = "uid://w8k7keh2oex5"
 [sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
 
 [sub_resource type="AttributeBuff" id="AttributeBuff_3bn13"]
+operation = SubResource("AttributeOperation_cr7lv")
+resource_local_to_scene = true
+script = ExtResource("12_ptgd0")
+max_ap = 10.0
+ap = 10.0
+metadata/_custom_type_script = "uid://daouxidx122kl"
+
+[sub_resource type="AttributeBuff" id="AttributeBuff_uenbh"]
+operation = SubResource("AttributeOperation_u646v")
+resource_local_to_scene = true
+script = ExtResource("11_uenbh")
+max_health = 5.0
+health = 5.0
+metadata/_custom_type_script = "uid://w8k7keh2oex5"
+
+[sub_resource type="AttributeBuff" id="AttributeBuff_ptgd0"]
 operation = SubResource("AttributeOperation_cr7lv")
 resource_local_to_scene = true
 script = ExtResource("12_ptgd0")
@@ -84,13 +100,28 @@ metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Yumi" parent="Characters" groups=["character", "player"] instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_2fenr"), SubResource("AttributeBuff_3bn13")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_uenbh"), SubResource("AttributeBuff_ptgd0")])
 part = "player"
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(192, 144)
 
+[node name="Enemy002" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
+position = Vector2(336, 48)
+id = "enemy002"
+
+[node name="Enemy003" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
+position = Vector2(336, 288)
+id = "enemy003"
+
+[node name="Enemy004" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
+position = Vector2(48, 288)
+id = "enemy004"
+
 [connection signal="path_end" from="Characters/Kiko" to="Characters/Kiko" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Yumi" to="Characters/Yumi" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Enemy001" to="Characters/Enemy001" method="_on_path_end"]
+[connection signal="path_end" from="Characters/Enemy002" to="Characters/Enemy002" method="_on_path_end"]
+[connection signal="path_end" from="Characters/Enemy003" to="Characters/Enemy003" method="_on_path_end"]
+[connection signal="path_end" from="Characters/Enemy004" to="Characters/Enemy004" method="_on_path_end"]
