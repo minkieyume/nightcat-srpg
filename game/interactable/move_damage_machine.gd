@@ -1,14 +1,14 @@
 extends Interactable
 
-func before_interact(character:String,handler:LevelHandler):
-	handler.send_command("chose_target",[])
+func before_interact(_character:String,_ctx:Dictionary):
+	LevelHandler.send_command("chose_target",[])
 
-func interact(character:String,handler:LevelHandler,ctx:Dictionary):
+func interact(_character:String,ctx:Dictionary):
 	var target:Vector2i = ctx["target"]
-	var movement = handler.get_movement_server()	
+	var movement = LevelHandler.get_movement_server()	
 	movement._move_interactable(id,target)	
 	await path_end
-	var quester = handler.get_grid_quester()
+	var quester = LevelHandler.get_grid_quester()
 	var pos = quester.quest_tile(position)
 	var damage_range = quester.quest_tiles_in_radius(pos,1)
 	if !damage_range.is_empty():

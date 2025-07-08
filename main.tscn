@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=12 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
@@ -8,12 +8,9 @@
 [ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
 [ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/menu_phase/hide.gd" id="9_074og"]
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="10_yaehf"]
-[ext_resource type="Script" uid="uid://l6clbaryheso" path="res://system/phase_system/tool_phase/cargo_set_phase.gd" id="11_074og"]
 [ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/phase_system/menu_phase/grid_target_choser_controller.gd" id="12_cegan"]
 [ext_resource type="Script" uid="uid://dq1x3v8wi5fis" path="res://system/phase_system/menu_phase/action_choser_controller.gd" id="13_82xsv"]
-[ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="14_getpj"]
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="15_074og"]
-[ext_resource type="Script" uid="uid://d26vwm781f5u8" path="res://system/phase_system/tool_phase/interactor.gd" id="16_cegan"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_w48qg")
@@ -44,22 +41,11 @@ transition = {
 }
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
-[node name="CargoSetPhase" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
-script = ExtResource("11_074og")
-cargos = {
-"master": "player",
-"target_chose_event": &"character_chose"
-}
-transition = {
-&"next": NodePath("../GridTargetChoser")
-}
-
 [node name="GridTargetChoser" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
 script = ExtResource("12_cegan")
 transition = {
-&"action_target_chose": NodePath("../ActionAchiever"),
-&"character_chose": NodePath("../ActionChoser"),
-&"interactable_target_chose": NodePath("../Interactor")
+&"action_target_chose": NodePath("../TurnEnd"),
+&"character_chose": NodePath("../ActionChoser")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 metadata/_edit_group_ = true
@@ -68,33 +54,16 @@ metadata/_edit_group_ = true
 script = ExtResource("13_82xsv")
 transition = {
 &"back": NodePath("../GridTargetChoser"),
-&"chose_action_target": NodePath("../GridTargetChoser")
+&"chose": NodePath("../GridTargetChoser")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="ActionAchiever" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
-script = ExtResource("14_getpj")
-transition = {
-&"action_failed": NodePath("../GridTargetChoser"),
-&"action_finish": NodePath("../TurnEnd"),
-&"interact": NodePath("../Interactor"),
-&"precheck_failed": NodePath("../GridTargetChoser")
-}
-
-[node name="Interactor" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
-script = ExtResource("16_cegan")
-transition = {
-&"chose_target": NodePath("../GridTargetChoser"),
-&"finished": NodePath("../ActionAchiever")
-}
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-metadata/_edit_group_ = true
 
 [node name="TurnEnd" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu"]
 script = ExtResource("15_074og")
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("6_4c57u")]
+visible = false
 phase = NodePath("../MenuManager/ActionChoseMenu/GridTargetChoser")
 metadata/_edit_lock_ = true
 

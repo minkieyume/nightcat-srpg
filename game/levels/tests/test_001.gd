@@ -7,8 +7,7 @@ extends Level
 @onready var movement_server:MovementServer = $MovementServer
 @onready var objects = $Objects
 
-func _ready() -> void:
-	super()
+func _ready() -> void:	
 	var character_dict = pack_nodes_to_dict(characters)
 	var object_dict = pack_nodes_to_dict(objects)
 	unit_dict.merge(character_dict)

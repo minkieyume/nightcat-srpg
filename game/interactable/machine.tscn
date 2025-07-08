@@ -6,6 +6,3 @@
 [node name="Machine" groups=["machine"] instance=ExtResource("1_eo2us")]
 script = ExtResource("2_o8w1y")
 id = "machine1"
-
-[node name="Sprite2D" parent="." index="0"]
-frame = 9

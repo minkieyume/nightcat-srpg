@@ -1,17 +1,36 @@
-[gd_scene load_steps=13 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=18 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_pj3v8"]
 [ext_resource type="Script" uid="uid://d3rx3d0v7r4hn" path="res://system/grid_system/grid_map.gd" id="4_2fenr"]
 [ext_resource type="TileSet" uid="uid://bttholbcw6qe8" path="res://assets/resources/tilesets/color_tiles.tres" id="4_pj3v8"]
-[ext_resource type="PackedScene" uid="uid://ctrc3t2peuvw0" path="res://system/interactable_system/interactable.tscn" id="5_s0flc"]
 [ext_resource type="PackedScene" uid="uid://crf1v72tkw48u" path="res://game/interactable/machine.tscn" id="6_360cf"]
 [ext_resource type="PackedScene" uid="uid://dupnywu6oavso" path="res://game/player/kiko.tscn" id="6_s27i0"]
 [ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/enemy_001.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="7_s27i0"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="7_w2seq"]
+[ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="11_uenbh"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="11_w2seq"]
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="12_2fenr"]
+[ext_resource type="Script" uid="uid://daouxidx122kl" path="res://system/attribute/ap_initailize.gd" id="12_ptgd0"]
+
+[sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
+
+[sub_resource type="AttributeBuff" id="AttributeBuff_i8eqi"]
+operation = SubResource("AttributeOperation_u646v")
+script = ExtResource("11_uenbh")
+max_health = 5.0
+health = 5.0
+metadata/_custom_type_script = "uid://w8k7keh2oex5"
+
+[sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
+
+[sub_resource type="AttributeBuff" id="AttributeBuff_1ct06"]
+operation = SubResource("AttributeOperation_cr7lv")
+script = ExtResource("12_ptgd0")
+max_ap = 10.0
+ap = 10.0
+metadata/_custom_type_script = "uid://daouxidx122kl"
 
 [node name="Test001" type="Node2D"]
 script = ExtResource("1_s0flc")
@@ -51,21 +70,21 @@ show_sights = true
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Interactable" parent="Objects" instance=ExtResource("5_s0flc")]
-position = Vector2(48, 0)
-
-[node name="Machine" parent="Objects" instance=ExtResource("6_360cf")]
+[node name="Machine" parent="Objects" groups=["interactable"] instance=ExtResource("6_360cf")]
 position = Vector2(144, 144)
-move_speed = null
-precing = null
-preced_unit_groups = null
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="Kiko" parent="Characters" groups=["player"] instance=ExtResource("6_s27i0")]
+[node name="Kiko" parent="Characters" groups=["character", "player"] instance=ExtResource("6_s27i0")]
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
+part = "player"
+metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
-[node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("7_s27i0")]
+[node name="Yumi" parent="Characters" groups=["character", "player"] instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
+part = "player"
+metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(192, 144)

@@ -14,11 +14,11 @@ func _on_action_requested(action_manager:ActionManager,\
 ## 在当前关卡环境中创建新的行动并返回该行动。
 func create_action(requester:String,id:StringName) -> Action:
 #	print("[ActionFactory]",requester)
-	var action_resource:ActionResource = level_handler.get_character_action(requester,id)
+	var action_resource:ActionResource = LevelHandler.get_character_action(requester,id)
 	var action = Action.new()
 	var action_logic:GDScript = action_resource.action_logic
 	action.requester = requester
-	action.level_handler = level_handler
+	action.LevelHandler = LevelHandler
 	action.resource = action_resource.duplicate(true)
 	action.action_range = action_resource.action_range.duplicate(true)
 	action.logic = action_logic.new()

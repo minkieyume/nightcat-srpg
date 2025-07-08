@@ -7,7 +7,8 @@ var grid_map:TileMapLayer
 var tile_size:Vector2i
 
 func _ready() -> void:
-	LevelHandler.connect("command_send",_on_command_recieved)
+	CommandBus.connect("command_send",_on_command_recieved)
+	await LevelHandler.level_ready
 	grid_map = LevelHandler.get_grid_map()
 	tile_size = grid_map.tile_set.tile_size
 

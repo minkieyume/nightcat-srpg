@@ -2,7 +2,6 @@ class_name Phase
 extends LimboState
 
 var controller_name:String
-var level_handler:LevelHandler
 @export var transition:Dictionary[StringName,LimboState]
 var context:Dictionary:
 	set(c):
@@ -14,7 +13,11 @@ signal context_changed()
 signal context_updated(id,content)
 
 func _ready() -> void:
-	CommandBus.command_send.connect(_on_level_handler_command_send)
+	CommandBus.command_send.connect(_on_handler_command_send)
+	await LevelHandler.level_ready
+
+func _setup() -> void:
+	pass
 
 func _enter() -> void:
 	pass
@@ -35,7 +38,7 @@ func update_context(id,content):
 	context[id] = content
 	emit_signal("context_updated",id,content)
 
-func _on_level_handler_command_send(command:StringName, args:Array) -> void:
+func _on_handler_command_send(command:StringName, args:Array) -> void:
 	if command == controller_name:
 		match args[0]:
 			"setcargo":

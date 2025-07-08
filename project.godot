@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-LevelHandler="*res://global/autoload/level_handler.gd"
 CommandBus="*res://global/autoload/command_bus.gd"
+LevelHandler="*res://global/autoload/level_handler.gd"
 
 [display]
 

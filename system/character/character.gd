@@ -95,19 +95,19 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	await tween.finished
 	animation_machine.dispatch("move_stop")
 
-func update_sight_character(handler:LevelHandler):
-	var players = handler.get_player_list()
+func update_sight_character():
+	var players = LevelHandler.get_characters().filter(func(c:Unit):return c.is_in_group("player"))
 	for player in players:
-		var pos = handler.get_character_position(player.id)		
-		if sight_radius.is_tile_in_radius(pos,handler.get_grid_quester()):
+		var pos = LevelHandler.get_character_position(player.id)		
+		if sight_radius.is_tile_in_radius(pos,LevelHandler.get_grid_quester()):
 			in_sight_characters.append(player)
 		else:
 			in_sight_characters.erase(player)
 
 ## 更新视野范围高亮数组
-func update_sight_view(handler:LevelHandler):
-	var grid_drawer = handler.get_grid_drawer()
-	var quester = handler.get_grid_quester()
+func update_sight_view():
+	var grid_drawer = LevelHandler.get_grid_drawer()
+	var quester = LevelHandler.get_grid_quester()
 	var sights_array = sight_radius.get_tiles_in_sector(quester)
 	grid_drawer.update_sight_dict(id,sights_array)
 

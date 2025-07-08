@@ -8,10 +8,10 @@ chosed_action: ActionChoser选中的行动。
 """
 
 func _enter() -> void:
-	var owne:CharacterOwner = level_handler.get_character_owner(context["master"])
+	var owne:CharacterOwner = LevelHandler.get_character_owner(context["master"])
 	for cid in owne.handled_characters:
-		var character = level_handler.get_character(cid)
+		var character = LevelHandler.get_character(cid)
 		if character.is_in_group("ai_character"):
 			var ai:StateAI = character.ai
-			ai.run_current_state(level_handler)
+			ai.run_current_state(LevelHandler)
 	dispatch("next")

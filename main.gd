@@ -1,11 +1,12 @@
 extends Node
 
+@onready var level = $Test001
 @onready var game_phase_controller = $GamePhaseController
 @onready var menu_manager = $CanvasLayer/MenuManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("[Main] 启用 GamePhaseController")
+	LevelHandler.level_init(level)
 	game_phase_controller.start()
 	menu_manager.start()
 

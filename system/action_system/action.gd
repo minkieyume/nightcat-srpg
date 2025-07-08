@@ -7,68 +7,79 @@ var target:Vector2i
 var resource:ActionResource
 var action_range:ActionRange
 var logic:ActionLogic
-
-signal failed
-signal finished
-
-func before_target_chose() -> int:
-	if !is_instance_valid(logic):
-		return 0	
-	var result = await logic.before_target_chose(self)
-	if !result:
-		return 0	
-	return result
-
-func prerun() -> int:
-	if !is_instance_valid(logic):
-		return 0
-	var result = await logic.action_prerun(self)
-	if !result:		
-		return 0
-	return result
+var ctx:Dictionary
 
 func _init(r:String,id:StringName):
-	var action_resource:ActionResource = LevelHandler.get_character_action(requester,id)	
+	var action_resource:ActionResource = LevelHandler.get_character_action(r,id)
 	var action_logic:GDScript = action_resource.action_logic
-	requester = r	
+	requester = r
 	resource = action_resource.duplicate(true)
 	action_range = action_resource.action_range.duplicate(true)
 	logic = action_logic.new()
 
+func before_target_chose() -> bool:
+	if !is_instance_valid(logic):
+		return false
+	var result = await logic.before_target_chose(self)
+	if !result:
+		return false
+	return result
+
+func before_run() -> bool:	
+	CommandBus.send_command("gamephase",["wait"])
+	CommandBus.send_command("gamephase",["setcargo","mode","start_action"])
+	if !is_instance_valid(logic):
+		print("[Action] 行动执行失败")
+		CommandBus.send_command("gamephase",["action_failed"])
+		return false
+	var result = await logic.before_run(self)
+	if result:
+		CommandBus.send_command("gamephase",["action_sucess"])
+		return true
+	else:
+		print("[Action] 行动执行失败")
+		CommandBus.send_command("gamephase",["action_failed"])
+		return false
+
 func execute()  -> bool:
+	CommandBus.send_command("gamephase",["wait"])
 	if is_instance_valid(action_range):
 #		print("[Action]",requester)
+		CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
 		var result = clac_action_range()
 		if !is_target_valid(result):
-			emit_signal("failed")
+			print("[Action] 行动执行失败")
+			CommandBus.send_command("gamephase",["action_failed"])
 			return false
 	if !can_consume():
-		emit_signal("failed")
+		print("[Action] 行动执行失败")
+		CommandBus.send_command("gamephase",["action_failed"])
 		return false
-	var action_result = await logic.execute(requester,target)
+	var action_result = await logic.execute(self)
 	if !action_result:
-		emit_signal("failed")
+		print("[Action] 行动执行失败")
+		CommandBus.send_command("gamephase",["action_failed"])
 		return false
 	coast_ap()
-	emit_signal("finished")
+	CommandBus.send_command("gamephase",["action_sucess"])
 	return true
 
 func set_target(t:Vector2i):
 	target = t
 
 func can_consume() -> bool:
-	var character = level_handler.get_character(requester)
+	var character = LevelHandler.get_character(requester)
 	var consume = resource.ap_cost
 	return character.can_consume_ap(consume)
 
 func coast_ap():
-	var character = level_handler.get_character(requester)
+	var character = LevelHandler.get_character(requester)
 	var consume = resource.ap_cost
 	character.consume_ap(consume)
 
 ## 计算允许互动的绝对坐标。
 func clac_action_range() -> Array[Vector2i]:
-	var origin = level_handler.get_character_position(requester)
+	var origin = LevelHandler.get_unit_position(requester)
 
 	var result:Array[Vector2i] = []
 	match action_range.type:
@@ -124,3 +135,9 @@ func is_target_valid(result:Array[Vector2i]) -> bool:
 
 func change_target(t:Vector2i) -> void:
 	target = t
+
+func set_ctx(_ctx:Dictionary):
+	if ctx != null:
+		ctx.merge(_ctx)
+	else:
+		ctx = _ctx

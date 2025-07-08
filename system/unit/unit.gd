@@ -3,6 +3,7 @@ extends Node2D
 
 ## 单位的id，场景内的单位id不能重复。
 @export var id = "unit1"
+@export var part = "upart1"
 ## 移动速度。
 @export var move_speed = 192
 
@@ -17,8 +18,8 @@ extends Node2D
 
 #LimboHSM状态机插件
 @onready var animation_machine: LimboHSM = $AnimationMachine
-@onready var idle_state: LimboState = $LimboHSM/IdleState
-@onready var move_state: LimboState = $LimboHSM/MoveState
+@onready var idle_state: LimboState = $AnimationMachine/IdleState
+@onready var move_state: LimboState = $AnimationMachine/MoveState
 
 ## 单位的朝向
 var direction:Vector2i = Vector2i.DOWN:
@@ -50,8 +51,7 @@ func change_face(face:String) -> bool:
 		"up":
 			change_direction(Vector2i.UP)
 		_:
-			return false
-	emit_signal("sight_updated",id)
+			return false	
 	return true
 
 func change_direction(dir:Vector2i) -> bool:	

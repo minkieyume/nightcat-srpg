@@ -20,22 +20,19 @@ func _ready() -> void:
 	super()
 	add_event_handler("chose",_chose)
 
-func _setup() -> void:
-	grid_drawer = level_handler.get_grid_drawer()
-
 func _enter() -> void:
 	super()
+	grid_drawer = LevelHandler.get_grid_drawer()
 	grid_drawer.show_highlight = true
-	#print(context)
-	if context["target_chose_event"] == "action_target_chose":
-		if context.has("action_limit"):
-			grid_drawer.limit_array = context["action_limit"]
+	match context["mode"]:
+		"chose_action_target":
+			var limit_array = context["limit_array"]
+			grid_drawer.limit_array = limit_array
 			grid_drawer.show_limit = true
 			limit_mode = true
-	
 
 func _exit() -> void:
-	super()
+	super()	
 	grid_drawer.show_highlight = false
 	if limit_mode:
 		limit_mode = false
@@ -44,8 +41,13 @@ func _exit() -> void:
 func _chose() -> bool:
 	#print(context)
 	context["target"] = get_chosed_target()
-	context.erase("action_limit")
-	dispatch(context["target_chose_event"])
+	match context["mode"]:
+		"chose_character":
+			dispatch("character_chose")
+		"chose_action_target":
+			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])
+			CommandBus.send_command("gamephase",["setcargo","target",context["target"]])
+			dispatch("action_target_chose")
 	return true
 
 func update_target_position(new_pos:Vector2i):
@@ -55,13 +57,14 @@ func get_chosed_target() -> Vector2i:
 	return grid_drawer.highlight
 
 func _return() -> bool:
-	if context["target_chose_event"] == "action_target_chose":
-		context["target_chose_event"] = "character_chose"
-		context.erase("actor")
-		context.erase("action_limit")
-		context.erase("action")
-		limit_mode = false
-		grid_drawer.show_limit = false
+	match context["mode"]:
+		"chose_action_target":
+			context["mode"] = "chose_character"
+			context.erase("actor")
+			context.erase("action_limit")
+			context.erase("action")		
+	limit_mode = false
+	grid_drawer.show_limit = false
 	return true
 
 func _on_target_chosed():

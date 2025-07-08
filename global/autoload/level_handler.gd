@@ -56,7 +56,7 @@ func get_character_ids() -> Array[String]:
 		results.append(c)
 	return cs
 	
-func get_characters() -> Array[Character]:
+func get_characters() -> Array:
 	var units = get_units()
 	return units.filter(func(c):return c is Character)
 

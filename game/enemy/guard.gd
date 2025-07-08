@@ -1,5 +1,5 @@
 extends StateAIState
 
-func _state_logic(handler:LevelHandler):
+func _state_logic():
 	print("stop")
-	print(handler)
+	print(LevelHandler)

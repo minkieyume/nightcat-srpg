@@ -4,8 +4,7 @@ signal target_chosed
 signal target_canceled
 
 func _ready() -> void:
-	super()
-	grab_focus()
+	super()	
 	if phase is GridTargetChoserController:
 		target_chosed.connect(phase._on_target_chosed)
 		target_canceled.connect(phase._on_target_canceled)

@@ -4,9 +4,11 @@
 # meta-space-indent: 4
 extends ActionLogic
 
-func action_prerun(action:Action) -> int:
-	return 1
+func before_target_chose(action:Action) -> bool:
+	return true
 
-func execute(character:String,target:Vector2i,handler:LevelHandler) -> bool:
-	print(character.name,grid_map.tile_set.tile_size,target)
+func before_run(action:Action) -> bool:
+	return true
+
+func execute(action:Action) -> bool:
 	return true

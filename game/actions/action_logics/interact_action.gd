@@ -1,13 +1,14 @@
 extends ActionLogic
 
-func execute(character:String,target:Vector2i,handler:LevelHandler) -> bool:
-	var grid_quester = handler.get_grid_quester()
-	var ikey = grid_quester.quest_interactable(target)
+func execute(action:Action) -> bool:
+	var grid_quester = LevelHandler.get_grid_quester()
+	var ikey = grid_quester.quest_unit(action.target)
 	if ikey != "":
-		var interactable = handler.get_interactable(ikey)
-		handler.send_command("setcargo",["interactable",interactable.id])
-		await interactable.interact(character,handler,{})
-		handler.send_command("menu",["interact",interactable.id])
-		return true
-	else:
-		return false
+		var unit = LevelHandler.get_unit(ikey)
+		if unit.is_in_group("interactable"):
+			CommandBus.send_command("gamephase",["setcargo","interactable",unit.id])
+			CommandBus.send_command("gamephase",["setcargo","mode","before_interact"])
+			CommandBus.send_command("gamephase",["interact"])
+			await unit.interact_end
+			return true
+	return false

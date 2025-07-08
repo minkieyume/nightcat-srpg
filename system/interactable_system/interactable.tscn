@@ -1,14 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctrc3t2peuvw0"]
 
-[ext_resource type="Script" uid="uid://ir6eky6wn7ic" path="res://system/interactable_system/interactable.gd" id="1_p5mss"]
+[ext_resource type="PackedScene" uid="uid://chh2vk7ydqmob" path="res://system/unit/unit.tscn" id="1_d8m6m"]
 [ext_resource type="Texture2D" uid="uid://ttrgy3qt3sgy" path="res://assets/external_packs/character-pack-free_version/sprite/free_chests.png" id="2_p5mss"]
 
-[node name="Interactable" type="Node2D" groups=["interactable"]]
-script = ExtResource("1_p5mss")
+[node name="Interactable" instance=ExtResource("1_d8m6m")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(23, -3)
-scale = Vector2(3, 3)
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(23, -2)
 texture = ExtResource("2_p5mss")
 hframes = 12
 vframes = 8

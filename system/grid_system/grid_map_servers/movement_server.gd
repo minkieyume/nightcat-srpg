@@ -9,6 +9,7 @@ signal move_failed
 
 func _ready() -> void:
 	super()
+	await LevelHandler.level_ready
 	_init_astar()
 	_init_piercing_astar()
 	_set_tile_blocks()
@@ -78,8 +79,7 @@ func _move_unit(cid:String,target:Vector2i):
 	if is_point_reachable(cid,target):
 		set_tile_passable(start)
 		await unit.step_path(path,tile_size,grid_map)		
-	else:
-		#print("failed")
+	else:		
 		emit_signal("move_failed")
 	remove_unit_blocks()
 	add_unit_blocks()
@@ -102,5 +102,5 @@ func is_point_reachable(cid:String,target:Vector2i) -> bool:
 # Note:坐标从0开始算，而非从1开始算。
 ## 接收移动角色指令。
 func _on_command_recieved(command:StringName,args:Array):
-	if command == "move_character":
-		_move_character(args[0],args[1])
+	if command == "move_unit":
+		_move_unit(args[0],args[1])

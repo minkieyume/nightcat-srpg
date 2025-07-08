@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcp4wjouh8kwm"]
+[gd_scene load_steps=11 format=3 uid="uid://bcp4wjouh8kwm"]
 
 [ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://system/phase_system/turn_phase/game_phase_controller.gd" id="2_emkk0"]
 [ext_resource type="Script" uid="uid://b4mr702dv54vg" path="res://system/phase_system/turn_phase/turn_prompt.gd" id="3_5hgr7"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="4_d1ik7"]
 [ext_resource type="Script" uid="uid://75x78h8qhuj5" path="res://system/phase_system/turn_phase/restore_ap.gd" id="6_emkk0"]
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="7_dm2g6"]
+[ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="7_oej6j"]
 [ext_resource type="Script" uid="uid://dhnujo24mhtvc" path="res://system/phase_system/turn_phase/player_select.gd" id="8_hvc3f"]
+[ext_resource type="Script" uid="uid://d26vwm781f5u8" path="res://system/phase_system/tool_phase/interactor.gd" id="8_ndc68"]
 [ext_resource type="Script" uid="uid://qlg2af8eqjwg" path="res://system/phase_system/turn_phase/enemy_next_unit.gd" id="13_prach"]
 
 [node name="GamePhaseController" type="LimboHSM"]
@@ -31,24 +33,16 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="RestoreAP" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("6_emkk0")
 transition = {
-&"next": NodePath("../TurnEnd")
+&"next": NodePath("../PrepareTurnEndCheck")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="CooldownTick" type="LimboState" parent="PrepareTurn"]
-script = ExtResource("3_emkk0")
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="AdvanceAlertCountdown" type="LimboState" parent="PrepareTurn"]
-script = ExtResource("3_emkk0")
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="CleanupExpiredStatus" type="LimboState" parent="PrepareTurn"]
-script = ExtResource("3_emkk0")
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="PrepareTurnEndCheck" type="LimboState" parent="PrepareTurn"]
-script = ExtResource("3_emkk0")
+[node name="PrepareTurnEndCheck" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("3_5hgr7")
+prompt = "准备阶段结束"
+transition = {
+&"next": NodePath("../TurnEnd")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="TurnEnd" type="LimboState" parent="PrepareTurn"]
@@ -66,27 +60,50 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 script = ExtResource("3_5hgr7")
 prompt = "玩家阶段"
 transition = {
-&"next": NodePath("../PlayerPartTurn/PlayerWaitChose")
+&"next": NodePath("../PlayerPartTurn")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="PlayerPartTurn" type="LimboHSM" parent="PlayerTurn"]
+[node name="PlayerPartTurn" type="LimboHSM" parent="PlayerTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("4_d1ik7")
+transition = {
+&"turn_end": NodePath("TurnEnd")
+}
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
-[node name="PlayerWaitChose" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
+[node name="PlayerChoseAction" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("8_hvc3f")
 transition = {
-&"next": null
+&"next": NodePath("../PlayerAchieveAction")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="PlayerAchieveAction" type="LimboState" parent="PlayerTurn/PlayerPartTurn"]
-script = ExtResource("3_emkk0")
+[node name="PlayerAchieveAction" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("7_oej6j")
+transition = {
+&"next": NodePath("../PlayerChoseAction"),
+&"wait": NodePath("../PlayerAwaiter")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="PlayerInteract" type="LimboState" parent="PlayerTurn/PlayerPartTurn"]
+[node name="PlayerInteract" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("8_ndc68")
+transition = {
+&"failed": NodePath("../PlayerChoseAction"),
+&"next": NodePath("../PlayerAchieveAction"),
+&"wait": NodePath("../PlayerAwaiter")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerAwaiter" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("3_emkk0")
+transition = {
+&"action_failed": NodePath("../PlayerChoseAction"),
+&"action_sucess": NodePath("../PlayerAchieveAction"),
+&"interact": NodePath("../PlayerInteract"),
+&"interact_failed": NodePath("../PlayerChoseAction"),
+&"interact_sucess": NodePath("../PlayerInteract")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="TurnEnd" type="LimboState" parent="PlayerTurn/PlayerPartTurn"]
@@ -123,7 +140,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="EnemyNextPart" type="LimboState" parent="EnemyTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("13_prach")
 transition = {
-&"next": null
+&"next": NodePath("../TurnEnd")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 

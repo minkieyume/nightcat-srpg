@@ -11,8 +11,9 @@ var context:Dictionary:
 signal cargo_send(cargo:Dictionary)
 
 func _ready() -> void:
+	CommandBus.command_send.connect(_on_handler_command_send)
 	_init_state_machine()
-	CommandBus.command_send.connect(_on_level_handler_command_send)
+	await LevelHandler.level_ready
 	
 func _init_state_machine():	
 	for phase in get_children():
@@ -26,13 +27,14 @@ func _init_state_machine():
 		initialize(self)
 
 
-func _setup():
+func _setup():	
 	for phase in get_children():
 		if phase is Phase or phase is PhaseController:			
 			phase.controller_name = controller_name
 
 func _enter() -> void:
-	pass
+	var state = initial_state
+	state._on_cargo_recieve(context)
 
 func _exit() -> void:
 	emit_signal("cargo_send",context)
@@ -47,7 +49,7 @@ func start():
 func stop():
 	set_active(false)
 
-func _on_level_handler_command_send(command:StringName, args:Array) -> void:
+func _on_handler_command_send(command:StringName, args:Array) -> void:
 	if command == controller_name:
 		match args[0]:
 			"setcargo":
