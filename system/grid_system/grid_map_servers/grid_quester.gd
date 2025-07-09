@@ -42,7 +42,6 @@ func quest_passable_tiles() -> Array:
 func is_tile_passable(pos:Vector2i) -> bool:	
 	return grid_map.is_cell_passable(pos)
 
-
 ## 判断目标是否在圆形范围内
 func is_in_radius(origin: Vector2i, target: Vector2i, radius: int) -> bool:
 	return origin.distance_to(target) <= radius
@@ -57,29 +56,34 @@ func quest_tiles_in_radius(origin: Vector2i, radius: int) -> Array:
 				result.append(pos)
 	return result
 
-## 判断目标是否在扇形范围内
-func is_in_sector(origin: Vector2i, target: Vector2i, direction: Vector2i, angle: float, radius: int) -> bool:
-	if not is_in_radius(origin, target, radius):
-		return false
-	var dir_vec = target - origin
-	if dir_vec.length() == 0:
-		return true
-	dir_vec = dir_vec / dir_vec.length()
-	var main_dir = direction
-	if main_dir.length() == 0:
-		return false
-	main_dir = main_dir / main_dir.length()
-	var dot = dir_vec.dot(main_dir)
-	var theta = acos(dot)
-	return theta <= deg_to_rad(angle) * 0.5
+## 判断目标是否在扇形内
+func is_in_sector(origin:Vector2i,target:Vector2i,sector:TiledSector2D) -> bool:
+	if is_in_radius(origin,target,sector.radius):
+		var o = Vector2(origin)
+		var t = Vector2(target)
+		var facing = Vector2(sector.face).normalized()
+		var dir = (t - o).normalized()
+		var angle = rad_to_deg(facing.angle_to(dir))
+		return abs(angle) <= sector.angle / 2.0
+	return false
 
-## 获取扇形范围内所有格子
-func quest_tiles_in_sector(origin: Vector2i, direction: Vector2i, angle: float, radius: int) -> Array[Vector2i]:
-	var result = []
-	for pos in quest_tiles_in_radius(origin, radius):
-		if is_in_sector(origin, pos, direction, angle, radius):
-			result.append(pos)
-	return result
+## 获取扇形内的全部图块
+func quest_tiles_in_sector(origin:Vector2i,sector:TiledSector2D) -> Array:
+	var result = quest_tiles_in_radius(origin,sector.radius)
+	return result.filter(func(tile):return is_in_sector(origin,tile,sector))
+
+## 判断目标是否处于视野内
+func is_in_sight(origin:Vector2i,target:Vector2i,sector:TiledSector2D) -> bool:
+	if is_in_sector(origin,target,sector):
+		if has_line_of_sight(origin,target):
+			return true
+	return false
+
+## 获取视野内的全部图块
+func quest_tiles_in_sight(origin:Vector2i,sector:TiledSector2D) -> Array:
+	var result = quest_tiles_in_sector(origin,sector)
+	return result.filter(func(tile):return has_line_of_sight(origin,tile))
+
 
 # 判断两点间是否有视线遮挡
 func has_line_of_sight(origin: Vector2i, target: Vector2i) -> bool:
@@ -97,6 +101,12 @@ func quest_character_in_area(area: Array) -> Array:
 		if c_pos in area:
 			result.append(character)
 	return result
+
+func quest_block_tiles_in_area(area:Array) -> Array:
+	return area.filter(grid_map.is_cell_block)
+
+func quest_passable_tiles_in_area(area:Array) -> Array:
+	return area.filter(grid_map.is_cell_passable)
 
 # 获取区域内所有单位，按指定filter过滤
 func quest_unit_in_area(area: Array,filter:Callable=func(_u:Unit):return true) \

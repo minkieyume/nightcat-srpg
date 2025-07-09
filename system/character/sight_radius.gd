@@ -42,9 +42,10 @@ func is_tile_in_radius(tile:Vector2i,quester:GridQuester) -> bool:
 ## 获取视野范围内的全部图块
 func get_tiles_in_sector(quester:GridQuester) -> Array:
 	var results = []
-	var origin = quester.quest_tile(base.position+position)
+	var origin = quester.quest_tile(base.position)
 	var ranges = quester.quest_tiles_in_radius(origin,int(radius))
 	for tile in ranges:
 		if is_tile_in_radius(tile,quester):
 			results.append(tile)
 	return results
+	#return quester.quest_tiles_in_sector(origin,Vector2i.LEFT,degress,int(radius))

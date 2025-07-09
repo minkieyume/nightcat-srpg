@@ -8,8 +8,9 @@ extends Unit
 ## 用于初始化修饰角色属性的值。
 @export var initalize_attribute_buffs:Array[AttributeBuffBase]
 
+@export var sight_sector:TiledSector2D
+
 @onready var action_manager = $ActionManager
-@onready var sight_radius = $SightRadius
 @onready var attributes = $AttributeContainer
 @onready var character_info = $Character_info
 
@@ -23,10 +24,9 @@ signal sight_updated(id:String)
 signal ap_changed(new_ap)
 
 func _ready() -> void:
-	_init_state_machine()
+	await super()	
 	_init_attribute()
-	operate_attribute("ap",5,5)
-	
+	operate_attribute("ap",5,5)	
 
 func _init_attribute() -> void:
 	for buff in initalize_attribute_buffs:
@@ -55,22 +55,24 @@ func change_face(face:String) -> bool:
 	return true
 
 func change_direction(dir:Vector2i) -> bool:
-	var dir_angle = Vector2(dir).angle()
-	sight_radius.rotation_deg = rad_to_deg(dir_angle)	
 	if direction == dir:
 		return true
 	match dir:
 		Vector2i.DOWN:
 			direction = dir
+			sight_sector.face = dir
 			return true
 		Vector2i.LEFT:
 			direction = dir
+			sight_sector.face = dir
 			return true
 		Vector2i.RIGHT:
 			direction = dir
+			sight_sector.face = dir
 			return true
 		Vector2i.UP:
 			direction = dir
+			sight_sector.face = dir
 			return true
 		_:
 			return false	
@@ -99,9 +101,11 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 
 func update_sight_units():
 	var units = LevelHandler.get_units()
+	var quester = LevelHandler.get_grid_quester()
+	var origin = LevelHandler.get_unit_position(id)
 	for unit in units:
-		var pos = LevelHandler.get_unit_position(unit.id)		
-		if sight_radius.is_tile_in_radius(pos,LevelHandler.get_grid_quester()):
+		var pos = LevelHandler.get_unit_position(unit.id)
+		if quester.is_in_sight(origin,pos,sight_sector):
 			in_sight_units.append(unit)
 		else:
 			in_sight_units.erase(unit)
@@ -110,7 +114,9 @@ func update_sight_units():
 func show_sight_view():
 	var grid_drawer = LevelHandler.get_grid_drawer()
 	var quester = LevelHandler.get_grid_quester()
-	var sights_array = sight_radius.get_tiles_in_sector(quester)
+	var origin = LevelHandler.get_unit_position(id)
+	var sights_array = quester.quest_tiles_in_sight(origin,sight_sector)
+	print(sights_array)
 	grid_drawer.update_sight_dict(id,sights_array)
 
 ## 隐藏视野高亮范围

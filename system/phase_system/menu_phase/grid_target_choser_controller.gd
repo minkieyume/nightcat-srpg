@@ -30,6 +30,7 @@ func _enter() -> void:
 			grid_drawer.limit_array = limit_array
 			grid_drawer.show_limit = true
 			limit_mode = true
+	grid_drawer.update()
 
 func _exit() -> void:
 	super()	
@@ -37,6 +38,7 @@ func _exit() -> void:
 	if limit_mode:
 		limit_mode = false
 		grid_drawer.show_limit = false
+	grid_drawer.update()
 	
 
 func _chose() -> bool:
@@ -68,6 +70,7 @@ func is_chosed_actor_vaild(target:Vector2i) -> bool:
 
 func update_target_position(new_pos:Vector2i):
 	grid_drawer.highlight = new_pos
+	grid_drawer.update()
 
 func get_chosed_target() -> Vector2i:
 	return grid_drawer.highlight
@@ -83,6 +86,7 @@ func _return() -> bool:
 			context.erase("action")
 	limit_mode = false
 	grid_drawer.show_limit = false
+	grid_drawer.update()
 	return true
 
 func _on_target_chosed():

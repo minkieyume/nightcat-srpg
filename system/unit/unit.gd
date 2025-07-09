@@ -35,8 +35,7 @@ signal path_end
 
 func _ready() -> void:
 	await LevelHandler.level_ready
-	_init_animation_machine()
-	var movement = LevelHandler.get_movement_server()
+	_init_animation_machine()	
 
 func _init_animation_machine() -> void:
 	animation_machine.add_transition(idle_state, move_state,"move_start")

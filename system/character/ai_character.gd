@@ -4,6 +4,6 @@ extends Character
 @export var ai:AIPhaseController
 
 func _ready() -> void:
-	super()
+	await super()
 	ai.initialize(self)
 	ai.set_active(true)

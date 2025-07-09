@@ -5,71 +5,26 @@ extends Node2D
 @export var fill_map:TileMapLayer # 用于填充和绘制网格的图块层
 
 @export_category("展示模式")
-@export var show_grid:bool = true:
-	set(s):
-		show_grid = s
-		queue_redraw()
-@export var show_highlight:bool = false:
-	set(s):
-		show_highlight = s
-		queue_redraw()
-@export var show_limit:bool = false:
-	set(s):
-		show_limit = s
-		queue_redraw()
-@export var show_sights:bool = false:
-	set(s):
-		show_sights = s
-		queue_redraw()
+@export var show_grid:bool = true
+@export var show_highlight:bool = false
+@export var show_limit:bool = false
+@export var show_sights:bool = false
 
 @export_category("网格颜色")
-@export var grid_color:Color = Color(1, 1, 1, 0):
-	set(c):
-		grid_color = c
-		queue_redraw()
-@export var grid_outline_color: Color = Color(1, 1, 1, 0.4):
-	set(c):
-		grid_outline_color = c
-		queue_redraw()
-@export var limit_color: Color = Color(1,0.5,1,0.3):
-	set(c):
-		limit_color = c
-		queue_redraw()
-@export var limit_outline_color: Color = Color(1,0.5,1,0.4):
-	set(c):
-		limit_outline_color = c
-		queue_redraw()
-@export var highlight_color: Color = Color(1, 1, 0, 0.3):
-	set(c):
-		highlight_color = c
-		queue_redraw()
-@export var highlight_outline_color: Color = Color(0.5, 1, 1, 0.4):
-	set(c):
-		highlight_outline_color = c
-		queue_redraw()
-@export var sight_color: Color = Color(0, 1, 1, 0.3):
-	set(c):
-		sight_color = c
-		queue_redraw()
-@export var sight_outline_color: Color = Color(0, 1, 1, 0.4):
-	set(c):
-		sight_outline_color = c
-		queue_redraw()
+@export var grid_color:Color = Color(1, 1, 1, 0)
+@export var grid_outline_color: Color = Color(1, 1, 1, 0.4)
+@export var limit_color: Color = Color(1,0.5,1,0.3)
+@export var limit_outline_color: Color = Color(1,0.5,1,0.4)
+@export var highlight_color: Color = Color(1, 1, 0, 0.3)
+@export var highlight_outline_color: Color = Color(0.5, 1, 1, 0.4)
+@export var sight_color: Color = Color(0, 1, 1, 0.3)
+@export var sight_outline_color: Color = Color(0, 1, 1, 0.4)
 
 var tile_size:Vector2i
 
-var limit_array:Array[Vector2i]:
-	set(l):
-		limit_array = l
-		queue_redraw()
-var highlight:Vector2i:
-	set(h):
-		highlight = h
-		queue_redraw()
-var sight_dict:Dictionary[String,Array]:
-	set(s):
-		sight_dict = s
-		queue_redraw()
+var limit_array:Array[Vector2i]
+var highlight:Vector2i
+var sight_dict:Dictionary[String,Array]
 		
 func _ready() -> void:
 	tile_size = fill_map.tile_set.tile_size
@@ -77,6 +32,9 @@ func _ready() -> void:
 	
 	if show_grid or show_limit or show_highlight or show_sights:
 		queue_redraw()
+
+func update() -> void:
+	queue_redraw()
 
 func update_sight_dict(id:String,val:Array):
 	sight_dict[id] = val

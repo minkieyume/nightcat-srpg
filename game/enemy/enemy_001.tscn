@@ -272,7 +272,7 @@ libraries = {
 &"move": SubResource("AnimationLibrary_u646v")
 }
 
-[node name="StateAI" type="LimboHSM" parent="." index="6"]
+[node name="StateAI" type="LimboHSM" parent="." index="5"]
 script = ExtResource("4_qqrc7")
 
 [node name="Patrol" type="LimboState" parent="StateAI" index="0" node_paths=PackedStringArray("transition")]
@@ -295,5 +295,5 @@ transition = {
 &"stop": NodePath("../Stop")
 }
 
-[node name="ActionManager" parent="." index="7"]
+[node name="ActionManager" parent="." index="6"]
 actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_qqrc7"), SubResource("Resource_wnpm0"), SubResource("Resource_tqtbr")])
