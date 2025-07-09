@@ -22,9 +22,6 @@ func _init_state_machine():
 				var target = phase.transition[event]
 				phase.cargo_send.connect(target._on_cargo_recieve)
 				add_transition(phase,target,event)
-	var parent = get_parent()
-	if !parent is PhaseController:
-		initialize(self)
 
 
 func _setup():	
@@ -43,7 +40,7 @@ func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo
 
 # 启动状态机
-func start():	
+func start():
 	set_active(true)
 
 func stop():

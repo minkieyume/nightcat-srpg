@@ -1,4 +1,4 @@
 class_name Enemy
-extends StateAICharacter
+extends AICharacter
 
 @export var chase_radius:int = 5

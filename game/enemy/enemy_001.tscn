@@ -1,13 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://bb4jaww77an76"]
+[gd_scene load_steps=31 format=3 uid="uid://bb4jaww77an76"]
 
-[ext_resource type="PackedScene" uid="uid://c84estheuoiro" path="res://system/character/state_ai_character.tscn" id="1_wkmnl"]
+[ext_resource type="PackedScene" uid="uid://c84estheuoiro" path="res://system/character/ai_character.tscn" id="1_wkmnl"]
 [ext_resource type="Texture2D" uid="uid://csm5mumirosf4" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_3.png" id="2_ciyex"]
 [ext_resource type="Script" uid="uid://do58gymkubxae" path="res://system/character/enemy.gd" id="2_kbf5l"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p36qo"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_nydrm"]
+[ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/phase_system/ai_phase/ai_phase_controller.gd" id="4_qqrc7"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_22db3"]
-[ext_resource type="PackedScene" uid="uid://u4m2fbdw6oco" path="res://system/character/state_ai.tscn" id="7_p36qo"]
-[ext_resource type="Script" uid="uid://d1li423y1f0vj" path="res://game/enemy/enemy001_ai.gd" id="8_ri16f"]
 [ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/enemy/patrol.gd" id="10_22db3"]
 [ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/enemy/guard.gd" id="11_x6aw5"]
 [ext_resource type="Script" uid="uid://bmwtiauyutjap" path="res://game/actions/action_logics/attack.gd" id="12_qqrc7"]
@@ -182,7 +181,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_wnpm0"]
+[sub_resource type="Resource" id="Resource_qqrc7"]
 resource_local_to_scene = true
 resource_name = "移动"
 script = ExtResource("2_p36qo")
@@ -209,7 +208,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 1
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_tqtbr"]
+[sub_resource type="Resource" id="Resource_wnpm0"]
 resource_local_to_scene = true
 resource_name = "攻击"
 script = ExtResource("2_p36qo")
@@ -236,7 +235,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_dhysm"]
+[sub_resource type="Resource" id="Resource_tqtbr"]
 resource_local_to_scene = true
 resource_name = "结束回合"
 script = ExtResource("2_p36qo")
@@ -273,17 +272,28 @@ libraries = {
 &"move": SubResource("AnimationLibrary_u646v")
 }
 
-[node name="StateAI" parent="." index="6" instance=ExtResource("7_p36qo")]
-script = ExtResource("8_ri16f")
+[node name="StateAI" type="LimboHSM" parent="." index="6"]
+script = ExtResource("4_qqrc7")
 
-[node name="Patrol" type="LimboState" parent="StateAI" index="0"]
+[node name="Patrol" type="LimboState" parent="StateAI" index="0" node_paths=PackedStringArray("transition")]
 script = ExtResource("10_22db3")
+transition = {
+&"find_enemy": NodePath("../Chase"),
+&"stop": NodePath("../Stop")
+}
 
-[node name="Stop" type="LimboState" parent="StateAI" index="1"]
+[node name="Stop" type="LimboState" parent="StateAI" index="1" node_paths=PackedStringArray("transition")]
 script = ExtResource("11_x6aw5")
+transition = {
+&"end_stop": NodePath("../Patrol")
+}
 
-[node name="Chase" type="LimboState" parent="StateAI" index="2"]
+[node name="Chase" type="LimboState" parent="StateAI" index="2" node_paths=PackedStringArray("transition")]
 script = ExtResource("12_rgqvb")
+transition = {
+&"lost_enemy": NodePath("../Patrol"),
+&"stop": NodePath("../Stop")
+}
 
 [node name="ActionManager" parent="." index="7"]
-actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_wnpm0"), SubResource("Resource_tqtbr"), SubResource("Resource_dhysm")])
+actions = Array[ExtResource("2_p36qo")]([SubResource("Resource_qqrc7"), SubResource("Resource_wnpm0"), SubResource("Resource_tqtbr")])

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dticwdage7esm"]
-
-[ext_resource type="Script" uid="uid://qcf6g7w6kqh" path="res://system/character/state_ai_state.gd" id="1_ukhea"]
-
-[node name="StateAiState" type="LimboState"]
-script = ExtResource("1_ukhea")

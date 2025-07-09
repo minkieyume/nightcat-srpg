@@ -1,4 +1,4 @@
-extends StateAIState
+extends AIPhase
 
 func before_action():
 	agent.update_sight_units()

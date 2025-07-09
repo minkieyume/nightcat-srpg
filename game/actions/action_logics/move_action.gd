@@ -5,11 +5,11 @@ func before_target_chose(action:Action):
 	var move_server = LevelHandler.get_movement_server()
 
 	# 更新行动范围配置
-	var blocked_tiles = quester.quest_block_tiles()	
 	var deter_array = action.clac_action_range()
 	var pos = LevelHandler.get_unit_position(action.requester)
 	var ap = LevelHandler.get_character(action.requester).get_ap()
-	deter_array = deter_array.filter(func(x):return not blocked_tiles.has(x))
+	deter_array = deter_array.filter(func(x):return \
+		move_server.is_point_reachable(action.requester,x))
 	deter_array = deter_array.filter(func(x):return move_server.get_path_length(pos,x)<=ap)
 	var new_range = ActionRange.new()
 	new_range.deter_array = deter_array
