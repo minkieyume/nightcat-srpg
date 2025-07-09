@@ -22,7 +22,7 @@ func get_next_action():
 		if move_action != null:			
 			var result = await move_action.precheck()
 			if result:
-				return move_action	
+				return move_action
 	return null
 
 	
