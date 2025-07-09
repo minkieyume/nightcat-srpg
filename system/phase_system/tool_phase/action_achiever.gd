@@ -21,14 +21,11 @@ target_chose_event:StringName TargetChoser选中后触发的事件，决定接�
 # 	add_event_handler("precheck_continue",_handle_precheck_continue)
 
 func _enter():
-	super()	
+	super()
 	match context["mode"]:
-		"before_action":
-			var action = context["action"]			
-			action.set_ctx(context)
-			action.before_run()
 		"start_action":
 			var action = context["action"]
+			action.set_ctx(context)
 			context.erase("target")
 			action.execute()
 		"end_action":
@@ -38,11 +35,10 @@ func _exit():
 	super()
 	match context["mode"]:
 		"end_action":
-			call_deferred("clean_action")
+			var action = context["action"]
+			context.erase("target")
+			context.erase("action")
+			call_deferred("clean_action",action)
 	
-func clean_action():
-	var action = context["action"]
-	context.erase("actor")
-	context.erase("target")
-	context.erase("action")
+func clean_action(action:Action):	
 	action.free()

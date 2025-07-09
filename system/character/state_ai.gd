@@ -10,8 +10,7 @@ func before_action():
 
 func get_next_action():
 	var state = get_active_state()
-	if state is StateAIState or state is StateAI:
-		print("debug")
+	if state is StateAIState or state is StateAI:		
 		await state.before_action()
 		var action = await state.get_next_action()
 		return action

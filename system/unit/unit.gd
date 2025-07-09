@@ -21,6 +21,8 @@ extends Node2D
 @onready var idle_state: LimboState = $AnimationMachine/IdleState
 @onready var move_state: LimboState = $AnimationMachine/MoveState
 
+var context:Dictionary
+
 ## 单位的朝向
 var direction:Vector2i = Vector2i.DOWN:
 	# 朝向改变
@@ -95,3 +97,9 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	tween.tween_property(self,"position",end,dis/move_speed)
 	await tween.finished
 	animation_machine.dispatch("move_stop")
+
+func set_ctx(ctx:Dictionary):
+	context.merge(ctx,true)
+
+func clean_ctx():
+	context.clear()

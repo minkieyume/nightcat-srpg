@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcp4wjouh8kwm"]
+[gd_scene load_steps=16 format=3 uid="uid://bcp4wjouh8kwm"]
 
 [ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://system/phase_system/turn_phase/game_phase_controller.gd" id="2_emkk0"]
 [ext_resource type="Script" uid="uid://b4mr702dv54vg" path="res://system/phase_system/turn_phase/turn_prompt.gd" id="3_5hgr7"]
 [ext_resource type="Script" uid="uid://dmqb80wbqxon3" path="res://system/phase_system/phase.gd" id="3_emkk0"]
 [ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="4_d1ik7"]
 [ext_resource type="Script" uid="uid://75x78h8qhuj5" path="res://system/phase_system/turn_phase/restore_ap.gd" id="6_emkk0"]
+[ext_resource type="Script" uid="uid://bsqnxcxpu0mlv" path="res://system/phase_system/turn_phase/action_precheck.gd" id="7_5hgr7"]
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="7_dm2g6"]
 [ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="7_oej6j"]
 [ext_resource type="Script" uid="uid://dhnujo24mhtvc" path="res://system/phase_system/turn_phase/player_select.gd" id="8_hvc3f"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://csu0070v2a4vi" path="res://system/phase_system/turn_phase/ai_chose_next.gd" id="12_b0lpp"]
 [ext_resource type="Script" uid="uid://qlg2af8eqjwg" path="res://system/phase_system/turn_phase/enemy_next_unit.gd" id="13_prach"]
 [ext_resource type="Script" uid="uid://csluhq5pey5q8" path="res://system/phase_system/turn_phase/ai_next_action.gd" id="13_x0yme"]
+[ext_resource type="Script" uid="uid://c5ny1678ypi1u" path="res://system/phase_system/turn_phase/action_failed.gd" id="14_prytn"]
 
 [node name="GamePhaseController" type="LimboHSM"]
 script = ExtResource("2_emkk0")
@@ -77,7 +79,14 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 [node name="PlayerChoseAction" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("8_hvc3f")
 transition = {
-&"menu_hide": NodePath("../PlayerAchieveAction"),
+&"menu_hide": NodePath("../PlayerActionPrecheck")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerActionPrecheck" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("7_5hgr7")
+transition = {
+&"end": NodePath("../PlayerChoseAction"),
 &"next": NodePath("../PlayerAchieveAction")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
@@ -102,8 +111,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="PlayerAwaiter" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("3_emkk0")
 transition = {
-&"action_failed": NodePath("../PlayerChoseAction"),
-&"action_sucess": NodePath("../PlayerAchieveAction"),
+&"action_finish": NodePath("../PlayerAchieveAction"),
 &"interact": NodePath("../PlayerInteract"),
 &"interact_failed": NodePath("../PlayerChoseAction"),
 &"interact_sucess": NodePath("../PlayerInteract")
@@ -200,11 +208,17 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="EnemyAwaiter" type="LimboState" parent="EnemyTurn/EnemyPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("3_emkk0")
 transition = {
-&"action_failed": NodePath("../EnemyNextAction"),
-&"action_sucess": NodePath("../EnemyAchieveAction"),
+&"action_finish": NodePath("../EnemyAchieveAction"),
 &"interact": NodePath("../EnemyInteract"),
-&"interact_failed": NodePath("../EnemyNextAction"),
+&"interact_failed": NodePath("../EnemyActionFailed"),
 &"interact_sucess": NodePath("../EnemyInteract")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyActionFailed" type="LimboState" parent="EnemyTurn/EnemyPartTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("14_prytn")
+transition = {
+&"next": NodePath("../TurnEnd")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 

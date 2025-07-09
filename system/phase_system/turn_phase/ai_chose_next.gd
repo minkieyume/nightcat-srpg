@@ -2,6 +2,7 @@ extends Phase
 
 func _enter() -> void:
 	super()
+	context["mode"] = "ai_chose_character"
 	var units:Array = context["units"]
 	if !units.is_empty():
 		var unit = units.pop_front()
@@ -9,4 +10,5 @@ func _enter() -> void:
 		call_deferred("dispatch","next")
 	else:
 		context.erase("units")
+		context.erase("actor")
 		call_deferred("dispatch","end")

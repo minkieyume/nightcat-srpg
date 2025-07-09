@@ -79,8 +79,8 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 		await unit.step_path(path,tile_size,grid_map)
 	else:		
 		return false
-	remove_unit_blocks()
-	add_unit_blocks()
+	remove_unit_blocks(func(u:Unit):return u.id == cid)
+	add_unit_blocks(func(u:Unit):return u.id == cid)
 	return true
 
 ## 获取移动的路径
@@ -91,9 +91,9 @@ func get_move_path(start:Vector2i,end:Vector2i) -> Array:
 func is_point_reachable(cid:String,target:Vector2i) -> bool:
 	var start = LevelHandler.get_unit_position(cid)
 	var path = get_move_path(start,target)
-	if astar.is_point_solid(target):
+	if path.is_empty():
 		return false
-	if path.size() <= 0:
+	if astar.is_point_solid(target):
 		return false
 	return true
 

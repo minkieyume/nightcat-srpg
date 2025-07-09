@@ -19,6 +19,14 @@ func get_character_action(id:String,action_id:StringName):
 	var character = get_character(id)
 	return character.get_action_resource(action_id)
 
+func is_unit_in_group(uid:String,group:String) -> bool:
+	var unit = get_unit(uid)
+	if unit.is_in_group(group):
+		return true
+	else:
+		return false
+
+
 ## 获取单位坐标，未找到则返回 (-9223372036854775808,-9223372036854775808)
 func get_unit_position(id:String) -> Vector2i:
 	var unit = get_unit(id)
@@ -68,11 +76,3 @@ func get_enemies() -> Array[Character]:
 
 func get_movement_server() -> MovementServer:
 	return level.get_movement_server()
-
-# 修正：路径长度实际为格数（即 path.size()-1），但ap消耗应为最大允许AP与实际路径长度的较小值
-func get_path_length(start: Vector2i, target: Vector2i) -> int:
-	var movement_server = get_movement_server()
-	if movement_server:
-		var length = movement_server.get_path_length(start, target)
-		return max(length, 0)
-	return 1

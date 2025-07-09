@@ -93,12 +93,12 @@ position = Vector2(144, 144)
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="Kiko" parent="Characters" groups=["character", "player"] instance=ExtResource("6_s27i0")]
+[node name="Kiko" parent="Characters" groups=["player"] instance=ExtResource("6_s27i0")]
 initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_2fenr"), SubResource("AttributeBuff_3bn13")])
 part = "player"
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
-[node name="Yumi" parent="Characters" groups=["character", "player"] instance=ExtResource("7_s27i0")]
+[node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
 initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_uenbh"), SubResource("AttributeBuff_ptgd0")])
 part = "player"

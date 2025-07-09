@@ -99,7 +99,7 @@ func quest_character_in_area(area: Array) -> Array:
 	return result
 
 # 获取区域内所有单位，按指定filter过滤
-func get_unit_in_area(area: Array,filter:Callable=func(_u:Unit):return true) \
+func quest_unit_in_area(area: Array,filter:Callable=func(_u:Unit):return true) \
 	-> Array:
 	var result = []
 	var units = LevelHandler.get_units()
@@ -108,6 +108,21 @@ func get_unit_in_area(area: Array,filter:Callable=func(_u:Unit):return true) \
 		if c_pos in area:
 			result.append(unit)
 	return result
+
+## 从给定组中获取距离某个点最近的单位
+func quest_nearst_unit(origin:Vector2i,units:Array[Unit]) -> Unit:
+	var distance = INF
+	var nearst_unit = units[0]
+	for unit in units:
+		var d = origin.distance_to(LevelHandler.get_unit(unit.id))
+		if  d < distance:
+			distance = d
+			nearst_unit = unit
+	return nearst_unit
+
+func quest_tiles_nearby_unit(unit:String) -> Array:
+	var unit_pos = LevelHandler.get_unit_position(unit)	
+	return [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT, Vector2i.UP].map(func(x):return x+unit_pos)
 
 func quest_unit_nearst_nearby_tile(origin:Vector2i,uid:String) -> Vector2i:	
 	var target_pos = LevelHandler.get_unit_position(uid)
@@ -120,4 +135,3 @@ func quest_unit_nearst_nearby_tile(origin:Vector2i,uid:String) -> Vector2i:
 			min_dist = dist
 			target_pos = pos
 	return target_pos
-

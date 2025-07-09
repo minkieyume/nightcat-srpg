@@ -50,6 +50,7 @@ func _chose() -> bool:
 			dispatch("character_chose")
 		"chose_action_target":
 			context["action"].set_target(context["target"])
+			CommandBus.send_command("gamephase",["setcargo","mode","action_precheck"])
 			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])			
 			context.erase("target")
 			CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
@@ -78,8 +79,7 @@ func _return() -> bool:
 			CommandBus.send_command("gamephase",["interact_failed"])
 		"chose_action_target":
 			context["mode"] = "chose_character"
-			context.erase("actor")
-			context.erase("action_limit")
+			context.erase("actor")			
 			context.erase("action")
 	limit_mode = false
 	grid_drawer.show_limit = false

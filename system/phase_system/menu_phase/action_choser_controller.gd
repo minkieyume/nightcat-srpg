@@ -50,21 +50,22 @@ func _create_action():
 	var action:Action = Action.new(context["actor"], context["chosed_action"])
 	context["action"] = action
 	action.set_ctx(context)
-	var result = await action.before_target_chose()
-	if result:
-		var action_range = action.clac_action_range()
-		context["action_limit"] = action_range
-	else:
-		print("[ActionChoser] 行动调用选择前处理失败")
-		call_deferred("dispatch","return")
 
 func _on_action_chosed() -> bool:
 	context.erase("target")
 	context.erase("action_list")
 	await _create_action()
-	context["mode"] = "chose_action_target"
-	context["limit_array"] = context["action"].clac_action_range()
-	dispatch("chose")
+	var action:Action = context["action"]
+	await action.before_target_chose()
+	if action.has_range():
+		context["mode"] = "chose_action_target"
+		context["limit_array"] = context["action"].clac_action_range()
+		dispatch("chose_target")
+	else:
+		CommandBus.send_command("gamephase",["setcargo","mode","action_precheck"])
+		CommandBus.send_command("gamephase",["setcargo","action",context["action"]]) 
+		CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
+		dispatch("end")
 	return true
 
 func _return() -> bool:

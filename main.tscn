@@ -55,7 +55,8 @@ metadata/_edit_group_ = true
 script = ExtResource("13_82xsv")
 transition = {
 &"back": NodePath("../GridTargetChoser"),
-&"chose": NodePath("../GridTargetChoser")
+&"chose_target": NodePath("../GridTargetChoser"),
+&"end": NodePath("../TurnEnd")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 

@@ -6,6 +6,7 @@ var target:Vector2i
 
 var resource:ActionResource
 var action_range:ActionRange
+var ap_cost:int
 var logic:ActionLogic
 var ctx:Dictionary
 
@@ -13,75 +14,76 @@ func _init(r:String,id:StringName):
 	var action_resource:ActionResource = LevelHandler.get_character_action(r,id)
 	var action_logic:GDScript = action_resource.action_logic
 	requester = r
-	resource = action_resource.duplicate(true)
-	action_range = action_resource.action_range.duplicate(true)
+	resource = action_resource
+	action_range = action_resource.action_range
+	ap_cost = action_resource.ap_cost
 	logic = action_logic.new()
 
-func before_target_chose() -> bool:
+func before_target_chose():
+	if !is_instance_valid(logic):
+		return
+	await logic.before_target_chose(self)
+
+func before_precheck():
+	if !is_instance_valid(logic):
+		return
+	await logic.before_precheck(self)
+
+func precheck() -> bool:
 	if !is_instance_valid(logic):
 		return false
-	var result = await logic.before_target_chose(self)
-	if !result:
-		return false
-	return result
-
-func before_run() -> bool:	
-	CommandBus.send_command("gamephase",["wait"])
-	CommandBus.send_command("gamephase",["setcargo","mode","start_action"])
-	if !is_instance_valid(logic):
-		print("[Action] 行动执行失败")
-		CommandBus.send_command("gamephase",["action_failed"])
-		return false
-	var result = await logic.before_run(self)
-	if result:
-		CommandBus.send_command("gamephase",["action_sucess"])
-		return true
-	else:
-		print("[Action] 行动执行失败")
-		CommandBus.send_command("gamephase",["action_failed"])
-		return false
-
-func end_action(sucess:bool=false) -> void:
-	CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
-	if sucess:
-		CommandBus.send_command("gamephase",["action_sucess"])
-	else:
-		print("[Action] 行动执行失败")
-		CommandBus.send_command("gamephase",["action_failed"])
-
-func execute()  -> bool:
-	CommandBus.send_command("gamephase",["wait"])
-	if is_instance_valid(action_range):
-#		print("[Action]",requester)		
-		var result = clac_action_range()
-		if !is_target_valid(result):
-			end_action()
+	if has_range():
+		var r = clac_action_range()
+		if !is_target_valid(r):
 			return false
 	if !can_consume():
-		end_action()
 		return false
-	var action_result = await logic.execute(self)
-	if !action_result:
-		end_action()
+	var result = await logic.precheck(self)
+	return result
+
+func has_range():
+	if is_instance_valid(action_range):
+		return true
+	else:
 		return false
-	coast_ap()
-	end_action(true)
-	return true
+
+# func before_run():
+# 	CommandBus.send_command("gamephase",["wait"])
+# 	CommandBus.send_command("gamephase",["setcargo","mode","start_action"])
+# 	if !is_instance_valid(logic):
+# 		print("[Action] 行动执行失败")
+# 		CommandBus.send_command("gamephase",["action_failed"])
+# 		return false
+# 	var result = await logic.before_run(self)
+# 	if result:
+# 		CommandBus.send_command("gamephase",["action_sucess"])
+# 		return true
+# 	else:
+# 		print("[Action] 行动执行失败")
+# 		CommandBus.send_command("gamephase",["action_failed"])
+# 		return false
+
+func execute():
+	CommandBus.send_command("gamephase",["wait"])
+	await logic.execute(self)
+	cost_ap()
+	end_action()
+
+func end_action() -> void:
+	CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
+	CommandBus.send_command("gamephase",["action_finish"])
 
 func set_target(t:Vector2i):
 	target = t
 
-func get_ap_coast() -> int:
-	return resource.ap_cost
-
 func can_consume() -> bool:
 	var character = LevelHandler.get_character(requester)
-	var consume = resource.ap_cost
+	var consume = ap_cost
 	return character.can_consume_ap(consume)
 
-func coast_ap():
+func cost_ap():
 	var character = LevelHandler.get_character(requester)
-	var consume = resource.ap_cost
+	var consume = ap_cost
 	character.consume_ap(consume)
 
 ## 计算允许互动的绝对坐标。
@@ -148,3 +150,12 @@ func set_ctx(_ctx:Dictionary):
 		ctx.merge(_ctx)
 	else:
 		ctx = _ctx
+
+func set_ap_cost(ap:int):
+	ap_cost = ap
+
+func get_ap_cost() -> int:
+	return ap_cost
+
+func set_action_range(a_range:ActionRange):
+	action_range = a_range
