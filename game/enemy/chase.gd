@@ -15,7 +15,7 @@ func get_next_action():
 
 	var nearby_tiles = quester.quest_tiles_nearby_unit(agent.id)
 	var nearby_player = quester.quest_character_in_area(nearby_tiles).\
-		filter(func(c):return LevelHandler.is_unit_in_group(c.id,"player"))	
+		filter(func(c):return LevelHandler.is_unit_in_group(c.id,"player"))
 	print(nearby_player)
 	if nearby_player.is_empty():
 		var move_action = await get_move_near_character_action()
@@ -58,7 +58,7 @@ func get_move_near_character_action():
 
 	# 获取距离自身最近的玩家的最近临近格
 	var chase_radius = grid_quester.quest_tiles_in_radius(origin,agent.chase_radius)
-	var characters = grid_quester.quest_character_in_area(chase_radius)
+	var characters = grid_quester.quest_character_in_area(chase_radius).filter(func(c):return LevelHandler.is_unit_in_group(c.id,"player"))
 	var nearst_target = null
 	for character in characters:
 		var near_target = grid_quester.quest_tiles_nearby_unit(character.id)\
@@ -68,8 +68,10 @@ func get_move_near_character_action():
 			if nearst_target == null:
 				nearst_target = near_target
 			else:
-				nearst_target = _get_near_pos(near_target,nearst_target)
-	print("Nearst:",nearst_target)
+				nearst_target = _get_near_pos(near_target,nearst_target)	
+
+	if nearst_target == null:
+		return null
 	# 获取行动的限制范围，并选择限制范围中最接近该玩家的最近临近格的格子。
 	var limit_array = action.clac_action_range()
 	var target = nearst_target
@@ -79,7 +81,7 @@ func get_move_near_character_action():
 				target = target_pos
 			elif target.distance_to(nearst_target) > target_pos.distance_to(nearst_target):
 				target = target_pos
-	print("ActionLimit:",target)
+	
 	if target != null:
 		action.set_target(target)	
 		return action

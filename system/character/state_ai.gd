@@ -8,7 +8,7 @@ func _init_ai():
 func before_action():
 	pass
 
-func get_next_action():
+func get_next_action():	
 	var state = get_active_state()
 	if state is StateAIState or state is StateAI:		
 		await state.before_action()
