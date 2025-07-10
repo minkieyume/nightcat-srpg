@@ -15,9 +15,9 @@ func before_action():
 	agent.update_sight_units()
 	agent.clean_question_units()
 	
-	# var sc:Array = agent.in_sight_characters
-	# if sc.is_empty():
-	# 	dispatch("lost_enemy")
+	var sc:Array = agent.in_sight_characters
+	if sc.is_empty():
+		dispatch("lost_enemy")
 
 func update_face_to_character():
 	var grid_quester = LevelHandler.get_grid_quester()
