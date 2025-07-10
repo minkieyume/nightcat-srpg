@@ -75,14 +75,14 @@ func quest_tiles_in_sector(origin:Vector2i,sector:TiledSector2D) -> Array:
 ## 判断目标是否处于视野内
 func is_in_sight(origin:Vector2i,target:Vector2i,sector:TiledSector2D) -> bool:
 	if is_in_sector(origin,target,sector):
-		if has_line_of_sight(origin,target):
+		if !has_line_of_sight(origin,target):
 			return true
 	return false
 
 ## 获取视野内的全部图块
 func quest_tiles_in_sight(origin:Vector2i,sector:TiledSector2D) -> Array:
 	var result = quest_tiles_in_sector(origin,sector)
-	return result.filter(func(tile):return has_line_of_sight(origin,tile))
+	return result.filter(func(tile):return !has_line_of_sight(origin,tile))
 
 
 # 判断两点间是否有视线遮挡
@@ -93,7 +93,7 @@ func has_line_of_sight(origin: Vector2i, target: Vector2i) -> bool:
 			return true
 	return false
 
-# 获取区域内所有角色
+## 获取区域内所有角色
 func quest_character_in_area(area: Array) -> Array:
 	var result = []
 	for character in LevelHandler.get_characters():
@@ -108,7 +108,12 @@ func quest_block_tiles_in_area(area:Array) -> Array:
 func quest_passable_tiles_in_area(area:Array) -> Array:
 	return area.filter(grid_map.is_cell_passable)
 
-# 获取区域内所有单位，按指定filter过滤
+## 获取target相对于orgin的方向。
+func quest_related_direction(origin:Vector2i,target:Vector2i) -> Vector2i:
+	var dir = Vector2(origin).direction_to(Vector2(target))	
+	return Vector2i(round(dir))
+
+## 获取区域内所有单位，按指定filter过滤
 func quest_unit_in_area(area: Array,filter:Callable=func(_u:Unit):return true) \
 	-> Array:
 	var result = []

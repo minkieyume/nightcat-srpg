@@ -73,6 +73,46 @@ func change_direction(dir:Vector2i) -> bool:
 		Vector2i.UP:
 			direction = dir
 			return true
+		Vector2i.ONE:
+			match direction:
+				Vector2i.LEFT:
+					direction = Vector2i.DOWN
+					return true
+				Vector2i.UP:
+					direction = Vector2i.RIGHT
+					return true
+				_:
+					return false
+		-Vector2i.ONE:
+			match direction:
+				Vector2i.DOWN:
+					direction = Vector2i.LEFT
+					return true
+				Vector2i.RIGHT:
+					direction = Vector2i.UP
+					return true
+				_:
+					return false
+		Vector2i(1,-1):
+			match direction:
+				Vector2i.LEFT:
+					direction = Vector2i.RIGHT
+					return true
+				Vector2i.DOWN:
+					direction = Vector2i.UP
+					return true
+				_:
+					return false
+		Vector2i(-1,1):
+			match direction:
+				Vector2i.UP:
+					direction = Vector2i.DOWN
+					return true
+				Vector2i.RIGHT:
+					direction = Vector2i.LEFT
+					return true
+				_:
+					return false
 		_:
 			return false
 

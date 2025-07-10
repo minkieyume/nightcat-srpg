@@ -3,35 +3,42 @@ class_name Character
 # 与各个Server中介通信
 extends Unit
 
+@export_category("初始属性")
+## 角色权重
 @export var weight:int = 0
-
 ## 用于初始化修饰角色属性的值。
 @export var initalize_attribute_buffs:Array[AttributeBuffBase]
 
+@export_category("视野")
+## 默认的视野扇形
 @export var sight_sector:TiledSector2D
+## 放大视野范围时增加的半径。
+@export var sight_expand_radius:int
+## 放大视野范围时增加的角度
+@export var sight_expand_angle:float
 
 @onready var action_manager = $ActionManager
 @onready var attributes = $AttributeContainer
 @onready var character_info = $Character_info
 
-var in_sight_units = []
+var in_sight_units:Array[String] = []
+var sector:TiledSector2D
 
 # 角色状态管理
 #var state: String = "normal" # 角色当前状态，如 normal, stunned, confused 等
 #var state_turns: int = 0 # 状态剩余持续回合数
 
-signal sight_updated(id:String)
 signal ap_changed(new_ap)
 
 func _ready() -> void:
 	await super()	
 	_init_attribute()
-	operate_attribute("ap",5,5)	
+	operate_attribute("ap",5,5)
+	reset_sight()
 
 func _init_attribute() -> void:
 	for buff in initalize_attribute_buffs:
 		attributes.apply_buff(buff)
-	
 
 func _init_state_machine() -> void:
 	animation_machine.add_transition(idle_state, move_state,"move_start")
@@ -39,51 +46,23 @@ func _init_state_machine() -> void:
 	animation_machine.initialize(self)
 	animation_machine.set_active(true)
 
-func change_face(face:String) -> bool:
-	match face:
-		"down":
-			change_direction(Vector2i.DOWN)
-		"left":
-			change_direction(Vector2i.LEFT)
-		"right":
-			change_direction(Vector2i.RIGHT)
-		"up":
-			change_direction(Vector2i.UP)
-		_:
-			return false
-	emit_signal("sight_updated",id)
-	return true
+## 重置视野范围为默认值
+func reset_sight():
+	sector = sight_sector.duplicate(true)
 
-func change_direction(dir:Vector2i) -> bool:
-	if direction == dir:
-		return true
-	match dir:
-		Vector2i.DOWN:
-			direction = dir
-			sight_sector.face = dir
-			return true
-		Vector2i.LEFT:
-			direction = dir
-			sight_sector.face = dir
-			return true
-		Vector2i.RIGHT:
-			direction = dir
-			sight_sector.face = dir
-			return true
-		Vector2i.UP:
-			direction = dir
-			sight_sector.face = dir
-			return true
-		_:
-			return false	
+func expand_sight(turn:int=1):
+	var t = turn
+	while t > 0:
+		sector.radius = sight_expand_radius+sector.radius
+		sector.angle = sight_expand_angle+sector.angle
+		t = t -1
 
 func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
 	# 沿着path批量移动
 	var start = map.local_to_map(position)
 	for point in path:
 		await step(point - start,vdis)
-		start = map.local_to_map(position)
-	emit_signal("sight_updated",id)
+		start = map.local_to_map(position)	
 	emit_signal("path_end")
 
 func step(dir:Vector2,vdis:Vector2) -> void:
@@ -100,23 +79,26 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	animation_machine.dispatch("move_stop")
 
 func update_sight_units():
+	in_sight_units = []
 	var units = LevelHandler.get_units()
 	var quester = LevelHandler.get_grid_quester()
 	var origin = LevelHandler.get_unit_position(id)
 	for unit in units:
 		var pos = LevelHandler.get_unit_position(unit.id)
-		if quester.is_in_sight(origin,pos,sight_sector):
-			in_sight_units.append(unit)
+		if unit.id == id:
+			continue
+		if quester.is_in_sight(origin,pos,sector):
+			print(unit.id)
+			in_sight_units.append(unit.id)
 		else:
-			in_sight_units.erase(unit)
+			in_sight_units.erase(unit.id)
 
 ## 显示视野范围高亮范围
 func show_sight_view():
 	var grid_drawer = LevelHandler.get_grid_drawer()
 	var quester = LevelHandler.get_grid_quester()
 	var origin = LevelHandler.get_unit_position(id)
-	var sights_array = quester.quest_tiles_in_sight(origin,sight_sector)
-	print(sights_array)
+	var sights_array = quester.quest_tiles_in_sight(origin,sector)
 	grid_drawer.update_sight_dict(id,sights_array)
 
 ## 隐藏视野高亮范围
@@ -124,6 +106,10 @@ func hide_sight_view():
 	var grid_drawer = LevelHandler.get_grid_drawer()
 	grid_drawer.clean_sight_dict(id)
 
+func update_sight_view():
+	hide_sight_view()
+	show_sight_view()
+	
 # 角色行动
 func get_action_list() -> Dictionary:
 	return action_manager.action_list
@@ -223,3 +209,7 @@ func apply_damage(damage:int):
 
 func _on_attribute_container_attribute_changed(_attribute:RuntimeAttribute, _previous_value:float, _new_value:float) -> void:
 	update_character_info()
+
+
+func _on_direction_changed(direct:Vector2i) -> void:
+	sector.face = direct

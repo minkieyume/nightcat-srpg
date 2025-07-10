@@ -72,10 +72,13 @@ func get_path_length(start: Vector2i, target: Vector2i) -> int:
 ## 移动单位
 func move_unit(cid:String,target:Vector2i) -> bool:
 	var unit = LevelHandler.get_unit(cid)
+	var drawer = LevelHandler.get_grid_drawer()
 
 	# 移除单位的视野显示
 	unit.hide_sight_view()
-
+	if unit.is_in_group("enemy"):
+		drawer.update()
+	
 	#单位行动逻辑
 	var start = grid_map.local_to_map(unit.position)	
 	if is_point_reachable(cid,target):
@@ -90,6 +93,7 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 	# 更新敌人的视野显示
 	if unit.is_in_group("enemy"):
 		unit.show_sight_view()
+		drawer.update()
 	return true
 
 ## 获取移动的路径

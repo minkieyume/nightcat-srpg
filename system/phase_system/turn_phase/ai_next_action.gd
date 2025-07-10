@@ -5,7 +5,8 @@ func _enter() -> void:
 	context["mode"] = "ai_chose_action"	
 	var unit:Unit = context["actor"]
 	if unit.is_in_group("ai"):
-		var action = await unit.ai.get_next_action()		
+		await unit.ai.before_action()
+		var action = await unit.ai.get_next_action()
 		if action != null:
 			context["mode"] = "start_action"
 			context["action"] = action
