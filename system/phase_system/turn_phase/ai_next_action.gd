@@ -12,6 +12,6 @@ func _enter() -> void:
 			context["action"] = action
 			call_deferred("dispatch","next")
 			call_deferred("next_action",action)
-			return
+			return		
 	context.erase("actor")
 	call_deferred("dispatch","end")	

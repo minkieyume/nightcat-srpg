@@ -2,11 +2,13 @@ extends AIPhase
 
 func _enter() -> void:
 	agent.expand_sight()
+	agent.update_sight_view()
 	super()	
 
 func _exit() -> void:
 	super()	
 	agent.reset_sight()
+	agent.update_sight_view()
 
 func before_action():
 	var qu:Array = agent.question_units
@@ -31,7 +33,6 @@ func update_face_to_character():
 		agent.change_direction(dir)
 		agent.update_sight_face(dir)
 		agent.update_sight_view()
-		LevelHandler.get_grid_drawer().update()
 
 func get_next_action():
 	var quester = LevelHandler.get_grid_quester()	
@@ -123,12 +124,14 @@ func get_move_near_character_action():
 				nearst_target = near_target
 			else:
 				nearst_target = _get_near_pos(near_target,nearst_target)
+	print(nearst_target)
 
 	if nearst_target == null:
 		return null
+	
 	# 获取行动的限制范围，并选择限制范围中最接近该玩家的最近临近格的格子。
 	var limit_array = action.clac_action_range()
-	var target = nearst_target
+	var target = null
 	for target_pos in limit_array:
 		if server.is_point_reachable(agent.id,target_pos):
 			if target == null:
@@ -137,7 +140,7 @@ func get_move_near_character_action():
 				target = target_pos
 	
 	if target != null:
-		action.set_target(target)	
+		action.set_target(target)
 		return action
 	else:
 		return null

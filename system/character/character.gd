@@ -57,8 +57,7 @@ func expand_sight(turn:int=1):
 	while t > 0:
 		sector.radius = sight_expand_radius+sector.radius
 		sector.angle = sight_expand_angle+sector.angle
-		t = t -1
-	update_sight_view()
+		t = t -1	
 
 func update_sight_face(dir:Vector2i):
 	sector.face = dir
@@ -133,6 +132,7 @@ func hide_sight_view():
 func update_sight_view():
 	hide_sight_view()
 	show_sight_view()
+	LevelHandler.get_grid_drawer().update()
 	
 # 角色行动
 func get_action_list() -> Dictionary:
