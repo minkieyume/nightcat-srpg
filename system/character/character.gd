@@ -21,7 +21,9 @@ extends Unit
 @onready var attributes = $AttributeContainer
 @onready var character_info = $Character_info
 
+var question_units:Array[String] = []
 var in_sight_units:Array[String] = []
+var angry_with = null # String
 var sector:TiledSector2D
 
 # 角色状态管理
@@ -93,10 +95,26 @@ func update_sight_units():
 		var pos = LevelHandler.get_unit_position(unit.id)
 		if unit.id == id:
 			continue
-		if quester.is_in_sight(origin,pos,sector):			
+		if quester.is_in_sight(origin,pos,sector):
 			in_sight_units.append(unit.id)
 		else:
 			in_sight_units.erase(unit.id)
+
+## 寻找进入视野的角色并加入question_units组
+func quest_question_units():
+	var units = LevelHandler.get_units()
+	var quester = LevelHandler.get_grid_quester()
+	var origin = LevelHandler.get_unit_position(id)
+	for unit in units:
+		var pos = LevelHandler.get_unit_position(unit.id)
+		if unit.id == id:
+			continue
+		if quester.is_in_sight(origin,pos,sector) and !question_units.has(unit.id):
+			question_units.append(unit.id)	
+
+## 清理question_units组
+func clean_question_units():
+	question_units.clear()
 
 ## 显示视野范围高亮范围
 func show_sight_view():

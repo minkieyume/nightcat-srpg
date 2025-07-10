@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dupnywu6oavso"]
+[gd_scene load_steps=19 format=3 uid="uid://dupnywu6oavso"]
 
 [ext_resource type="PackedScene" uid="uid://bmifao6rkul2o" path="res://system/character/player.tscn" id="1_ouxu8"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_1nccq"]
 [ext_resource type="Script" uid="uid://daouxidx122kl" path="res://system/attribute/ap_initailize.gd" id="2_3g2ta"]
 [ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="3_05vi7"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="3_wb5sy"]
+[ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="4_05vi7"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_j5q56"]
 [ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="5_e2xvg"]
 [ext_resource type="Resource" uid="uid://c2c8kbawe86ax" path="res://game/actions/action_resources/end_turn.tres" id="7_bjwp7"]
@@ -26,6 +27,15 @@ script = ExtResource("3_05vi7")
 max_health = 5.0
 health = 5.0
 metadata/_custom_type_script = "uid://w8k7keh2oex5"
+
+[sub_resource type="Resource" id="Resource_merej"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("4_05vi7")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
 [sub_resource type="Resource" id="Resource_lmbwv"]
 script = ExtResource("4_j5q56")
@@ -51,6 +61,7 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [sub_resource type="Resource" id="Range"]
@@ -76,10 +87,12 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
+tags = Array[String]([])
 
 [node name="Kiko" instance=ExtResource("1_ouxu8")]
 initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_8tnnp"), SubResource("AttributeBuff_766sh")])
+sight_sector = SubResource("Resource_merej")
 id = "kiko"
 
-[node name="ActionManager" parent="." index="6"]
+[node name="ActionManager" parent="." index="5"]
 actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_w02p2"), SubResource("Resource_bjwp7"), ExtResource("7_bjwp7")])

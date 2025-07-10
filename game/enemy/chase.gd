@@ -1,15 +1,25 @@
 extends AIPhase
 
 func _enter() -> void:
-	super()
 	agent.expand_sight()
+	super()	
 
 func _exit() -> void:
-	super()
-	print("reset")
+	super()	
 	agent.reset_sight()
 
 func before_action():
+	var qu:Array = agent.question_units
+	agent.in_sight_units.append_array(qu)
+	update_face_to_character()
+	agent.update_sight_units()
+	agent.clean_question_units()
+	
+	# var sc:Array = agent.in_sight_characters
+	# if sc.is_empty():
+	# 	dispatch("lost_enemy")
+
+func update_face_to_character():
 	var grid_quester = LevelHandler.get_grid_quester()
 	var origin = LevelHandler.get_unit_position(agent.id)
 	var c_pos = agent.in_sight_units.\
@@ -19,16 +29,9 @@ func before_action():
 	if c_pos:
 		var dir = grid_quester.quest_related_direction(origin,c_pos)
 		agent.change_direction(dir)
-		agent.update_sight_face(dir)		
+		agent.update_sight_face(dir)
+		agent.update_sight_view()
 		LevelHandler.get_grid_drawer().update()
-
-	print(c_pos)
-	print(agent.in_sight_units)
-	agent.update_sight_units()
-	
-	# var sc:Array = agent.in_sight_characters
-	# if sc.is_empty():
-	# 	dispatch("lost_enemy")
 
 func get_next_action():
 	var quester = LevelHandler.get_grid_quester()	

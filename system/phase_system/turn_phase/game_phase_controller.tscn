@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bcp4wjouh8kwm"]
+[gd_scene load_steps=18 format=3 uid="uid://bcp4wjouh8kwm"]
 
 [ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://system/phase_system/turn_phase/game_phase_controller.gd" id="2_emkk0"]
 [ext_resource type="Script" uid="uid://b4mr702dv54vg" path="res://system/phase_system/turn_phase/turn_prompt.gd" id="3_5hgr7"]
@@ -10,12 +10,13 @@
 [ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="7_oej6j"]
 [ext_resource type="Script" uid="uid://dhnujo24mhtvc" path="res://system/phase_system/turn_phase/player_select.gd" id="8_hvc3f"]
 [ext_resource type="Script" uid="uid://d26vwm781f5u8" path="res://system/phase_system/tool_phase/interactor.gd" id="8_ndc68"]
+[ext_resource type="Script" uid="uid://rxt26x1thuv" path="res://system/phase_system/turn_phase/player_action_end.gd" id="11_3vpev"]
 [ext_resource type="Script" uid="uid://bwl7t7bu2tsew" path="res://system/phase_system/tool_phase/count_weight.gd" id="11_6xkuc"]
 [ext_resource type="Script" uid="uid://l6clbaryheso" path="res://system/phase_system/tool_phase/cargo_set_phase.gd" id="11_qq5tc"]
 [ext_resource type="Script" uid="uid://csu0070v2a4vi" path="res://system/phase_system/turn_phase/ai_chose_next.gd" id="12_b0lpp"]
 [ext_resource type="Script" uid="uid://qlg2af8eqjwg" path="res://system/phase_system/turn_phase/enemy_next_unit.gd" id="13_prach"]
-[ext_resource type="Script" uid="uid://csluhq5pey5q8" path="res://system/phase_system/turn_phase/ai_next_action.gd" id="13_x0yme"]
 [ext_resource type="Script" uid="uid://c5ny1678ypi1u" path="res://system/phase_system/turn_phase/action_failed.gd" id="14_prytn"]
+[ext_resource type="Script" uid="uid://bxy5inob2hef3" path="res://system/phase_system/turn_phase/enemy_action_end.gd" id="18_wpmnv"]
 
 [node name="GamePhaseController" type="LimboHSM"]
 script = ExtResource("2_emkk0")
@@ -95,7 +96,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="PlayerAchieveAction" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("7_oej6j")
 transition = {
-&"next": NodePath("../PlayerChoseAction"),
+&"next": NodePath("../PlayerActrionEnd"),
 &"wait": NodePath("../PlayerAwaiter")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
@@ -116,6 +117,13 @@ transition = {
 &"interact": NodePath("../PlayerInteract"),
 &"interact_failed": NodePath("../PlayerChoseAction"),
 &"interact_sucess": NodePath("../PlayerInteract")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="PlayerActrionEnd" type="LimboState" parent="PlayerTurn/PlayerPartTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("11_3vpev")
+transition = {
+&"next": NodePath("../PlayerChoseAction")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
@@ -186,22 +194,14 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 script = ExtResource("12_b0lpp")
 transition = {
 &"end": NodePath("../TurnEnd"),
-&"next": NodePath("../EnemyNextAction")
-}
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="EnemyNextAction" type="LimboState" parent="EnemyTurn/EnemyPartTurn" node_paths=PackedStringArray("transition")]
-script = ExtResource("13_x0yme")
-transition = {
-&"end": NodePath("../EnemyChoseNext"),
-&"next": NodePath("../EnemyAchieveAction")
+&"next": NodePath("")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="EnemyAchieveAction" type="LimboState" parent="EnemyTurn/EnemyPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("7_oej6j")
 transition = {
-&"next": NodePath("../EnemyNextAction"),
+&"next": NodePath("../EnemyActionEnd"),
 &"wait": NodePath("../EnemyAwaiter")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
@@ -209,7 +209,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="EnemyInteract" type="LimboState" parent="EnemyTurn/EnemyPartTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("8_ndc68")
 transition = {
-&"failed": NodePath("../EnemyNextAction"),
+&"failed": NodePath(""),
 &"next": NodePath("../EnemyAchieveAction"),
 &"wait": NodePath("../EnemyAwaiter")
 }
@@ -229,6 +229,13 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 script = ExtResource("14_prytn")
 transition = {
 &"next": NodePath("../TurnEnd")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyActionEnd" type="LimboState" parent="EnemyTurn/EnemyPartTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("18_wpmnv")
+transition = {
+&"next": NodePath("")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 

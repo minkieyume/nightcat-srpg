@@ -85,6 +85,8 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 		var path = get_move_path(start,target)
 		set_tile_passable(start)
 		await unit.step_path(path,tile_size,grid_map)
+		for character in LevelHandler.get_characters():
+			character.quest_question_units()			
 	else:		
 		return false
 	remove_unit_blocks(func(u:Unit):return u.id == cid)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=27 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_pj3v8"]
@@ -69,6 +69,42 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
+[sub_resource type="Resource" id="Resource_sq75y"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("12_3bn13")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
+
+[sub_resource type="Resource" id="Resource_nlkc7"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("12_3bn13")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
+
+[sub_resource type="Resource" id="Resource_y4dlw"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("12_3bn13")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
+
+[sub_resource type="Resource" id="Resource_x0uo6"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("12_3bn13")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
+
 [node name="Test001" type="Node2D"]
 script = ExtResource("1_s0flc")
 metadata/_edit_lock_ = true
@@ -109,6 +145,7 @@ show_sights = true
 
 [node name="Machine" parent="Objects" groups=["interactable"] instance=ExtResource("6_360cf")]
 position = Vector2(144, 144)
+metadata/_edit_lock_ = true
 
 [node name="Characters" type="Node2D" parent="."]
 
@@ -117,6 +154,7 @@ initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff
 sight_sector = SubResource("Resource_ollb5")
 sight_expand_radius = 0
 part = "player"
+metadata/_edit_lock_ = true
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("7_s27i0")]
@@ -125,26 +163,31 @@ initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff
 sight_sector = SubResource("Resource_fx85u")
 sight_expand_radius = 0
 part = "player"
+metadata/_edit_lock_ = true
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(192, 144)
-sight_expand_radius = 0
+sight_sector = SubResource("Resource_sq75y")
+metadata/_edit_lock_ = true
 
 [node name="Enemy002" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(336, 48)
-sight_expand_radius = 0
+sight_sector = SubResource("Resource_nlkc7")
 id = "enemy002"
+metadata/_edit_lock_ = true
 
 [node name="Enemy003" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(336, 288)
-sight_expand_radius = 0
+sight_sector = SubResource("Resource_y4dlw")
 id = "enemy003"
+metadata/_edit_lock_ = true
 
 [node name="Enemy004" parent="Characters" groups=["enemy"] instance=ExtResource("7_80j1t")]
 position = Vector2(48, 288)
-sight_expand_radius = 0
+sight_sector = SubResource("Resource_x0uo6")
 id = "enemy004"
+metadata/_edit_lock_ = true
 
 [connection signal="path_end" from="Characters/Kiko" to="Characters/Kiko" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Yumi" to="Characters/Yumi" method="_on_path_end"]

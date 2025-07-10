@@ -167,7 +167,6 @@ _data = {
 
 [node name="Unit" type="Node2D" groups=["id"]]
 script = ExtResource("1_r1jac")
-metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(24, 19)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bb4jaww77an76"]
+[gd_scene load_steps=33 format=3 uid="uid://bb4jaww77an76"]
 
 [ext_resource type="PackedScene" uid="uid://c84estheuoiro" path="res://system/character/ai_character.tscn" id="1_wkmnl"]
 [ext_resource type="Texture2D" uid="uid://csm5mumirosf4" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_3.png" id="2_ciyex"]
 [ext_resource type="Script" uid="uid://do58gymkubxae" path="res://system/character/enemy.gd" id="2_kbf5l"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p36qo"]
+[ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="3_wnpm0"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_nydrm"]
 [ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/phase_system/ai_phase/ai_phase_controller.gd" id="4_qqrc7"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_22db3"]
@@ -12,6 +13,15 @@
 [ext_resource type="Script" uid="uid://bmwtiauyutjap" path="res://game/actions/action_logics/attack.gd" id="12_qqrc7"]
 [ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/enemy/chase.gd" id="12_rgqvb"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="13_wnpm0"]
+
+[sub_resource type="Resource" id="Resource_dhysm"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("3_wnpm0")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
 [sub_resource type="Animation" id="Animation_wlaod"]
 length = 0.001
@@ -257,6 +267,7 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 [node name="Enemy001" node_paths=PackedStringArray("ai") instance=ExtResource("1_wkmnl")]
 script = ExtResource("2_kbf5l")
 ai = NodePath("StateAI")
+sight_sector = SubResource("Resource_dhysm")
 id = "enemy001"
 part = "enemy"
 
