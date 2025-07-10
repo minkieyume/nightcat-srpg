@@ -56,6 +56,11 @@ func expand_sight(turn:int=1):
 		sector.radius = sight_expand_radius+sector.radius
 		sector.angle = sight_expand_angle+sector.angle
 		t = t -1
+	update_sight_view()
+
+func update_sight_face(dir:Vector2i):
+	sector.face = dir
+	update_sight_view()
 
 func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
 	# 沿着path批量移动
@@ -78,6 +83,7 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	await tween.finished
 	animation_machine.dispatch("move_stop")
 
+## 更新视野内的单位
 func update_sight_units():
 	in_sight_units = []
 	var units = LevelHandler.get_units()
@@ -87,8 +93,7 @@ func update_sight_units():
 		var pos = LevelHandler.get_unit_position(unit.id)
 		if unit.id == id:
 			continue
-		if quester.is_in_sight(origin,pos,sector):
-			print(unit.id)
+		if quester.is_in_sight(origin,pos,sector):			
 			in_sight_units.append(unit.id)
 		else:
 			in_sight_units.erase(unit.id)
@@ -106,6 +111,7 @@ func hide_sight_view():
 	var grid_drawer = LevelHandler.get_grid_drawer()
 	grid_drawer.clean_sight_dict(id)
 
+## 更新视野高亮范围
 func update_sight_view():
 	hide_sight_view()
 	show_sight_view()
@@ -209,7 +215,3 @@ func apply_damage(damage:int):
 
 func _on_attribute_container_attribute_changed(_attribute:RuntimeAttribute, _previous_value:float, _new_value:float) -> void:
 	update_character_info()
-
-
-func _on_direction_changed(direct:Vector2i) -> void:
-	sector.face = direct

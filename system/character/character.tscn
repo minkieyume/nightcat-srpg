@@ -36,7 +36,7 @@ resource_name = "视野范围"
 script = ExtResource("5_fvjva")
 face = Vector2i(0, 1)
 radius = 6
-angle = 120.0
+angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
 [sub_resource type="Animation" id="Animation_wlaod"]
@@ -282,5 +282,4 @@ HP:1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="direction_changed" from="." to="." method="_on_direction_changed"]
 [connection signal="attribute_changed" from="AttributeContainer" to="." method="_on_attribute_container_attribute_changed"]

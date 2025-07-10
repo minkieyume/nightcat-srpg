@@ -19,7 +19,7 @@ func before_action():
 	if c_pos:
 		var dir = grid_quester.quest_related_direction(origin,c_pos)
 		agent.change_direction(dir)
-		agent.update_sight_view()
+		agent.update_sight_face(dir)		
 		LevelHandler.get_grid_drawer().update()
 
 	print(c_pos)
