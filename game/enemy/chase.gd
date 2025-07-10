@@ -15,7 +15,7 @@ func before_action():
 	agent.update_sight_units()
 	agent.clean_question_units()
 	
-	var sc:Array = agent.in_sight_characters
+	var sc:Array = agent.in_sight_units
 	if sc.is_empty():
 		dispatch("lost_enemy")
 
@@ -50,7 +50,13 @@ func get_next_action():
 			if result:
 				return move_action
 	else:
-		return await random_attack()
+		if nearby_player.size() > 0:
+			var rand_player_index = randi()%(nearby_player.size())
+			var player = nearby_player[rand_player_index-1]
+			var p_pos = LevelHandler.get_unit_position(player.id)
+			return await random_attack(p_pos)
+		else:
+			return false
 
 	
 	#var ap_cost = move_action.get_ap_coast()
@@ -74,7 +80,7 @@ func get_next_action():
 	#			
 	#return action_array
 
-func random_attack():
+func random_attack(target:Vector2i):
 	# 随机选取一个带有攻击标签的action，以后可以做成一个通用方法。
 	# 也就是让敌人随机选取任意一个符合条件的行动，并根据剩余ap决定执行哪个行动的方法。
 	var ap = agent.get_ap()	
@@ -88,6 +94,7 @@ func random_attack():
 		if ap >= action_ap:
 			var action = Action.new(agent.id,action_id)
 			await action.before_target_chose()
+			action.set_target(target)
 			if await action.precheck():
 				return action
 	return null
