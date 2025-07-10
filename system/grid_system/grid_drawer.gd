@@ -2,7 +2,12 @@ class_name GridDrawer
 extends Node2D
 # 图层绘制器，用于在填充图层上绘制网格。
 
-@export var fill_map:TileMapLayer # 用于填充和绘制网格的图块层
+## 用于填充和绘制网格的图块层
+@export var fill_map:TileMapLayer
+## 跟随高亮的相机
+@export var follow_camera:PhantomCamera2D
+## 用于给摄像机追踪高亮图块位置的目标节点
+@export var high_light_camera_follow:Node2D
 
 @export_category("展示模式")
 @export var show_grid:bool = true
@@ -33,8 +38,26 @@ func _ready() -> void:
 	if show_grid or show_limit or show_highlight or show_sights:
 		queue_redraw()
 
+func focus_highlight():
+	if follow_camera and high_light_camera_follow:		
+		follow_camera.set_follow_target(high_light_camera_follow)
+
 func update() -> void:
 	queue_redraw()
+
+func update_highlight(new_pos:Vector2i):
+	var local_pos = fill_map.map_to_local(new_pos)
+	# if limit_camera:
+	# 	var limits = Rect2(limit_camera.limit_top,limit_camera.limit_left,\
+	# 		limit_camera.limit_right-limit_camera.limit_left,\
+	# 		limit_camera.limit_bottom-limit_camera.limit_top)
+	# 	if !limits.has_point(new_pos):
+	# 		return
+	highlight = new_pos
+	if high_light_camera_follow:
+		high_light_camera_follow.position = local_pos
+
+	
 
 func update_sight_dict(id:String,val:Array):
 	sight_dict[id] = val

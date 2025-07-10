@@ -24,6 +24,7 @@ func _enter() -> void:
 	super()
 	grid_drawer = LevelHandler.get_grid_drawer()
 	grid_drawer.show_highlight = true
+	grid_drawer.focus_highlight()
 	match context["mode"]:
 		"chose_action_target":
 			var limit_array = context["limit_array"]
@@ -69,7 +70,7 @@ func is_chosed_actor_vaild(target:Vector2i) -> bool:
 	return quester.quest_character(target) != ""
 
 func update_target_position(new_pos:Vector2i):
-	grid_drawer.highlight = new_pos
+	grid_drawer.update_highlight(new_pos)
 	grid_drawer.update()
 
 func get_chosed_target() -> Vector2i:

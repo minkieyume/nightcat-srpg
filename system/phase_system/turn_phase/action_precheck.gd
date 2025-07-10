@@ -4,6 +4,8 @@ func _enter():
 	super()
 	match context["mode"]:
 		"action_precheck":
+			var camera = LevelHandler.get_camera()			
+			camera.set_follow_target(LevelHandler.get_character(context["actor"]))
 			var action = context["action"]
 			action.set_ctx(context)
 			await action.before_precheck()

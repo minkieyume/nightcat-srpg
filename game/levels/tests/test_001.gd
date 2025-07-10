@@ -31,4 +31,4 @@ func get_movement_server() -> MovementServer:
 	return movement_server
 
 func get_camera() -> PhantomCamera2D:
-	return PhantomCamera2D.new()
+	return camera

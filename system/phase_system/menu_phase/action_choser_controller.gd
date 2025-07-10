@@ -30,6 +30,8 @@ func _update_actor():
 	var actor = grid_quester.quest_character(context["target"])
 	if actor != "":
 		context["actor"] = actor
+		var camera = LevelHandler.get_camera()		
+		camera.set_follow_target(LevelHandler.get_character(actor))
 	else:
 		print("[ActionChoser] 未找到角色，请重新选择")
 		call_deferred("dispatch","return")
