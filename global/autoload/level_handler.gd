@@ -57,6 +57,9 @@ func get_character(id:String):
 	else:
 		return null
 
+func get_camera() -> PhantomCamera2D:
+	return level.get_camera()
+
 func get_character_ids() -> Array[String]:
 	var results = []
 	var cs = get_characters()

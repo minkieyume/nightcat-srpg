@@ -40,3 +40,6 @@ func get_grid_quester() -> GridQuester:
 
 func get_movement_server() -> MovementServer:
 	return MovementServer.new()
+
+func get_camera() -> PhantomCamera2D:
+	return PhantomCamera2D.new()

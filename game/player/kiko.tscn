@@ -94,5 +94,5 @@ initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff
 sight_sector = SubResource("Resource_merej")
 id = "kiko"
 
-[node name="ActionManager" parent="." index="5"]
+[node name="ActionManager" parent="." index="4"]
 actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_w02p2"), SubResource("Resource_bjwp7"), ExtResource("7_bjwp7")])

@@ -259,20 +259,20 @@ sight_sector = SubResource("Resource_h7f75")
 sight_expand_radius = 6
 sight_expand_angle = 0.0
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="1"]
 libraries = {
 &"": SubResource("AnimationLibrary_wlaod"),
 &"idle": SubResource("AnimationLibrary_bl7gt"),
 &"move": SubResource("AnimationLibrary_u646v")
 }
 
-[node name="AttributeContainer" type="AttributeContainer" parent="." index="4"]
+[node name="AttributeContainer" type="AttributeContainer" parent="." index="3"]
 attribute_set = ExtResource("3_deljr")
 
-[node name="ActionManager" parent="." index="5" instance=ExtResource("5_h7f75")]
+[node name="ActionManager" parent="." index="4" instance=ExtResource("5_h7f75")]
 actions = Array[ExtResource("6_u646v")]([SubResource("Resource_fvjva"), SubResource("Resource_u646v")])
 
-[node name="Character_info" type="Label" parent="." index="6"]
+[node name="Character_info" type="Label" parent="." index="5"]
 offset_left = 4.0
 offset_top = -56.0
 offset_right = 44.0
