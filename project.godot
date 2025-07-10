@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 CommandBus="*res://global/autoload/command_bus.gd"
 LevelHandler="*res://global/autoload/level_handler.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
@@ -28,6 +29,10 @@ window/size/viewport_height=540
 [editor]
 
 naming/script_name_casing=2
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 

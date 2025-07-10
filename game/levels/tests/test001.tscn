@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://c2purqc7krpp8"]
+[gd_scene load_steps=30 format=4 uid="uid://c2purqc7krpp8"]
 
 [ext_resource type="Script" uid="uid://bpkkqd6hstwnu" path="res://game/levels/tests/test_001.gd" id="1_s0flc"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_pj3v8"]
@@ -14,10 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="12_2fenr"]
 [ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="12_3bn13"]
 [ext_resource type="Script" uid="uid://daouxidx122kl" path="res://system/attribute/ap_initailize.gd" id="12_ptgd0"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_ptgd0"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_ollb5"]
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_3bn13"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_ptgd0"]
 operation = SubResource("AttributeOperation_u646v")
 resource_local_to_scene = true
 script = ExtResource("11_uenbh")
@@ -27,7 +29,7 @@ metadata/_custom_type_script = "uid://w8k7keh2oex5"
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_uenbh"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_ollb5"]
 operation = SubResource("AttributeOperation_cr7lv")
 resource_local_to_scene = true
 script = ExtResource("12_ptgd0")
@@ -44,7 +46,7 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_ptgd0"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_sq75y"]
 operation = SubResource("AttributeOperation_u646v")
 resource_local_to_scene = true
 script = ExtResource("11_uenbh")
@@ -52,7 +54,7 @@ max_health = 5.0
 health = 5.0
 metadata/_custom_type_script = "uid://w8k7keh2oex5"
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_ollb5"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_nlkc7"]
 operation = SubResource("AttributeOperation_cr7lv")
 resource_local_to_scene = true
 script = ExtResource("12_ptgd0")
@@ -105,6 +107,12 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
+[sub_resource type="Resource" id="Resource_b814j"]
+script = ExtResource("16_ollb5")
+duration = 1.0
+transition = 0
+ease = 2
+
 [node name="Test001" type="Node2D"]
 script = ExtResource("1_s0flc")
 metadata/_edit_lock_ = true
@@ -150,7 +158,7 @@ metadata/_edit_lock_ = true
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Kiko" parent="Characters" groups=["player"] instance=ExtResource("6_s27i0")]
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_3bn13"), SubResource("AttributeBuff_uenbh")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_ptgd0"), SubResource("AttributeBuff_ollb5")])
 sight_sector = SubResource("Resource_ollb5")
 sight_expand_radius = 0
 part = "player"
@@ -159,7 +167,7 @@ metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("7_s27i0")]
 position = Vector2(96, 0)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_ptgd0"), SubResource("AttributeBuff_ollb5")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_sq75y"), SubResource("AttributeBuff_nlkc7")])
 sight_sector = SubResource("Resource_fx85u")
 sight_expand_radius = 0
 part = "player"
@@ -188,6 +196,12 @@ position = Vector2(48, 288)
 sight_sector = SubResource("Resource_x0uo6")
 id = "enemy004"
 metadata/_edit_lock_ = true
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(384, 192)
+script = ExtResource("15_ptgd0")
+tween_resource = SubResource("Resource_b814j")
+draw_limits = true
 
 [connection signal="path_end" from="Characters/Kiko" to="Characters/Kiko" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Yumi" to="Characters/Yumi" method="_on_path_end"]

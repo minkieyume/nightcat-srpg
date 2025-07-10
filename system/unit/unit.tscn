@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://chh2vk7ydqmob"]
+[gd_scene load_steps=18 format=3 uid="uid://chh2vk7ydqmob"]
 
 [ext_resource type="Script" uid="uid://cirek5i3e4lk7" path="res://system/unit/unit.gd" id="1_r1jac"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_pk3qa"]
 [ext_resource type="Texture2D" uid="uid://dl1087ffalj4y" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_1.png" id="5_74xa2"]
 [ext_resource type="Script" uid="uid://cwks6baw6juj6" path="res://system/character/states/idle_state.gd" id="13_5bykn"]
 [ext_resource type="Script" uid="uid://clf6ve54nuriy" path="res://system/character/states/move_state.gd" id="14_3fmv1"]
@@ -178,6 +179,11 @@ frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_pk3qa")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

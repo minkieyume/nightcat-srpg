@@ -75,7 +75,8 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 	var drawer = LevelHandler.get_grid_drawer()	
 
 	# 移除单位的视野显示
-	unit.hide_sight_view()
+	if unit is Character:
+		unit.hide_sight_view()
 	if unit.is_in_group("enemy"):
 		drawer.update()
 	
