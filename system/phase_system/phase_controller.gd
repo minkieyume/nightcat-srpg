@@ -27,16 +27,16 @@ func _init_state_machine():
 				phase.cargo_send.connect(target._on_cargo_recieve)
 				add_transition(phase,target,event)
 
-@rpc("authority","call_local")
-func remote_dispatch(event:StringName):
-	dispatch(event)
+# @rpc("authority","call_local")
+# func remote_dispatch(event:StringName):
+# 	dispatch(event)
 
-func rpc_dispatch(event:StringName):
-	if MultiCat.should_sync():		
-		if is_multiplayer_authority():
-			rpc("remote_dispatch",event)
-	else:
-		dispatch(event)
+# func rpc_dispatch(event:StringName):
+# 	if MultiCat.should_sync():		
+# 		if is_multiplayer_authority():
+# 			rpc("remote_dispatch",event)
+# 	else:
+# 		dispatch(event)
 
 func _setup():	
 	for phase in get_children():
@@ -48,11 +48,12 @@ func _enter() -> void:
 	state._on_cargo_recieve(context)
 
 func _exit() -> void:
-	if MultiCat.should_sync():
-		if is_multiplayer_authority():
-			rpc("send_cargo",context)
-	else:
-		send_cargo(context)
+	send_cargo(context)
+	# if MultiCat.should_sync():
+	# 	if is_multiplayer_authority():
+	# 		rpc("send_cargo",context)
+	# else:
+	# 	send_cargo(context)
 
 @rpc("authority","call_local")
 func send_cargo(ctx:Dictionary):
@@ -80,30 +81,30 @@ func get_context() -> Dictionary:
 	var leaf = get_leaf_state()
 	return leaf.context
 
-@rpc("authority","call_remote")
-func sync(ctx:Dictionary,state_tree:Array):
-	var state = get_node(state_tree.pop_back())
-	change_active_state(state)
-	print(get_active_state())
-	if state is PhaseController:
-		state.sync(ctx,state_tree)
-	elif state is Phase:
-		state.sync(ctx)
+# @rpc("authority","call_remote")
+# func sync(ctx:Dictionary,state_tree:Array):
+# 	var state = get_node(state_tree.pop_back())
+# 	change_active_state(state)
+# 	print(get_active_state())
+# 	if state is PhaseController:
+# 		state.sync(ctx,state_tree)
+# 	elif state is Phase:
+# 		state.sync(ctx)
 
-@rpc("authority","call_remote")
-func queue_sync(ctx:Dictionary,state_tree:Array):
-	if not has_started:
-		await started
-	else:
-		await get_tree().process_frame
-	sync(ctx,state_tree)
+# @rpc("authority","call_remote")
+# func queue_sync(ctx:Dictionary,state_tree:Array):
+# 	if not has_started:
+# 		await started
+# 	else:
+# 		await get_tree().process_frame
+# 	sync(ctx,state_tree)
 
-func rpc_update_context(id,content):
-	if MultiCat.should_sync():
-		if is_multiplayer_authority():
-			rpc("update_context",id,content)
-	else:
-		update_context(id,content)
+# func rpc_update_context(id,content):
+# 	if MultiCat.should_sync():
+# 		if is_multiplayer_authority():
+# 			rpc("update_context",id,content)
+# 	else:
+# 		update_context(id,content)
 
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo

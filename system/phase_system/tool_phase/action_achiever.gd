@@ -26,8 +26,8 @@ func _enter():
 		"start_action":
 			var action = context["action"]
 			action.set_ctx(context)
-			context.erase("target")
-			action.execute()
+			context.erase("target")			
+			LevelHandler.cat_execute_action(action)
 		"end_action":
 			call_deferred("dispatch","next")
 		

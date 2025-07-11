@@ -26,6 +26,19 @@ func is_unit_in_group(uid:String,group:String) -> bool:
 	else:
 		return false
 
+@rpc("authority","call_local")
+func execute_action(r:String,id:StringName,target:Vector2i,ap_coast:int,ctx:Dictionary):
+	var action = Action.new(r,id)	
+	action.set_target(target)
+	action.set_ap_cost(ap_coast)
+	action.set_ctx(ctx)
+	action.execute()
+
+func cat_execute_action(action:Action):
+	if MultiCat.should_sync():
+		rpc("execute_action",action.requester,action.resource.id,action.target,action.ap_cost,action.ctx)
+	else:
+		action.execute()
 
 ## 获取单位坐标，未找到则返回 (-9223372036854775808,-9223372036854775808)
 func get_unit_position(id:String) -> Vector2i:
