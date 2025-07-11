@@ -7,10 +7,7 @@ func send_command(command:StringName,args:Array):
 	emit_signal("command_send",command,args)
 
 func rpc_send_command(command:StringName,args:Array):
-	if should_sync():
+	if MultiCat.should_sync():
 		rpc("send_command",command,args)
 	else:
 		emit_signal("command_send",command,args)
-
-func should_sync():
-	return MPIO.mpc.mode == MPIO.mpc.PlayMode.Online

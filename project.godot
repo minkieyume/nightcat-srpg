@@ -21,6 +21,8 @@ CommandBus="*res://global/autoload/command_bus.gd"
 LevelHandler="*res://global/autoload/level_handler.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 MPIO="*res://addons/MultiplayCore/MPIO.gd"
+PackRTC="*res://addons/packrtc/scripts/PackRTC.gd"
+MultiCat="*res://global/autoload/multicat.gd"
 
 [display]
 
@@ -33,7 +35,7 @@ naming/script_name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/MultiplayCore/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/MultiplayCore/plugin.cfg", "res://addons/awaitable_http_request/plugin.cfg", "res://addons/nodewebsockets/plugin.cfg", "res://addons/packrtc/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 

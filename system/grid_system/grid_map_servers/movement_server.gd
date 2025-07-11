@@ -107,7 +107,7 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 	return true
 
 func request_move_unit(cid:String,target:Vector2i):
-	if CommandBus.should_sync():
+	if MultiCat.should_sync():
 		rpc("move_unit",cid,target)	
 	await move_unit(cid,target)
 

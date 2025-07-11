@@ -23,38 +23,48 @@ func _enter() -> void:
 	pass
 
 func _exit() -> void:
-	if CommandBus.should_sync() and is_multiplayer_authority():
-		rpc("send_cargo",context)
-	send_cargo(context)
+	if MultiCat.should_sync():
+		if is_multiplayer_authority():
+			rpc("send_cargo",context)
+	else:
+		send_cargo(context)
 
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo
 
-@rpc("authority")
+@rpc("authority","call_local")
 func send_cargo(ctx:Dictionary):
 	emit_signal("cargo_send",ctx)
 
 func search_context(id):
 	return context.get(id)
 
-@rpc("authority")
+@rpc("authority","call_local")
 func update_context(id,content):
 	context[id] = content
 	emit_signal("context_updated",id,content)
 
-func rpc_update_context(id,content):
-	if CommandBus.should_sync() and is_multiplayer_authority():
-		rpc("update_context",id,content)
-	update_context(id,content)
+@rpc("authority","call_remote")
+func sync(ctx:Dictionary):
+	context = ctx	
 
-@rpc("authority")
+func rpc_update_context(id,content):
+	if MultiCat.should_sync():
+		if is_multiplayer_authority():
+			rpc("update_context",id,content)
+	else:
+		update_context(id,content)
+
+@rpc("authority","call_local")
 func remote_dispatch(event:StringName):
 	dispatch(event)
 
 func rpc_dispatch(event:StringName):
-	if CommandBus.should_sync() and is_multiplayer_authority():
-		rpc("remote_dispatch",event)
-	dispatch(event)
+	if MultiCat.should_sync():		
+		if is_multiplayer_authority():
+			rpc("remote_dispatch",event)
+	else:
+		dispatch(event)
 
 func _on_handler_command_send(command:StringName, args:Array) -> void:
 	if command == controller_name:
