@@ -1,12 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg3dp8fyss4f2"]
+[gd_scene load_steps=15 format=3 uid="uid://cg3dp8fyss4f2"]
 
 [ext_resource type="PackedScene" uid="uid://bmifao6rkul2o" path="res://system/character/player.tscn" id="1_ia4wj"]
 [ext_resource type="Texture2D" uid="uid://cwsnak15fe60m" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_2.png" id="2_4vs7r"]
+[ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="2_aysmk"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_p1g74"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="3_ditxy"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_qjnne"]
 [ext_resource type="Script" uid="uid://5cp6n7kqsogh" path="res://game/actions/action_logics/machine_interact_action.gd" id="6_p1g74"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="7_t0dh5"]
+
+[sub_resource type="Resource" id="Resource_cv6jv"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("2_aysmk")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
 [sub_resource type="Resource" id="Resource_lmbwv"]
 script = ExtResource("4_qjnne")
@@ -16,7 +26,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_t0dh5"]
+[sub_resource type="Resource" id="Resource_aysmk"]
 resource_local_to_scene = true
 resource_name = "移动"
 script = ExtResource("2_p1g74")
@@ -32,6 +42,7 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [sub_resource type="Resource" id="Resource_xkqmr"]
@@ -42,7 +53,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_aysmk"]
+[sub_resource type="Resource" id="Resource_iws6o"]
 resource_local_to_scene = true
 resource_name = "机关操纵"
 script = ExtResource("2_p1g74")
@@ -58,24 +69,16 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
-[sub_resource type="Resource" id="Resource_7m1oh"]
-script = ExtResource("4_qjnne")
-deter_array = Array[Vector2i]([])
-deter_vector2 = Vector2i(0, 0)
-deter_rect2 = Rect2i(0, 0, 0, 0)
-type = 2
-metadata/_custom_type_script = "uid://b6x8da3egg2rq"
-
-[sub_resource type="Resource" id="Resource_iws6o"]
+[sub_resource type="Resource" id="Resource_vh832"]
 resource_local_to_scene = true
 resource_name = "结束回合"
 script = ExtResource("2_p1g74")
 id = &"end_turn"
 group = ""
 action_name = "结束回合"
-action_range = SubResource("Resource_7m1oh")
 action_logic = ExtResource("7_t0dh5")
 allowed_target = {
 "Enemy": true,
@@ -84,14 +87,17 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 0
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [node name="Yumi" instance=ExtResource("1_ia4wj")]
+sight_sector = SubResource("Resource_cv6jv")
 id = "yumi"
+part = "player"
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(25, 18)
 texture = ExtResource("2_4vs7r")
 
-[node name="ActionManager" parent="." index="6"]
-actions = Array[ExtResource("2_p1g74")]([SubResource("Resource_t0dh5"), SubResource("Resource_aysmk"), SubResource("Resource_iws6o")])
+[node name="ActionManager" parent="." index="4"]
+actions = Array[ExtResource("2_p1g74")]([SubResource("Resource_aysmk"), SubResource("Resource_iws6o"), SubResource("Resource_vh832")])

@@ -164,7 +164,6 @@ metadata/_edit_lock_ = true
 initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_ollb5"), SubResource("AttributeBuff_sq75y")])
 sight_sector = SubResource("Resource_ollb5")
 sight_expand_radius = 0
-part = "player"
 metadata/_edit_lock_ = true
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
@@ -173,7 +172,6 @@ position = Vector2(96, 0)
 initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_nlkc7"), SubResource("AttributeBuff_fx85u")])
 sight_sector = SubResource("Resource_fx85u")
 sight_expand_radius = 0
-part = "player"
 metadata/_edit_lock_ = true
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
