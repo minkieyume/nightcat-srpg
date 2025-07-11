@@ -4,7 +4,7 @@ func before_interact(_character:String,_ctx:Dictionary):
 	CommandBus.send_command("gamephase",["wait"])
 	CommandBus.send_command("gamephase",["setcargo","mode","interact"])
 	CommandBus.send_command("menu",["setcargo","mode","chose_interactable_target"])
-	CommandBus.send_command("menu",["action"])
+	CommandBus.send_command("menu",["chose_target"])
 
 func interact(_character:String,ctx:Dictionary):
 	CommandBus.send_command("gamephase",["wait"])
