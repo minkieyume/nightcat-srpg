@@ -13,7 +13,7 @@ extends Node2D
 ## 单位默认穿透的unit的组别
 @export var preced_unit_groups:Array[String]
 
-# 动画播放器插件
+# 动画播放器
 @onready var animation_player = $AnimationPlayer
 
 #LimboHSM状态机插件
@@ -123,7 +123,7 @@ func step_path(path:Array[Vector2i],vdis:Vector2,map:TileMapLayer) -> void:
 		start = map.local_to_map(position)	
 	emit_signal("path_end")
 
-func step(dir:Vector2,vdis:Vector2) -> void:
+func step(dir:Vector2,vdis:Vector2) -> void:	
 	# 朝特定方向移动一段距离
 	# dir:朝向的向量
 	# vdis:距离的向量，x和y分别代表x方向和y方向的移动量。

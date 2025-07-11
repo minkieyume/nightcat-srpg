@@ -10,7 +10,7 @@ func interact(_character:String,ctx:Dictionary):
 	CommandBus.send_command("gamephase",["wait"])
 	var target:Vector2i = ctx["target"]	
 	var movement = LevelHandler.get_movement_server()
-	var move_result = await movement.move_unit(id,target)	
+	var move_result = await movement.move_unit(id,target)
 	if !move_result:
 		CommandBus.send_command("gamephase",["interact_failed"])
 		call_deferred("end")

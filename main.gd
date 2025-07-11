@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 
 
 func _on_handler_level_load() -> void:	
-	game_phase_controller.initialize(self)
-	menu_manager.initialize(self)
-	game_phase_controller.start()
+	#game_phase_controller.initialize(self)
+	#game_phase_controller.start()
+	menu_manager.initialize(self)	
 	menu_manager.start()	

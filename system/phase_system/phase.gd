@@ -23,20 +23,38 @@ func _enter() -> void:
 	pass
 
 func _exit() -> void:
+	if CommandBus.should_sync() and is_multiplayer_authority():
+		rpc("send_cargo",context)
 	send_cargo(context)
 
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo
 
+@rpc("authority")
 func send_cargo(ctx:Dictionary):
 	emit_signal("cargo_send",ctx)
 
 func search_context(id):
 	return context.get(id)
 
+@rpc("authority")
 func update_context(id,content):
 	context[id] = content
 	emit_signal("context_updated",id,content)
+
+func rpc_update_context(id,content):
+	if CommandBus.should_sync() and is_multiplayer_authority():
+		rpc("update_context",id,content)
+	update_context(id,content)
+
+@rpc("authority")
+func remote_dispatch(event:StringName):
+	dispatch(event)
+
+func rpc_dispatch(event:StringName):
+	if CommandBus.should_sync() and is_multiplayer_authority():
+		rpc("remote_dispatch",event)
+	dispatch(event)
 
 func _on_handler_command_send(command:StringName, args:Array) -> void:
 	if command == controller_name:

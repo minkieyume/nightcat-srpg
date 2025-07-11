@@ -69,6 +69,7 @@ func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	return max(path.size() - 1, 0)
 
 ## 移动单位
+@rpc("any_peer")
 func move_unit(cid:String,target:Vector2i) -> bool:
 	var unit = LevelHandler.get_unit(cid)
 	var drawer = LevelHandler.get_grid_drawer()	
@@ -104,6 +105,11 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 		unit.show_sight_view()
 		drawer.update()
 	return true
+
+func request_move_unit(cid:String,target:Vector2i):
+	if CommandBus.should_sync():
+		rpc("move_unit",cid,target)	
+	await move_unit(cid,target)
 
 ## 获取移动的路径
 func get_move_path(start:Vector2i,end:Vector2i) -> Array:

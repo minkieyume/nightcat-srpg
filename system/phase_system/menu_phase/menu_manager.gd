@@ -8,3 +8,6 @@ func _on_handler_command_send(command:StringName, args:Array) -> void:
 				return
 			_:
 				dispatch(args[0])
+
+func _exit() -> void:
+	send_cargo(context)

@@ -23,6 +23,14 @@ func _init_state_machine():
 				phase.cargo_send.connect(target._on_cargo_recieve)
 				add_transition(phase,target,event)
 
+@rpc("authority")
+func remote_dispatch(event:StringName):
+	dispatch(event)
+
+func rpc_dispatch(event:StringName):
+	if CommandBus.should_sync() and is_multiplayer_authority():
+		rpc("remote_dispatch",event)
+	dispatch(event)
 
 func _setup():	
 	for phase in get_children():
@@ -34,7 +42,26 @@ func _enter() -> void:
 	state._on_cargo_recieve(context)
 
 func _exit() -> void:
-	emit_signal("cargo_send",context)
+	if CommandBus.should_sync() and is_multiplayer_authority():
+		rpc("send_cargo",context)
+	send_cargo(context)
+
+@rpc("authority")
+func send_cargo(ctx:Dictionary):
+	emit_signal("cargo_send",ctx)
+
+func search_context(id):
+	return context.get(id)
+
+@rpc("authority")
+func update_context(id,content):
+	context[id] = content
+	emit_signal("context_updated",id,content)
+
+func rpc_update_context(id,content):
+	if CommandBus.should_sync() and is_multiplayer_authority():
+		rpc("update_context",id,content)
+	update_context(id,content)
 
 func _on_cargo_recieve(cargo:Dictionary):
 	context = cargo

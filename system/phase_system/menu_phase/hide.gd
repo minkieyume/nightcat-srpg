@@ -1,4 +1,4 @@
-extends Phase
+extends MenuPhase
 
 var first_run = true
 
