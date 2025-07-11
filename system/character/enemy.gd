@@ -1,6 +1,6 @@
 class_name Enemy
 extends AICharacter
 
-func _ready() -> void:
-	await super()
+func _on_level_ready():
+	super()
 	show_sight_view()

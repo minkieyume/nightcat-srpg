@@ -21,32 +21,10 @@ func _enter() -> void:
 	_update_action_list()
 
 func _update_action_list():
-	_update_actor()
-	if is_character_in_part():
-		update_context("action_list",LevelHandler.get_character_actions(context["actor"]))	
-
-func _update_actor():
-	var grid_quester = LevelHandler.get_grid_quester()
-	var actor = grid_quester.quest_character(context["target"])
-	if actor != "":
-		context["actor"] = actor
-		var camera = LevelHandler.get_camera()		
-		camera.set_follow_target(LevelHandler.get_character(actor))
-	else:
-		print("[ActionChoser] 未找到角色，请重新选择")
-		call_deferred("dispatch","return")
+	update_context("action_list",LevelHandler.get_character_actions(context["actor"]))
 
 func _exit():
 	super()	
-
-func is_character_in_part():
-	var character = LevelHandler.get_character(context["actor"])
-	if character.part == context["part"]:
-		return true
-	else:
-		print("[ActionChoser] 你没有该角色的控制权")
-		call_deferred("dispatch","return")
-		return false
 
 func _create_action():
 	var action:Action = Action.new(context["actor"], context["chosed_action"])

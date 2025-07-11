@@ -14,7 +14,7 @@ signal context_updated(id,content)
 
 func _ready() -> void:
 	CommandBus.command_send.connect(_on_handler_command_send)
-	await LevelHandler.level_ready
+	LevelHandler.level_ready.connect(_on_level_ready)
 
 func _setup() -> void:
 	pass
@@ -43,3 +43,6 @@ func _on_handler_command_send(command:StringName, args:Array) -> void:
 		match args[0]:
 			"setcargo":
 				context.set(args[1],args[2])
+
+func _on_level_ready():
+	pass

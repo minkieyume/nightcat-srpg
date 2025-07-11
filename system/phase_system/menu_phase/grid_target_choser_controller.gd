@@ -47,16 +47,18 @@ func _chose() -> bool:
 	context["target"] = target
 	match context["mode"]:
 		"chose_character":
-			if !is_chosed_actor_vaild(target):
+			if !update_actor():
 				print("[GridChoser] 选中目标不是角色，请重新选择")
 				return true
+			if !is_character_in_part():
+				return true
+			CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
+			CommandBus.send_command("gamephase",["setcargo","mode","chose_action"])
 			dispatch("character_chose")
 		"chose_action_target":
-			context["action"].set_target(context["target"])
-			CommandBus.send_command("gamephase",["setcargo","mode","action_precheck"])
-			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])			
+			context["action"].set_target(context["target"])			
+			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])
 			context.erase("target")
-			CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
 			dispatch("action_target_chose")
 		"chose_interactable_target":
 			CommandBus.send_command("gamephase",["setcargo","target",context["target"]])
@@ -65,9 +67,24 @@ func _chose() -> bool:
 			dispatch("interactable_target_chose")
 	return true
 
-func is_chosed_actor_vaild(target:Vector2i) -> bool:
-	var quester = LevelHandler.get_grid_quester()
-	return quester.quest_character(target) != ""
+func update_actor() -> bool:
+	var grid_quester = LevelHandler.get_grid_quester()
+	var actor = grid_quester.quest_character(context["target"])
+	if actor != "":
+		context["actor"] = actor
+		var camera = LevelHandler.get_camera()		
+		camera.set_follow_target(LevelHandler.get_character(actor))
+		return true
+	else:
+		return false
+
+func is_character_in_part():
+	var character = LevelHandler.get_character(context["actor"])
+	if character.part == context["part"]:
+		return true
+	else:
+		print("[GridTargetChoser] 你没有该角色的控制权")		
+		return false
 
 func update_target_position(new_pos:Vector2i):
 	grid_drawer.update_highlight(new_pos)

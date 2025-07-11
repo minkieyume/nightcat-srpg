@@ -5,9 +5,8 @@ extends GridMapServer
 var piercing_astar:AStarGrid2D
 var astar:AStarGrid2D
 
-func _ready() -> void:
+func _on_level_ready():
 	super()
-	await LevelHandler.level_ready
 	_init_astar()
 	_init_piercing_astar()
 	_set_tile_blocks()

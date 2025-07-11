@@ -8,11 +8,12 @@ extends Level
 @onready var movement_server:MovementServer = $MovementServer
 @onready var objects = $Objects
 
-func _ready() -> void:	
+func _ready() -> void:
 	var character_dict = pack_nodes_to_dict(characters)
 	var object_dict = pack_nodes_to_dict(objects)
 	unit_dict.merge(character_dict)
 	unit_dict.merge(object_dict)
+	super()
 	
 
 func get_grid_drawer() -> GridDrawer:

@@ -2,20 +2,28 @@
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
+[ext_resource type="Script" uid="uid://budecnfydfvbx" path="res://addons/MultiplayCore/MultiPlay.gd" id="2_ycdy4"]
+[ext_resource type="Script" uid="uid://bp8gh6nox1p8a" path="res://addons/MultiplayCore/net_protocols/ENetProtocol.gd" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bcp4wjouh8kwm" path="res://system/phase_system/turn_phase/game_phase_controller.tscn" id="6_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
 [ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/menu_phase/hide.gd" id="9_074og"]
-[ext_resource type="Script" uid="uid://fe3prh577nyf" path="res://system/phase_system/phase_controller.gd" id="10_yaehf"]
 [ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/phase_system/menu_phase/grid_target_choser_controller.gd" id="12_cegan"]
 [ext_resource type="Script" uid="uid://dq1x3v8wi5fis" path="res://system/phase_system/menu_phase/action_choser_controller.gd" id="13_82xsv"]
-[ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="15_074og"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_w48qg")
 
-[node name="Test001" parent="." instance=ExtResource("1_ig7tw")]
+[node name="MultiPlayCore" type="Node" parent="."]
+script = ExtResource("2_ycdy4")
+first_scene = ExtResource("1_ig7tw")
+swap_input_action = "swap_action"
+metadata/_custom_type_script = "uid://budecnfydfvbx"
+
+[node name="ENetProtocol" type="Node" parent="MultiPlayCore"]
+script = ExtResource("4_w48qg")
+metadata/_custom_type_script = "uid://bp8gh6nox1p8a"
 
 [node name="GamePhaseController" parent="." instance=ExtResource("6_ycdy4")]
 
@@ -29,44 +37,33 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 [node name="Hide" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("9_074og")
 transition = {
-&"action": NodePath("../ActionChoseMenu")
+&"chose_action": NodePath("../ActionChoser"),
+&"chose_target": NodePath("../GridTargetChoser")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
-[node name="ActionChoseMenu" type="LimboHSM" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
-script = ExtResource("10_yaehf")
-transition = {
-&"hide": NodePath("../Hide"),
-&"turn_end": NodePath("../Hide")
-}
-metadata/_custom_type_script = "uid://fe3prh577nyf"
-
-[node name="GridTargetChoser" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
+[node name="GridTargetChoser" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("12_cegan")
 transition = {
-&"action_target_chose": NodePath("../TurnEnd"),
-&"character_chose": NodePath("../ActionChoser"),
-&"interactable_target_chose": NodePath("../TurnEnd")
+&"action_target_chose": NodePath("../Hide"),
+&"character_chose": NodePath("../Hide"),
+&"interactable_target_chose": NodePath("../Hide")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 metadata/_edit_group_ = true
 
-[node name="ActionChoser" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu" node_paths=PackedStringArray("transition")]
+[node name="ActionChoser" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("13_82xsv")
 transition = {
 &"back": NodePath("../GridTargetChoser"),
 &"chose_target": NodePath("../GridTargetChoser"),
-&"end": NodePath("../TurnEnd")
+&"end": NodePath("../Hide")
 }
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="TurnEnd" type="LimboState" parent="CanvasLayer/MenuManager/ActionChoseMenu"]
-script = ExtResource("15_074og")
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("6_4c57u")]
 visible = false
-phase = NodePath("../MenuManager/ActionChoseMenu/GridTargetChoser")
+phase = NodePath("../MenuManager/GridTargetChoser")
 metadata/_edit_lock_ = true
 
 [node name="ActionChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("7_efxa6")]
@@ -75,6 +72,6 @@ offset_left = 277.0
 offset_top = 100.0
 offset_right = -683.0
 offset_bottom = -440.0
-phase = NodePath("../MenuManager/ActionChoseMenu/ActionChoser")
+phase = NodePath("../MenuManager/ActionChoser")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true

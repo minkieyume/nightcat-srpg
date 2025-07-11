@@ -32,12 +32,6 @@ var sector:TiledSector2D
 
 signal ap_changed(new_ap)
 
-func _ready() -> void:
-	await super()	
-	_init_attribute()
-	operate_attribute("ap",5,5)
-	reset_sight()
-
 func _init_attribute() -> void:
 	for buff in initalize_attribute_buffs:
 		attributes.apply_buff(buff)
@@ -233,3 +227,9 @@ func apply_damage(damage:int):
 
 func _on_attribute_container_attribute_changed(_attribute:RuntimeAttribute, _previous_value:float, _new_value:float) -> void:
 	update_character_info()
+
+func _on_level_ready():
+	super()
+	_init_attribute()
+	operate_attribute("ap",5,5)
+	reset_sight()

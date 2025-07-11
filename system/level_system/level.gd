@@ -5,6 +5,9 @@ extends Node2D
 
 var unit_dict:Dictionary[String,Unit]
 
+func _ready() -> void:
+	LevelHandler.level_init(self)
+
 func pack_nodes(nodes:Node) -> Array:
 	var array = Array()
 	for node in nodes.get_children():

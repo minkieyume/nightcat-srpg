@@ -34,8 +34,7 @@ signal direction_changed(direct:Vector2i)
 signal path_end
 
 func _ready() -> void:
-	await LevelHandler.level_ready
-	_init_animation_machine()	
+	LevelHandler.level_ready.connect(_on_level_ready)
 
 func _init_animation_machine() -> void:
 	animation_machine.add_transition(idle_state, move_state,"move_start")
@@ -142,3 +141,6 @@ func set_ctx(ctx:Dictionary):
 
 func clean_ctx():
 	context.clear()
+
+func _on_level_ready():	
+	_init_animation_machine()

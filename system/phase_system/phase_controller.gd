@@ -13,7 +13,7 @@ signal cargo_send(cargo:Dictionary)
 func _ready() -> void:
 	CommandBus.command_send.connect(_on_handler_command_send)
 	_init_state_machine()
-	await LevelHandler.level_ready
+	LevelHandler.level_ready.connect(_on_level_ready)	
 	
 func _init_state_machine():	
 	for phase in get_children():
@@ -51,3 +51,6 @@ func _on_handler_command_send(command:StringName, args:Array) -> void:
 		match args[0]:
 			"setcargo":
 				context.set(args[1],args[2])
+
+func _on_level_ready():
+	pass
