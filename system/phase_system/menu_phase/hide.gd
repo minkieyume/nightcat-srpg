@@ -2,7 +2,8 @@ extends MenuPhase
 
 var first_run = true
 
-func _enter() -> void:	
-	if !first_run:
-		CommandBus.send_command("gamephase",["menu_hide"])
-	first_run = false
+func _enter() -> void:
+	super()
+	# if !first_run:
+	# 	CommandBus.send_command("gamephase",["menu_hide"])
+	# first_run = false

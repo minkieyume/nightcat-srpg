@@ -15,7 +15,7 @@ extends MenuPhase
 var grid_drawer:GridDrawer
 var limit_mode = false
 
-@export var default_mode = "choase_character"
+@export var default_mode = "chose_character"
 
 func _ready() -> void:
 	super()
@@ -32,6 +32,9 @@ func _enter() -> void:
 			grid_drawer.limit_array = limit_array
 			grid_drawer.show_limit = true
 			limit_mode = true
+	if context.has("actor"):
+		var pos = LevelHandler.get_unit_position(context["actor"])
+		grid_drawer.update_highlight(pos)
 	grid_drawer.update()
 
 func _exit() -> void:
@@ -53,19 +56,23 @@ func _chose() -> bool:
 				return true
 			if !is_character_in_part():
 				return true
-			CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
-			CommandBus.send_command("gamephase",["setcargo","mode","chose_action"])
-			dispatch("character_chose")
-		"chose_action_target":
-			context["action"].set_target(context["target"])			
-			CommandBus.send_command("gamephase",["setcargo","action",context["action"]])
+			CommandBus.rpc_send_command("gamephase",["setcargo","actor",context["actor"]])
+			CommandBus.rpc_send_command("gamephase",["setcargo","mode","chose_action"])
+			CommandBus.rpc_send_command("gamephase",["menu_hide"])
+			dispatch("hide")
+		"chose_action_target":			
+			var action = Action.from_dict(context["action"])
+			action.set_target(context["target"])
+			context["action"] = action.to_dictionary()
+			CommandBus.rpc_send_command("gamephase",["setcargo","action",context["action"]])
 			context.erase("target")
-			dispatch("action_target_chose")
+			CommandBus.rpc_send_command("gamephase",["menu_hide"])
+			dispatch("hide")
 		"chose_interactable_target":
-			CommandBus.send_command("gamephase",["setcargo","target",context["target"]])
-			CommandBus.send_command("gamephase",["interact_sucess"])
+			CommandBus.rpc_send_command("gamephase",["setcargo","target",context["target"]])
+			CommandBus.rpc_send_command("gamephase",["interact_sucess"])
 			context.erase("target")
-			dispatch("interactable_target_chose")
+			dispatch("hide")
 	return true
 
 func update_actor() -> bool:
@@ -98,12 +105,12 @@ func _return() -> bool:
 	match context["mode"]:
 		"chose_interactable_target":
 			context["mode"] = "chose_character"
-			CommandBus.send_command("gamephase",["interact_failed"])
+			CommandBus.rpc_send_command("gamephase",["interact_failed"])
 		"chose_action_target":
 			context["mode"] = "chose_character"
 			context.erase("actor")
 			context.erase("action")
-			CommandBus.cat_send_command("gamephase",["back"])
+			CommandBus.rpc_send_command("gamephase",["back"])			
 	limit_mode = false
 	grid_drawer.show_limit = false
 	grid_drawer.update()

@@ -6,12 +6,11 @@ func _enter() -> void:
 	var unit:Unit = context["actor"]
 	if unit.is_in_group("ai"):
 		await unit.ai.before_action()
-		var action = await unit.ai.get_next_action()
+		var action:Action = await unit.ai.get_next_action()
 		if action != null:
 			context["mode"] = "start_action"
-			context["action"] = action
+			context["action"] = action.to_dictionary()
 			call_deferred("dispatch","next")
-			call_deferred("next_action",action)
-			return		
+			return
 	context.erase("actor")
 	call_deferred("dispatch","end")	

@@ -1,7 +1,7 @@
 extends Phase
 
 func _enter() -> void:
-	if MultiCat.should_sync():
+	if MultiCat.is_online():
 		if is_multiplayer_authority():
 			call_deferred("dispatch","authority")
 	else:

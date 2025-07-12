@@ -6,8 +6,10 @@ func _setup() -> void:
 func _enter() -> void:
 	super()
 	var parts:Array = context["parts"]
+	print(parts)
 	if !parts.is_empty():
-		context["part"] = parts.pop_front()
-		call_deferred("dispatch","next")
+		context["part"] = parts.pop_front()		
+		call_deferred("dispatch","part_chose")
 	else:
+		print("turn_end")
 		call_deferred("dispatch","end")

@@ -23,7 +23,7 @@ func _enter() -> void:
 	pass
 
 func _exit() -> void:
-	if MultiCat.should_sync():
+	if MultiCat.is_online():
 		if is_multiplayer_authority():
 			rpc("send_cargo",context)
 	else:
@@ -49,7 +49,7 @@ func sync(ctx:Dictionary):
 	context = ctx	
 
 func rpc_update_context(id,content):
-	if MultiCat.should_sync():
+	if MultiCat.is_online():
 		if is_multiplayer_authority():
 			rpc("update_context",id,content)
 	else:
@@ -60,7 +60,7 @@ func remote_dispatch(event:StringName):
 	dispatch(event)
 
 func rpc_dispatch(event:StringName):
-	if MultiCat.should_sync():		
+	if MultiCat.is_online():		
 		if is_multiplayer_authority():
 			rpc("remote_dispatch",event)
 	else:

@@ -27,18 +27,26 @@ func is_unit_in_group(uid:String,group:String) -> bool:
 		return false
 
 @rpc("authority","call_local")
-func execute_action(r:String,id:StringName,target:Vector2i,ap_coast:int,ctx:Dictionary):
-	var action = Action.new(r,id)	
-	action.set_target(target)
-	action.set_ap_cost(ap_coast)
-	action.set_ctx(ctx)
+func execute_action(action_dict:Dictionary):
+	var action = Action.from_dict(action_dict)
 	action.execute()
 
-func cat_execute_action(action:Action):
-	if MultiCat.should_sync():
-		rpc("execute_action",action.requester,action.resource.id,action.target,action.ap_cost,action.ctx)
+func cat_execute_action(action:Dictionary):
+	if MultiCat.is_online():
+		rpc("execute_action",action)
 	else:
-		action.execute()
+		execute_action(action)
+
+@rpc("authority","call_local")
+func set_camera_follow_unit(unit:String):
+	var camera = get_camera()
+	camera.set_follow_target(LevelHandler.get_unit(unit))
+
+func cat_set_camera_folllow_unit(unit:String):
+	if MultiCat.is_online():
+		rpc("set_camera_follow_unit",unit)
+	else:
+		set_camera_follow_unit(unit)
 
 ## 获取单位坐标，未找到则返回 (-9223372036854775808,-9223372036854775808)
 func get_unit_position(id:String) -> Vector2i:

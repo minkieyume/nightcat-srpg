@@ -32,7 +32,7 @@ func _init_state_machine():
 # 	dispatch(event)
 
 # func rpc_dispatch(event:StringName):
-# 	if MultiCat.should_sync():		
+# 	if MultiCat.is_online():		
 # 		if is_multiplayer_authority():
 # 			rpc("remote_dispatch",event)
 # 	else:
@@ -49,7 +49,7 @@ func _enter() -> void:
 
 func _exit() -> void:
 	send_cargo(context)
-	# if MultiCat.should_sync():
+	# if MultiCat.is_online():
 	# 	if is_multiplayer_authority():
 	# 		rpc("send_cargo",context)
 	# else:
@@ -100,7 +100,7 @@ func get_context() -> Dictionary:
 # 	sync(ctx,state_tree)
 
 # func rpc_update_context(id,content):
-# 	if MultiCat.should_sync():
+# 	if MultiCat.is_online():
 # 		if is_multiplayer_authority():
 # 			rpc("update_context",id,content)
 # 	else:

@@ -24,21 +24,16 @@ func _enter():
 	super()
 	match context["mode"]:
 		"start_action":
-			var action = context["action"]
+			var action = Action.from_dict(context["action"])
 			action.set_ctx(context)
 			context.erase("target")			
-			LevelHandler.cat_execute_action(action)
+			LevelHandler.cat_execute_action(action.to_dictionary())
 		"end_action":
 			call_deferred("dispatch","next")
 		
 func _exit():
 	super()
 	match context["mode"]:
-		"end_action":
-			var action = context["action"]
+		"end_action":			
 			context.erase("target")
 			context.erase("action")
-			call_deferred("clean_action",action)
-	
-func clean_action(action:Action):	
-	action.free()

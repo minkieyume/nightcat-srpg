@@ -7,11 +7,12 @@ func _ready() -> void:
 	add_event_handler("return",_return)
 
 func _enter() -> void:
-	super()	
-	CommandBus.send_command("menu",["setcargo","part","player"])
-	CommandBus.send_command("menu",["setcargo","mode","chose_action"])
-	CommandBus.send_command("menu",["setcargo","actor",context["actor"]])
-	CommandBus.send_command("menu",["chose_action"])
+	super()
+	CommandBus.cat_send_command("menu",["setcargo","part",context["part"]])
+	CommandBus.cat_send_command("menu",["setcargo","mode","chose_action"])
+	CommandBus.cat_send_command("menu",["setcargo","actor",context["actor"]])
+	CommandBus.cat_send_command("menu",["setcargo","mode","chose_action"])
+	CommandBus.cat_send_command("menu",["chose_action"])
 
 func _exit() -> void:
 	if return_:

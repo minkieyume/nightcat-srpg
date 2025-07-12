@@ -70,6 +70,8 @@ tags = Array[String]([])
 
 [node name="Character" instance=ExtResource("1_40ioe")]
 sight_sector = SubResource("Resource_hchjq")
+id = "kiko"
+part = "kiko"
 
-[node name="ActionManager" parent="." index="5"]
+[node name="ActionManager" parent="." index="4"]
 actions = Array[ExtResource("2_2purp")]([SubResource("Resource_n6kq4"), SubResource("Resource_dad06")])

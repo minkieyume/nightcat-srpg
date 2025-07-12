@@ -19,6 +19,25 @@ func _init(r:String,id:StringName):
 	ap_cost = action_resource.ap_cost
 	logic = action_logic.new()
 
+static func from_dict(dict:Dictionary) -> Action:
+	var action = Action.new(dict["requester"],dict["id"])
+	if dict.has("target"):
+		action.set_target(dict["target"])
+	if dict.has("ctx"):
+		action.set_ctx(dict["ctx"])
+	if dict.has("ap_cost"):
+		action.set_ap_cost(dict["ap_cost"])
+	return action
+
+func to_dictionary() -> Dictionary:
+	return {
+		"id":resource.id,
+		"requester":requester,
+		"target":target,
+		"ap_cost":ap_cost,
+		"ctx":ctx
+		}
+
 func before_target_chose():
 	if !is_instance_valid(logic):
 		return

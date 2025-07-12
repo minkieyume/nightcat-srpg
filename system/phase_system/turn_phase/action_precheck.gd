@@ -5,11 +5,13 @@ func _enter():
 	match context["mode"]:
 		"action_precheck":
 			var camera = LevelHandler.get_camera()			
-			camera.set_follow_target(LevelHandler.get_character(context["actor"]))
-			var action = context["action"]
+			camera.set_follow_target(LevelHandler.get_character(context["actor"]))			
+			var action = Action.from_dict(context["action"])
 			action.set_ctx(context)
 			await action.before_precheck()
 			var presult = await action.precheck()
+			context["action"] = action.to_dictionary()
+			action.free()
 			if presult:
 				context["mode"] = "start_action"				
 				call_deferred("dispatch","next")
@@ -24,9 +26,7 @@ func _exit():
 		"end_action":
 			call_deferred("clean_action")
 	
-func clean_action():
-	var action = context["action"]
+func clean_action():	
 	context.erase("actor")
 	context.erase("target")
 	context.erase("action")
-	action.free()

@@ -93,7 +93,7 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 [node name="Yumi" instance=ExtResource("1_ia4wj")]
 sight_sector = SubResource("Resource_cv6jv")
 id = "yumi"
-part = "player"
+part = "yumi"
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(25, 18)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=13 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
 [ext_resource type="Script" uid="uid://budecnfydfvbx" path="res://addons/MultiplayCore/MultiPlay.gd" id="2_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://ctrgyq8s1riw6" path="res://system/multiplay_system/multi_agent.tscn" id="3_dg77c"]
 [ext_resource type="Script" uid="uid://bp8gh6nox1p8a" path="res://addons/MultiplayCore/net_protocols/ENetProtocol.gd" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bcp4wjouh8kwm" path="res://system/phase_system/turn_phase/game_phase_controller.tscn" id="6_ycdy4"]
@@ -17,6 +18,7 @@ script = ExtResource("1_w48qg")
 
 [node name="MultiPlayCore" type="Node" parent="."]
 script = ExtResource("2_ycdy4")
+player_scene = ExtResource("3_dg77c")
 first_scene = ExtResource("1_ig7tw")
 swap_input_action = "swap_action"
 metadata/_custom_type_script = "uid://budecnfydfvbx"
@@ -45,9 +47,8 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="GridTargetChoser" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("12_cegan")
 transition = {
-&"action_target_chose": NodePath("../Hide"),
-&"character_chose": NodePath("../Hide"),
-&"interactable_target_chose": NodePath("../Hide")
+&"chose_action": NodePath("../ActionChoser"),
+&"hide": NodePath("../Hide")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 metadata/_edit_group_ = true
@@ -55,9 +56,8 @@ metadata/_edit_group_ = true
 [node name="ActionChoser" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("13_82xsv")
 transition = {
-&"back": NodePath("../GridTargetChoser"),
 &"chose_target": NodePath("../GridTargetChoser"),
-&"end": NodePath("../Hide")
+&"hide": NodePath("../Hide")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
@@ -75,3 +75,5 @@ offset_bottom = -440.0
 phase = NodePath("../MenuManager/ActionChoser")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[connection signal="player_connected" from="MultiPlayCore" to="." method="_on_multi_play_core_player_connected"]

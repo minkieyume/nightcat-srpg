@@ -28,24 +28,28 @@ func _exit():
 
 func _create_action():
 	var action:Action = Action.new(context["actor"], context["chosed_action"])
-	context["action"] = action
 	action.set_ctx(context)
+	context["action"] = action.to_dictionary()
 
-func _on_action_chosed() -> bool:
+func _on_action_chosed() -> bool:	
 	context.erase("target")
 	context.erase("action_list")
-	await _create_action()
-	var action:Action = context["action"]
+	await _create_action()	
+	var action = Action.from_dict(context["action"])
 	await action.before_target_chose()
+	context["action"] = action.to_dictionary()
 	if action.has_range():
 		context["mode"] = "chose_action_target"
-		context["limit_array"] = context["action"].clac_action_range()
+		context["limit_array"] = action.clac_action_range()
+		action.free()
 		dispatch("chose_target")
 	else:
-		CommandBus.send_command("gamephase",["setcargo","mode","action_precheck"])
-		CommandBus.send_command("gamephase",["setcargo","action",context["action"]]) 
-		CommandBus.send_command("gamephase",["setcargo","actor",context["actor"]])
-		dispatch("end")
+		CommandBus.rpc_send_command("gamephase",["setcargo","mode","action_precheck"])
+		CommandBus.rpc_send_command("gamephase",["setcargo","action",context["action"]]) 
+		CommandBus.rpc_send_command("gamephase",["setcargo","actor",context["actor"]])
+		CommandBus.rpc_send_command("gamephase",["menu_hide"])
+		action.free()
+		dispatch("hide")
 	return true
 
 func _return() -> bool:
@@ -53,9 +57,7 @@ func _return() -> bool:
 	context.erase("target")
 	context.erase("action_list")
 	context.erase("action")
-	context["mode"] = "chose_action_target"
-	CommandBus.cat_send_command("gamephase",["back"])
-	dispatch("back")
+	CommandBus.rpc_send_command("gamephase",["back"])
 	return true
 
 func _on_ui_canceled():

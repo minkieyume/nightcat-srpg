@@ -12,6 +12,6 @@ func _enter() -> void:
 	for cid in owne.handled_characters:
 		var character = LevelHandler.get_character(cid)
 		if character.is_in_group("ai_character"):
-			var ai:StateAI = character.ai
+			var ai:AIPhaseController = character.ai
 			ai.run_current_state(LevelHandler)
 	dispatch("next")

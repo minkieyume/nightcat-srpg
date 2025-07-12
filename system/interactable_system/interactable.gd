@@ -17,7 +17,7 @@ func before_interact(_character:String,_ctx:Dictionary):
 	CommandBus.send_command("gamephase",["interact_sucess"])
 
 func cat_before_interact(character:String,ctx:Dictionary):
-	if MultiCat.should_sync():
+	if MultiCat.is_online():
 		if is_multiplayer_authority():
 			rpc("before_interact",character,ctx)
 	else:
@@ -34,7 +34,7 @@ func interact(_character:String,_ctx:Dictionary):
 	call_deferred("end")
 
 func cat_interact(character:String,ctx:Dictionary):
-	if MultiCat.should_sync():
+	if MultiCat.is_online():
 		if is_multiplayer_authority():
 			rpc("interact",character,ctx)
 	else:

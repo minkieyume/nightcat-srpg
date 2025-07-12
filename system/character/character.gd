@@ -186,6 +186,7 @@ func set_ap(value: int) -> void:
 func add_ap(delta: int) -> void:
 	operate_attribute("ap",delta,0)
 
+@rpc("authority","call_remote")
 func reset_ap() -> void:
 	set_ap(int(get_attribute("max_ap")))
 
