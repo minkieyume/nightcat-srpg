@@ -83,7 +83,7 @@ func update_actor() -> bool:
 	var actor = grid_quester.quest_character(context["target"])
 	if actor != "":
 		context["actor"] = actor
-		var camera = LevelHandler.get_camera()		
+		var camera = LevelHandler.get_camera()
 		camera.set_follow_target(LevelHandler.get_character(actor))
 		return true
 	else:

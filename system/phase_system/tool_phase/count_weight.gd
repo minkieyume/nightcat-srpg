@@ -7,7 +7,7 @@ func _enter() -> void:
 	super()
 	var characters:Array = LevelHandler.get_characters().filter(func(c):return c.part == context["part"])
 	characters.sort_custom(sort_character)
-	context["units"] = characters
+	context["units"] = characters.map(func(c):return c.id)
 	call_deferred("dispatch","next")
 
 func sort_character(a:Character,b:Character) -> bool:

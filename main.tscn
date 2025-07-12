@@ -28,10 +28,12 @@ script = ExtResource("4_w48qg")
 metadata/_custom_type_script = "uid://bp8gh6nox1p8a"
 
 [node name="GamePhaseController" parent="." instance=ExtResource("6_ycdy4")]
+editor_description = "GamePhaeController是仅在服务器上运行的服务端远程节点。"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MenuManager" type="LimboHSM" parent="CanvasLayer"]
+editor_description = "菜单管理器是本地类，不会参与远程同步。"
 script = ExtResource("8_074og")
 controller_name = "menu"
 metadata/_custom_type_script = "uid://fe3prh577nyf"

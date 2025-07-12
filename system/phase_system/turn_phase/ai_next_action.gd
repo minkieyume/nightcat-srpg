@@ -3,7 +3,7 @@ extends Phase
 func _enter() -> void:
 	super()
 	context["mode"] = "ai_chose_action"	
-	var unit:Unit = context["actor"]
+	var unit:Unit = LevelHandler.get_unit(context["actor"])
 	if unit.is_in_group("ai"):
 		await unit.ai.before_action()
 		var action:Action = await unit.ai.get_next_action()

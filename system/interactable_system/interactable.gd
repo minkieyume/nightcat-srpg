@@ -12,9 +12,10 @@ func end():
 ## 互动前的操作
 @rpc("authority","call_local")
 func before_interact(_character:String,_ctx:Dictionary):
-	CommandBus.send_command("gamephase",["wait"])
-	CommandBus.send_command("gamephase",["setcargo","mode","interact"])
-	CommandBus.send_command("gamephase",["interact_sucess"])
+	CommandBus.server_local_command("gamephase",["wait"])
+	CommandBus.server_local_command("gamephase",["setcargo","mode","interact"])
+	CommandBus.send_command("menu",["setcargo","interactable",id])
+	CommandBus.server_local_command("gamephase",["interact_sucess"])
 
 func cat_before_interact(character:String,ctx:Dictionary):
 	if MultiCat.is_online():
@@ -29,8 +30,8 @@ func precheck(_character:String,_ctx:Dictionary) -> bool:
 ## 与物体互动
 @rpc("authority","call_local")
 func interact(_character:String,_ctx:Dictionary):
-	CommandBus.send_command("gamephase",["setcargo","mode","end_interact"])
-	CommandBus.send_command("gamephase",["interact_sucess"])
+	CommandBus.server_local_command("gamephase",["setcargo","mode","end_interact"])
+	CommandBus.server_local_command("gamephase",["interact_sucess"])
 	call_deferred("end")
 
 func cat_interact(character:String,ctx:Dictionary):

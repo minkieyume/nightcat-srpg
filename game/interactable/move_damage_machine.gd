@@ -1,9 +1,11 @@
 extends Interactable
 
+@rpc("authority","call_local")
 func before_interact(_character:String,_ctx:Dictionary):
 	CommandBus.server_local_command("gamephase",["wait"])
 	CommandBus.server_local_command("gamephase",["setcargo","mode","interact"])
 	CommandBus.send_command("menu",["setcargo","mode","chose_interactable_target"])
+	CommandBus.send_command("menu",["setcargo","interactable",id])
 	CommandBus.send_command("menu",["chose_target"])
 
 func precheck(_character:String,ctx:Dictionary) -> bool:
@@ -15,6 +17,7 @@ func precheck(_character:String,ctx:Dictionary) -> bool:
 		return false	
 
 ## BUG：要重构interactable类来修复interactable的选中互动目标失败无法反馈的bug
+@rpc("authority","call_local")
 func interact(_character:String,ctx:Dictionary):
 	CommandBus.server_local_command("gamephase",["wait"])
 	var target:Vector2i = ctx["target"]
