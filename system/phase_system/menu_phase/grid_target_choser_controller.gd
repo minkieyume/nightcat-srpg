@@ -15,6 +15,7 @@ extends MenuPhase
 var grid_drawer:GridDrawer
 var limit_mode = false
 
+@export var default_mode = "choase_character"
 
 func _ready() -> void:
 	super()
@@ -100,8 +101,9 @@ func _return() -> bool:
 			CommandBus.send_command("gamephase",["interact_failed"])
 		"chose_action_target":
 			context["mode"] = "chose_character"
-			context.erase("actor")			
+			context.erase("actor")
 			context.erase("action")
+			CommandBus.cat_send_command("gamephase",["back"])
 	limit_mode = false
 	grid_drawer.show_limit = false
 	grid_drawer.update()

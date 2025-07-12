@@ -53,6 +53,8 @@ func _return() -> bool:
 	context.erase("target")
 	context.erase("action_list")
 	context.erase("action")
+	context["mode"] = "chose_action_target"
+	CommandBus.cat_send_command("gamephase",["back"])
 	dispatch("back")
 	return true
 

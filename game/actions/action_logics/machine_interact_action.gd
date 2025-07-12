@@ -7,9 +7,9 @@ func execute(action:Action) -> bool:
 		return false
 	var unit = LevelHandler.get_unit(ikey)
 	if unit.is_in_group("machine"):
-		CommandBus.send_command("gamephase",["setcargo","interactable",unit.id])
-		CommandBus.send_command("gamephase",["setcargo","mode","before_interact"])
-		CommandBus.send_command("gamephase",["interact"])
+		CommandBus.server_local_command("gamephase",["setcargo","interactable",unit.id])
+		CommandBus.server_local_command("gamephase",["setcargo","mode","before_interact"])
+		CommandBus.server_local_command("gamephase",["interact"])
 		await unit.interact_end
 		return true
 	else:

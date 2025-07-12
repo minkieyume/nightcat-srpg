@@ -1,5 +1,11 @@
 extends Phase
 
+var return_ = false
+
+func _ready() -> void:
+	super()
+	add_event_handler("return",_return)
+
 func _enter() -> void:
 	super()	
 	CommandBus.send_command("menu",["setcargo","part","player"])
@@ -8,6 +14,15 @@ func _enter() -> void:
 	CommandBus.send_command("menu",["chose_action"])
 
 func _exit() -> void:
-	context["mode"] = "action_precheck"
+	if return_:
+		return_ = false
+		context["mode"] = "chose_character"
+	else:
+		context["mode"] = "action_precheck"
 	super()
 	
+
+func _return() -> bool:
+	return_ = true
+	dispatch("back")
+	return true

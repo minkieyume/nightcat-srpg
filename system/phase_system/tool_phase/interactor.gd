@@ -3,18 +3,14 @@ extends Phase
 func _enter():
 	super()
 	var iid = context["interactable"]
-	var interactable = LevelHandler.get_unit(iid)
-	if !interactable.is_in_group("interactable"):
-		print("行动失败，不在组内")
-		quit()
-		call_deferred("failed")
+	var interactable = LevelHandler.get_unit(iid)	
 	match context["mode"]:
 		"before_interact":
-			interactable.before_interact(context["actor"],context.duplicate())
+			interactable.cat_before_interact(context["actor"],context.duplicate())
 		"interact":
-			interactable.interact(context["actor"],context.duplicate())
+			interactable.cat_interact(context["actor"],context.duplicate())
 		"end_interact":
-			CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
+			context["mode"] = "end_action"
 			call_deferred("dispatch","next")
 
 func _exit():

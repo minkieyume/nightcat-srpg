@@ -64,14 +64,14 @@ func has_range():
 # 		return false
 
 func execute():
-	CommandBus.send_command("gamephase",["wait"])
+	CommandBus.server_local_command("gamephase",["wait"])
 	await logic.execute(self)
 	cost_ap()
 	end_action()
 
 func end_action() -> void:
-	CommandBus.send_command("gamephase",["setcargo","mode","end_action"])
-	CommandBus.send_command("gamephase",["action_finish"])
+	CommandBus.server_local_command("gamephase",["setcargo","mode","end_action"])
+	CommandBus.server_local_command("gamephase",["action_finish"])
 
 func set_target(t:Vector2i):
 	target = t
