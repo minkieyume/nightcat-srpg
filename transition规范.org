@@ -10,3 +10,25 @@ dispatch该字符串用于跳转到下一个阶段或菜单。
 dispatch该字符串用于结束当前的阶段控制器，以便跳转到下一个阶段控制器。
 因为LimboState的dispatch机制是，dispatch的信号如果没有被接收，就会往上层冒泡，所以在子状态中使用turn_end信号，如果子状态没有监听turn_end，那么该信号便会传递到上级状态。
 因此，状态机任何状态中都能使用turn_end来结束当前的大状态，跳转到下个大状态。
+** chose_action
+菜单转换，用于切换到行动选择菜单
+** chose_target
+菜单转换，用于切换到目标选择菜单
+** hide
+菜单切换，用于切换到隐藏菜单。
+** part_chose
+阶段转换，用于结束阶段选择
+** end
+阶段转换，用于结束特定阶段的循环状态。
+** wait
+特定阶段转换，部分阶段会调用该转换跳转到wait状态。
+** failed
+部分阶段可能会调用该转换跳转到失败状态。
+** interact
+用于从wait阶段转换到interact阶段
+** interact_failed
+用于从wait阶段转换到互动失败的阶段
+** interact_sucess
+用于从wait阶段转换到互动成功的阶段。
+** action_finish
+用于从wait阶段转换到行动执行结束的阶段
