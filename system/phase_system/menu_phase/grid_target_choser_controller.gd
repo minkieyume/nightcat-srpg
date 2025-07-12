@@ -31,10 +31,13 @@ func _enter() -> void:
 			var limit_array = context["limit_array"]
 			grid_drawer.limit_array = limit_array
 			grid_drawer.show_limit = true
-			limit_mode = true
-	if context.has("actor"):
-		var pos = LevelHandler.get_unit_position(context["actor"])
-		grid_drawer.update_highlight(pos)
+			limit_mode = true			
+			var pos = LevelHandler.get_unit_position(context["actor"])
+			grid_drawer.update_highlight(pos)
+		"chose_interactable_target":
+			pass
+			
+		
 	grid_drawer.update()
 
 func _exit() -> void:

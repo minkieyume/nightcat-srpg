@@ -3,8 +3,8 @@ extends Interactable
 func before_interact(_character:String,_ctx:Dictionary):
 	CommandBus.server_local_command("gamephase",["wait"])
 	CommandBus.server_local_command("gamephase",["setcargo","mode","interact"])
-	CommandBus.server_local_command("menu",["setcargo","mode","chose_interactable_target"])
-	CommandBus.server_local_command("menu",["chose_target"])
+	CommandBus.send_command("menu",["setcargo","mode","chose_interactable_target"])
+	CommandBus.send_command("menu",["chose_target"])
 
 func precheck(_character:String,ctx:Dictionary) -> bool:
 	var target:Vector2i = ctx["target"]

@@ -24,9 +24,8 @@ func _exit():
 	super()
 	match context["mode"]:
 		"end_action":
-			call_deferred("clean_action")
+			clean_action()			
 	
 func clean_action():	
-	context.erase("actor")
 	context.erase("target")
 	context.erase("action")
