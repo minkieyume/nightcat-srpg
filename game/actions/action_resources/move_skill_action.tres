@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
 [resource]
 resource_local_to_scene = true
-resource_name = "Move"
+resource_name = "移动"
 script = ExtResource("3_q7vhc")
 id = &"move_skill"
 group = "技能"
@@ -28,4 +28,6 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"

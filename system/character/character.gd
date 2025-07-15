@@ -203,6 +203,13 @@ func consume_ap(cost: int) -> bool:
 func apply_damage(damage:int):
 	operate_attribute("hp",damage,4)
 
+# 行动相关
+@rpc("authority","call_remote")
+func reset_action_twice():
+	for _id in action_manager.get_action_id_list():
+		var action:ActionResource = action_manager.get_action_resouce(_id)
+		action.reset_twice()
+
 # 状态相关
 #func set_state(new_state: String, turns: int = 0) -> void:
 #	state = new_state

@@ -13,7 +13,7 @@ func _ready() -> void:
 	for action in actions:
 		action_list[action.id] = action
 
-func get_action_resouce(id:StringName):
+func get_action_resouce(id:StringName) -> ActionResource:
 	return action_list[id]
 
 func get_action_id_list(action_filter:Callable=func(_a):return true) -> Array:

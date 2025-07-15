@@ -27,3 +27,5 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
+max_twice = 1
+tags = Array[String]([])

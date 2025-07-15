@@ -57,6 +57,8 @@ func precheck() -> bool:
 			return false
 	if !can_consume():
 		return false
+	if resource.is_twice_max():
+		return false
 	var result = await logic.precheck(self)
 	return result
 
@@ -85,6 +87,7 @@ func has_range():
 func execute():
 	CommandBus.server_local_command("gamephase",["wait"])
 	await logic.execute(self)
+	resource.count_twice()
 	cost_ap()
 	end_action()
 
