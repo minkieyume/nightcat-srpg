@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Buff" load_steps=3 format=3 uid="uid://yay7g0dgtxj1"]
+
+[ext_resource type="Script" uid="uid://jb0ap1b7vhqd" path="res://system/buff/buff.gd" id="1_704fk"]
+[ext_resource type="Script" uid="uid://c31l88rl8o71v" path="res://system/buff/buff_logic.gd" id="1_golna"]
+
+[resource]
+script = ExtResource("1_704fk")
+id = "buff0"
+buff_logic = ExtResource("1_golna")
+metadata/_custom_type_script = "uid://jb0ap1b7vhqd"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bcp4wjouh8kwm"]
+[gd_scene load_steps=26 format=3 uid="uid://bcp4wjouh8kwm"]
 
 [ext_resource type="Script" uid="uid://bodda3w1gkwm" path="res://system/phase_system/turn_phase/multi_play_init_phase.gd" id="2_40s63"]
 [ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://system/phase_system/turn_phase/game_phase_controller.gd" id="2_emkk0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bsqnxcxpu0mlv" path="res://system/phase_system/turn_phase/action_precheck.gd" id="7_5hgr7"]
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="7_dm2g6"]
 [ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="7_oej6j"]
+[ext_resource type="Script" uid="uid://d2l5rt06p5tpw" path="res://system/phase_system/turn_phase/tick_buff.gd" id="7_pwe5p"]
 [ext_resource type="Script" uid="uid://dhnujo24mhtvc" path="res://system/phase_system/turn_phase/player_chose_action.gd" id="8_hvc3f"]
 [ext_resource type="Script" uid="uid://d26vwm781f5u8" path="res://system/phase_system/tool_phase/interactor.gd" id="8_ndc68"]
 [ext_resource type="Script" uid="uid://cq4au2cl68r8f" path="res://system/phase_system/turn_phase/multi_chose_default_character.gd" id="9_m6v1k"]
@@ -23,6 +24,7 @@
 [ext_resource type="Script" uid="uid://c5ny1678ypi1u" path="res://system/phase_system/turn_phase/action_failed.gd" id="14_prytn"]
 [ext_resource type="Script" uid="uid://bmfb5i1gjlg1a" path="res://system/phase_system/turn_phase/player_turn_end_handle.gd" id="17_g72m5"]
 [ext_resource type="Script" uid="uid://bxy5inob2hef3" path="res://system/phase_system/turn_phase/enemy_action_end.gd" id="18_wpmnv"]
+[ext_resource type="Script" uid="uid://betppcd2yj8ss" path="res://system/phase_system/turn_phase/remove_buff.gd" id="25_l2h6g"]
 
 [node name="GamePhaseController" type="LimboHSM"]
 script = ExtResource("2_emkk0")
@@ -59,6 +61,13 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="RestoreActionTwice" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("6_ddtil")
+transition = {
+&"next": NodePath("../TickBuff")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="TickBuff" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("7_pwe5p")
 transition = {
 &"next": NodePath("../PrepareTurnEndCheck")
 }
@@ -334,6 +343,13 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 [node name="EndTurnStartPrompt" type="LimboState" parent="EndTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("3_5hgr7")
 prompt = "结束阶段"
+transition = {
+&"next": NodePath("../RemoveBuff")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="RemoveBuff" type="LimboState" parent="EndTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("25_l2h6g")
 transition = {
 &"next": NodePath("../TurnEnd")
 }

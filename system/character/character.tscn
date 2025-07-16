@@ -223,6 +223,7 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 1
+max_twice = 1
 tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
@@ -249,6 +250,7 @@ allowed_target = {
 "Tile": true
 }
 ap_cost = 2
+max_twice = 1
 tags = Array[String]([])
 
 [node name="Character" instance=ExtResource("1_kfso4")]

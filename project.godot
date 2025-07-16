@@ -23,6 +23,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 MPIO="*res://addons/MultiplayCore/MPIO.gd"
 PackRTC="*res://addons/packrtc/scripts/PackRTC.gd"
 MultiCat="*res://global/autoload/multicat.gd"
+BuffR="*res://system/buff/buff_register.tscn"
 
 [display]
 

@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpjkcemggyxjw"]
+
+[ext_resource type="Script" uid="uid://boltyphgs3nfj" path="res://system/buff/buff_register.gd" id="1_6j8qa"]
+[ext_resource type="Script" uid="uid://jb0ap1b7vhqd" path="res://system/buff/buff.gd" id="2_d4xca"]
+[ext_resource type="Resource" uid="uid://yay7g0dgtxj1" path="res://system/buff/buff0.tres" id="3_d4xca"]
+
+[node name="BuffRegister" type="Node"]
+script = ExtResource("1_6j8qa")
+buffs = Array[ExtResource("2_d4xca")]([ExtResource("3_d4xca")])

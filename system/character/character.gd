@@ -23,6 +23,7 @@ extends Unit
 
 var question_units:Array[String] = []
 var in_sight_units:Array[String] = []
+var buffs:Dictionary[Buff,int]
 var angry_with = null # String
 var sector:TiledSector2D
 
@@ -158,9 +159,6 @@ func operate_attribute(attr_name: String, value:float,o:int=5):
 	buff.operation = operation
 	attributes.apply_buff(buff)
 
-func apply_buff(buff:AttributeBuff):	
-	attributes.apply_buff(buff)
-
 func update_character_info():
 	var ap = int(get_attribute("ap"))
 	var hp = int(get_attribute("hp"))
@@ -210,28 +208,63 @@ func reset_action_twice():
 		var action:ActionResource = action_manager.get_action_resouce(_id)
 		action.reset_twice()
 
-# 状态相关
-#func set_state(new_state: String, turns: int = 0) -> void:
-#	state = new_state
-#	state_turns = turns
-#	emit_signal("state_changed", state)
-#
-#func get_state() -> String:
-#	return state
-#
-#func is_state(state_name: String) -> bool:
-#	return state == state_name
-#
-#func tick_state() -> void:
-#	if state != "normal":
-#		if state_turns > 0:
-#			state_turns -= 1
-#			if state_turns == 0:
-#				set_state("normal")
+# Buff相关
+@rpc("authority","call_remote")
+func apply_buff(buff_id:String,tick:int):
+	var buff = BuffR.get_buff(buff_id)
+	if buff == null:
+		return
+	if buff.attribute_buff:		
+		attributes.apply_buff(buff.attribute_buff)
+	var logic:BuffLogic = buff.buff_logic.new()
+	await logic.apply(id,buff)
+	buffs.set(buff,tick)
 
-#func get_state_turns() -> int:
-#	return state_turns
+@rpc("authority","call_remote")
+func tick_buffs() -> void:
+	for buff in buffs.keys():
+		var logic:BuffLogic = buff.buff_logic.new()
+		await logic.turn(id,buff)
+		buffs.set(buff,buffs[buff]-1)
 
+func get_buff_tick(bid:String) -> int:
+	if has_buff(bid):
+		var buff = BuffR.get_buff(bid)
+		if buff == null:
+			return 0
+		return buffs[buff]
+	else:
+		return 0
+
+func has_buff(_id:String) -> bool:
+	for buff in buffs:
+		if buff.id == _id:
+			return true
+	return false
+
+@rpc("authority","call_remote")
+func remove_buff(bid:String):
+	if has_buff(bid):
+		var buff = BuffR.get_buff(bid)
+		if buff == null:
+			return
+		if buff.attribute_buff:
+			attributes.remove_buff(buff.attribute_buff)
+		var logic:BuffLogic = buff.buff_logic.new()
+		await logic.remove(id,buff)
+
+## 清空全部buff
+@rpc("authority","call_remote")
+func clear_buff():
+	for buff in buffs.keys():
+		remove_buff(buff.id)
+
+## 清理失效的buff
+@rpc("authority","call_remote")
+func clean_buff():
+	for buff in buffs.keys():
+		if buffs[buff] <= 0:
+			remove_buff(buff.id)
 
 func _on_attribute_container_attribute_changed(_attribute:RuntimeAttribute, _previous_value:float, _new_value:float) -> void:
 	update_character_info()
