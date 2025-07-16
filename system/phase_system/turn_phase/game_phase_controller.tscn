@@ -62,13 +62,6 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="RestoreActionTwice" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("6_ddtil")
 transition = {
-&"next": NodePath("../TickBuff")
-}
-metadata/_custom_type_script = "uid://dmqb80wbqxon3"
-
-[node name="TickBuff" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
-script = ExtResource("7_pwe5p")
-transition = {
 &"next": NodePath("../PrepareTurnEndCheck")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
@@ -121,7 +114,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="PlayerPartTurn" type="LimboHSM" parent="PlayerTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("4_d1ik7")
 transition = {
-&"turn_end": NodePath("../PlayerNextPart")
+&"turn_end": NodePath("../PlayerTickBuff")
 }
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
@@ -194,6 +187,13 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 script = ExtResource("7_dm2g6")
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
+[node name="PlayerTickBuff" type="LimboState" parent="PlayerTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("7_pwe5p")
+transition = {
+&"next": NodePath("../PlayerNextPart")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
 [node name="PlayerTurnEndHandle" type="LimboState" parent="PlayerTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("17_g72m5")
 transition = {
@@ -256,7 +256,7 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="EnemyPartTurn" type="LimboHSM" parent="EnemyTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("4_d1ik7")
 transition = {
-&"turn_end": NodePath("../EnemyTurnEndPrompt")
+&"turn_end": NodePath("../EnemyTickBuff")
 }
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
@@ -319,6 +319,13 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="TurnEnd" type="LimboState" parent="EnemyTurn/EnemyPartTurn"]
 script = ExtResource("7_dm2g6")
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="EnemyTickBuff" type="LimboState" parent="EnemyTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("7_pwe5p")
+transition = {
+&"next": NodePath("../EnemyNextPart")
+}
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="EnemyTurnEndPrompt" type="LimboState" parent="EnemyTurn" node_paths=PackedStringArray("transition")]
