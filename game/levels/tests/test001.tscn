@@ -6,7 +6,7 @@
 [ext_resource type="TileSet" uid="uid://bttholbcw6qe8" path="res://assets/resources/tilesets/color_tiles.tres" id="4_pj3v8"]
 [ext_resource type="PackedScene" uid="uid://crf1v72tkw48u" path="res://game/interactable/machine.tscn" id="6_360cf"]
 [ext_resource type="PackedScene" uid="uid://dupnywu6oavso" path="res://game/player/kiko.tscn" id="6_s27i0"]
-[ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/enemy_001.tscn" id="7_80j1t"]
+[ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/test_enemy/enemy_001.tscn" id="7_80j1t"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="7_s27i0"]
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="7_w2seq"]
 [ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="11_uenbh"]

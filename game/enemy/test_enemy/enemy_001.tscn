@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_nydrm"]
 [ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/phase_system/ai_phase/ai_phase_controller.gd" id="4_qqrc7"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="5_22db3"]
-[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/enemy/patrol.gd" id="10_22db3"]
-[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/enemy/guard.gd" id="11_x6aw5"]
+[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/enemy/test_enemy/patrol.gd" id="10_22db3"]
+[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/enemy/test_enemy/guard.gd" id="11_x6aw5"]
 [ext_resource type="Script" uid="uid://bmwtiauyutjap" path="res://game/actions/action_logics/attack.gd" id="12_qqrc7"]
-[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/enemy/chase.gd" id="12_rgqvb"]
+[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/enemy/test_enemy/chase.gd" id="12_rgqvb"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="13_wnpm0"]
 
 [sub_resource type="Resource" id="Resource_dhysm"]
