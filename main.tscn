@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://ctpwokqd5uh20"]
 
-[ext_resource type="PackedScene" uid="uid://c2purqc7krpp8" path="res://game/levels/tests/test001.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
 [ext_resource type="Script" uid="uid://budecnfydfvbx" path="res://addons/MultiplayCore/MultiPlay.gd" id="2_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctrgyq8s1riw6" path="res://system/multiplay_system/multi_agent.tscn" id="3_dg77c"]
+[ext_resource type="PackedScene" uid="uid://db4qbuh3bxyot" path="res://game/levels/tests/demo_001.tscn" id="4_dg77c"]
 [ext_resource type="Script" uid="uid://bp8gh6nox1p8a" path="res://addons/MultiplayCore/net_protocols/ENetProtocol.gd" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://ca46e64edqsde" path="res://system/ui/grid_target_choser.tscn" id="6_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bcp4wjouh8kwm" path="res://system/phase_system/turn_phase/game_phase_controller.tscn" id="6_ycdy4"]
@@ -19,7 +19,7 @@ script = ExtResource("1_w48qg")
 [node name="MultiPlayCore" type="Node" parent="."]
 script = ExtResource("2_ycdy4")
 player_scene = ExtResource("3_dg77c")
-first_scene = ExtResource("1_ig7tw")
+first_scene = ExtResource("4_dg77c")
 swap_input_action = "swap_action"
 metadata/_custom_type_script = "uid://budecnfydfvbx"
 

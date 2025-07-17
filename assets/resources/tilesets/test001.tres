@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://d103yqt17qft6"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://d103yqt17qft6"]
 
 [ext_resource type="Texture2D" uid="uid://cs503db1g72qy" path="res://assets/external_packs/overworld-pack-free_version/autotiles/free_autotile_0.png" id="1_4d3e5"]
 [ext_resource type="Texture2D" uid="uid://f70dk22fkp45" path="res://assets/external_packs/overworld-pack-free_version/autotiles/free_autotile_26.png" id="2_0jy8b"]
+[ext_resource type="Texture2D" uid="uid://cl0lkj7ox7pkh" path="res://assets/tiles/color_tiles.png" id="2_mfm0h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pj3v8"]
 texture = ExtResource("1_4d3e5")
@@ -21,6 +22,20 @@ texture_region_size = Vector2i(48, 48)
 0:4/0 = 0
 1:4/0 = 0
 2:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kyv56"]
+texture = ExtResource("2_mfm0h")
+texture_region_size = Vector2i(48, 48)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3bn13"]
 texture = ExtResource("2_0jy8b")
@@ -65,3 +80,4 @@ custom_data_layer_0/name = "terrain_type"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_pj3v8")
 sources/3 = SubResource("TileSetAtlasSource_3bn13")
+sources/2 = SubResource("TileSetAtlasSource_kyv56")
