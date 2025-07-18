@@ -21,11 +21,8 @@ group = ""
 action_name = "攻击"
 action_range = SubResource("Resource_jf5ck")
 action_logic = ExtResource("1_jf5ck")
-allowed_target = {
-"Enemy": true,
-"Object": true,
-"Player": true,
-"Tile": true
+args = {
+"damage": 1
 }
 ap_cost = 1
 max_twice = 1

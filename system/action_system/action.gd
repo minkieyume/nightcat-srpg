@@ -7,6 +7,7 @@ var target:Vector2i
 var resource:ActionResource
 var action_range:ActionRange
 var ap_cost:int
+var args:Dictionary
 var logic:ActionLogic
 var ctx:Dictionary
 
@@ -16,6 +17,7 @@ func _init(r:String,id:StringName):
 	requester = r
 	resource = action_resource
 	action_range = action_resource.action_range
+	args = action_resource.args.duplicate(true)
 	ap_cost = action_resource.ap_cost
 	logic = action_logic.new()
 
@@ -139,7 +141,7 @@ func clac_action_range() -> Array[Vector2i]:
 			var hl = floori(h/2)
 			var d_rect = Rect2i(Vector2i(-wl,-hl),\
 				action_range.deter_vector2)
-			result = _clac_action_range_rect(origin,d_rect)			
+			result = _clac_action_range_rect(origin,d_rect)
 			return result
 		4:
 			result = _clac_action_range_rect(origin,\

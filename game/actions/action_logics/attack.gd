@@ -19,7 +19,8 @@ func execute(action:Action):
 	var character = LevelHandler.get_unit(cid)
 	var origin = LevelHandler.get_unit_position(action.requester)
 	var dir = quester.quest_related_direction(origin,action.target)
-	requester.change_direction(dir)	
+	var args = action.args
+	requester.change_direction(dir)
 	requester.update_sight_face(dir)
-	character.apply_damage(1)
+	character.apply_damage(args["damage"])
 	

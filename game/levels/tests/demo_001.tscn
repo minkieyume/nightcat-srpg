@@ -14,13 +14,14 @@
 [ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="12_3xpu4"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="13_yebf8"]
 [ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/test_enemy/enemy_001.tscn" id="14_16grb"]
+[ext_resource type="PackedScene" uid="uid://bvr8unh25ufhl" path="res://game/enemy/guard/fight_guard.tscn" id="14_tp5rb"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_o5atp"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_vutqp"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="17_ua5dw"]
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_fpp8n"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_tp5rb"]
 operation = SubResource("AttributeOperation_u646v")
 resource_local_to_scene = true
 script = ExtResource("10_xjiqy")
@@ -30,7 +31,7 @@ metadata/_custom_type_script = "uid://w8k7keh2oex5"
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_tp5rb"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_2df0u"]
 operation = SubResource("AttributeOperation_cr7lv")
 resource_local_to_scene = true
 script = ExtResource("11_eqcpq")
@@ -47,7 +48,7 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_2df0u"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_7dxo1"]
 operation = SubResource("AttributeOperation_u646v")
 resource_local_to_scene = true
 script = ExtResource("10_xjiqy")
@@ -55,7 +56,7 @@ max_health = 5.0
 health = 5.0
 metadata/_custom_type_script = "uid://w8k7keh2oex5"
 
-[sub_resource type="AttributeBuff" id="AttributeBuff_7dxo1"]
+[sub_resource type="AttributeBuff" id="AttributeBuff_7lm4w"]
 operation = SubResource("AttributeOperation_cr7lv")
 resource_local_to_scene = true
 script = ExtResource("11_eqcpq")
@@ -72,16 +73,7 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
-[sub_resource type="Resource" id="Resource_sq75y"]
-resource_local_to_scene = true
-resource_name = "视野范围"
-script = ExtResource("12_3xpu4")
-face = Vector2i(0, 1)
-radius = 6
-angle = 90.0
-metadata/_custom_type_script = "uid://knoqcwl0eufq"
-
-[sub_resource type="Resource" id="Resource_nlkc7"]
+[sub_resource type="Resource" id="Resource_5eb2s"]
 resource_local_to_scene = true
 resource_name = "视野范围"
 script = ExtResource("12_3xpu4")
@@ -265,26 +257,25 @@ position = Vector2(1056, 816)
 
 [node name="Kiko" parent="Characters" groups=["player"] instance=ExtResource("9_5eb2s")]
 position = Vector2(432, 480)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_fpp8n"), SubResource("AttributeBuff_tp5rb")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_tp5rb"), SubResource("AttributeBuff_2df0u")])
 sight_sector = SubResource("Resource_ollb5")
 sight_expand_radius = 0
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("13_yebf8")]
 position = Vector2(672, 480)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_2df0u"), SubResource("AttributeBuff_7dxo1")])
+initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_7dxo1"), SubResource("AttributeBuff_7lm4w")])
 sight_sector = SubResource("Resource_fx85u")
 sight_expand_radius = 0
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
-[node name="Enemy001" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
+[node name="FightGuard" parent="Characters" instance=ExtResource("14_tp5rb")]
 position = Vector2(48, 432)
-sight_sector = SubResource("Resource_sq75y")
+sight_sector = SubResource("Resource_5eb2s")
 
-[node name="Enemy002" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
+[node name="FightGuard2" parent="Characters" instance=ExtResource("14_tp5rb")]
 position = Vector2(1056, 432)
-sight_sector = SubResource("Resource_nlkc7")
-id = "enemy002"
+sight_sector = SubResource("Resource_5eb2s")
 
 [node name="Enemy003" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(336, 192)
@@ -346,8 +337,6 @@ script = ExtResource("17_ua5dw")
 
 [connection signal="path_end" from="Characters/Kiko" to="Characters/Kiko" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Yumi" to="Characters/Yumi" method="_on_path_end"]
-[connection signal="path_end" from="Characters/Enemy001" to="Characters/Enemy001" method="_on_path_end"]
-[connection signal="path_end" from="Characters/Enemy002" to="Characters/Enemy002" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Enemy003" to="Characters/Enemy003" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Enemy004" to="Characters/Enemy004" method="_on_path_end"]
 [connection signal="path_end" from="Characters/Enemy005" to="Characters/Enemy005" method="_on_path_end"]

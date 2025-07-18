@@ -7,12 +7,13 @@ extends Resource
 @export var action_name:String = "行动" #显示名字
 @export var action_range:ActionRange
 @export var action_logic:GDScript
-@export var allowed_target = { #允许执行行动的目标。
-	"Tile":true,   # 图块
-	"Enemy":true,  # 敌人
-	"Player":true, # 玩家
-	"Object":true  # 物件
-}
+# @export var allowed_target = { #允许执行行动的目标。
+# 	"Tile":true,   # 图块
+# 	"Enemy":true,  # 敌人
+# 	"Player":true, # 玩家
+# 	"Object":true  # 物件
+# }
+@export var args:Dictionary
 ## 行动消耗AP
 @export var ap_cost: int = 1
 ## 一回合的最大行动次数
