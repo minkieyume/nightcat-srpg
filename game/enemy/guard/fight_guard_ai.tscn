@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/phase_system/ai_phase/ai_phase_controller.gd" id="1_4okxs"]
 [ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/enemy/test_enemy/patrol.gd" id="2_htcbp"]
+[ext_resource type="Script" uid="uid://bbcxjkcoigjdl" path="res://game/enemy/guard/fight_guard_chase.gd" id="3_4okxs"]
 [ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/enemy/test_enemy/guard.gd" id="3_8sa81"]
-[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/enemy/test_enemy/chase.gd" id="4_kla4t"]
 
 [node name="StateAI" type="LimboHSM"]
 script = ExtResource("1_4okxs")
@@ -16,11 +16,12 @@ transition = {
 }
 
 [node name="Chase" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
-script = ExtResource("4_kla4t")
+script = ExtResource("3_4okxs")
 transition = {
 &"lost_enemy": NodePath("../Patrol"),
 &"stop": NodePath("../Stop")
 }
+metadata/_custom_type_script = "uid://qcf6g7w6kqh"
 
 [node name="Stop" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
 script = ExtResource("3_8sa81")

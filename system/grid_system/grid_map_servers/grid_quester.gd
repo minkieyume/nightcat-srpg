@@ -139,6 +139,13 @@ func quest_tiles_nearby_unit(unit:String) -> Array:
 	var unit_pos = LevelHandler.get_unit_position(unit)	
 	return [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT, Vector2i.UP].map(func(x):return x+unit_pos)
 
+## 获取与unit保持给定相对距离的图块组
+func quest_tiles_distance_unit(unit:String,distance:int) -> Array:
+	var origin = LevelHandler.get_unit_position(unit)
+	var radius_tiles = quest_tiles_in_radius(origin,distance)
+	var distance_tiles = radius_tiles.filter(func(t):return t.distance_to(origin)>=distance)
+	return distance_tiles
+
 func quest_unit_nearst_nearby_tile(origin:Vector2i,uid:String) -> Vector2i:	
 	var target_pos = LevelHandler.get_unit_position(uid)
 	var min_pos = target_pos
