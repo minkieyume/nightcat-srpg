@@ -29,7 +29,7 @@ func get_next_action():
 
 	var in_range_players = agent.in_sight_units.\
 		filter(func(c):return LevelHandler.is_unit_in_group(c,"player")).\
-		filter(func(c):return AiToolkit.is_is_unit_in_action_range(c,agent))
+		filter(func(c):return await AiToolkit.is_unit_in_action_range(c,agent))
 	
 	if in_range_players.is_empty():
 		var move_action = await AiToolkit.get_move_near_character_action(agent)

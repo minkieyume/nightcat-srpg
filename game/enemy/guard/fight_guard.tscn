@@ -188,7 +188,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_wnpm0"]
+[sub_resource type="Resource" id="Resource_tsds6"]
 resource_local_to_scene = true
 resource_name = "移动"
 script = ExtResource("9_6gvhg")
@@ -211,7 +211,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 1
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_tqtbr"]
+[sub_resource type="Resource" id="Resource_h5hpw"]
 resource_local_to_scene = true
 resource_name = "攻击"
 script = ExtResource("9_6gvhg")
@@ -234,7 +234,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_yyxms"]
+[sub_resource type="Resource" id="Resource_x5d5m"]
 resource_local_to_scene = true
 resource_name = "结束回合"
 script = ExtResource("9_6gvhg")
@@ -267,7 +267,7 @@ libraries = {
 }
 
 [node name="ActionManager" parent="." index="4"]
-actions = Array[ExtResource("9_6gvhg")]([SubResource("Resource_wnpm0"), SubResource("Resource_tqtbr"), SubResource("Resource_yyxms")])
+actions = Array[ExtResource("9_6gvhg")]([SubResource("Resource_tsds6"), SubResource("Resource_h5hpw"), SubResource("Resource_x5d5m")])
 
 [node name="StateAI" parent="." index="5" instance=ExtResource("10_tsds6")]
 
