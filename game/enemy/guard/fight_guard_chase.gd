@@ -3,17 +3,17 @@ extends AIPhase
 func _enter() -> void:
 	agent.expand_sight()
 	agent.update_sight_view()
-	super()	
+	super()
 
 func _exit() -> void:
-	super()	
+	super()
 	agent.reset_sight()
 	agent.update_sight_view()
 
 func before_action():
 	var qu:Array = agent.question_units
 	agent.in_sight_units.append_array(qu)
-	update_face_to_character()
+	AiToolkit.update_face_to_character(agent)
 	agent.update_sight_units()
 	agent.clean_question_units()
 	
@@ -21,41 +21,30 @@ func before_action():
 	if sc.is_empty():
 		dispatch("lost_enemy")
 
-func update_face_to_character():
-	var grid_quester = LevelHandler.get_grid_quester()
-	var origin = LevelHandler.get_unit_position(agent.id)
-	var c_pos = agent.in_sight_units.\
-		filter(func(c):return LevelHandler.is_unit_in_group(c,"player")).\
-		map(func(c):return LevelHandler.get_unit_position(c)).\
-		reduce(func(c1,c2):return AiToolkit.get_near_pos(agent,c1,c2))
-	if c_pos:
-		var dir = grid_quester.quest_related_direction(origin,c_pos)
-		agent.change_direction(dir)
-		agent.update_sight_face(dir)
-		agent.update_sight_view()
-
 func get_next_action():
-	var quester = LevelHandler.get_grid_quester()	
+	var quester = LevelHandler.get_grid_quester()
 	var ap = agent.get_ap()
 	if ap <= 0:
 		return null
 
-	var nearby_tiles = quester.quest_tiles_nearby_unit(agent.id)	
-	var nearby_player = quester.quest_character_in_area(nearby_tiles).\
-		filter(func(c):return LevelHandler.is_unit_in_group(c.id,"player")).\
-		filter(func(c):return c.id in agent.in_sight_units)
-	if nearby_player.is_empty():
-		var move_action = await AiToolkit.get_move_near_character_action()
+	var in_range_players = agent.in_sight_units.\
+		filter(func(c):return LevelHandler.is_unit_in_group(c,"player")).\
+		filter(func(c):return AiToolkit.is_is_unit_in_action_range(c,agent))
+	
+	if in_range_players.is_empty():
+		var move_action = await AiToolkit.get_move_near_character_action(agent)
 		if move_action != null:
 			var result = await move_action.precheck()
 			if result:
 				return move_action
 	else:
-		if nearby_player.size() > 0:
-			var rand_player_index = randi()%(nearby_player.size())
-			var player = nearby_player[rand_player_index-1]
-			var p_pos = LevelHandler.get_unit_position(player.id)
-			return await AiToolkit.random_chose_action(agent,p_pos)
+		if in_range_players.size() > 0:
+			var rand_player_index = randi()%(in_range_players.size())
+			var player = in_range_players[rand_player_index-1]
+			var in_range_actions = await AiToolkit.get_action_unit_in_range(player,agent)
+			var p_pos = LevelHandler.get_unit_position(player)
+			return await AiToolkit.random_chose_action\
+				(agent,p_pos,func(a:ActionResource):return a in in_range_actions)
 		else:
-			return false
-
+			return null
+	return null

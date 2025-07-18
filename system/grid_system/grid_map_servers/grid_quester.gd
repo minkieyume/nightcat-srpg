@@ -139,12 +139,24 @@ func quest_tiles_nearby_unit(unit:String) -> Array:
 	var unit_pos = LevelHandler.get_unit_position(unit)	
 	return [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT, Vector2i.UP].map(func(x):return x+unit_pos)
 
-## 获取与unit保持给定相对距离的图块组
+## 获取与unit保持给定相对距离的图块，默认采用欧几里得距离算法。
 func quest_tiles_distance_unit(unit:String,distance:int) -> Array:
 	var origin = LevelHandler.get_unit_position(unit)
 	var radius_tiles = quest_tiles_in_radius(origin,distance)
 	var distance_tiles = radius_tiles.filter(func(t):return t.distance_to(origin)>=distance)
 	return distance_tiles
+
+## 获取与unit保持给定相对曼哈顿距离的图块，对于按步数计算很有用。
+func quest_tiles_distance_unit_manhattan(unit:String,distance:int) -> Array:
+	var origin = LevelHandler.get_unit_position(unit)
+	var radius_tiles = quest_tiles_in_radius(origin,distance)
+	var distance_tiles = radius_tiles.filter(func(t):return is_tile_manhattan_distance_bigger(origin,t,distance))
+	return distance_tiles
+
+func is_tile_manhattan_distance_bigger(origin:Vector2i,tile:Vector2i,distance:int) -> bool:
+	var delta = tile - origin
+	var manhattan = abs(delta.x) + abs(delta.y)
+	return manhattan == distance
 
 func quest_unit_nearst_nearby_tile(origin:Vector2i,uid:String) -> Vector2i:	
 	var target_pos = LevelHandler.get_unit_position(uid)
