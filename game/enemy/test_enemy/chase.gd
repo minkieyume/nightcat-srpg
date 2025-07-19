@@ -11,8 +11,8 @@ func _exit() -> void:
 	agent.update_sight_view()
 
 func before_action():
-	var qu:Array = agent.question_units
-	agent.in_sight_units.append_array(qu)
+	#var qu:Array = agent.found_units
+	#agent.in_sight_units.append_array(qu)
 	update_face_to_character()
 	agent.update_sight_units()
 	agent.clean_question_units()

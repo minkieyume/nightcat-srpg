@@ -110,7 +110,7 @@ func quest_passable_tiles_in_area(area:Array) -> Array:
 
 ## 获取target相对于orgin的方向。
 func quest_related_direction(origin:Vector2i,target:Vector2i) -> Vector2i:
-	var dir = Vector2(origin).direction_to(Vector2(target))	
+	var dir = Vector2(origin).direction_to(Vector2(target))
 	return Vector2i(round(dir))
 
 ## 获取区域内所有单位，按指定filter过滤
@@ -150,13 +150,14 @@ func quest_tiles_distance_unit(unit:String,distance:int) -> Array:
 func quest_tiles_distance_unit_manhattan(unit:String,distance:int) -> Array:
 	var origin = LevelHandler.get_unit_position(unit)
 	var radius_tiles = quest_tiles_in_radius(origin,distance)
-	var distance_tiles = radius_tiles.filter(func(t):return is_tile_manhattan_distance_bigger(origin,t,distance))
+	var distance_tiles = radius_tiles.filter(func(t):return manhattan_distance_to(origin,t)>=distance)
 	return distance_tiles
 
-func is_tile_manhattan_distance_bigger(origin:Vector2i,tile:Vector2i,distance:int) -> bool:
-	var delta = tile - origin
+## 计算两个坐标之间的曼哈顿距离
+func manhattan_distance_to(origin:Vector2i,target:Vector2i) -> int:
+	var delta = target - origin
 	var manhattan = abs(delta.x) + abs(delta.y)
-	return manhattan == distance
+	return manhattan
 
 func quest_unit_nearst_nearby_tile(origin:Vector2i,uid:String) -> Vector2i:	
 	var target_pos = LevelHandler.get_unit_position(uid)

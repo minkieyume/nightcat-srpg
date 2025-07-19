@@ -86,15 +86,6 @@ func move_unit(cid:String,target:Vector2i) -> bool:
 		var path = get_move_path(start,target)
 		set_tile_passable(start)
 		await unit.step_path(path,tile_size,grid_map)
-
-		# 更新全体单位的疑惑对象列表
-		for character in LevelHandler.get_characters():
-			# 如果开始移动时角色在不在单位的视野范围内
-			# 则将角色存入疑惑列表。
-			var cpos = LevelHandler.get_unit_position(character.id)
-			var quester = LevelHandler.get_grid_quester()
-			if !quester.is_in_sight(start,cpos,character.sector):			
-				character.quest_question_units()
 	else:		
 		return false
 	remove_unit_blocks(func(u:Unit):return u.id == cid)

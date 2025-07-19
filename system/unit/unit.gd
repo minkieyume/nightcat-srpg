@@ -134,6 +134,9 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self,"position",end,dis/move_speed)
 	await tween.finished
+	for character in LevelHandler.get_characters():
+		character.update_sight_units()
+		character.found_sights_unit()
 	animation_machine.dispatch("move_stop")
 
 func set_ctx(ctx:Dictionary):

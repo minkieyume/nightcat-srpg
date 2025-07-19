@@ -11,12 +11,16 @@ script = ExtResource("1_nfbn2")
 [node name="Patrol" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
 script = ExtResource("2_lpa3s")
 transition = {
-&"find_enemy": NodePath(""),
+&"find_enemy": NodePath("../Chase"),
 &"stop": NodePath("../Stop")
 }
 
-[node name="Chase" type="LimboState" parent="."]
+[node name="Chase" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
 script = ExtResource("3_nfbn2")
+transition = {
+&"lost_enemy": NodePath("../Patrol"),
+&"stop": NodePath("../Stop")
+}
 metadata/_custom_type_script = "uid://qcf6g7w6kqh"
 
 [node name="Stop" type="LimboState" parent="." node_paths=PackedStringArray("transition")]

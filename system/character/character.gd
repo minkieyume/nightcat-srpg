@@ -21,10 +21,9 @@ extends Unit
 @onready var attributes = $AttributeContainer
 @onready var character_info = $Character_info
 
-var question_units:Array[String] = []
+var found_units:Dictionary[String,int] = {} # 带有目标权重的角色字典
 var in_sight_units:Array[String] = []
 var buffs:Dictionary[Buff,int]
-var angry_with = null # String
 var sector:TiledSector2D
 
 # 角色状态管理
@@ -77,6 +76,9 @@ func step(dir:Vector2,vdis:Vector2) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self,"position",end,dis/move_speed)
 	await tween.finished
+	for character in LevelHandler.get_characters():
+		character.update_sight_units()
+		character.found_sights_unit()
 	animation_machine.dispatch("move_stop")
 
 ## 更新视野内的单位
@@ -94,21 +96,39 @@ func update_sight_units():
 		else:
 			in_sight_units.erase(unit.id)
 
-## 寻找进入视野的角色并加入question_units组
-func quest_question_units():
-	var units = LevelHandler.get_units()
-	var quester = LevelHandler.get_grid_quester()
-	var origin = LevelHandler.get_unit_position(id)
-	for unit in units:
-		var pos = LevelHandler.get_unit_position(unit.id)
-		if unit.id == id:
-			continue
-		if quester.is_in_sight(origin,pos,sector) and !question_units.has(unit.id):
-			question_units.append(unit.id)	
+## 在发现列表添加单位
+func discover_unit(unit:String,wei:int):
+	found_units[unit] = wei
 
-## 清理question_units组
-func clean_question_units():
-	question_units.clear()
+## 寻找进入视野的角色并加入发现列表。
+## 发现列表默认按距离计算权重，方便AI根据权重判定优先级。
+func found_sights_unit():
+	var units = LevelHandler.get_unit_ids()
+	for unit in units:		
+		if unit == id:
+			continue
+		if unit in in_sight_units and !found_units.has(unit):			
+			discover_unit(unit,0)
+
+## 结合距离等因素，计算特定单位的实际权重
+func count_unit_weight(unit:String) -> int:
+	var wei = found_units[unit]
+	var quester = LevelHandler.get_grid_quester()
+	var pos = LevelHandler.get_unit_position(unit)
+	var origin = LevelHandler.get_unit_position(id)
+	var distance = quester.manhattan_distance_to(origin,pos)
+	return wei-distance
+
+## 计算所有单位的实际权重并返回一个权重字典。
+func count_units_weight() -> Dictionary[String,int]:
+	var units = found_units.duplicate()
+	for unit in units.keys():		
+		units[unit] = count_unit_weight(unit)
+	return units
+
+## 让特定单位从发现列表中丢失
+func lost_sight_unit(unit:String):
+	found_units.erase(unit)
 
 ## 显示视野范围高亮范围
 func show_sight_view():

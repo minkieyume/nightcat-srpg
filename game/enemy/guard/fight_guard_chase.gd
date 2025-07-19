@@ -11,28 +11,32 @@ func _exit() -> void:
 	agent.update_sight_view()
 
 func before_action():
-	var qu:Array = agent.question_units
-	agent.in_sight_units.append_array(qu)
-	AiToolkit.update_face_to_character(agent)
+	#var qu:Array = agent.question_units
+	#agent.in_sight_units.append_array(qu)	
+	AiToolkit.update_face_to_unit(agent,true)
+	agent.update_sight_view()
 	agent.update_sight_units()
-	agent.clean_question_units()
 	
-	var sc:Array = agent.in_sight_units
+	var sc:Array = agent.found_units.keys()
 	if sc.is_empty():
 		dispatch("lost_enemy")
 
 func get_next_action():
-	var quester = LevelHandler.get_grid_quester()
+	#var quester = LevelHandler.get_grid_quester()
+	var target_units = agent.found_units
 	var ap = agent.get_ap()
 	if ap <= 0:
 		return null
 
-	var in_range_players = agent.in_sight_units.\
+	
+	var in_range_players = target_units.keys().\
 		filter(func(c):return LevelHandler.is_unit_in_group(c,"player")).\
 		filter(func(c):return await AiToolkit.is_unit_in_action_range(c,agent))
 	
+	print(in_range_players)
+	
 	if in_range_players.is_empty():
-		var move_action = await AiToolkit.get_move_near_character_action(agent)
+		var move_action = await AiToolkit.move_near_weight_units_action(agent)
 		if move_action != null:
 			var result = await move_action.precheck()
 			if result:

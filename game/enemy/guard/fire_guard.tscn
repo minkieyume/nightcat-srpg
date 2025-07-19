@@ -251,9 +251,9 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [node name="FightGuard" node_paths=PackedStringArray("ai") instance=ExtResource("1_1eb7g")]
 script = ExtResource("2_fgrcs")
-ai = NodePath("StateAI")
-sight_sector = SubResource("Resource_dhysm")
 part = "enemy"
+sight_sector = SubResource("Resource_dhysm")
+ai = NodePath("StateAI")
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(24, 18)
