@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b405eq3xla3wm"]
+[gd_scene load_steps=31 format=3 uid="uid://b405eq3xla3wm"]
 
 [ext_resource type="PackedScene" uid="uid://chh2vk7ydqmob" path="res://system/unit/unit.tscn" id="1_kfso4"]
 [ext_resource type="Script" uid="uid://wbnikvil5wun" path="res://system/character/character.gd" id="2_1i7cy"]
@@ -10,15 +10,15 @@
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="6_u646v"]
 [ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="8_bl7gt"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="8_cr7lv"]
-[ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="9_1ct06"]
+[ext_resource type="Resource" uid="uid://bpf08ux3m4pr6" path="res://game/actions/action_resources/twice_move_action.tres" id="9_fvjva"]
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
 
 [sub_resource type="AttributeBuff" id="AttributeBuff_i8eqi"]
 operation = SubResource("AttributeOperation_u646v")
 script = ExtResource("3_fvjva")
-max_ap = 10.0
-ap = 10.0
+max_ap = 2.0
+ap = 2.0
 metadata/_custom_type_script = "uid://daouxidx122kl"
 
 [sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
@@ -199,29 +199,6 @@ _data = {
 &"move_up": SubResource("Animation_fvjva")
 }
 
-[sub_resource type="Resource" id="Resource_lmbwv"]
-script = ExtResource("8_cr7lv")
-deter_array = Array[Vector2i]([])
-deter_vector2 = Vector2i(1, 6)
-deter_rect2 = Rect2i(0, 0, 0, 0)
-type = 2
-metadata/_custom_type_script = "uid://b6x8da3egg2rq"
-
-[sub_resource type="Resource" id="Resource_fvjva"]
-resource_local_to_scene = true
-resource_name = "移动"
-script = ExtResource("6_u646v")
-id = &"move"
-group = ""
-action_name = "移动"
-action_range = SubResource("Resource_lmbwv")
-action_logic = ExtResource("9_1ct06")
-args = {}
-ap_cost = 1
-max_twice = 1
-tags = Array[String]([])
-metadata/_custom_type_script = "uid://b1xru1xnc1twu"
-
 [sub_resource type="Resource" id="Range"]
 script = ExtResource("8_cr7lv")
 deter_array = Array[Vector2i]([])
@@ -262,7 +239,7 @@ libraries = {
 attribute_set = ExtResource("3_deljr")
 
 [node name="ActionManager" parent="." index="4" instance=ExtResource("5_h7f75")]
-actions = Array[ExtResource("6_u646v")]([SubResource("Resource_fvjva"), SubResource("Resource_u646v")])
+actions = Array[ExtResource("6_u646v")]([ExtResource("9_fvjva"), SubResource("Resource_u646v")])
 
 [node name="Character_info" type="Label" parent="." index="5"]
 offset_left = 4.0

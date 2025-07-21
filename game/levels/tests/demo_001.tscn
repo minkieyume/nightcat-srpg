@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://db4qbuh3bxyot"]
+[gd_scene load_steps=28 format=4 uid="uid://db4qbuh3bxyot"]
 
 [ext_resource type="Script" uid="uid://chb4w8u6irhhe" path="res://game/levels/tests/demo_001.gd" id="1_fpp8n"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_tp5rb"]
@@ -9,8 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="7_87jy8"]
 [ext_resource type="PackedScene" uid="uid://crf1v72tkw48u" path="res://game/interactable/machine.tscn" id="8_sax3x"]
 [ext_resource type="PackedScene" uid="uid://dupnywu6oavso" path="res://game/player/kiko.tscn" id="9_5eb2s"]
-[ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="10_xjiqy"]
-[ext_resource type="Script" uid="uid://daouxidx122kl" path="res://system/attribute/ap_initailize.gd" id="11_eqcpq"]
 [ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="12_3xpu4"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="13_yebf8"]
 [ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/test_enemy/enemy_001.tscn" id="14_16grb"]
@@ -18,26 +16,6 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_o5atp"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_vutqp"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="17_ua5dw"]
-
-[sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
-
-[sub_resource type="AttributeBuff" id="AttributeBuff_tp5rb"]
-operation = SubResource("AttributeOperation_u646v")
-resource_local_to_scene = true
-script = ExtResource("10_xjiqy")
-max_health = 5.0
-health = 5.0
-metadata/_custom_type_script = "uid://w8k7keh2oex5"
-
-[sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
-
-[sub_resource type="AttributeBuff" id="AttributeBuff_2df0u"]
-operation = SubResource("AttributeOperation_cr7lv")
-resource_local_to_scene = true
-script = ExtResource("11_eqcpq")
-max_ap = 10.0
-ap = 10.0
-metadata/_custom_type_script = "uid://daouxidx122kl"
 
 [sub_resource type="Resource" id="Resource_ollb5"]
 resource_local_to_scene = true
@@ -47,22 +25,6 @@ face = Vector2i(0, 1)
 radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
-
-[sub_resource type="AttributeBuff" id="AttributeBuff_7dxo1"]
-operation = SubResource("AttributeOperation_u646v")
-resource_local_to_scene = true
-script = ExtResource("10_xjiqy")
-max_health = 5.0
-health = 5.0
-metadata/_custom_type_script = "uid://w8k7keh2oex5"
-
-[sub_resource type="AttributeBuff" id="AttributeBuff_7lm4w"]
-operation = SubResource("AttributeOperation_cr7lv")
-resource_local_to_scene = true
-script = ExtResource("11_eqcpq")
-max_ap = 10.0
-ap = 10.0
-metadata/_custom_type_script = "uid://daouxidx122kl"
 
 [sub_resource type="Resource" id="Resource_fx85u"]
 resource_local_to_scene = true
@@ -266,14 +228,12 @@ position = Vector2(1056, 816)
 
 [node name="Kiko" parent="Characters" groups=["player"] instance=ExtResource("9_5eb2s")]
 position = Vector2(432, 480)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_tp5rb"), SubResource("AttributeBuff_2df0u")])
 sight_sector = SubResource("Resource_ollb5")
 sight_expand_radius = 0
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="Yumi" parent="Characters" groups=["player"] instance=ExtResource("13_yebf8")]
 position = Vector2(672, 480)
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_7dxo1"), SubResource("AttributeBuff_7lm4w")])
 sight_sector = SubResource("Resource_fx85u")
 sight_expand_radius = 0
 metadata/_custom_type_script = "uid://cirek5i3e4lk7"
