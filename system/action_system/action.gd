@@ -152,7 +152,7 @@ func clac_action_range() -> Array[Vector2i]:
 
 func _clac_action_range_rect(origin:Vector2i,rect:Rect2i)\
 	-> Array[Vector2i]:
-	var result = []
+	var result:Array[Vector2i] = []
 	var min_rand = origin+rect.position
 	var max_rand = origin+rect.end
 	for px in range(min_rand.x,max_rand.x+1):

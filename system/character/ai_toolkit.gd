@@ -8,23 +8,30 @@ func random_chose_action(agent:Node,target:Vector2i,\
 	var action_manager:ActionManager = agent.action_manager
 	var chosed_actions = action_manager.get_action_id_list(filter)
 	var actions = []
+	var action_dict = {}
+	#print("[ChosedActions]",chosed_actions)
 
 	# 从行动中过滤出AP及行动次数不足的行动，并批量执行预检查
 	for actid in chosed_actions:
 		var actrs = action_manager.get_action_resouce(actid)
 		var action_ap  = actrs.ap_cost
-		if ap >= action_ap and actrs.twice>0:
+		#print("[ChoseAction]",action_ap)
+		#print("[ChoseAction]",actrs.twice)
+		if ap >= action_ap and !actrs.is_twice_max():
 			var action = Action.new(agent.id,actid)
 			await action.before_target_chose()
 			action.set_target(target)
 			if await action.precheck():
 				actions.append(actid)
+				action_dict[actid] = action
+	
+	#print(actions)
 	
 	# 随机选择行动
 	if actions.size() > 0:
 		var rand_acton_index = randi()%(actions.size())
 		var action_id = actions[rand_acton_index-1]
-		return action_manager.get_action_resouce(action_id)
+		return action_dict[action_id]
 	return null
 
 ## 根据给定的过滤器，获取特定单位在agent的行动范围内的行动列表。

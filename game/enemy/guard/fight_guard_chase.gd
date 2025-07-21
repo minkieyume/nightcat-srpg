@@ -27,13 +27,14 @@ func get_next_action():
 	var ap = agent.get_ap()
 	if ap <= 0:
 		return null
-
-	
+			
 	var in_range_players = target_units.keys().\
 		filter(func(c):return LevelHandler.is_unit_in_group(c,"player")).\
 		filter(func(c):return await AiToolkit.is_unit_in_action_range(c,agent))
+			
+	in_range_players.sort_custom(func(u1,u2):return target_units[u1]>target_units[u2])
 	
-	print(in_range_players)
+	#print(in_range_players)
 	
 	if in_range_players.is_empty():
 		var move_action = await AiToolkit.move_near_weight_units_action(agent)
@@ -41,14 +42,11 @@ func get_next_action():
 			var result = await move_action.precheck()
 			if result:
 				return move_action
-	else:
-		if in_range_players.size() > 0:
-			var rand_player_index = randi()%(in_range_players.size())
-			var player = in_range_players[rand_player_index-1]
+	else:		
+		for player in in_range_players:
 			var in_range_actions = await AiToolkit.get_action_unit_in_range(player,agent)
+			print(in_range_actions)
 			var p_pos = LevelHandler.get_unit_position(player)
 			return await AiToolkit.random_chose_action\
-				(agent,p_pos,func(a:ActionResource):return a in in_range_actions)
-		else:
-			return null
+				(agent,p_pos,func(a:ActionResource):return a.id in in_range_actions)
 	return null

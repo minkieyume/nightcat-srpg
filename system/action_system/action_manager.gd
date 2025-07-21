@@ -16,11 +16,12 @@ func _ready() -> void:
 func get_action_resouce(id:StringName) -> ActionResource:
 	return action_list[id]
 
-func get_action_id_list(action_filter:Callable=func(_a):return true) -> Array:
-	var result = []
+func get_action_id_list(action_filter:Callable=func(_a):return true) -> Array[String]:
+	var result:Array[String] = []
 	for id in action_list.keys():
 		var action = action_list[id]
-		if action_filter.call(action):
+		#print("[CharacterActionManager]",action)		
+		if action_filter.call(action):			
 			result.append(id)
 	return result
 

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1_t0o1x"]
 
 [sub_resource type="Resource" id="Resource_6goeg"]
+resource_local_to_scene = true
 script = ExtResource("1_b0mli")
 deter_array = Array[Vector2i]([])
 deter_vector2 = Vector2i(3, 3)

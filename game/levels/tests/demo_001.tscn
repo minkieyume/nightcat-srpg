@@ -280,43 +280,43 @@ metadata/_custom_type_script = "uid://cirek5i3e4lk7"
 
 [node name="FightGuard" parent="Characters" instance=ExtResource("14_tp5rb")]
 position = Vector2(48, 432)
-id = "guard1"
 sight_sector = SubResource("Resource_5eb2s")
+id = "guard1"
 
 [node name="FightGuard2" parent="Characters" instance=ExtResource("14_tp5rb")]
 position = Vector2(1056, 432)
-id = "guard2"
 sight_sector = SubResource("Resource_xjiqy")
+id = "guard2"
 
 [node name="Enemy003" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(336, 192)
-id = "enemy003"
 sight_sector = SubResource("Resource_y4dlw")
+id = "enemy003"
 
 [node name="Enemy004" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(144, 288)
-id = "enemy004"
 sight_sector = SubResource("Resource_x0uo6")
+id = "enemy004"
 
 [node name="Enemy005" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(240, 192)
-id = "enemy005"
 sight_sector = SubResource("Resource_7lm4w")
+id = "enemy005"
 
 [node name="Enemy006" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(672, 144)
-id = "enemy006"
 sight_sector = SubResource("Resource_gfbjb")
+id = "enemy006"
 
 [node name="Enemy007" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(864, 144)
-id = "enemy007"
 sight_sector = SubResource("Resource_87jy8")
+id = "enemy007"
 
 [node name="Enemy008" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(528, 384)
-id = "enemy008"
 sight_sector = SubResource("Resource_sax3x")
+id = "enemy008"
 
 [node name="HighLightTilePos" type="Node2D" parent="."]
 editor_description = "给PhatomCamera绑定用的虚拟的高亮图块位置。"
