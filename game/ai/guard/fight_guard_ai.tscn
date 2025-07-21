@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://du7dd15kk33ju"]
+
+[ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/phase_system/ai_phase/ai_phase_controller.gd" id="1_3ekwp"]
+[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/ai/common/patrol.gd" id="2_g74o7"]
+[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/ai/common/chase.gd" id="3_y1nbv"]
+[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/ai/common/guard.gd" id="4_8o5w1"]
+
+[node name="FightGuardAI" type="LimboHSM"]
+script = ExtResource("1_3ekwp")
+
+[node name="Patrol" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
+script = ExtResource("2_g74o7")
+transition = {
+&"find_enemy": NodePath("../Chase"),
+&"stop": NodePath("../Stop")
+}
+
+[node name="Chase" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
+script = ExtResource("3_y1nbv")
+transition = {
+&"lost_enemy": NodePath("../Patrol"),
+&"stop": NodePath("../Stop")
+}
+metadata/_custom_type_script = "uid://qcf6g7w6kqh"
+
+[node name="Stop" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
+script = ExtResource("4_8o5w1")
+transition = {
+&"end_stop": NodePath("../Patrol")
+}

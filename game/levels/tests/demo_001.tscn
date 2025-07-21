@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://db4qbuh3bxyot"]
+[gd_scene load_steps=29 format=4 uid="uid://db4qbuh3bxyot"]
 
 [ext_resource type="Script" uid="uid://chb4w8u6irhhe" path="res://game/levels/tests/demo_001.gd" id="1_fpp8n"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_tp5rb"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="12_3xpu4"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="13_yebf8"]
 [ext_resource type="PackedScene" uid="uid://bb4jaww77an76" path="res://game/enemy/test_enemy/enemy_001.tscn" id="14_16grb"]
+[ext_resource type="PackedScene" uid="uid://dgkebotgds0q4" path="res://game/enemy/guard/fire_guard.tscn" id="14_fpp8n"]
 [ext_resource type="PackedScene" uid="uid://bvr8unh25ufhl" path="res://game/enemy/guard/fight_guard.tscn" id="14_tp5rb"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_o5atp"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_vutqp"]
@@ -44,7 +45,7 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
-[sub_resource type="Resource" id="Resource_xjiqy"]
+[sub_resource type="Resource" id="Resource_tp5rb"]
 resource_local_to_scene = true
 resource_name = "视野范围"
 script = ExtResource("12_3xpu4")
@@ -243,10 +244,10 @@ position = Vector2(48, 432)
 sight_sector = SubResource("Resource_5eb2s")
 id = "guard1"
 
-[node name="FightGuard2" parent="Characters" instance=ExtResource("14_tp5rb")]
+[node name="FireGuard" parent="Characters" instance=ExtResource("14_fpp8n")]
 position = Vector2(1056, 432)
-sight_sector = SubResource("Resource_xjiqy")
-id = "guard2"
+sight_sector = SubResource("Resource_tp5rb")
+id = "fireguard1"
 
 [node name="Enemy003" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
 position = Vector2(336, 192)

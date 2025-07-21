@@ -1,4 +1,3 @@
-
 extends AIPhase
 
 func _enter() -> void:

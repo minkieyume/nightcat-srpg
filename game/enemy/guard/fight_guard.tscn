@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://csm5mumirosf4" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_3.png" id="4_5sryr"]
 [ext_resource type="Resource" uid="uid://bpf08ux3m4pr6" path="res://game/actions/action_resources/twice_move_action.tres" id="6_tsds6"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="9_6gvhg"]
-[ext_resource type="PackedScene" uid="uid://du7dd15kk33ju" path="res://game/enemy/guard/fight_guard_ai.tscn" id="10_tsds6"]
+[ext_resource type="PackedScene" uid="uid://du7dd15kk33ju" path="res://game/ai/guard/fight_guard_ai.tscn" id="10_tsds6"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="11_2kp2x"]
 [ext_resource type="Script" uid="uid://bmwtiauyutjap" path="res://game/actions/action_logics/attack.gd" id="12_f54vb"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="13_ih6y7"]
@@ -231,7 +231,7 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
 [node name="FightGuard" node_paths=PackedStringArray("ai") instance=ExtResource("1_6ydq3")]
 script = ExtResource("2_j43a6")
-ai = NodePath("StateAI")
+ai = NodePath("FightGuardAI")
 sight_sector = SubResource("Resource_dhysm")
 part = "enemy"
 
@@ -249,7 +249,7 @@ libraries = {
 [node name="ActionManager" parent="." index="4"]
 actions = Array[ExtResource("9_6gvhg")]([ExtResource("6_tsds6"), SubResource("Resource_x5d5m"), SubResource("Resource_farhh")])
 
-[node name="StateAI" parent="." index="5" instance=ExtResource("10_tsds6")]
+[node name="FightGuardAI" parent="." index="5" instance=ExtResource("10_tsds6")]
 
 [node name="Info" type="Label" parent="." index="7"]
 offset_left = 3.0

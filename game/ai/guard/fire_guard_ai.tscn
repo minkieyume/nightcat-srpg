@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://xx3tpwfwlxnb"]
 
 [ext_resource type="Script" uid="uid://by2xqkmbft8tc" path="res://system/phase_system/ai_phase/ai_phase_controller.gd" id="1_nfbn2"]
-[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/enemy/test_enemy/patrol.gd" id="2_lpa3s"]
-[ext_resource type="Script" uid="uid://bw8wlf53ybbuh" path="res://game/enemy/guard/fire_guard_chase.gd" id="3_nfbn2"]
-[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/enemy/test_enemy/guard.gd" id="4_du8c2"]
+[ext_resource type="Script" uid="uid://bsewfem38glf" path="res://game/ai/common/patrol.gd" id="2_lpa3s"]
+[ext_resource type="Script" uid="uid://cmsxyy05larov" path="res://game/ai/common/chase.gd" id="3_fq5tp"]
+[ext_resource type="Script" uid="uid://dpp422xmgo7f4" path="res://game/ai/common/guard.gd" id="4_du8c2"]
 
-[node name="StateAI" type="LimboHSM"]
+[node name="FireGuardAI" type="LimboHSM"]
 script = ExtResource("1_nfbn2")
 
 [node name="Patrol" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
@@ -16,7 +16,9 @@ transition = {
 }
 
 [node name="Chase" type="LimboState" parent="." node_paths=PackedStringArray("transition")]
-script = ExtResource("3_nfbn2")
+script = ExtResource("3_fq5tp")
+keep_distance = 3
+manhattan = true
 transition = {
 &"lost_enemy": NodePath("../Patrol"),
 &"stop": NodePath("../Stop")
