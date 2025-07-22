@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://db4qbuh3bxyot"]
+[gd_scene load_steps=30 format=4 uid="uid://db4qbuh3bxyot"]
 
 [ext_resource type="Script" uid="uid://chb4w8u6irhhe" path="res://game/levels/tests/demo_001.gd" id="1_fpp8n"]
 [ext_resource type="TileSet" uid="uid://d103yqt17qft6" path="res://assets/resources/tilesets/test001.tres" id="2_tp5rb"]
@@ -37,6 +37,15 @@ angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
 [sub_resource type="Resource" id="Resource_5eb2s"]
+resource_local_to_scene = true
+resource_name = "视野范围"
+script = ExtResource("12_3xpu4")
+face = Vector2i(0, 1)
+radius = 6
+angle = 90.0
+metadata/_custom_type_script = "uid://knoqcwl0eufq"
+
+[sub_resource type="Resource" id="Resource_fpp8n"]
 resource_local_to_scene = true
 resource_name = "视野范围"
 script = ExtResource("12_3xpu4")
@@ -245,7 +254,7 @@ id = "guard1"
 [node name="FightGuard2" parent="Characters" node_paths=PackedStringArray("patrol_path") instance=ExtResource("14_tp5rb")]
 position = Vector2(528, 384)
 patrol_path = NodePath("../../PatrolPaths/Path2D")
-sight_sector = SubResource("Resource_5eb2s")
+sight_sector = SubResource("Resource_fpp8n")
 id = "guard2"
 
 [node name="FireGuard" parent="Characters" instance=ExtResource("14_fpp8n")]
