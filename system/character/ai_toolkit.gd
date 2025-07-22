@@ -65,9 +65,6 @@ func move_near_unit_action(agent:Node,unit:String,dis:int=1,manhattan:=false):
 	var grid_quester = LevelHandler.get_grid_quester()
 	var server = LevelHandler.get_movement_server()	
 
-	var action = Action.new(agent.id,&"move")
-	await action.before_target_chose()
-
 	# 获取自身距离该单位的最近临近格
 	var nearst_target = null
 	var near_target:Vector2i
@@ -90,22 +87,31 @@ func move_near_unit_action(agent:Node,unit:String,dis:int=1,manhattan:=false):
 
 	if nearst_target == null:
 		return null
-	
+
+	return await move_near_action(agent,nearst_target)
+
+## 获取移动到移动范围内最接近end的位置的行动。
+func move_near_action(agent:Node,end:Vector2i):
 	# 获取行动的限制范围，并选择限制范围中最接近该玩家的最近临近格的格子。
-	var limit_array = action.clac_action_range()
+	var server = LevelHandler.get_movement_server()	
+	var action = Action.new(agent.id,&"move")
+	await action.before_target_chose()
+
 	var target = null
+	
+	var limit_array = action.clac_action_range()	
 	for target_pos in limit_array:
 		if server.is_point_reachable(agent.id,target_pos):
 			if target == null:
 				target = target_pos
-			elif target.distance_to(nearst_target) > target_pos.distance_to(nearst_target):
+			elif target.distance_to(end) > target_pos.distance_to(end):
 				target = target_pos
 	
 	if target != null:
 		action.set_target(target)
-		return action
-	else:
-		return null
+		if await action.precheck():			
+			return action
+	return null
 
 ## 往权重最高的单位移动，未指定filter的话默认为筛选player。
 ## 通过manhattan选项来计算是与该角色保持manhttan距离的位置还是欧几里得距离的位置。

@@ -99,14 +99,12 @@ radius = 6
 angle = 90.0
 metadata/_custom_type_script = "uid://knoqcwl0eufq"
 
-[sub_resource type="Resource" id="Resource_sax3x"]
+[sub_resource type="Curve2D" id="Curve2D_fpp8n"]
 resource_local_to_scene = true
-resource_name = "视野范围"
-script = ExtResource("12_3xpu4")
-face = Vector2i(0, 1)
-radius = 6
-angle = 90.0
-metadata/_custom_type_script = "uid://knoqcwl0eufq"
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 192, 384, 0, 0, 0, 0, 960, 384)
+}
+point_count = 2
 
 [sub_resource type="Resource" id="Resource_b814j"]
 script = ExtResource("16_vutqp")
@@ -244,6 +242,12 @@ position = Vector2(48, 432)
 sight_sector = SubResource("Resource_5eb2s")
 id = "guard1"
 
+[node name="FightGuard2" parent="Characters" node_paths=PackedStringArray("patrol_path") instance=ExtResource("14_tp5rb")]
+position = Vector2(528, 384)
+patrol_path = NodePath("../../PatrolPaths/Path2D")
+sight_sector = SubResource("Resource_5eb2s")
+id = "guard2"
+
 [node name="FireGuard" parent="Characters" instance=ExtResource("14_fpp8n")]
 position = Vector2(1056, 432)
 sight_sector = SubResource("Resource_tp5rb")
@@ -274,10 +278,10 @@ position = Vector2(864, 144)
 sight_sector = SubResource("Resource_87jy8")
 id = "enemy007"
 
-[node name="Enemy008" parent="Characters" groups=["enemy"] instance=ExtResource("14_16grb")]
-position = Vector2(528, 384)
-sight_sector = SubResource("Resource_sax3x")
-id = "enemy008"
+[node name="PatrolPaths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="PatrolPaths"]
+curve = SubResource("Curve2D_fpp8n")
 
 [node name="HighLightTilePos" type="Node2D" parent="."]
 editor_description = "给PhatomCamera绑定用的虚拟的高亮图块位置。"

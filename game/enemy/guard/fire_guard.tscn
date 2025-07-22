@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dgkebotgds0q4"]
+[gd_scene load_steps=30 format=3 uid="uid://dgkebotgds0q4"]
 
 [ext_resource type="PackedScene" uid="uid://c84estheuoiro" path="res://system/character/ai_character.tscn" id="1_1eb7g"]
 [ext_resource type="Script" uid="uid://do58gymkubxae" path="res://system/character/enemy.gd" id="2_fgrcs"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="5_xptva"]
 [ext_resource type="Script" uid="uid://pl0o3rwbjk30" path="res://game/actions/action_logics/move_action.gd" id="6_piwo6"]
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="7_iy8d3"]
-[ext_resource type="Resource" uid="uid://c21pl5id0qno4" path="res://game/actions/action_resources/guard/fire_guard_attack.tres" id="8_1eb7g"]
+[ext_resource type="Script" uid="uid://bmwtiauyutjap" path="res://game/actions/action_logics/attack.gd" id="8_1eb7g"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="9_4iof8"]
 [ext_resource type="PackedScene" uid="uid://xx3tpwfwlxnb" path="res://game/ai/guard/fire_guard_ai.tscn" id="10_1eb7g"]
 
@@ -204,6 +204,32 @@ max_twice = 1
 tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
+[sub_resource type="Resource" id="Resource_xtxro"]
+resource_local_to_scene = true
+script = ExtResource("7_iy8d3")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(2, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_7eyeh"]
+resource_local_to_scene = true
+resource_name = "射击"
+script = ExtResource("5_xptva")
+id = &"guard_fire"
+group = ""
+action_name = "射击"
+action_range = SubResource("Resource_xtxro")
+action_logic = ExtResource("8_1eb7g")
+args = {
+"damage": 2
+}
+ap_cost = 1
+max_twice = 1
+tags = Array[String](["attack"])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
 [sub_resource type="Resource" id="Resource_7m1oh"]
 script = ExtResource("7_iy8d3")
 deter_array = Array[Vector2i]([])
@@ -212,7 +238,7 @@ deter_rect2 = Rect2i(0, 0, 0, 0)
 type = 2
 metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
-[sub_resource type="Resource" id="Resource_yyxms"]
+[sub_resource type="Resource" id="Resource_xptva"]
 resource_local_to_scene = true
 resource_name = "结束回合"
 script = ExtResource("5_xptva")
@@ -245,7 +271,7 @@ libraries = {
 }
 
 [node name="ActionManager" parent="." index="4"]
-actions = Array[ExtResource("5_xptva")]([SubResource("Resource_fgrcs"), ExtResource("8_1eb7g"), SubResource("Resource_yyxms")])
+actions = Array[ExtResource("5_xptva")]([SubResource("Resource_fgrcs"), SubResource("Resource_7eyeh"), SubResource("Resource_xptva")])
 
 [node name="FireGuardAI" parent="." index="5" instance=ExtResource("10_1eb7g")]
 
