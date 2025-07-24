@@ -32,9 +32,12 @@ editor_description = "GamePhaeController是仅在服务器上运行的服务端�
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MenuManager" type="LimboHSM" parent="CanvasLayer"]
+[node name="MenuManager" type="LimboHSM" parent="CanvasLayer" node_paths=PackedStringArray("hide", "grid_target_choser", "action_choser")]
 editor_description = "菜单管理器是本地类，不会参与远程同步。"
 script = ExtResource("8_074og")
+hide = NodePath("Hide")
+grid_target_choser = NodePath("GridTargetChoser")
+action_choser = NodePath("ActionChoser")
 controller_name = "menu"
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 

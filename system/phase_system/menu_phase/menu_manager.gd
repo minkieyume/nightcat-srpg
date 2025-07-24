@@ -1,7 +1,12 @@
 extends PhaseController
 
+@export var hide:MenuPhase
+@export var grid_target_choser:MenuPhase
+@export var action_choser:MenuPhase
+
 func _on_handler_command_send(command:StringName, args:Array) -> void:	
 	super(command,args)
+	MenuHandler.menu_manager = self
 	if MultiCat.is_online():
 		if is_multiplayer_authority():
 			rpc("menu_commend_recive",command,args)

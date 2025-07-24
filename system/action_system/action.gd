@@ -10,6 +10,7 @@ var ap_cost:int
 var args:Dictionary
 var logic:ActionLogic
 var ctx:Dictionary
+var no_cost = false
 
 func _init(r:String,id:StringName):
 	var action_resource:ActionResource = LevelHandler.get_character_action(r,id)
@@ -89,8 +90,9 @@ func has_range():
 func execute():
 	CommandBus.server_local_command("gamephase",["wait"])
 	await logic.execute(self)
-	resource.count_twice()
-	cost_ap()
+	if !no_cost:
+		resource.count_twice()
+		cost_ap()
 	end_action()
 
 func end_action() -> void:
