@@ -24,5 +24,13 @@ func execute(action:Action):
 		movement.rpc("move_unit",unit,action.ctx["target"])
 		await LevelHandler.get_unit(unit).path_end
 	else:
-		action.no_cost = true
+		if MultiCat.is_online():
+			if action.ctx.has("part"):
+				var agents = MultiCat.get_agents()
+				var player_id = MultiCat.multiplayer.get_unique_id()
+				var agen = agents["%d"%player_id]
+				if agen.part == action.ctx["part"]:
+					action.no_cost = true
+		else:
+			action.no_cost = true
 

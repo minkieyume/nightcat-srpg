@@ -21,12 +21,7 @@ group = "技能"
 action_name = "机关操纵"
 action_range = SubResource("Resource_xkqmr")
 action_logic = ExtResource("1_77jaw")
-allowed_target = {
-"Enemy": true,
-"Object": true,
-"Player": true,
-"Tile": true
-}
+args = {}
 ap_cost = 1
 max_twice = 1
 tags = Array[String]([])
