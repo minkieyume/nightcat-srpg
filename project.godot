@@ -25,6 +25,7 @@ PackRTC="*res://addons/packrtc/scripts/PackRTC.gd"
 MultiCat="*res://global/autoload/multicat.gd"
 BuffR="*res://system/buff/buff_register.tscn"
 AiToolkit="*res://system/character/ai_toolkit.gd"
+MenuHandler="*res://global/autoload/menu_handler.gd"
 
 [display]
 

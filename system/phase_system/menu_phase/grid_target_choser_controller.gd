@@ -17,6 +17,8 @@ var limit_mode = false
 
 @export var default_mode = "chose_character"
 
+signal grid_chosed
+
 func _ready() -> void:
 	super()
 	add_event_handler("chose",_chose)
@@ -34,9 +36,6 @@ func _enter() -> void:
 			limit_mode = true			
 			var pos = LevelHandler.get_unit_position(context["actor"])
 			grid_drawer.update_highlight(pos)
-		"chose_interactable_target":
-			pass
-			
 		
 	grid_drawer.update()
 
@@ -76,7 +75,16 @@ func _chose() -> bool:
 			CommandBus.rpc_send_command("gamephase",["interact_sucess"])
 			context.erase("target")
 			dispatch("hide")
+		"inaction_menu":			
+			var action:Action = context["_action"]
+			action.set_ctx(context)
+			rpc("remote_grid_chosed")
+			emit_signal("grid_chosed")
 	return true
+
+@rpc("any_peer","call_local")
+func remote_grid_chosed():
+	emit_signal("grid_chosed")
 
 func update_actor() -> bool:
 	var grid_quester = LevelHandler.get_grid_quester()
@@ -113,7 +121,9 @@ func _return() -> bool:
 			context["mode"] = "chose_character"
 			context.erase("actor")
 			context.erase("action")
-			CommandBus.rpc_send_command("gamephase",["back"])			
+			CommandBus.rpc_send_command("gamephase",["back"])
+		"inaction_menu":
+			rpc("remote_grid_chosed")
 	limit_mode = false
 	grid_drawer.show_limit = false
 	grid_drawer.update()

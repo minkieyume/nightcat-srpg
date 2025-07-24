@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cg3dp8fyss4f2"]
+[gd_scene load_steps=18 format=3 uid="uid://cg3dp8fyss4f2"]
 
 [ext_resource type="PackedScene" uid="uid://bmifao6rkul2o" path="res://system/character/player.tscn" id="1_ia4wj"]
 [ext_resource type="Texture2D" uid="uid://cwsnak15fe60m" path="res://assets/external_packs/character-pack-free_version/sprite/free_character_2.png" id="2_4vs7r"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://xyj6wu1yxj5c" path="res://game/actions/action_logics/twice_move_action.gd" id="5_aysmk"]
 [ext_resource type="Script" uid="uid://5cp6n7kqsogh" path="res://game/actions/action_logics/machine_interact_action.gd" id="6_p1g74"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="7_t0dh5"]
+[ext_resource type="Script" uid="uid://booridrmscej" path="res://game/actions/action_logics/telekinesis.gd" id="8_iws6o"]
 
 [sub_resource type="Resource" id="Resource_cv6jv"]
 resource_local_to_scene = true
@@ -65,6 +66,30 @@ max_twice = 1
 tags = Array[String]([])
 metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 
+[sub_resource type="Resource" id="Resource_mqlo0"]
+resource_local_to_scene = true
+script = ExtResource("4_qjnne")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_ikqj6"]
+resource_local_to_scene = true
+resource_name = "念力"
+script = ExtResource("2_p1g74")
+id = &"telekinesis"
+group = "技能"
+action_name = "念力"
+action_range = SubResource("Resource_mqlo0")
+action_logic = ExtResource("8_iws6o")
+args = {}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
 [sub_resource type="Resource" id="Resource_8q6cw"]
 resource_local_to_scene = true
 resource_name = "结束回合"
@@ -89,4 +114,4 @@ position = Vector2(25, 18)
 texture = ExtResource("2_4vs7r")
 
 [node name="ActionManager" parent="." index="4"]
-actions = Array[ExtResource("2_p1g74")]([SubResource("Resource_k6t1n"), SubResource("Resource_vh832"), SubResource("Resource_8q6cw")])
+actions = Array[ExtResource("2_p1g74")]([SubResource("Resource_k6t1n"), SubResource("Resource_vh832"), SubResource("Resource_ikqj6"), SubResource("Resource_8q6cw")])

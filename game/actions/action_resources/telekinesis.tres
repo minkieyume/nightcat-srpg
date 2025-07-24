@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://678xe0splliv"]
+
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="1_3hplo"]
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1_6vqdu"]
+[ext_resource type="Script" uid="uid://booridrmscej" path="res://game/actions/action_logics/telekinesis.gd" id="1_8elcp"]
+
+[sub_resource type="Resource" id="Resource_8elcp"]
+resource_local_to_scene = true
+script = ExtResource("1_3hplo")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[resource]
+resource_local_to_scene = true
+resource_name = "念力"
+script = ExtResource("1_6vqdu")
+id = &"telekinesis"
+group = "技能"
+action_name = "念力"
+action_range = SubResource("Resource_8elcp")
+action_logic = ExtResource("1_8elcp")
+args = {}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"

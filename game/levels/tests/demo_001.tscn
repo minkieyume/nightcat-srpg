@@ -199,8 +199,9 @@ position = Vector2(864, 192)
 [node name="Lamp1" parent="Objects" groups=["interactable"] instance=ExtResource("8_sax3x")]
 position = Vector2(384, 192)
 
-[node name="Lamp2" parent="Objects" groups=["interactable"] instance=ExtResource("8_sax3x")]
+[node name="Lamp2" parent="Objects" groups=["interactable", "telekable"] instance=ExtResource("8_sax3x")]
 position = Vector2(528, 528)
+id = "lamp2"
 
 [node name="Lamp3" parent="Objects" groups=["interactable"] instance=ExtResource("8_sax3x")]
 position = Vector2(768, 192)

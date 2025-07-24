@@ -69,7 +69,7 @@ func get_path_length(start: Vector2i, target: Vector2i) -> int:
 	return max(path.size() - 1, 0)
 
 ## 移动单位
-@rpc("authority","call_local")
+@rpc("any_peer","call_local")
 func move_unit(cid:String,target:Vector2i) -> bool:
 	var unit = LevelHandler.get_unit(cid)
 	var drawer = LevelHandler.get_grid_drawer()	
