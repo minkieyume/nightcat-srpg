@@ -100,3 +100,9 @@ func get_enemies() -> Array[Character]:
 
 func get_movement_server() -> MovementServer:
 	return level.get_movement_server()
+
+func remove_unit(unit:String):
+	level.remove_unit(unit)
+
+func add_unit(unit:Unit):
+	level.add_unit(unit)

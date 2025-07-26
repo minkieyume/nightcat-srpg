@@ -33,3 +33,7 @@ func get_movement_server() -> MovementServer:
 
 func get_camera() -> PhantomCamera2D:
 	return camera
+
+func add_unit(unit:Unit):
+	super(unit)
+	objects.add_child(unit)
