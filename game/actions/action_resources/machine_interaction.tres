@@ -14,11 +14,11 @@ metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
 [resource]
 resource_local_to_scene = true
-resource_name = "机关操纵"
+resource_name = "非生物催眠"
 script = ExtResource("3_bdk42")
 id = &"machine"
 group = "技能"
-action_name = "机关操纵"
+action_name = "非生物催眠"
 action_range = SubResource("Resource_xkqmr")
 action_logic = ExtResource("1_77jaw")
 args = {}
