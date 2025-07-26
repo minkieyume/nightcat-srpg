@@ -46,3 +46,12 @@ func get_movement_server() -> MovementServer:
 
 func get_camera() -> PhantomCamera2D:
 	return PhantomCamera2D.new()
+
+func remove_unit(unit:String):
+	if unit_dict.has(unit):
+		var unit_entity = unit_dict[unit]
+		unit_dict.erase(unit)
+		unit_entity.queue_free()
+
+func add_unit(unit:Unit):
+	unit_dict[unit.id] = unit
