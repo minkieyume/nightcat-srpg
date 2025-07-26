@@ -1,7 +1,7 @@
 extends ActionLogic
 
 func execute(action:Action):
-	var unit = Unit.new()
+	var unit = preload("res://game/unit/ghost.tscn")
 	var quester = LevelHandler.get_grid_quester()
 	var ghosts = LevelHandler.get_units().filter(func(g):
 		return LevelHandler.is_unit_in_group(g.id,"ghost"))
