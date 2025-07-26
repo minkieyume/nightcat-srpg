@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bcp4wjouh8kwm"]
+[gd_scene load_steps=27 format=3 uid="uid://bcp4wjouh8kwm"]
 
 [ext_resource type="Script" uid="uid://bodda3w1gkwm" path="res://system/phase_system/turn_phase/multi_play_init_phase.gd" id="2_40s63"]
 [ext_resource type="Script" uid="uid://bnnv46xobvq7w" path="res://system/phase_system/turn_phase/game_phase_controller.gd" id="2_emkk0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://casup1kbvp28x" path="res://system/phase_system/turn_phase/turn_end.gd" id="7_dm2g6"]
 [ext_resource type="Script" uid="uid://cn8gh722p35ia" path="res://system/phase_system/tool_phase/action_achiever.gd" id="7_oej6j"]
 [ext_resource type="Script" uid="uid://d2l5rt06p5tpw" path="res://system/phase_system/turn_phase/tick_buff.gd" id="7_pwe5p"]
+[ext_resource type="Script" uid="uid://bwxcxy8sq5y36" path="res://system/phase_system/turn_phase/unit_turn.gd" id="7_x2m72"]
 [ext_resource type="Script" uid="uid://dhnujo24mhtvc" path="res://system/phase_system/turn_phase/player_chose_action.gd" id="8_hvc3f"]
 [ext_resource type="Script" uid="uid://d26vwm781f5u8" path="res://system/phase_system/tool_phase/interactor.gd" id="8_ndc68"]
 [ext_resource type="Script" uid="uid://cq4au2cl68r8f" path="res://system/phase_system/turn_phase/multi_chose_default_character.gd" id="9_m6v1k"]
@@ -61,6 +62,13 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
 [node name="RestoreActionTwice" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
 script = ExtResource("6_ddtil")
+transition = {
+&"next": NodePath("../UnitTurn")
+}
+metadata/_custom_type_script = "uid://dmqb80wbqxon3"
+
+[node name="UnitTurn" type="LimboState" parent="PrepareTurn" node_paths=PackedStringArray("transition")]
+script = ExtResource("7_x2m72")
 transition = {
 &"next": NodePath("../PrepareTurnEndCheck")
 }
