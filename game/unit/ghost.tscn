@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dguha2vaq4ih4"]
 
-[ext_resource type="Script" uid="uid://dtcqinp60v64t" path="res://game/unit/ghost.gd" id="1_d2bbp"]
+[ext_resource type="Script" uid="uid://cds6850iwjdgc" path="res://system/unit/turn_disappear_unit.gd" id="1_d2bbp"]
 
 [node name="Ghost" type="Node2D" groups=["ghost"]]
 script = ExtResource("1_d2bbp")
