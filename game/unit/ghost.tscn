@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bw88u8fk37vf4" path="res://system/unit/turn_disappear_unit.tscn" id="1_y4cja"]
 
-[node name="Unit" groups=["ghost"] instance=ExtResource("1_y4cja")]
+[node name="Ghost" groups=["ghost"] instance=ExtResource("1_y4cja")]
 id = "ghost"
 part = "ghost"
