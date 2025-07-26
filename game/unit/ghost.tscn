@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dguha2vaq4ih4"]
+
+[ext_resource type="Script" uid="uid://dtcqinp60v64t" path="res://game/unit/ghost.gd" id="1_d2bbp"]
+
+[node name="Ghost" type="Node2D" groups=["ghost"]]
+script = ExtResource("1_d2bbp")
+id = "ghost"
+part = "ghost"
+metadata/_custom_type_script = "uid://cirek5i3e4lk7"

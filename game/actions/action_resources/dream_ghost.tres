@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://hu4jkbe63ntp"]
+
+[ext_resource type="Script" uid="uid://brff3qi7pyhdk" path="res://game/actions/action_logics/dream_ghost.gd" id="1_072nx"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="1_anitq"]
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1_h6qgk"]
+
+[sub_resource type="Resource" id="Resource_anitq"]
+resource_local_to_scene = true
+script = ExtResource("1_anitq")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(1, 4)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_h6qgk")
+id = &"dream_ghost"
+group = ""
+action_name = "梦境幻影"
+action_range = SubResource("Resource_anitq")
+action_logic = ExtResource("1_072nx")
+args = {}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
