@@ -147,3 +147,6 @@ func clean_ctx():
 
 func _on_level_ready():	
 	_init_animation_machine()
+
+func turn():
+	pass
