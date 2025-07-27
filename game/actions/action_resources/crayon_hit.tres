@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ActionResource" load_steps=5 format=3 uid="uid://0l0al14lat31"]
+
+[ext_resource type="Script" uid="uid://cu1qb5f0x4td0" path="res://game/actions/action_logics/crayon_hit.gd" id="1_jqcsa"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="2_0go5s"]
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="3_dij3d"]
+
+[sub_resource type="Resource" id="Resource_jqcsa"]
+resource_local_to_scene = true
+script = ExtResource("2_0go5s")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(3, 3)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 3
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[resource]
+resource_local_to_scene = true
+resource_name = "攻击"
+script = ExtResource("3_dij3d")
+id = &"crayon_hit"
+group = "技能"
+action_name = "蜡笔重击"
+action_range = SubResource("Resource_jqcsa")
+action_logic = ExtResource("1_jqcsa")
+args = {
+"damage": 5
+}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
