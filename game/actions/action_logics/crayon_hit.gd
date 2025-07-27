@@ -10,6 +10,7 @@ func precheck(action:Action) -> bool:
 	return false
 
 # 蜡笔重击：对敌人进行处决一击
+# 只能对倒地和恐惧状态的敌人使用
 func execute(action:Action):
 	var quester = LevelHandler.get_grid_quester()
 	var unit_id = quester.quest_unit(action.target)
