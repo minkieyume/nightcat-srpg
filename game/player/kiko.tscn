@@ -58,7 +58,7 @@ action_name = "夜猫嘲讽"
 action_range = SubResource("Resource_bjwp7")
 action_logic = ExtResource("5_e2xvg")
 args = {}
-ap_cost = 2
+ap_cost = 1
 max_twice = 1
 tags = Array[String]([])
 

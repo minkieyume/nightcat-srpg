@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ActionResource" load_steps=4 format=3 uid="uid://cqiq7g41d5knj"]
+
+[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1_4yxpl"]
+[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="1_6v2jv"]
+
+[sub_resource type="Resource" id="Resource_fgpk6"]
+resource_local_to_scene = true
+script = ExtResource("1_6v2jv")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(2, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[resource]
+resource_local_to_scene = true
+resource_name = "蜡笔飞弹"
+script = ExtResource("1_4yxpl")
+id = &"crayon_rocket"
+group = "技能"
+action_name = "蜡笔飞弹"
+action_range = SubResource("Resource_fgpk6")
+args = {}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"

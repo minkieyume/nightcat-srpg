@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsr7mdw24db8u"]
+
+[ext_resource type="PackedScene" uid="uid://bw88u8fk37vf4" path="res://system/unit/turn_disappear_unit.tscn" id="1_vkule"]
+[ext_resource type="Texture2D" uid="uid://ccc5617mkwjnp" path="res://assets/external_packs/no_free/overworld-pack-full_version/sprite/free_chests.png" id="2_7tybe"]
+[ext_resource type="Script" uid="uid://btiph1lronv4x" path="res://game/unit/breakable.gd" id="2_ot11t"]
+
+[node name="Breakable" groups=["breakable"] instance=ExtResource("1_vkule")]
+script = ExtResource("2_ot11t")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(25, 2)
+texture = ExtResource("2_7tybe")
+hframes = 12
+vframes = 8
