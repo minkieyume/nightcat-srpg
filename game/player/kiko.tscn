@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dupnywu6oavso"]
+[gd_scene load_steps=19 format=3 uid="uid://dupnywu6oavso"]
 
 [ext_resource type="PackedScene" uid="uid://bmifao6rkul2o" path="res://system/character/player.tscn" id="1_ouxu8"]
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="2_1nccq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="4_j5q56"]
 [ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="5_e2xvg"]
 [ext_resource type="Script" uid="uid://xyj6wu1yxj5c" path="res://game/actions/action_logics/twice_move_action.gd" id="6_05vi7"]
+[ext_resource type="Script" uid="uid://cu1qb5f0x4td0" path="res://game/actions/action_logics/crayon_hit.gd" id="8_3g2ta"]
 [ext_resource type="Script" uid="uid://b8qk3b5kva4xq" path="res://game/actions/action_logics/end_turn.gd" id="9_05vi7"]
 
 [sub_resource type="Resource" id="Resource_merej"]
@@ -62,6 +63,55 @@ ap_cost = 1
 max_twice = 1
 tags = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_05vi7"]
+resource_local_to_scene = true
+script = ExtResource("4_j5q56")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(2, 6)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 2
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_vcdb1"]
+resource_local_to_scene = true
+resource_name = "蜡笔飞弹"
+script = ExtResource("2_1nccq")
+id = &"crayon_rocket"
+group = "技能"
+action_name = "蜡笔飞弹"
+action_range = SubResource("Resource_05vi7")
+args = {}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
+[sub_resource type="Resource" id="Resource_hdsma"]
+resource_local_to_scene = true
+script = ExtResource("4_j5q56")
+deter_array = Array[Vector2i]([])
+deter_vector2 = Vector2i(3, 3)
+deter_rect2 = Rect2i(0, 0, 0, 0)
+type = 3
+metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+
+[sub_resource type="Resource" id="Resource_ywinf"]
+resource_local_to_scene = true
+resource_name = "蜡笔重击"
+script = ExtResource("2_1nccq")
+id = &"crayon_hit"
+group = "技能"
+action_name = "蜡笔重击"
+action_range = SubResource("Resource_hdsma")
+action_logic = ExtResource("8_3g2ta")
+args = {
+"damage": 5
+}
+ap_cost = 1
+max_twice = 1
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://b1xru1xnc1twu"
+
 [sub_resource type="Resource" id="Resource_766sh"]
 resource_local_to_scene = true
 resource_name = "结束回合"
@@ -80,4 +130,4 @@ metadata/_custom_type_script = "uid://b1xru1xnc1twu"
 sight_sector = SubResource("Resource_merej")
 
 [node name="ActionManager" parent="." index="4"]
-actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_8tnnp"), SubResource("Resource_3g2ta"), SubResource("Resource_766sh")])
+actions = Array[ExtResource("2_1nccq")]([SubResource("Resource_8tnnp"), SubResource("Resource_3g2ta"), SubResource("Resource_vcdb1"), SubResource("Resource_ywinf"), SubResource("Resource_766sh")])

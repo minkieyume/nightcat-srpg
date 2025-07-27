@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://b6x8da3egg2rq"
 
 [resource]
 resource_local_to_scene = true
-resource_name = "攻击"
+resource_name = "蜡笔重击"
 script = ExtResource("3_dij3d")
 id = &"crayon_hit"
 group = "技能"
