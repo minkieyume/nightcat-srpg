@@ -80,6 +80,11 @@ func _chose() -> bool:
 			action.set_ctx(context)
 			rpc("remote_grid_chosed")
 			emit_signal("grid_chosed")
+		"cat_feet":
+			var action:Action = context["_action"]
+			action.set_ctx(context)
+			rpc("remote_grid_chosed")
+			emit_signal("grid_chosed")
 	return true
 
 @rpc("any_peer","call_local")
@@ -123,6 +128,8 @@ func _return() -> bool:
 			context.erase("action")
 			CommandBus.rpc_send_command("gamephase",["back"])
 		"inaction_menu":
+			rpc("remote_grid_chosed")
+		"cat_feet":
 			rpc("remote_grid_chosed")
 	limit_mode = false
 	grid_drawer.show_limit = false
