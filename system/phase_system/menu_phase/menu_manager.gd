@@ -3,6 +3,7 @@ extends PhaseController
 @export var hide:MenuPhase
 @export var grid_target_choser:MenuPhase
 @export var action_choser:MenuPhase
+@export var qte:MenuPhase
 
 func _on_handler_command_send(command:StringName, args:Array) -> void:	
 	super(command,args)

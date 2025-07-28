@@ -1,4 +1,4 @@
-extends Node2D
+extends PhaseMenu
 @onready var failed_area:ColorRect = $FailedArea
 @onready var sucess_area:Area2D = $FailedArea/SuccessArea
 @onready var hardsucess_area:Area2D = $FailedArea/SuccessArea/HardSucessArea
@@ -7,7 +7,7 @@ extends Node2D
 @onready var sucess_collision_shape = $FailedArea/SuccessArea/CollisionShape2D
 
 @onready var hardsucess_rect:ColorRect = $FailedArea/SuccessArea/HardSucessArea/HardSucessRect
-@onready var hardsucess_collision_shape = $FailedArea/SuccessArea/CollisionShape2D
+@onready var hardsucess_collision_shape = $FailedArea/SuccessArea/HardSucessArea/CollisionShape2D
 
 @onready var zhizhen:Area2D = $FailedArea/ZhiZhen
 
@@ -23,21 +23,46 @@ extends Node2D
 @export var rate :float = 100.0
 
 var zhizhen_right = true
-var zhizhen_stop = false
+var zhizhen_stop = true
+
+var result = 0 # 结果：0为失败，1为成功，2为艰难成功
+
+signal qte_finished
 
 func _ready():
+	super()	
 	#矩形大小配置
-	var sucess_shape = RectangleShape2D.new()
-	var hardsucess_shape  = RectangleShape2D.new()
-	sucess_rect.size.x = failed_area.size.x*sucess_per
-	hardsucess_rect.size.x = failed_area.size.x*hard_sucess_per
-	sucess_shape.size = sucess_rect.size/2
-	hardsucess_shape.size = hardsucess_rect.size/2
-	sucess_collision_shape = sucess_shape
-	hardsucess_collision_shape = hardsucess_shape
+	var s_shape = RectangleShape2D.new()
+	var hs_shape = RectangleShape2D.new()
+	
+	var sizex = failed_area.size.x*sucess_per
+	var hsizex = failed_area.size.x*hard_sucess_per
+	
+	sucess_rect.size.x = sizex
+	hardsucess_rect.size.x = hsizex
+	
+	s_shape.size = Vector2(sizex,sucess_rect.size.y)
+	hs_shape.size = Vector2(hsizex,sucess_rect.size.y)
+	
 	sucess_area.position.x = sucess_area.position.x + sucess_off
 	hardsucess_area.position.x = hardsucess_area.position.x + hard_off
+		
+	sucess_collision_shape.set_shape(s_shape)
+	hardsucess_collision_shape.set_shape(hs_shape)
+
+	sucess_collision_shape.position.x = s_shape.size.x/2
+	hardsucess_collision_shape.position.x = hs_shape.size.x/2
+	
+	
+
+func _phase_enter() -> void:
+	super()
+	zhizhen_stop = false
 	get_tree().create_timer(stop_sec).connect("timeout",_on_stop_sec_timeout)
+
+func _phase_exit() -> void:
+	super()
+	zhizhen.position.x = 1
 
 func zhizhen_move(delta: float):
 	var zsx = zhizhen.position.x
@@ -58,8 +83,19 @@ func _process(delta: float) -> void:
 func _on_stop_sec_timeout() -> void:
 	if not zhizhen_stop:
 		zhizhen_stop = true
-		zhizhen.visible = false
+		check_result()
+		phase.apply_qte_result(result)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("QTE"):
 		zhizhen_stop = true
+		check_result()
+		phase.apply_qte_result(result)
+
+func check_result():
+	if hardsucess_area.overlaps_area(zhizhen):
+		result = 2
+	elif sucess_area.overlaps_area(zhizhen):
+		result = 1
+	else:
+		result = 0

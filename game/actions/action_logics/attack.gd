@@ -28,7 +28,7 @@ func execute(action:Action):
 	var unit_id = grid_quester.quest_unit(action.target)
 	var unit = LevelHandler.get_character(unit_id)
 	if unit and unit.id =="kiko" and unit.cat_feet:
-		var qte = MenuHandler.get_grid_target_choser()
+		var qte = MenuHandler.get_qte()
 		CommandBus.send_command("menu",["setcargo","mode","cat_feet"])
 		CommandBus.send_command("menu",["setcargo","_action",action])
 		CommandBus.send_command("menu",["qte"])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctpwokqd5uh20"]
+[gd_scene load_steps=15 format=3 uid="uid://ctpwokqd5uh20"]
 
 [ext_resource type="Script" uid="uid://b710l1bww0w16" path="res://main.gd" id="1_w48qg"]
 [ext_resource type="Script" uid="uid://budecnfydfvbx" path="res://addons/MultiplayCore/MultiPlay.gd" id="2_ycdy4"]
@@ -10,8 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
 [ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/menu_phase/hide.gd" id="9_074og"]
+[ext_resource type="Script" uid="uid://knx4xit8ksjs" path="res://qte.gd" id="11_ycdy4"]
 [ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/phase_system/menu_phase/grid_target_choser_controller.gd" id="12_cegan"]
 [ext_resource type="Script" uid="uid://dq1x3v8wi5fis" path="res://system/phase_system/menu_phase/action_choser_controller.gd" id="13_82xsv"]
+[ext_resource type="PackedScene" uid="uid://5m30opp7uf8m" path="res://system/qte/time_click_bar.tscn" id="14_w48qg"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_w48qg")
@@ -32,12 +34,13 @@ editor_description = "GamePhaeController是仅在服务器上运行的服务端�
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MenuManager" type="LimboHSM" parent="CanvasLayer" node_paths=PackedStringArray("hide", "grid_target_choser", "action_choser")]
+[node name="MenuManager" type="LimboHSM" parent="CanvasLayer" node_paths=PackedStringArray("hide", "grid_target_choser", "action_choser", "qte")]
 editor_description = "菜单管理器是本地类，不会参与远程同步。"
 script = ExtResource("8_074og")
 hide = NodePath("Hide")
 grid_target_choser = NodePath("GridTargetChoser")
 action_choser = NodePath("ActionChoser")
+qte = NodePath("QTE")
 controller_name = "menu"
 metadata/_custom_type_script = "uid://fe3prh577nyf"
 
@@ -66,6 +69,13 @@ transition = {
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
+[node name="QTE" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
+script = ExtResource("11_ycdy4")
+transition = {
+&"hide": NodePath("../Hide")
+}
+metadata/_custom_type_script = "uid://dcaq0kefvc78r"
+
 [node name="GridTargetChoser" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("6_4c57u")]
 visible = false
 phase = NodePath("../MenuManager/GridTargetChoser")
@@ -80,5 +90,13 @@ offset_bottom = -440.0
 phase = NodePath("../MenuManager/ActionChoser")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="TimeClickBar" parent="CanvasLayer" node_paths=PackedStringArray("phase") instance=ExtResource("14_w48qg")]
+visible = false
+offset_left = 203.0
+offset_top = 269.0
+offset_right = 203.0
+offset_bottom = 269.0
+phase = NodePath("../MenuManager/QTE")
 
 [connection signal="player_connected" from="MultiPlayCore" to="." method="_on_multi_play_core_player_connected"]

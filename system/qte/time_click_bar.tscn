@@ -1,12 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://5m30opp7uf8m"]
 
-[ext_resource type="Script" uid="uid://t2v3hutwj2cu" path="res://system/time_click_bar.gd" id="1_tl608"]
+[ext_resource type="Script" uid="uid://t2v3hutwj2cu" path="res://system/qte/time_click_bar.gd" id="1_tl608"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tl608"]
 size = Vector2(2, 20)
 
-[node name="TimeClickBar" type="Node2D"]
+[node name="TimeClickBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_tl608")
+metadata/_custom_type_script = "uid://dgxmreeqhtyku"
 
 [node name="FailedArea" type="ColorRect" parent="."]
 offset_right = 200.0
@@ -22,6 +25,7 @@ offset_bottom = 20.0
 color = Color(0.97412, 0.828498, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FailedArea/SuccessArea"]
+position = Vector2(0, 10)
 
 [node name="HardSucessArea" type="Area2D" parent="FailedArea/SuccessArea"]
 metadata/_edit_group_ = true
@@ -32,6 +36,7 @@ offset_bottom = 20.0
 color = Color(1, 0.332408, 0.356037, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FailedArea/SuccessArea/HardSucessArea"]
+position = Vector2(0, 10)
 
 [node name="ZhiZhen" type="Area2D" parent="FailedArea"]
 position = Vector2(1, 10)
@@ -45,5 +50,3 @@ offset_bottom = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FailedArea/ZhiZhen"]
 shape = SubResource("RectangleShape2D_tl608")
-
-[connection signal="gui_input" from="FailedArea" to="." method="_on_failed_area_gui_input"]
