@@ -9,5 +9,10 @@ func apply_qte_result(result:int):
 	if context.has("_action"):
 		var action:Action = context["_action"]
 		action.set_ctx(context)
+	rpc("remote_qte_finish")
 	emit_signal("qte_finish")
 	dispatch("hide")	
+
+@rpc("any_peer","call_remote")
+func remote_qte_finish():
+	emit_signal("qte_finish")

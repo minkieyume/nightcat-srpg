@@ -33,7 +33,7 @@ func execute(action:Action):
 		CommandBus.send_command("menu",["setcargo","_action",action])
 		CommandBus.send_command("menu",["qte"])
 		await qte.qte_finish
-		if action.ctx.has("qte_sucess") and action.ctx["qte_sucess"]:
+		if action.ctx.has("qte_result") and action.ctx["qte_result"] > 0:
 			var target_choser:GridTargetChoserController = MenuHandler.get_grid_target_choser()
 			## FEATURE：我觉得，给目标选择器在有限制数组的时候，加上实际将target限制在范围内的机制很有必要
 			## 这样有利于在任何地方灵活调用并获取限制后的目标。
@@ -46,8 +46,22 @@ func execute(action:Action):
 				movement.rpc("move_unit",unit,action.ctx["target"])
 				await LevelHandler.get_unit(unit).path_end
 		else:
-			character.apply_damage(args["damage"])
+			# 闪避失败受到的伤害
+			if is_apply_damage(action):
+				character.apply_damage(args["damage"])
 	else:
 		# 对通常的敌人应用伤害
-		character.apply_damage(args["damage"])
+		if is_apply_damage(action):
+			character.apply_damage(args["damage"])
 	
+func is_apply_damage(action:Action) -> bool:
+	if MultiCat.is_online():
+		if action.ctx.has("part"):
+			var agents = MultiCat.get_agents()
+			var player_id = MultiCat.multiplayer.get_unique_id()
+			var agen = agents["%d"%player_id]
+			if agen.part == action.ctx["part"]:
+				return true
+		return false
+	else:
+		return true
