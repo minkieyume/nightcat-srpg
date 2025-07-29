@@ -32,6 +32,7 @@ func execute(action:Action):
 		var qte = MenuHandler.get_qte()
 		CommandBus.send_command("menu",["setcargo","mode","cat_feet"])
 		CommandBus.send_command("menu",["setcargo","_action",action])
+		CommandBus.send_command("menu",["setcargo","part",unit.part])
 		CommandBus.send_command("menu",["qte"])
 		await qte.qte_finish
 		if action.ctx.has("qte_result") and action.ctx["qte_result"] > 0:

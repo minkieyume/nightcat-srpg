@@ -48,7 +48,8 @@ metadata/_custom_type_script = "uid://fe3prh577nyf"
 script = ExtResource("9_074og")
 transition = {
 &"chose_action": NodePath("../ActionChoser"),
-&"chose_target": NodePath("../GridTargetChoser")
+&"chose_target": NodePath("../GridTargetChoser"),
+&"qte": NodePath("../QTE")
 }
 metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 
@@ -72,7 +73,6 @@ metadata/_custom_type_script = "uid://dmqb80wbqxon3"
 [node name="QTE" type="LimboState" parent="CanvasLayer/MenuManager" node_paths=PackedStringArray("transition")]
 script = ExtResource("11_ycdy4")
 transition = {
-&"chose_action": NodePath("../GridTargetChoser"),
 &"hide": NodePath("../Hide")
 }
 metadata/_custom_type_script = "uid://dcaq0kefvc78r"
