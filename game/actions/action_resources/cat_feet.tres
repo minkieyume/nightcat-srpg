@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ActionResource" load_steps=2 format=3 uid="uid://bgcctgkrdem3f"]
+[gd_resource type="Resource" script_class="ActionResource" load_steps=3 format=3 uid="uid://bgcctgkrdem3f"]
 
 [ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="1_3l8kc"]
+[ext_resource type="Script" uid="uid://bwdelj57gf60u" path="res://game/actions/action_logics/cat_feet.gd" id="1_pf8cr"]
 
 [resource]
 resource_local_to_scene = true
@@ -9,6 +10,7 @@ script = ExtResource("1_3l8kc")
 id = &"cat_feet"
 group = "技能"
 action_name = "猫步"
+action_logic = ExtResource("1_pf8cr")
 args = {}
 ap_cost = 1
 max_twice = 1
