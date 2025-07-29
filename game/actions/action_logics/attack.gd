@@ -27,7 +27,8 @@ func execute(action:Action):
 	var grid_quester = LevelHandler.get_grid_quester()
 	var unit_id = grid_quester.quest_unit(action.target)
 	var unit = LevelHandler.get_character(unit_id)
-	if unit and unit.id =="kiko" and unit.cat_feet:
+	print("cat_feet_attack")
+	if unit and LevelHandler.is_unit_in_group(unit.id,"cat_feet") and unit.cat_feet:
 		var qte = MenuHandler.get_qte()
 		CommandBus.send_command("menu",["setcargo","mode","cat_feet"])
 		CommandBus.send_command("menu",["setcargo","_action",action])
@@ -47,21 +48,22 @@ func execute(action:Action):
 				await LevelHandler.get_unit(unit).path_end
 		else:
 			# 闪避失败受到的伤害
-			if is_apply_damage(action):
+			if is_apply_damage(unit.part):
+				character.rpc("apply_damage")
 				character.apply_damage(args["damage"])
 	else:
 		# 对通常的敌人应用伤害
-		if is_apply_damage(action):
+		if is_apply_damage(unit.part):
+			character.rpc("apply_damage")
 			character.apply_damage(args["damage"])
 	
-func is_apply_damage(action:Action) -> bool:
+func is_apply_damage(part:String) -> bool:
 	if MultiCat.is_online():
-		if action.ctx.has("part"):
-			var agents = MultiCat.get_agents()
-			var player_id = MultiCat.multiplayer.get_unique_id()
-			var agen = agents["%d"%player_id]
-			if agen.part == action.ctx["part"]:
-				return true
+		var agents = MultiCat.get_agents()
+		var player_id = MultiCat.multiplayer.get_unique_id()
+		var agen = agents["%d"%player_id]
+		if agen.part == part:
+			return true
 		return false
 	else:
 		return true

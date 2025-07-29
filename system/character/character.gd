@@ -218,6 +218,7 @@ func consume_ap(cost: int) -> bool:
 	return false
 
 # HP相关
+@rpc("any_peer","call_remote")
 func apply_damage(damage:int):
 	operate_attribute("hp",damage,4)
 
