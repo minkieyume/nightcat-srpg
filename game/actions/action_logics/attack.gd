@@ -28,13 +28,14 @@ func execute(action:Action):
 	var unit_id = grid_quester.quest_unit(action.target)
 	var unit = LevelHandler.get_character(unit_id)
 	print("cat_feet_attack")
-	if unit and LevelHandler.is_unit_in_group(unit.id,"cat_feet") and unit.cat_feet:
+	if unit and LevelHandler.is_unit_in_group(unit_id,"cat_feet") and unit.cat_feet:
 		var qte = MenuHandler.get_qte()
 		CommandBus.send_command("menu",["setcargo","mode","cat_feet"])
 		CommandBus.send_command("menu",["setcargo","_action",action])
 		CommandBus.send_command("menu",["setcargo","part",unit.part])
 		CommandBus.send_command("menu",["qte"])
 		await qte.qte_finish
+		await LevelHandler.get_tree().process_frame
 		if action.ctx.has("qte_result") and action.ctx["qte_result"] > 0:
 			var target_choser:GridTargetChoserController = MenuHandler.get_grid_target_choser()
 			## FEATURE：我觉得，给目标选择器在有限制数组的时候，加上实际将target限制在范围内的机制很有必要
@@ -45,8 +46,8 @@ func execute(action:Action):
 			await target_choser.grid_chosed
 			if action.ctx.has("target"):
 				var movement = LevelHandler.get_movement_server()
-				movement.rpc("move_unit",unit,action.ctx["target"])
-				await LevelHandler.get_unit(unit).path_end
+				movement.rpc("move_unit",unit_id,action.ctx["target"])
+				await LevelHandler.get_unit(unit_id).path_end
 		else:
 			# 闪避失败受到的伤害
 			if is_apply_damage(unit.part):
