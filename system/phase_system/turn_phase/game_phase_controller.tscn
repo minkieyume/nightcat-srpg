@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://bmfb5i1gjlg1a" path="res://system/phase_system/turn_phase/player_turn_end_handle.gd" id="17_g72m5"]
 [ext_resource type="Script" uid="uid://bxy5inob2hef3" path="res://system/phase_system/turn_phase/enemy_action_end.gd" id="18_wpmnv"]
 [ext_resource type="Script" uid="uid://betppcd2yj8ss" path="res://system/phase_system/turn_phase/remove_buff.gd" id="25_l2h6g"]
-[ext_resource type="Script" uid="uid://bdwu0octqq73g" path="res://game/phases/cat_feet_end.gd" id="26_wdbc1"]
+[ext_resource type="Script" path="res://game/phases/cat_feet_end.gd" id="26_wdbc1"]
 
 [node name="GamePhaseController" type="LimboHSM"]
 script = ExtResource("2_emkk0")

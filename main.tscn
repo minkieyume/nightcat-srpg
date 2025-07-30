@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://yiq5cf5y3oqv" path="res://system/ui/action_choser.tscn" id="7_efxa6"]
 [ext_resource type="Script" uid="uid://fjajc0gc35gq" path="res://system/phase_system/menu_phase/menu_manager.gd" id="8_074og"]
 [ext_resource type="Script" uid="uid://bmnjt0fy3ng2v" path="res://system/phase_system/menu_phase/hide.gd" id="9_074og"]
-[ext_resource type="Script" uid="uid://knx4xit8ksjs" path="res://game/phases/qte.gd" id="11_ycdy4"]
+[ext_resource type="Script" path="res://game/phases/qte.gd" id="11_ycdy4"]
 [ext_resource type="Script" uid="uid://dcgy1h4l27wqh" path="res://system/phase_system/menu_phase/grid_target_choser_controller.gd" id="12_cegan"]
 [ext_resource type="Script" uid="uid://dq1x3v8wi5fis" path="res://system/phase_system/menu_phase/action_choser_controller.gd" id="13_82xsv"]
 [ext_resource type="PackedScene" uid="uid://5m30opp7uf8m" path="res://system/qte/time_click_bar.tscn" id="14_w48qg"]

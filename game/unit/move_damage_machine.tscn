@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://crf1v72tkw48u"]
 
 [ext_resource type="PackedScene" uid="uid://ctrc3t2peuvw0" path="res://system/interactable_system/interactable.tscn" id="1_eo2us"]
-[ext_resource type="Script" uid="uid://c07eunkqlj0ob" path="res://game/interactable/move_damage_machine.gd" id="2_o8w1y"]
+[ext_resource type="Script" uid="uid://c07eunkqlj0ob" path="res://game/unit/move_damage_machine.gd" id="2_o8w1y"]
 
 [node name="Machine" groups=["machine"] instance=ExtResource("1_eo2us")]
 script = ExtResource("2_o8w1y")
 id = "machine1"
 
-[connection signal="move_failed" from="." to="." method="_on_move_failed"]
 [connection signal="path_end" from="." to="." method="_on_path_end"]

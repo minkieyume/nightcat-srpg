@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dttgt1vn2jtmo"]
+
+[ext_resource type="PackedScene" uid="uid://chh2vk7ydqmob" path="res://system/unit/unit.tscn" id="1_b0cw6"]
+[ext_resource type="Texture2D" uid="uid://ttrgy3qt3sgy" path="res://assets/external_packs/character-pack-free_version/sprite/free_chests.png" id="2_6t0bg"]
+
+[node name="Block" groups=["block", "interactable"] instance=ExtResource("1_b0cw6")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(23, -2)
+texture = ExtResource("2_6t0bg")
+hframes = 12
+vframes = 8

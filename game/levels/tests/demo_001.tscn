@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://oij0n5ovj4xj" path="res://system/grid_system/grid_drawer.tscn" id="5_7lm4w"]
 [ext_resource type="PackedScene" uid="uid://frwonbuxsi7w" path="res://system/grid_system/grid_map_servers/grid_quester.tscn" id="6_gfbjb"]
 [ext_resource type="PackedScene" uid="uid://dtl6pwehxavyo" path="res://system/grid_system/grid_map_servers/movement_server.tscn" id="7_87jy8"]
-[ext_resource type="PackedScene" uid="uid://crf1v72tkw48u" path="res://game/interactable/machine.tscn" id="8_sax3x"]
+[ext_resource type="PackedScene" uid="uid://crf1v72tkw48u" path="res://game/unit/move_damage_machine.tscn" id="8_sax3x"]
 [ext_resource type="PackedScene" uid="uid://dupnywu6oavso" path="res://game/player/kiko.tscn" id="9_5eb2s"]
 [ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="12_3xpu4"]
 [ext_resource type="PackedScene" uid="uid://cg3dp8fyss4f2" path="res://game/player/yumi.tscn" id="13_yebf8"]
