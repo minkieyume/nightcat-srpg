@@ -10,7 +10,7 @@ func _on_level_ready():
 	_init_astar()
 	_init_piercing_astar()
 	_set_tile_blocks()
-	add_unit_blocks()
+	add_unit_blocks(func(_x):return LevelHandler.is_unit_in_group(_x.id,"block"))
 
 func _init_piercing_astar() -> void:
 	piercing_astar = AStarGrid2D.new()
