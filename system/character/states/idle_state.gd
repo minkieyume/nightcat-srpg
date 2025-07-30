@@ -9,13 +9,17 @@ func _enter() -> void:
 func _update_animation(direction) -> void:
 	match direction:
 		Vector2i.DOWN:
-			agent.animation_player.play("idle/idle_down")
+			if agent.animation_player.has_animation("idle/idle_down"):
+				agent.animation_player.play("idle/idle_down")
 		Vector2i.LEFT:
-			agent.animation_player.play("idle/idle_left")
+			if agent.animation_player.has_animation("idle/idle_left"):
+				agent.animation_player.play("idle/idle_left")
 		Vector2i.RIGHT:
-			agent.animation_player.play("idle/idle_right")
+			if agent.animation_player.has_animation("idle/idle_right"):
+				agent.animation_player.play("idle/idle_right")
 		Vector2i.UP:
-			agent.animation_player.play("idle/idle_up")
+			if agent.animation_player.has_animation("idle/idle_up"):
+				agent.animation_player.play("idle/idle_up")
 
 func _on_direction_changed(direction):
 	if is_active():

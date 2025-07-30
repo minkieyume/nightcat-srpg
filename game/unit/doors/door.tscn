@@ -1,10 +1,10 @@
 [gd_scene load_steps=21 format=3 uid="uid://b7puhi45r5m4b"]
 
 [ext_resource type="PackedScene" uid="uid://chh2vk7ydqmob" path="res://system/unit/unit.tscn" id="1_vw1hd"]
-[ext_resource type="Script" uid="uid://chahig6fcubgx" path="res://game/unit/door.gd" id="2_db0co"]
-[ext_resource type="Texture2D" uid="uid://ccc5617mkwjnp" path="res://assets/external_packs/no_free/overworld-pack-full_version/sprite/free_chests.png" id="2_l6wi3"]
-[ext_resource type="Script" uid="uid://dpaoapab7vysb" path="res://game/unit/close.gd" id="4_3t1ma"]
-[ext_resource type="Script" uid="uid://bflsr5ylsn10i" path="res://game/unit/open.gd" id="5_y6u5v"]
+[ext_resource type="Script" uid="uid://chahig6fcubgx" path="res://game/unit/doors/door.gd" id="2_db0co"]
+[ext_resource type="Texture2D" uid="uid://d2dfmrcpxl7p6" path="res://assets/external_packs/no_free/overworld-pack-full_version/sprite/free_icons1.png" id="3_3t1ma"]
+[ext_resource type="Script" uid="uid://dpaoapab7vysb" path="res://game/unit/doors/close.gd" id="4_3t1ma"]
+[ext_resource type="Script" uid="uid://bflsr5ylsn10i" path="res://game/unit/doors/open.gd" id="5_y6u5v"]
 
 [sub_resource type="Animation" id="Animation_wlaod"]
 length = 0.001
@@ -26,9 +26,9 @@ _data = {
 &"RESET": SubResource("Animation_wlaod")
 }
 
-[sub_resource type="Animation" id="Animation_l6wi3"]
-
 [sub_resource type="Animation" id="Animation_db0co"]
+
+[sub_resource type="Animation" id="Animation_l6wi3"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3t1ma"]
 _data = {
@@ -180,10 +180,8 @@ _data = {
 script = ExtResource("2_db0co")
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(25, -2)
-texture = ExtResource("2_l6wi3")
-hframes = 12
-vframes = 8
+position = Vector2(25, 25)
+texture = ExtResource("3_3t1ma")
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
