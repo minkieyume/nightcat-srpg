@@ -1,43 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://b405eq3xla3wm"]
+[gd_scene load_steps=21 format=3 uid="uid://b7puhi45r5m4b"]
 
-[ext_resource type="PackedScene" uid="uid://chh2vk7ydqmob" path="res://system/unit/unit.tscn" id="1_kfso4"]
-[ext_resource type="Script" uid="uid://wbnikvil5wun" path="res://system/character/character.gd" id="2_1i7cy"]
-[ext_resource type="AttributeSet" uid="uid://bl63cuqdi5v84" path="res://system/character/attributes.tres" id="3_deljr"]
-[ext_resource type="Script" uid="uid://daouxidx122kl" path="res://system/attribute/ap_initailize.gd" id="3_fvjva"]
-[ext_resource type="Script" uid="uid://w8k7keh2oex5" path="res://system/attribute/hp_initialize.gd" id="4_h7f75"]
-[ext_resource type="Script" uid="uid://knoqcwl0eufq" path="res://global/tools/tiled_sector_2d.gd" id="5_fvjva"]
-[ext_resource type="PackedScene" uid="uid://ciljufcsear1m" path="res://system/action_system/ActionManager.tscn" id="5_h7f75"]
-[ext_resource type="Script" uid="uid://b1xru1xnc1twu" path="res://system/action_system/action_resource.gd" id="6_u646v"]
-[ext_resource type="Script" uid="uid://b6s6uvu6uy2i" path="res://game/actions/action_logics/cat_challenge_action.gd" id="8_bl7gt"]
-[ext_resource type="Script" uid="uid://b6x8da3egg2rq" path="res://system/action_system/action_range.gd" id="8_cr7lv"]
-[ext_resource type="Script" uid="uid://xyj6wu1yxj5c" path="res://game/actions/action_logics/twice_move_action.gd" id="9_fvjva"]
-
-[sub_resource type="AttributeOperation" id="AttributeOperation_u646v"]
-
-[sub_resource type="AttributeBuff" id="AttributeBuff_i8eqi"]
-operation = SubResource("AttributeOperation_u646v")
-script = ExtResource("3_fvjva")
-max_ap = 2.0
-ap = 2.0
-metadata/_custom_type_script = "uid://daouxidx122kl"
-
-[sub_resource type="AttributeOperation" id="AttributeOperation_cr7lv"]
-
-[sub_resource type="AttributeBuff" id="AttributeBuff_1ct06"]
-operation = SubResource("AttributeOperation_cr7lv")
-script = ExtResource("4_h7f75")
-max_health = 5.0
-health = 5.0
-metadata/_custom_type_script = "uid://w8k7keh2oex5"
-
-[sub_resource type="Resource" id="Resource_h7f75"]
-resource_local_to_scene = true
-resource_name = "视野范围"
-script = ExtResource("5_fvjva")
-face = Vector2i(0, 1)
-radius = 6
-angle = 90.0
-metadata/_custom_type_script = "uid://knoqcwl0eufq"
+[ext_resource type="PackedScene" uid="uid://chh2vk7ydqmob" path="res://system/unit/unit.tscn" id="1_vw1hd"]
+[ext_resource type="Script" uid="uid://chahig6fcubgx" path="res://game/unit/door.gd" id="2_db0co"]
+[ext_resource type="Texture2D" uid="uid://ccc5617mkwjnp" path="res://assets/external_packs/no_free/overworld-pack-full_version/sprite/free_chests.png" id="2_l6wi3"]
+[ext_resource type="Script" uid="uid://dpaoapab7vysb" path="res://game/unit/close.gd" id="4_3t1ma"]
+[ext_resource type="Script" uid="uid://bflsr5ylsn10i" path="res://game/unit/open.gd" id="5_y6u5v"]
 
 [sub_resource type="Animation" id="Animation_wlaod"]
 length = 0.001
@@ -57,6 +24,16 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wlaod"]
 _data = {
 &"RESET": SubResource("Animation_wlaod")
+}
+
+[sub_resource type="Animation" id="Animation_l6wi3"]
+
+[sub_resource type="Animation" id="Animation_db0co"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3t1ma"]
+_data = {
+&"close": SubResource("Animation_db0co"),
+&"open": SubResource("Animation_l6wi3")
 }
 
 [sub_resource type="Animation" id="Animation_2gdvs"]
@@ -199,80 +176,25 @@ _data = {
 &"move_up": SubResource("Animation_fvjva")
 }
 
-[sub_resource type="Resource" id="Resource_u646v"]
-resource_local_to_scene = true
-script = ExtResource("8_cr7lv")
-deter_array = Array[Vector2i]([])
-deter_vector2 = Vector2i(1, 3)
-deter_rect2 = Rect2i(0, 0, 0, 0)
-type = 2
-metadata/_custom_type_script = "uid://b6x8da3egg2rq"
+[node name="Door" groups=["block"] instance=ExtResource("1_vw1hd")]
+script = ExtResource("2_db0co")
 
-[sub_resource type="Resource" id="Resource_i8eqi"]
-resource_local_to_scene = true
-resource_name = "移动"
-script = ExtResource("6_u646v")
-id = &"move"
-group = ""
-action_name = "移动"
-action_range = SubResource("Resource_u646v")
-action_logic = ExtResource("9_fvjva")
-args = {}
-ap_cost = 1
-max_twice = 1
-tags = Array[String]([])
-metadata/_custom_type_script = "uid://b1xru1xnc1twu"
-
-[sub_resource type="Resource" id="Range"]
-script = ExtResource("8_cr7lv")
-deter_array = Array[Vector2i]([])
-deter_vector2 = Vector2i(0, 0)
-deter_rect2 = Rect2i(0, 0, 0, 0)
-type = 2
-
-[sub_resource type="Resource" id="Resource_cr7lv"]
-resource_local_to_scene = true
-resource_name = "夜猫嘲讽"
-script = ExtResource("6_u646v")
-id = &"cat_challenge"
-group = "技能"
-action_name = "夜猫嘲讽"
-action_range = SubResource("Range")
-action_logic = ExtResource("8_bl7gt")
-args = {}
-ap_cost = 2
-max_twice = 1
-tags = Array[String]([])
-
-[node name="Character" instance=ExtResource("1_kfso4")]
-script = ExtResource("2_1i7cy")
-weight = 0
-initalize_attribute_buffs = Array[AttributeBuffBase]([SubResource("AttributeBuff_i8eqi"), SubResource("AttributeBuff_1ct06")])
-sight_sector = SubResource("Resource_h7f75")
-sight_expand_radius = 6
-sight_expand_angle = 0.0
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(23, -2)
+texture = ExtResource("2_l6wi3")
+hframes = 12
+vframes = 8
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
 &"": SubResource("AnimationLibrary_wlaod"),
+&"door": SubResource("AnimationLibrary_3t1ma"),
 &"idle": SubResource("AnimationLibrary_bl7gt"),
 &"move": SubResource("AnimationLibrary_u646v")
 }
 
-[node name="AttributeContainer" type="AttributeContainer" parent="." index="3"]
-attribute_set = ExtResource("3_deljr")
+[node name="Close" type="LimboState" parent="AnimationMachine" index="2"]
+script = ExtResource("4_3t1ma")
 
-[node name="ActionManager" parent="." index="4" groups=["block"] instance=ExtResource("5_h7f75")]
-actions = Array[ExtResource("6_u646v")]([SubResource("Resource_i8eqi"), SubResource("Resource_cr7lv")])
-
-[node name="Character_info" type="Label" parent="." index="5"]
-offset_left = 4.0
-offset_top = -56.0
-offset_right = 44.0
-offset_bottom = -7.0
-text = "AP:1
-HP:1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="attribute_changed" from="AttributeContainer" to="." method="_on_attribute_container_attribute_changed"]
+[node name="Open" type="LimboState" parent="AnimationMachine" index="3"]
+script = ExtResource("5_y6u5v")
